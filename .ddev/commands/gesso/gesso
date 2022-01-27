@@ -1,0 +1,32 @@
+#!/bin/sh
+
+## Description: Run Gesso commands for theme development.
+## Usage: gesso install|build|watch|eslint|eslint-prod|stylelint|(some other command in the theme service)
+## Example: "ddev gesso build"
+
+case $1 in
+  install)
+    npm ci
+  ;;
+  build)
+    gulp build
+  ;;
+  eslint)
+    npx eslint -c .eslintrc-dev.js "**/*.es6.js"
+  ;;
+  eslint-prod)
+    npx eslint -c .eslintrc.js "**/*.es6.js"
+  ;;
+  stylelint)
+    npx stylelint -f verbose "source/**/*.scss" --ip "source/**/*.artifact.scss"
+  ;;
+  watch)
+    gulp
+  ;;
+  "")
+    echo "Usage: gesso install|build|watch|eslint|eslint-prod|stylelint|(some other command in the theme service)"
+  ;;
+  *)
+    "$@"
+  ;;
+esac

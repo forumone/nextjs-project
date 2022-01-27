@@ -1,0 +1,178 @@
+# Consolidate the common configuration for reuse across multiple steps.
+definitions:
+  # Configure some default step values.
+  step-defaults: &step-defaults
+    timeout_in_minutes: 15
+
+  # Specify common agent queue parameters.
+  queues:
+    # Docker-based tasks should run in the Docker queue.
+    docker-agents: &docker-agents
+      agents:
+        queue: "docker-builders"
+
+  # Specify common plugin configurations.
+  plugins:
+    aws-sm: &aws-sm
+      seek-oss/aws-sm#v2.1.0:
+        file:
+          - path: "./auth.json"
+            secret-id: "buildkite/wordpress_composer_auth"
+    ecr: &ecr
+      ecr#v2.0.0:
+        login: true
+        no-include-email: true
+
+env:
+  # Enable BuildKit engine.
+  DOCKER_BUILDKIT: 1
+  BUILDKIT_PROGRESS: plain
+  COMPOSE_DOCKER_CLI_BUILD: 1
+
+  # Identify the address for the shared Buildkite ECR repository.
+  IMAGE_REPOSITORY: "165761832703.dkr.ecr.us-east-1.amazonaws.com/buildkite"
+
+  # Set this as an environment variable for automatic usage by default for all
+  # docker-compose buildkite plugin executions.
+  BUILDKITE_PLUGIN_DOCKER_COMPOSE_IMAGE_REPOSITORY: "$IMAGE_REPOSITORY"
+
+steps:
+  - label: ":heavy_check_mark: :php: Lint"
+    key: "lint_php"
+    <<: *step-defaults
+    <<: *docker-agents
+    commands:
+      - "composer install"
+      - "composer lint"
+    plugins:
+      # Pull the COMPOSER_AUTH from AWS Secrets Manager.
+      - *aws-sm
+      - docker-compose#v3.8.0:
+          config:
+            - docker-compose.buildkite.yml
+          run: composer
+
+  - label: ":hammer: :docker: Build Test"
+    key: "test"
+    <<: *step-defaults
+    <<: *docker-agents
+    depends_on: lint_php
+    branches:
+      - "!integration"
+      - "!main"
+      - "!live"
+    plugins:
+      # Log into ECR for this build step to access and push images.
+      - *ecr
+      # Pull the COMPOSER_AUTH from AWS Secrets Manager.
+      - *aws-sm
+      # Prebuild and upload the listed services defined in the buildkite
+      # Docker Compose configuration. In this case, the various stages
+      # of the multi-stage build for the `wordpress` service are uploaded in
+      # addition to the final image.
+      - docker-compose#v3.8.0:
+          # Pull pre-existing images if available to leverage caches and
+          # speed up applicable portions of the image build.
+          # These images are attempted to pull in sequence up to the first
+          # success, and any failures don't prevent further build steps.
+          cache-from:
+            - test:$IMAGE_REPOSITORY:$BUILDKITE_PIPELINE_SLUG-$BUILDKITE_COMMIT
+            - test:$IMAGE_REPOSITORY:$BUILDKITE_PIPELINE_SLUG-latest
+          build:
+            - test
+          config:
+            - docker-compose.buildkite.yml
+          upload-container-logs: "on-error"
+          # Upload commit-specific image tags for clarity and caching support.
+          push:
+            - test:$IMAGE_REPOSITORY:$BUILDKITE_PIPELINE_SLUG-latest
+            - test:$IMAGE_REPOSITORY:$BUILDKITE_PIPELINE_SLUG-$BUILDKITE_COMMIT
+
+  - label: ":hammer: :docker: Build Release"
+    key: "build"
+    <<: *step-defaults
+    <<: *docker-agents
+    depends_on: lint_php
+    branches:
+      - integration
+      - main
+      - live
+    plugins:
+      # Log into ECR for this build step to access and push images.
+      - *ecr
+      # Pull the COMPOSER_AUTH from AWS Secrets Manager.
+      - *aws-sm
+      # Prebuild and upload the listed services defined in the buildkite
+      # Docker Compose configuration. In this case, the various stages
+      # of the multi-stage build for the `wordpress` service are uploaded in
+      # addition to the final image.
+      - docker-compose#v3.8.0:
+          # Pull pre-existing images if available to leverage caches and
+          # speed up applicable portions of the image build.
+          # These images are attempted to pull in sequence up to the first
+          # success, and any failures don't prevent further build steps.
+          cache-from:
+            - release:$IMAGE_REPOSITORY:$BUILDKITE_PIPELINE_SLUG-$BUILDKITE_COMMIT
+            - release:$IMAGE_REPOSITORY:$BUILDKITE_PIPELINE_SLUG-latest
+          build:
+            - release
+          config:
+            - docker-compose.buildkite.yml
+          upload-container-logs: "on-error"
+          # Upload commit-specific image tags for clarity and caching support.
+          push:
+            - release:$IMAGE_REPOSITORY:$BUILDKITE_PIPELINE_SLUG-latest
+            - release:$IMAGE_REPOSITORY:$BUILDKITE_PIPELINE_SLUG-$BUILDKITE_COMMIT
+
+  - label: ":git: Deploy Release"
+    key: "deploy"
+    <<: *step-defaults
+    depends_on: build
+    command: echo "Preparing for Deployment..."
+    concurrency: 1
+    concurrency_group: '$BUILDKITE_BRANCH/deploy'
+    branches:
+      - integration
+      - main
+      - live
+    plugins:
+      # Log into ECR for this build step to access and push images.
+      - *ecr
+      # Extract artifacts from the release image.
+      - forumone/extract#v0.2.0:
+          image:
+            service: release
+          from: /var/www/html
+          to: ./
+      # Push artifacts to Git remote.
+      - forumone/artifact-push#v0.3.1:
+          verbose: true
+          source-directory: services/wordpress
+          remote: [SSH_REPO_FROM_PANTHEON]
+          branches:
+            - match: 'integration'
+              target: 'f1-dev'
+            - match: 'main'
+              target: 'f1-stage'
+            - match: 'live'
+              target: 'master'
+
+          ssh:
+            keyscan: [PANTHEON_HOST]
+
+          git:
+            name: F1 Builder
+            email: support+f1builder@forumone.com
+
+          files:
+            force-add:
+              - web/wp-content/themes/gesso/css
+              - web/wp-content/themes/gesso/js
+              - web/wp-content/themes/gesso/dependencyGraph.json
+              - web/wp-content/themes/gesso/pattern-lab
+              - web/wp
+              - web/wp-content/plugins
+              - web/wp-content/vendor
+              - web/wp-config.php
+              - web/wp-config.pantheon.php
+

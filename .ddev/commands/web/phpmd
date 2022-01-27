@@ -1,0 +1,7 @@
+#!/bin/bash
+
+## Description: Runs PHP Mess Detector.
+## Usage: phpmd
+## Example: "ddev phpmd"
+
+composer phpmd
