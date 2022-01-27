@@ -15,13 +15,11 @@ COPY package*.json ./
 RUN npm ci
 
 # Copy build configuration
-COPY tsconfig.json next.config.js \
-     next-env.d.ts .babelrc \
+COPY .babelrc.js .eslintrc.js .eslintignore .lintstagedrc .importSortPrefixrc \
+     tsconfig.json webpack.config.babel.js \
      ./
 
-ENV NODE_ENV development
-
-EXPOSE 3000
+EXPOSE 8080
 
 # Set entrypoint to start command
-CMD [ "npm", "run", "dev" ]
+CMD [ "npm", "run", "start" ]
