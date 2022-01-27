@@ -1,0 +1,24 @@
+version: '3.6'
+services:
+  next:
+    container_name: ddev-${DDEV_SITENAME}-next
+    build:
+      context: ./../svc-next
+      dockerfile: dev.Dockerfile
+    volumes:
+      - ./../svc-next/pages:/app/pages
+      - ./../svc-next/public:/app/public
+      - ./../svc-next/source:/app/source
+      - ".:/mnt/ddev_config"
+    expose:
+      - 3000
+    environment:
+      - VIRTUAL_HOST=$DDEV_HOSTNAME
+      - HTTP_EXPOSE=2999:3000
+      - HTTPS_EXPOSE=3000:3000
+      - CHOKIDAR_USEPOLLING=1
+      - CHOKIDAR_INTERVAL=1000
+    labels:
+      com.ddev.site-name: ${DDEV_SITENAME}
+      com.ddev.approot: $DDEV_APPROOT
+    networks: [default, ddev_default]

@@ -12,27 +12,30 @@ Note that Next v11 comes with the following installed already:
 
 ## Getting Started
 
-Ensure that you are using the proper Node version for this app. We currently use v16. Assuming you have [nvm](https://github.com/nvm-sh/nvm) installed locally, you can simply run:
+`ddev start` will start Next in dev mode at https://js-onboarding.ddev.site:3000/
+
+Before making changes or modifying packages, ensure that you are using the proper Node version for this app. We currently use v16. Assuming you have [nvm](https://github.com/nvm-sh/nvm) installed locally, you can simply run:
 
 ```bash
+cd svc-next
 nvm use
 ```
 
 This will set your Node version to match the `.nvmrc` file.
 
-To run the [development server](https://nextjs.org/docs/api-reference/cli#development):
+It's also handy to install the packages locally so your IDE will know about them.
 
 ```bash
-npm run dev
+cd svc-next
+npm ci
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## Other Commands
 
 ### Build production application
 
 ```bash
+cd svc-next
 npm run build
 ```
 Runs `next build`, which builds the production application in the `.next` folder. For more information, see the [Next.js CLI documentation](https://nextjs.org/docs/api-reference/cli#build).
@@ -40,6 +43,7 @@ Runs `next build`, which builds the production application in the `.next` folder
 ### Start application in production mode
 
 ```bash
+cd svc-next
 npm run start
 ```
 
@@ -48,6 +52,7 @@ Runs `next start`, which starts a Node.js server that supports [hybrid pages](ht
 ### Export application to static HTML
 
 ```bash
+cd svc-next
 npm run export
 ```
 
@@ -56,6 +61,7 @@ Runs `next build && next export`. This allows you to export your app to static H
 ### Run linter
 
 ```bash
+cd svc-next
 npm run lint
 ```
 
@@ -64,6 +70,7 @@ Runs `next lint`, which runs the ESLint command. This is useful to catch lint er
 ### Run prettier
 
 ```bash
+cd svc-next
 npm run prettier
 ```
 
@@ -72,6 +79,7 @@ Runs `prettier --write`, which will find and fix all prettier issues found withi
 ### Run TypeScript compiler (tsc)
 
 ```bash
+cd svc-next
 npm run tsc
 ```
 
