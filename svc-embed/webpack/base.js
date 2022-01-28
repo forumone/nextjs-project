@@ -10,13 +10,13 @@ import { arrayFilterEmpty } from './utils/helpers';
 
 export default {
   context: __dirname,
-  target: isDevServer ? 'web' : ['web', 'es5'],
+  target: 'browserslist',
   mode: isProd ? 'production' : 'development',
   entry,
   output: {
     path: path.join(__dirname, '../dist'),
     publicPath: isDevServer ? undefined : './',
-    filename: isDevServer ? '[name].[fullhash].js' : '[name].[contenthash].js',
+    filename: '[name].js',
   },
   module: {
     rules: arrayFilterEmpty([

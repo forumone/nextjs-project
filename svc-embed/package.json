@@ -91,6 +91,10 @@
     "webpack-dev-server": "~4.7.2",
     "webpack-merge": "~5.8.0"
   },
+  "browserslist": [
+    "defaults",
+    "not ie 11"
+  ],
   "importSort": {
     ".ts, .tsx": {
       "style": "module-and-prefix",
