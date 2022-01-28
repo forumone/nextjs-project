@@ -1,5 +1,19 @@
 # <Project Name> [![Build status](<url-from-buildkite)](https://buildkite.com/forum-one/<project-uri>)
 
+## Local URLs
+
+https://js-onboarding.ddev.site/ : WordPress site
+
+https://js-onboarding.ddev.site:3000/ : Next.js app (`svc-next/`) displaying content from WP.
+
+https://js-onboarding.ddev.site:8080/ : Embedded React app (`scv-embed/`) previewed inside static WP content.
+
+## TODO
+
+- Display WP content within the Next page.
+- Allow building/depositing embedded app assets into the web container (like gesso).
+- Allow build with watch mode for cases where static WP content isn't good enough.
+
 ## Development Branch Naming & Workflow
 
 - Always create Feature and Bugfix branches from the `main` branch.
