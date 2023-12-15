@@ -1,63 +1,62 @@
 # Forum One Next.js Starter App
 
 This is a starter app for [Next.js](https://nextjs.org/) (bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app)) that includes the following features:
+* [Storybook](https://storybook.js.org)
 * [TypeScript](https://www.typescriptlang.org/)
-* [Emotion](https://emotion.sh/docs/introduction)
+* [PostCSS](https://postcss.org/)
 * [ESLint](https://eslint.org/)
+* [Stylelint](https://stylelint.io/)
 * [Prettier](https://prettier.io/)
 
 Note that Next v13 comes with the following installed already:
 * [Webpack v5](https://webpack.js.org/concepts/)
-
-## Getting Started
+* [CSS Modules](https://github.com/css-modules/css-modules)
 
 ## Initial Setup
 
-1. Setup [husky](https://typicode.github.io/husky/#/) by installing it at the base of the repo.
-    ```bash
-    npm ci
-    ```
-
-1. Go to the `services/app` directory.
-    ```bash
-    cd services/app
-    ```
-
-1. Ensure that you are using the proper Node version for this app. We currently use v16. Assuming you have [nvm](https://github.com/nvm-sh/nvm) installed locally, you can simply run:
+1. Run [nvm](https://github.com/nvm-sh/nvm) so your local node version matches the project's node version:
     ```bash
     nvm use
     ```
-    This will set your Node version to match the `.nvmrc` file.
 
-1. Next, install packages for local development:
+1. Install dependencies locally. This helps some IDEs using tools like IntelliSense to properly wireup packages to your app files,
+   or if you simply want to run `npm` commands outside of `ddev`.
+   View the `README.nextjs.md` file to see how to run commands outside of ddev.
     ```bash
     npm ci
     ```
+   
+1. Install dependencies for ddev.
+   You will need to install dependencies and run the app in the same environment (either Docker/Linux for both
+   or your local OS for both). Otherwise, you can end up with incompatible versions of some packages.
+   ```bash
+   ddev nextjs npm ci
+   ```
 
-1. Next, copy `.env.local.example` to `.env.local` and define any local environment variables you need for local development.
-    ```bash
-    cp .env.local.example .env.local
-    ```
-
-1. Now you are ready to start up the app. To do that, run `ddev start` from within the `services/app` directory:
+1. Start up the app by running `ddev start`:
     ```bash
     ddev start
     ```
 
 ## Starting and stopping the project
 
-After following the "Initial Setup" instructions, you can start the local development server for the app by going to the `services/app` directory and running:
+After following the "Initial Setup" instructions, you can start the local development server for the app by running:
 ```bash
 ddev start
 ```
-Open [https://nyu-cdhdb.ddev.site/](https://nyu-cdhdb.ddev.site/) with your browser to see the app. Note that the script will continue to run in your terminal tab. Killing or exiting the script (e.g. `ctrl+C`) will stop the Nextjs app.
+Open [https://YOUR-PROJECT.ddev.site/](https://YOUR-PROJECT.ddev.site/) with your browser to see the app. If using storybook, use port `6006` by default to view it: [https://YOUR-PROJECT.ddev.site:6006](https://YOUR-PROJECT.ddev.site:6006).
 
 To stop `ddev` for the project:
 ```bash
 ddev stop
 ```
 
-Note that these `ddev` commands _must_ be run in the `services/app` directory.
+## Icons
+After adding a new SVG to `source/01-global-icon/svgs`, you will need to
+generate the React components:
+```bash
+ddev nextjs icons
+```
 
 ## Helpful commands
 
@@ -139,14 +138,6 @@ ddev nextjs tsc
 
 Runs `tsc --noEmit`, which will compile the TypeScript code without emitting files. This acts as a TS error check in your CLI. This is useful to catch TS errors that you might miss during development. For more information, see the [TypeScript Compiler (tsc) documentation](https://www.typescriptlang.org/docs/handbook/compiler-options.html).
 
-### Scaffold new component
-
-```bash
-ddev nextjs component
-```
-Runs the `lib/component.js` script, which will scaffold a new React or Emotion component,
-with the option to include a Storybook story file as well.
-
 
 ## Notes
 
@@ -173,9 +164,5 @@ If you would want to use `npm`, please do `ddev npm [package]`.
 
 To verify that it is working please run: `ddev nextjs monit` and if it is not working as expected please try the following:
 * Stop DDev, `ddev stop`
-* Remove `node_modules` folder from the `services/app`
+* Remove `node_modules`
 * Then restart DDev, `ddev start`
-
-### Helpfup script
-
-If you do not want to go into the `services/app` directory and want to stay at the root of the project, Please just use `sh dev [ddev command]`.
