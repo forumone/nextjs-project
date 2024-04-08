@@ -31,6 +31,12 @@ const Icons = {
   Rss: dynamic(() => import('./Rss'), {
     loading: () => <svg className="icon"></svg>,
   }),
+  Sort: dynamic(() => import('./Sort'), {
+    loading: () => <svg className="icon"></svg>,
+  }),
+  Sorted: dynamic(() => import('./Sorted'), {
+    loading: () => <svg className="icon"></svg>,
+  }),
   Twitter: dynamic(() => import('./Twitter'), {
     loading: () => <svg className="icon"></svg>,
   }),
