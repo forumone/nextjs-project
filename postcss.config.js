@@ -11,6 +11,7 @@ module.exports = {
     },
     [require.resolve('./lib/iff.js')]: {},
     'postcss-rem': {},
+    'postcss-import': {},
     'postcss-preset-env': {
       stage: 3,
       features: {
