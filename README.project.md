@@ -153,6 +153,11 @@ Runs `tsc --noEmit`, which will compile the TypeScript code without emitting fil
 * Starting in Next.js v9.4, TypeScript errors do not show up in your browser when running the dev server (i.e. `npm run dev`). However, TS errors will prevent `next build` (i.e. `npm run build`) from running successfully. You can run `npm run lint` and `npm run tsc` to check for issues, which will give you lint and TS errors that will most likely cause your builds to fail. Note also that if you have [`husky`](https://typicode.github.io/husky/#/) installed, these will automatically run when you attempt to commit to a branch.
 * The current favicon implementation will probably not display correctly locally in Chrome (v94), but does display correctly in Firefox and Safari. Note that the favicon _does_ display correctly once deployed. Not sure why.
 
+### Vendor Cascade Layer
+A cascade layer ([https://developer.mozilla.org/en-US/docs/Web/CSS/@layer](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer)) for thrid-party css is available called vendor.
+
+CSS can be added to this layer using @import. Ex: `@import "theme.css" layer(vendor);`
+This can be added within the files for component and layout styles using the third-party package.
 
 ## Helpful tips
 
