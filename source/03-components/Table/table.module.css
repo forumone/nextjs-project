@@ -1,0 +1,60 @@
+@import 'mixins';
+
+@layer components {
+  .is-scrollable {
+    thead {
+      display: table;
+      inline-size: calc(100% - var(--scrollbar-width));
+      table-layout: fixed;
+    }
+
+    tbody {
+      display: block;
+      max-block-size: rem-convert(365px);
+      overflow: hidden auto;
+
+      tr {
+        display: table;
+        inline-size: 100%;
+        table-layout: fixed;
+      }
+    }
+  }
+
+  .is-sortable {
+    th[data-sortable] {
+      padding-inline-end: var(--spacing-5);
+      position: relative;
+
+      &[aria-sort] {
+        background-color: var(--table-background-sorted);
+      }
+
+      &[aria-sort='descending'] {
+        :global(.icon) {
+          rotate: 180deg;
+        }
+      }
+    }
+  }
+
+  .header-button {
+    @include text-button;
+
+    color: inherit;
+    display: block;
+    inline-size: var(--spacing-4);
+    inset-block: var(--spacing-0-5);
+    inset-inline-end: var(--spacing-0-5);
+    outline-offset: 0;
+    position: absolute;
+
+    &:focus-visible {
+      outline-color: var(--grayscale-white);
+    }
+  }
+
+  .announcement-region {
+    @include visually-hidden;
+  }
+}
