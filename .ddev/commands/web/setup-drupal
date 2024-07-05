@@ -7,5 +7,5 @@
 node lib/merge-package-json.js
 npm install --package-lock-only
 npm ci
-pm2 restart nextjs
+pm2 restart app
 pm2 restart storybook
