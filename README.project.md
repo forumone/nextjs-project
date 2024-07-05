@@ -38,7 +38,7 @@ have more details about which to use when.
    You will need to install dependencies and run the app in the same environment (either Docker/Linux for both
    or your local OS for both). Otherwise, you can end up with incompatible versions of some packages.
    ```bash
-   ddev nextjs npm ci
+   ddev frontend install
    ```
 
 1. Start up the app by running `ddev start`:
@@ -69,18 +69,18 @@ ddev nextjs icons
 ## Helpful commands
 
 ### Monitoring the applications
-If you want to monitor the status of `app` or `storybook`. Please use `ddev nextjs monit`
+If you want to monitor the status of `app` or `storybook`. Please use `ddev frontend monit`
 
 ### Restarting a specific service
 If you want to restart `storybook` or `app`, please use the following:
 
 `app`
 ```bash
-ddev nextjs restart app
+ddev frontend restart frontend
 ```
 `storybook`
 ```bash
-ddev nextjs restart storybook
+ddev frontend restart storybook
 ```
 
 To restart the whole application
@@ -92,7 +92,7 @@ ddev restart
 ### Build production application
 
 ```bash
-ddev nextjs build
+ddev frontend build
 ```
 Runs `next build`, which builds the production application in the `.next` folder. For more information, see the [Next.js CLI documentation](https://nextjs.org/docs/api-reference/cli#build).
 
@@ -107,7 +107,7 @@ Runs `next start`, which starts a Node.js server that supports [hybrid pages](ht
 ### Export application to static HTML
 
 ```bash
-ddev nextjs export
+ddev frontend export
 ```
 
 Runs `next build && next export`. This allows you to export your app to static HTML (exported in the `out` folder), which can be run standalone without the need of a Node.js server. For more information, see the [Next.js Static HTML Export documentation](https://nextjs.org/docs/advanced-features/static-html-export).
@@ -115,7 +115,7 @@ Runs `next build && next export`. This allows you to export your app to static H
 ### Run linter
 
 ```bash
-ddev nextjs lint
+ddev frontend lint
 ```
 
 Runs `next lint`, which runs the ESLint command. This is useful to catch lint errors that you might miss during development. For more information, see the [Next.js ESLint documentation](https://nextjs.org/docs/basic-features/eslint).
@@ -125,7 +125,7 @@ Runs `next lint`, which runs the ESLint command. This is useful to catch lint er
 #### Prettier check
 
 ```bash
-ddev nextjs prettier
+ddev frontend prettier
 ```
 
 Runs `prettier --check`, which will check that all files within the `app` and `source` directories use the Prettier code style from `.prettierrc`. This might be redundant with the `lint` script above, since it extends whatever Prettier rules we have set.
@@ -133,7 +133,7 @@ Runs `prettier --check`, which will check that all files within the `app` and `s
 #### Prettier write
 
 ```bash
-ddev nextjs prettier:write
+ddev frontend prettier:write
 ```
 
 Runs `prettier --write`, which will find and fix all prettier issues found within the `app` and `source` directories. Note that this will automatically overwrite your files.
@@ -141,7 +141,7 @@ Runs `prettier --write`, which will find and fix all prettier issues found withi
 ### Run TypeScript compiler (tsc)
 
 ```bash
-ddev nextjs tsc
+ddev frontend tsc
 ```
 
 Runs `tsc --noEmit`, which will compile the TypeScript code without emitting files. This acts as a TS error check in your CLI. This is useful to catch TS errors that you might miss during development. For more information, see the [TypeScript Compiler (tsc) documentation](https://www.typescriptlang.org/docs/handbook/compiler-options.html).
@@ -170,7 +170,7 @@ If you would want to use `npm`, please do `ddev npm [package]`.
 
 ### If the application never starts
 
-To verify that it is working please run: `ddev nextjs monit` and if it is not working as expected please try the following:
+To verify that it is working please run: `ddev frontend monit` and if it is not working as expected please try the following:
 * Stop DDev, `ddev stop`
 * Remove `node_modules`
 * Then restart DDev, `ddev start`
