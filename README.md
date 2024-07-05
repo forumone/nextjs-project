@@ -31,7 +31,7 @@ git remote add origin git@github.com:forumone/[project-name].git
 
 6. Run `ddev setup-drupal`
 
-7. Go through the rest of the `build process`
+7. Copy `.env.local.example` to `.env.local` and fill in the variables
 
 ### Assuming Forum One hosted project,
 

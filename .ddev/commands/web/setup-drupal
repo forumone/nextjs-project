@@ -7,6 +7,9 @@
 node lib/drupal/merge-package-json.js
 npm install --package-lock-only
 npm ci
-cp ./starterkits/drupal/codegen.ts ./codegen.ts
-pm2 restart app
+if [ ! -f ./codgen.ts ]; then
+  cp ./starterkits/drupal/codegen.ts ./codegen.ts
+fi
+cat ./starterkits/drupal/.env.drupal >> .env.local.example
+pm2 restart frontend
 pm2 restart storybook
