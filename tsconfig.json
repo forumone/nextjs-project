@@ -23,6 +23,11 @@
     "noImplicitAny": true,
     "incremental": true,
     "strictBindCallApply": true,
+    "paths": {
+      "@/*": [
+        "./*"
+      ]
+    },
     "plugins": [
       {
         "name": "next"

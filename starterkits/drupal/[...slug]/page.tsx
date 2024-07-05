@@ -1,11 +1,11 @@
-import { draftMode } from 'next/headers';
-import { notFound } from 'next/navigation';
-import { graphql } from '../../../types/drupal/__generated__';
+import { graphql } from '@/types/drupal/__generated__';
 import {
   GetNodeByPathQuery,
   GetNodeByPathQueryVariables,
-} from '../../../types/drupal/__generated__/graphql';
-import query from '../../../util/drupal/query';
+} from '@/types/drupal/__generated__/graphql';
+import query from '@/util/drupal/query';
+import { draftMode } from 'next/headers';
+import { notFound } from 'next/navigation';
 import BasicPage from '../_content/BasicPage';
 
 const getNodeByPath = graphql(`

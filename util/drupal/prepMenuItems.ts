@@ -1,10 +1,7 @@
-import { MenuItem as GessoMenuItem } from '../../source/03-components/Menu/Menu';
+import { MenuItem as GessoMenuItem } from '@/source/03-components/Menu/Menu';
+import { FragmentType, getFragmentData } from '@/types/drupal/__generated__';
+import { MenuItemFragmentFragment } from '@/types/drupal/__generated__/graphql';
 import MenuItemFragment from '../../starterkits/drupal/_navigation/MenuItemFragment';
-import {
-  FragmentType,
-  getFragmentData,
-} from '../../types/drupal/__generated__/fragment-masking';
-import { MenuItemFragmentFragment } from '../../types/drupal/__generated__/graphql';
 
 interface MenuItemFragmentWithUrl extends MenuItemFragmentFragment {
   url: string;
