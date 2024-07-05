@@ -1,0 +1,36 @@
+import parse from 'html-react-parser';
+import { JSX } from 'react';
+import Wysiwyg from '../../../source/03-components/Wysiwyg/Wysiwyg';
+import Page from '../../../source/04-templates/Page/Page';
+import {
+  FragmentType,
+  getFragmentData,
+  graphql,
+} from '../../../types/drupal/__generated__';
+
+const BasicPageFragment = graphql(`
+  fragment BasicPageFragment on NodePage {
+    title
+    body {
+      processed
+    }
+  }
+`);
+
+function BasicPage(props: {
+  entity: FragmentType<typeof BasicPageFragment>;
+}): JSX.Element {
+  const page = getFragmentData(BasicPageFragment, props.entity);
+  return (
+    <Page title={page.title}>
+      <Wysiwyg>
+        {page.body && typeof page.body.processed === 'string' ? (
+          <Wysiwyg>{parse(page.body.processed)}</Wysiwyg>
+        ) : null}
+      </Wysiwyg>
+    </Page>
+  );
+}
+
+export { BasicPageFragment };
+export default BasicPage;
