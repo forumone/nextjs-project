@@ -1,4 +1,3 @@
-import ArticleFull from '@/starterkits/drupal/_content/ArticleFull';
 import { graphql } from '@/types/drupal/__generated__';
 import {
   GetNodeByPathQuery,
@@ -7,6 +6,7 @@ import {
 import query from '@/util/drupal/query';
 import { draftMode } from 'next/headers';
 import { notFound } from 'next/navigation';
+import ArticleFull from '../_content/ArticleFull';
 import BasicPage from '../_content/BasicPageFull';
 
 const getNodeByPath = graphql(`
