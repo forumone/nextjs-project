@@ -1,3 +1,4 @@
+import ArticleFull from '@/starterkits/drupal/_content/ArticleFull';
 import { graphql } from '@/types/drupal/__generated__';
 import {
   GetNodeByPathQuery,
@@ -6,7 +7,7 @@ import {
 import query from '@/util/drupal/query';
 import { draftMode } from 'next/headers';
 import { notFound } from 'next/navigation';
-import BasicPage from '../_content/BasicPage';
+import BasicPage from '../_content/BasicPageFull';
 
 const getNodeByPath = graphql(`
   query GetNodeByPath($path: String!) {
@@ -18,6 +19,7 @@ const getNodeByPath = graphql(`
           ... on NodeInterface {
             status
           }
+          ...ArticleFullFragment
           ...BasicPageFragment
         }
       }
@@ -42,6 +44,8 @@ async function NodeFull({ params }: { params: { slug: string[] } }) {
     (('status' in data.route.entity && data.route.entity.status) || isEnabled)
   ) {
     switch (data.route.entity.__typename) {
+      case 'NodeArticle':
+        return <ArticleFull entity={data.route.entity} />;
       case 'NodePage':
         return <BasicPage entity={data.route.entity} />;
       default:

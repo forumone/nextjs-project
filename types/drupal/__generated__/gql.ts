@@ -13,7 +13,8 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "\n  query GetNodeByPath($path: String!) {\n    route(path: $path) {\n      __typename\n      ... on RouteInternal {\n        entity {\n          __typename\n          ... on NodeInterface {\n            status\n          }\n          ...BasicPageFragment\n        }\n      }\n    }\n  }\n": types.GetNodeByPathDocument,
+    "\n  query GetNodeByPath($path: String!) {\n    route(path: $path) {\n      __typename\n      ... on RouteInternal {\n        entity {\n          __typename\n          ... on NodeInterface {\n            status\n          }\n          ...ArticleFullFragment\n          ...BasicPageFragment\n        }\n      }\n    }\n  }\n": types.GetNodeByPathDocument,
+    "\n  fragment ArticleFullFragment on NodeArticle {\n    title\n    created {\n      timestamp\n    }\n    body {\n      processed\n    }\n  }\n": types.ArticleFullFragmentFragmentDoc,
     "\n  fragment BasicPageFragment on NodePage {\n    title\n    body {\n      processed\n    }\n  }\n": types.BasicPageFragmentFragmentDoc,
     "\n  fragment MenuItemFragment on MenuItem {\n    title\n    id\n    url\n    attributes {\n      class\n    }\n    internal\n  }\n": types.MenuItemFragmentFragmentDoc,
 };
@@ -35,7 +36,11 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query GetNodeByPath($path: String!) {\n    route(path: $path) {\n      __typename\n      ... on RouteInternal {\n        entity {\n          __typename\n          ... on NodeInterface {\n            status\n          }\n          ...BasicPageFragment\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetNodeByPath($path: String!) {\n    route(path: $path) {\n      __typename\n      ... on RouteInternal {\n        entity {\n          __typename\n          ... on NodeInterface {\n            status\n          }\n          ...BasicPageFragment\n        }\n      }\n    }\n  }\n"];
+export function graphql(source: "\n  query GetNodeByPath($path: String!) {\n    route(path: $path) {\n      __typename\n      ... on RouteInternal {\n        entity {\n          __typename\n          ... on NodeInterface {\n            status\n          }\n          ...ArticleFullFragment\n          ...BasicPageFragment\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetNodeByPath($path: String!) {\n    route(path: $path) {\n      __typename\n      ... on RouteInternal {\n        entity {\n          __typename\n          ... on NodeInterface {\n            status\n          }\n          ...ArticleFullFragment\n          ...BasicPageFragment\n        }\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  fragment ArticleFullFragment on NodeArticle {\n    title\n    created {\n      timestamp\n    }\n    body {\n      processed\n    }\n  }\n"): (typeof documents)["\n  fragment ArticleFullFragment on NodeArticle {\n    title\n    created {\n      timestamp\n    }\n    body {\n      processed\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
