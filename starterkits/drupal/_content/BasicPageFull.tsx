@@ -17,7 +17,7 @@ const BasicPageFragment = graphql(`
   }
 `);
 
-function BasicPage(props: {
+function BasicPageFull(props: {
   entity: FragmentType<typeof BasicPageFragment>;
 }): JSX.Element {
   const page = getFragmentData(BasicPageFragment, props.entity);
@@ -33,4 +33,4 @@ function BasicPage(props: {
 }
 
 export { BasicPageFragment };
-export default BasicPage;
+export default BasicPageFull;
