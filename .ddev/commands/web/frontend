@@ -1,8 +1,8 @@
 #!/bin/sh
 
-## Description: Run nextjs commands to rebuild the app
-## Usage: nextjs install|build|deploy|watch|(some other command in the theme service)
-## Example: "ddev nextjs build"
+## Description: Run frontend commands to rebuild the app
+## Usage: frontend install|build|deploy|watch|(some other command in the theme service)
+## Example: "ddev frontend build"
 
 case $1 in
   install)
@@ -42,7 +42,7 @@ case $1 in
     npm run generate:all
   ;;
   "")
-    echo "Usage: nextjs install|build|deploy|watch|(some other command in the theme service)"
+    echo "Usage: frontend install|build|deploy|watch|(some other command in the theme service)"
   ;;
   *)
     "$@"
