@@ -1,6 +1,6 @@
 /* eslint-disable */
-import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 import * as types from './graphql';
+import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 
 /**
  * Map of all GraphQL operations in the project.
@@ -13,12 +13,9 @@ import * as types from './graphql';
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-  '\n  fragment NodeBaseFields on NodeInterface {\n    __typename\n    status\n    id\n    title\n    path\n  }\n':
-    types.NodeBaseFieldsFragmentDoc,
-  '\n  query GetNodeByPath($path: String!) {\n    route(path: $path) {\n      __typename\n      ... on RouteInternal {\n        entity {\n          ...NodeBaseFields\n          ... on NodeArticle {\n            body {\n              processed\n            }\n            created {\n              timestamp\n            }\n            image {\n              width\n              url\n              height\n            }\n          }\n          ... on NodePage {\n            body {\n              processed\n            }\n          }\n        }\n      }\n    }\n  }\n':
-    types.GetNodeByPathDocument,
-  '\n  fragment MenuItemFragment on MenuItem {\n    title\n    id\n    url\n    attributes {\n      class\n    }\n    internal\n  }\n':
-    types.MenuItemFragmentFragmentDoc,
+    "\n  query GetNodeByPath($path: String!) {\n    route(path: $path) {\n      __typename\n      ... on RouteInternal {\n        entity {\n          __typename\n          ... on NodeInterface {\n            status\n          }\n          ...BasicPageFragment\n        }\n      }\n    }\n  }\n": types.GetNodeByPathDocument,
+    "\n  fragment BasicPageFragment on NodePage {\n    title\n    body {\n      processed\n    }\n  }\n": types.BasicPageFragmentFragmentDoc,
+    "\n  fragment MenuItemFragment on MenuItem {\n    title\n    id\n    url\n    attributes {\n      class\n    }\n    internal\n  }\n": types.MenuItemFragmentFragmentDoc,
 };
 
 /**
@@ -38,25 +35,18 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(
-  source: '\n  fragment NodeBaseFields on NodeInterface {\n    __typename\n    status\n    id\n    title\n    path\n  }\n',
-): (typeof documents)['\n  fragment NodeBaseFields on NodeInterface {\n    __typename\n    status\n    id\n    title\n    path\n  }\n'];
+export function graphql(source: "\n  query GetNodeByPath($path: String!) {\n    route(path: $path) {\n      __typename\n      ... on RouteInternal {\n        entity {\n          __typename\n          ... on NodeInterface {\n            status\n          }\n          ...BasicPageFragment\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetNodeByPath($path: String!) {\n    route(path: $path) {\n      __typename\n      ... on RouteInternal {\n        entity {\n          __typename\n          ... on NodeInterface {\n            status\n          }\n          ...BasicPageFragment\n        }\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(
-  source: '\n  query GetNodeByPath($path: String!) {\n    route(path: $path) {\n      __typename\n      ... on RouteInternal {\n        entity {\n          ...NodeBaseFields\n          ... on NodeArticle {\n            body {\n              processed\n            }\n            created {\n              timestamp\n            }\n            image {\n              width\n              url\n              height\n            }\n          }\n          ... on NodePage {\n            body {\n              processed\n            }\n          }\n        }\n      }\n    }\n  }\n',
-): (typeof documents)['\n  query GetNodeByPath($path: String!) {\n    route(path: $path) {\n      __typename\n      ... on RouteInternal {\n        entity {\n          ...NodeBaseFields\n          ... on NodeArticle {\n            body {\n              processed\n            }\n            created {\n              timestamp\n            }\n            image {\n              width\n              url\n              height\n            }\n          }\n          ... on NodePage {\n            body {\n              processed\n            }\n          }\n        }\n      }\n    }\n  }\n'];
+export function graphql(source: "\n  fragment BasicPageFragment on NodePage {\n    title\n    body {\n      processed\n    }\n  }\n"): (typeof documents)["\n  fragment BasicPageFragment on NodePage {\n    title\n    body {\n      processed\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(
-  source: '\n  fragment MenuItemFragment on MenuItem {\n    title\n    id\n    url\n    attributes {\n      class\n    }\n    internal\n  }\n',
-): (typeof documents)['\n  fragment MenuItemFragment on MenuItem {\n    title\n    id\n    url\n    attributes {\n      class\n    }\n    internal\n  }\n'];
+export function graphql(source: "\n  fragment MenuItemFragment on MenuItem {\n    title\n    id\n    url\n    attributes {\n      class\n    }\n    internal\n  }\n"): (typeof documents)["\n  fragment MenuItemFragment on MenuItem {\n    title\n    id\n    url\n    attributes {\n      class\n    }\n    internal\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};
 }
 
-export type DocumentType<TDocumentNode extends DocumentNode<any, any>> =
-  TDocumentNode extends DocumentNode<infer TType, any> ? TType : never;
+export type DocumentType<TDocumentNode extends DocumentNode<any, any>> = TDocumentNode extends DocumentNode<  infer TType,  any>  ? TType  : never;
