@@ -4,12 +4,22 @@
 ## Usage: setup-drupal
 ## Example: "ddev setup-drupal"
 
-node lib/drupal/merge-package-json.js
-npm install --package-lock-only
-npm ci
+#node lib/drupal/merge-package-json.js
+#npm install --package-lock-only
+#npm ci
 if [ ! -f ./codgen.ts ]; then
   cp ./starterkits/drupal/codegen.ts ./codegen.ts
 fi
 cat ./starterkits/drupal/.env.drupal >> .env.local.example
+cp -r ./starterkits/drupal/api ./app
+if [ ! -d "./app/[...slug]" ]; then
+  cp -r "./starterkits/drupal/[...slug]" ./app
+fi
+if [ ! -d ./app/_content ]; then
+  cp -r ./starterkits/drupal/_content ./app
+fi
+if [ ! -d ./app/_navigation ]; then
+  cp -r ./starterkits/drupal/_navigation ./app
+fi
 pm2 restart frontend
 pm2 restart storybook
