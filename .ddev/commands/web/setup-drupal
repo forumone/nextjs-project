@@ -1,0 +1,11 @@
+#!/bin/bash
+
+## Description: Set up project for headless Drupal
+## Usage: setup-drupal
+## Example: "ddev setup-drupal"
+
+node lib/merge-package-json.js
+npm install --package-lock-only
+npm ci
+pm2 restart nextjs
+pm2 restart storybook

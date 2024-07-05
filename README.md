@@ -25,15 +25,13 @@ git init
 ```shell
 git remote add origin git@github.com:forumone/[project-name].git
 ```
-4. Update configuration in the `./.ddev/config.yaml`
-   5. Update `name: [project name]` to the correct project name.
+4. Update configuration in the `./.ddev/config.yaml`. Update `name: nextjs-project` to the correct project name.
 
+5. Run `ddev start`
 
-* Project name (`[project-name]`): `[project-name]<ENTER>`
-* Docroot Location (...): `public<ENTER>`
-* Project Type [...]: `php<ENTER>`
+6. Run `ddev setup-drupal`
 
-6. Go through the rest of the `build process`
+7. Go through the rest of the `build process`
 
 ### Assuming Forum One hosted project,
 

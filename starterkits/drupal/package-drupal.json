@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "graphql": "^16.8.1",
+    "graphql-request": "^6.1.0",
+    "next-drupal": "^1.6.0"
+  },
+  "devDependencies": {
+    "@dotenvx/dotenvx": "^0.27.0",
+    "@graphql-codegen/cli": "^5.0.2",
+    "@graphql-codegen/client-preset": "^4.2.4",
+    "@parcel/watcher": "^2.4.1"
+  },
+  "overrides": {
+    "next": "^14.2.4"
+  }
+}
