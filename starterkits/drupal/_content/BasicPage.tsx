@@ -1,12 +1,12 @@
-import parse from 'html-react-parser';
-import { JSX } from 'react';
-import Wysiwyg from '../../../source/03-components/Wysiwyg/Wysiwyg';
-import Page from '../../../source/04-templates/Page/Page';
+import Wysiwyg from '@/source/03-components/Wysiwyg/Wysiwyg';
+import Page from '@/source/04-templates/Page/Page';
 import {
   FragmentType,
   getFragmentData,
   graphql,
-} from '../../../types/drupal/__generated__';
+} from '@/types/drupal/__generated__';
+import parse from 'html-react-parser';
+import { JSX } from 'react';
 
 const BasicPageFragment = graphql(`
   fragment BasicPageFragment on NodePage {
