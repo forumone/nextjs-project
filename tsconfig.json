@@ -43,6 +43,7 @@
   ],
   "exclude": [
     "node_modules",
-    "lib/plop-templates/*"
+    "lib/plop-templates/*",
+    "starterkits/*/examples/**"
   ]
 }
