@@ -4,8 +4,9 @@
 ## Usage: setup-drupal
 ## Example: "ddev setup-drupal"
 
-node lib/merge-package-json.js
+node lib/drupal/merge-package-json.js
 npm install --package-lock-only
 npm ci
+cp ./starterkits/drupal/codegen.ts ./codegen.ts
 pm2 restart app
 pm2 restart storybook
