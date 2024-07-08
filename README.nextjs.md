@@ -8,7 +8,7 @@ This is a starter app for [Next.js](https://nextjs.org/) (bootstrapped with [`cr
 * [Stylelint](https://stylelint.io/)
 * [Prettier](https://prettier.io/)
 
-Note that Next v11 comes with the following installed already:
+Note that Next v14 comes with the following installed already:
 * [Webpack v5](https://webpack.js.org/concepts/)
 * [CSS Modules](https://github.com/css-modules/css-modules)
 

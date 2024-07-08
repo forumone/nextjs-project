@@ -66,6 +66,24 @@ generate the React components:
 ddev nextjs icons
 ```
 
+## Project organization
+- `app`: Queries and integration components. Any components that rely on a particular
+  CMS or content structure go here. Uses the Next.js App Router, so refer to the
+  [Next.js docs](https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts)
+  for details on how the folder structure corresponds to routes.
+- `lib`: Helper files for `nextjs-project` itself, such as custom PostCSS plugins,
+  and scripts to facilitate setting up for a headless CMS.
+- `public`: [Static assets](https://nextjs.org/docs/app/building-your-application/optimizing/static-assets)
+- `source`: UI components. Components here contain only what's needed for front-end 
+  display and interactivity, no queries or anything CMS-specific. (Think, if it can be
+  displayed in Storybook, it probably goes here.)
+- `starterkits`: Starting code and examples for building a headless site for a specific
+  CMS (currently just Drupal, but WordPress is coming soon)
+- `types`: Type definitions. Anything within `__generated__` is generated automatically
+  and should not be edited manually.
+- `util`: Utility functions for working with CMSes or working with queries. Front-end
+  utilities and Storybook helpers are in `source/06-utility`
+
 ## Helpful commands
 
 ### Monitoring the applications
