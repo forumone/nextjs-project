@@ -66,6 +66,11 @@ const FilmDetailPageFragment = graphql(`
   }
 `);
 
+/**
+ * Component to display the Film detail page.
+ *
+ * Think of this as node--film--full.html.twig.
+ */
 function FilmDetailPage(props: {
   entity: FragmentType<typeof FilmDetailPageFragment>;
 }): JSX.Element {
