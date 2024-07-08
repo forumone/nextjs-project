@@ -1,8 +1,15 @@
 import { FragmentType, getFragmentData } from '@/types/drupal/__generated__';
-import { JSX } from 'react';
+import dynamic from 'next/dynamic';
+import { ComponentType, JSX } from 'react';
 import AllParagraphsFragment from './AllParagraphsFragment';
-import QuoteParagraph from './QuoteParagraph';
-import TriviaParagraph from './TriviaParagraph';
+
+const paragraphMapping: Record<
+  string,
+  ComponentType<{ paragraph: FragmentType<never> }>
+> = {
+  ParagraphQuote: dynamic(() => import('./QuoteParagraph')),
+  ParagraphTrivia: dynamic(() => import('./TriviaParagraph')),
+};
 
 /**
  * Imports the appropriate template based on the paragraph type.
@@ -14,19 +21,20 @@ function mapParagraph(
   entity: FragmentType<typeof AllParagraphsFragment>,
 ): JSX.Element | null {
   const paragraph = getFragmentData(AllParagraphsFragment, entity);
-  if (!paragraph?.id) {
+
+  if (
+    !paragraph?.id ||
+    !paragraph?.__typename ||
+    !Object.prototype.hasOwnProperty.call(
+      paragraphMapping,
+      paragraph.__typename,
+    )
+  ) {
     return null;
   }
 
-  // TODO: This should be the cleaner switch using an object map.
-  switch (paragraph.__typename) {
-    case 'ParagraphQuote':
-      return <QuoteParagraph paragraph={paragraph} key={paragraph.id} />;
-    case 'ParagraphTrivia':
-      return <TriviaParagraph paragraph={paragraph} key={paragraph.id} />;
-    default:
-      return null;
-  }
+  const ParagraphComponent = paragraphMapping[paragraph.__typename];
+  return <ParagraphComponent paragraph={paragraph} key={paragraph.id} />;
 }
 
 export default mapParagraph;
