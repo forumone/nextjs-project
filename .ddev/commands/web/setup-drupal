@@ -21,5 +21,8 @@ fi
 if [ ! -d ./app/_navigation ]; then
   cp -r ./starterkits/drupal/_navigation ./app
 fi
+if [ ! -d ./app/blog ]; then
+  cp -r ./starterkits/drupal/blog ./app
+fi
 pm2 restart frontend
 pm2 restart storybook
