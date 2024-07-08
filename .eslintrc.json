@@ -50,6 +50,12 @@
       "rules": {
         "prettier/prettier": "off"
       }
+    },
+    {
+      "files": ["lib/drupal/generate-graphql-types.ts"],
+      "rules": {
+        "@typescript-eslint/ban-ts-comment": "off"
+      }
     }
   ]
 }

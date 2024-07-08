@@ -1,6 +1,9 @@
 import { CodegenContext, generate } from '@graphql-codegen/cli';
 import { resolve } from 'node:path';
-// @ts-expect-error The codegen file won't be at its location until setup-drupal is run.
+// The codegen file won't be at its location until setup-drupal is run. Ignore
+// the missing file, because @ts-expect-error then errors once setup-drupal is
+// run and the file *is* there.
+// @ts-ignore
 import codegenConfig from '../../codegen';
 import drupal from '../../util/drupal/drupal';
 import graphqlEndpoint from '../../util/drupal/graphqlEndpoint';
