@@ -23,11 +23,9 @@ function BasicPageFull(props: {
   const page = getFragmentData(BasicPageFragment, props.entity);
   return (
     <Page title={page.title}>
-      <Wysiwyg>
-        {page.body && typeof page.body.processed === 'string' ? (
-          <Wysiwyg>{parse(page.body.processed)}</Wysiwyg>
-        ) : null}
-      </Wysiwyg>
+      {page.body && typeof page.body.processed === 'string' ? (
+        <Wysiwyg>{parse(page.body.processed)}</Wysiwyg>
+      ) : null}
     </Page>
   );
 }
