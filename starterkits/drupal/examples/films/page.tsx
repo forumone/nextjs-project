@@ -5,7 +5,7 @@
  */
 import { graphql } from '@/types/drupal/__generated__';
 import query from '@/util/drupal/query';
-import FilmsListing from '../_views/FilmsListing';
+import FilmsListing from '../views/FilmsListing';
 
 /**
  * Query to get the view results for a single page. If there were any other

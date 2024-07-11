@@ -52,7 +52,10 @@
       }
     },
     {
-      "files": ["lib/drupal/generate-graphql-types.ts"],
+      "files": [
+        "lib/drupal/generate-graphql-types.ts",
+        "util/drupal/prepMenuItems.ts"
+      ],
       "rules": {
         "@typescript-eslint/ban-ts-comment": "off"
       }

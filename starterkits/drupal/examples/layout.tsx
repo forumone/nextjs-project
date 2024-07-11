@@ -13,8 +13,8 @@ import '@/source/06-utility/index.css';
 import { graphql } from '@/types/drupal/__generated__';
 import { query } from '@/util/drupal/drupal';
 import { JSX, PropsWithChildren } from 'react';
-import GlobalFooter from './_layout/GlobalFooter.tsx';
-import GlobalHeader from './_layout/GlobalHeader.tsx';
+import GlobalFooter from './layout/GlobalFooter.tsx';
+import GlobalHeader from './layout/GlobalHeader.tsx';
 
 /**
  * The root layout query only composes the fragments that are needed for the

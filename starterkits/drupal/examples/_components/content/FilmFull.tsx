@@ -14,7 +14,7 @@ import {
 } from '@/types/drupal/__generated__';
 import Image from 'next/image';
 import { JSX } from 'react';
-import mapParagraph from '../_paragraphs/mapParagraph';
+import mapParagraph from '../paragraphs/mapParagraph';
 
 /**
  * Fragment for the film detail page. In addition to getting all the basic

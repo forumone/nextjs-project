@@ -12,7 +12,7 @@ import {
 } from '@/types/drupal/__generated__';
 import entityIsType from '@/util/entityIsType';
 import { JSX, Suspense } from 'react';
-import FilmTeaser, { FilmTeaserFragment } from '../_content/FilmTeaser';
+import FilmTeaser, { FilmTeaserFragment } from '../content/FilmTeaser';
 
 /**
  * Fragment to query the films_listing view. The view would need to be set up
