@@ -1,7 +1,11 @@
+// The fragment file won't be at its location until setup-drupal is run. Ignore
+// the missing file, because @ts-expect-error then errors once setup-drupal is
+// run and the file *is* there.
+// @ts-ignore
+import MenuItemFragment from '@/app/_components/navigation/MenuItemFragment';
 import { MenuItem as GessoMenuItem } from '@/source/03-components/Menu/Menu';
 import { FragmentType, getFragmentData } from '@/types/drupal/__generated__';
 import { MenuItemFragmentFragment } from '@/types/drupal/__generated__/graphql';
-import MenuItemFragment from '../../starterkits/drupal/_navigation/MenuItemFragment';
 
 interface MenuItemFragmentWithUrl extends MenuItemFragmentFragment {
   url: string;

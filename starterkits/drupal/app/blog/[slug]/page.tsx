@@ -12,7 +12,7 @@ import {
 import query from '@/util/drupal/query';
 import { draftMode } from 'next/headers';
 import { notFound } from 'next/navigation';
-import ArticleFull from '../../_content/ArticleFull';
+import ArticleFull from '../../_components/content/ArticleFull';
 
 const getArticleByName = graphql(`
   query GetArticleByPath($path: String!) {

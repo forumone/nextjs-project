@@ -12,7 +12,7 @@ import {
 import query from '@/util/drupal/query';
 import { draftMode } from 'next/headers';
 import { notFound } from 'next/navigation';
-import BasicPageFull from '../_content/BasicPageFull';
+import BasicPageFull from '../_components/content/BasicPageFull';
 
 const getNodeByPath = graphql(`
   query GetNodeByPath($path: String!) {

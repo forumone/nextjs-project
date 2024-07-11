@@ -13,8 +13,8 @@ import {
 } from '@/types/drupal/__generated__';
 import parse from 'html-react-parser';
 import { JSX } from 'react';
-import FooterMenu from '../_navigation/FooterMenu';
-import SocialMenu from '../_navigation/SocialMenu';
+import FooterMenu from '../navigation/FooterMenu';
+import SocialMenu from '../navigation/SocialMenu';
 
 /**
  * Fragment for the global footer.
