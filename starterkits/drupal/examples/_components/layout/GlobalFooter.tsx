@@ -6,11 +6,7 @@
  */
 
 import Footer from '@/source/02-layouts/Footer/Footer';
-import {
-  FragmentType,
-  getFragmentData,
-  graphql,
-} from '@/types/drupal/__generated__';
+import { FragmentType, getFragmentData, graphql } from '@/types/__generated__';
 import parse from 'html-react-parser';
 import { JSX } from 'react';
 import FooterMenu from '../navigation/FooterMenu';

@@ -1,9 +1,5 @@
 import Box from '@/source/03-components/Box/Box';
-import {
-  FragmentType,
-  getFragmentData,
-  graphql,
-} from '@/types/drupal/__generated__';
+import { FragmentType, getFragmentData, graphql } from '@/types/__generated__';
 
 /**
  * Fragment for a trivia paragraph with a text field for the title and

@@ -9,11 +9,7 @@
 import Icons from '@/source/01-global/icon/icons';
 import Menu, { MenuItem } from '@/source/03-components/Menu/Menu';
 import styles from '@/source/03-components/Menu/menu-social.module.css';
-import {
-  FragmentType,
-  getFragmentData,
-  graphql,
-} from '@/types/drupal/__generated__';
+import { FragmentType, getFragmentData, graphql } from '@/types/__generated__';
 
 /**
  * Fragment for the menu items. You may need to use the beta version of the

@@ -1,4 +1,4 @@
-import { RouteInternal } from '@/types/drupal/__generated__/graphql';
+import { RouteInternal } from '@/types/__generated__/graphql';
 import entityIsType from '@/util/entityIsType';
 
 function routeIsInternal(

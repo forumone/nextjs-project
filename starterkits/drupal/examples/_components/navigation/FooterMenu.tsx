@@ -10,12 +10,8 @@ import Menu from '@/source/03-components/Menu/Menu';
  * the footer menu in Storybook and import it instead of the generic Menu.
  */
 import styles from '@/source/03-components/Menu/menu-footer.module.css';
-import {
-  FragmentType,
-  getFragmentData,
-  graphql,
-} from '@/types/drupal/__generated__';
-import { prepMenuItems } from '@/util/drupal/prepMenuItems';
+import { FragmentType, getFragmentData, graphql } from '@/types/__generated__';
+import { prepMenuItems } from '@/util/prepMenuItems';
 
 /**
  * Fragment for the footer menu items.

@@ -1,10 +1,6 @@
 import Wysiwyg from '@/source/03-components/Wysiwyg/Wysiwyg';
 import Page from '@/source/04-templates/Page/Page';
-import {
-  FragmentType,
-  getFragmentData,
-  graphql,
-} from '@/types/drupal/__generated__';
+import { FragmentType, getFragmentData, graphql } from '@/types/__generated__';
 import parse from 'html-react-parser';
 import { JSX } from 'react';
 
