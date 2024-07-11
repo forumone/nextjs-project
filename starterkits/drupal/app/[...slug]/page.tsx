@@ -8,8 +8,8 @@ import {
   canShowEntity,
   entityExists,
   routeIsInternal,
-} from '@/util/drupal/dataIsEntityType';
-import query from '@/util/drupal/query';
+} from '@/util/dataIsEntityType';
+import query from '@/util/query';
 import { draftMode } from 'next/headers';
 import { notFound } from 'next/navigation';
 import BasicPageFull from '../_components/content/BasicPageFull';
