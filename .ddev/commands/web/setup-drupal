@@ -4,25 +4,18 @@
 ## Usage: setup-drupal
 ## Example: "ddev setup-drupal"
 
+if [ -e ./codegen.ts ] || [ -d ./app/api ]; then
+  echo "Drupal setup can only be run once."
+  echo "If you need the starter files, copy them from the starterkits directory."
+  echo 0;
+fi
+
 node lib/drupal/merge-package-json.js
 npm install --package-lock-only
 npm ci
-if [ ! -f ./codgen.ts ]; then
-  cp ./starterkits/drupal/codegen.ts ./codegen.ts
-fi
+cp ./starterkits/drupal/codegen.ts ./codegen.ts
 cat ./starterkits/drupal/.env.drupal >> .env.local.example
 cp -r ./starterkits/drupal/api ./app
-if [ ! -d "./app/[...slug]" ]; then
-  cp -r "./starterkits/drupal/[...slug]" ./app
-fi
-if [ ! -d ./app/_content ]; then
-  cp -r ./starterkits/drupal/_content ./app
-fi
-if [ ! -d ./app/_navigation ]; then
-  cp -r ./starterkits/drupal/_navigation ./app
-fi
-if [ ! -d ./app/blog ]; then
-  cp -r ./starterkits/drupal/blog ./app
-fi
+cp -r ./starterkits/drupal/app/* ./app
 pm2 restart frontend
 pm2 restart storybook
