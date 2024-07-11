@@ -1,9 +1,5 @@
 import Article from '@/source/03-components/Article/Article';
-import {
-  FragmentType,
-  getFragmentData,
-  graphql,
-} from '@/types/drupal/__generated__';
+import { FragmentType, getFragmentData, graphql } from '@/types/__generated__';
 import { JSX } from 'react';
 
 const ArticleFullFragment = graphql(`

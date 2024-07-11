@@ -5,11 +5,7 @@
 
 import Pager from '@/source/03-components/Pager/Pager';
 import ListingPage from '@/source/04-templates/ListingPage/ListingPage;';
-import {
-  FragmentType,
-  getFragmentData,
-  graphql,
-} from '@/types/drupal/__generated__';
+import { FragmentType, getFragmentData, graphql } from '@/types/__generated__';
 import entityIsType from '@/util/entityIsType';
 import { JSX, Suspense } from 'react';
 import FilmTeaser, { FilmTeaserFragment } from '../content/FilmTeaser';

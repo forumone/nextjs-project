@@ -7,11 +7,7 @@
  */
 
 import Film from '@/source/04-templates/Film/Film';
-import {
-  FragmentType,
-  getFragmentData,
-  graphql,
-} from '@/types/drupal/__generated__';
+import { FragmentType, getFragmentData, graphql } from '@/types/__generated__';
 import Image from 'next/image';
 import { JSX } from 'react';
 import mapParagraph from '../paragraphs/mapParagraph';

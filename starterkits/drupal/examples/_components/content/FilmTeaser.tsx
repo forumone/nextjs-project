@@ -7,11 +7,7 @@
  */
 
 import ImageTeaser from '@/source/03-components/ImageTeaser/ImageTeaser.tsx';
-import {
-  FragmentType,
-  getFragmentData,
-  graphql,
-} from '@/types/drupal/__generated__';
+import { FragmentType, getFragmentData, graphql } from '@/types/__generated__';
 import Image from 'next/image';
 
 /**

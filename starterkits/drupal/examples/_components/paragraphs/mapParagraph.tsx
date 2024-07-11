@@ -1,4 +1,4 @@
-import { FragmentType, getFragmentData } from '@/types/drupal/__generated__';
+import { FragmentType, getFragmentData } from '@/types/__generated__';
 import dynamic from 'next/dynamic';
 import { ComponentType, JSX } from 'react';
 import AllParagraphsFragment from './AllParagraphsFragment';

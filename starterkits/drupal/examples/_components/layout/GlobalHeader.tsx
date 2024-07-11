@@ -5,11 +5,7 @@
 
 import Header from '@/source/02-layouts/Header/Header';
 import SiteName from '@/source/03-components/SiteName/SiteName';
-import {
-  FragmentType,
-  getFragmentData,
-  graphql,
-} from '@/types/drupal/__generated__';
+import { FragmentType, getFragmentData, graphql } from '@/types/__generated__';
 import { JSX } from 'react';
 import MainMenu from '../_navigation/MainMenu';
 

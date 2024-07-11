@@ -6,7 +6,7 @@ const config: CodegenConfig = {
   documents: './app/**/!(*.d).{ts,tsx}',
   ignoreNoDocuments: true,
   generates: {
-    './types/drupal/__generated__/': {
+    './types/__generated__/': {
       preset: 'client',
       presetConfig: {
         fragmentMasking: { unmaskFunctionName: 'getFragmentData' },

@@ -1,15 +1,15 @@
-import { graphql } from '@/types/drupal/__generated__';
+import { graphql } from '@/types/__generated__';
 import {
   GetArticleByPathQuery,
   GetArticleByPathQueryVariables,
   NodeArticle,
-} from '@/types/drupal/__generated__/graphql';
+} from '@/types/__generated__/graphql';
 import {
   canShowEntity,
   entityExists,
   routeIsInternal,
-} from '@/util/drupal/dataIsEntityType';
-import query from '@/util/drupal/query';
+} from '@/util/dataIsEntityType';
+import query from '@/util/query';
 import { draftMode } from 'next/headers';
 import { notFound } from 'next/navigation';
 import ArticleFull from '../../_components/content/ArticleFull';

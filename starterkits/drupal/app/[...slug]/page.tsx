@@ -1,9 +1,9 @@
-import { graphql } from '@/types/drupal/__generated__';
+import { graphql } from '@/types/__generated__';
 import {
   GetNodeByPathQuery,
   GetNodeByPathQueryVariables,
   NodePage,
-} from '@/types/drupal/__generated__/graphql';
+} from '@/types/__generated__/graphql';
 import {
   canShowEntity,
   entityExists,

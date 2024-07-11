@@ -1,4 +1,4 @@
-import { graphql } from '@/types/drupal/__generated__';
+import { graphql } from '@/types/__generated__';
 
 /**
  * Fragment for all potential paragraph types we want to retrieve if they're
