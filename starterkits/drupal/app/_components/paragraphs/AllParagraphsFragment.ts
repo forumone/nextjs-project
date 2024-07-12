@@ -11,7 +11,10 @@ const AllParagraphsFragment = graphql(`
       id
     }
     ...AccordionParagraphFragment
+    ...CardParagraphFragment
+    ...CardsParagraphFragment
     ...HeroParagraphFragment
+    ...WysiwygParagraphFragment
   }
 `);
 

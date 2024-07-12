@@ -19,8 +19,11 @@ const documents = {
     "\n  fragment MenuItemFragment on MenuItem {\n    title\n    id\n    url\n    attributes {\n      class\n    }\n    internal\n  }\n": types.MenuItemFragmentFragmentDoc,
     "\n  fragment AccordionItemParagraphFragment on ParagraphAccordionItem {\n    id\n    accordionHeading\n    accordionBody {\n      processed\n    }\n  }\n": types.AccordionItemParagraphFragmentFragmentDoc,
     "\n  fragment AccordionParagraphFragment on ParagraphAccordion {\n    id\n    accordionItems {\n      __typename\n      ...AccordionItemParagraphFragment\n    }\n  }\n": types.AccordionParagraphFragmentFragmentDoc,
-    "\n  fragment AllParagraphsFragment on ParagraphUnion {\n    __typename\n    ... on ParagraphInterface {\n      id\n    }\n    ...AccordionParagraphFragment\n    ...HeroParagraphFragment\n  }\n": types.AllParagraphsFragmentFragmentDoc,
+    "\n  fragment AllParagraphsFragment on ParagraphUnion {\n    __typename\n    ... on ParagraphInterface {\n      id\n    }\n    ...AccordionParagraphFragment\n    ...CardParagraphFragment\n    ...CardsParagraphFragment\n    ...HeroParagraphFragment\n    ...WysiwygParagraphFragment\n  }\n": types.AllParagraphsFragmentFragmentDoc,
+    "\n  fragment CardParagraphFragment on ParagraphCard {\n    id\n    cardLink {\n      url\n    }\n    cardMedia {\n      ... on MediaImage {\n        mediaImage {\n          alt\n          variations(styles: LARGE) {\n            height\n            url\n            width\n          }\n        }\n      }\n    }\n    cardSubtitle\n    cardTitle\n  }\n": types.CardParagraphFragmentFragmentDoc,
+    "\n  fragment CardsParagraphFragment on ParagraphCards {\n    cards {\n      __typename\n      ... on ParagraphInterface {\n        id\n      }\n      ...CardParagraphFragment\n    }\n  }\n": types.CardsParagraphFragmentFragmentDoc,
     "\n  fragment HeroParagraphFragment on ParagraphHero {\n    id\n    heroAlignment\n    heroBody {\n      processed\n    }\n    heroHasOverlay\n    heroHeading\n    heroImage {\n      ... on MediaImage {\n        id\n        name\n        mediaImage {\n          alt\n          height\n          width\n          url\n        }\n      }\n    }\n    heroLink {\n      title\n      url\n    }\n  }\n": types.HeroParagraphFragmentFragmentDoc,
+    "\n  fragment WysiwygParagraphFragment on ParagraphWysiwyg {\n    wysiwyg {\n      processed\n    }\n  }\n": types.WysiwygParagraphFragmentFragmentDoc,
     "\n  query GetArticleByPath($path: String!) {\n    route(path: $path) {\n      __typename\n      ... on RouteInternal {\n        entity {\n          __typename\n          ... on NodeInterface {\n            status\n          }\n          ...ArticleFullFragment\n        }\n      }\n    }\n  }\n": types.GetArticleByPathDocument,
 };
 
@@ -65,11 +68,23 @@ export function graphql(source: "\n  fragment AccordionParagraphFragment on Para
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  fragment AllParagraphsFragment on ParagraphUnion {\n    __typename\n    ... on ParagraphInterface {\n      id\n    }\n    ...AccordionParagraphFragment\n    ...HeroParagraphFragment\n  }\n"): (typeof documents)["\n  fragment AllParagraphsFragment on ParagraphUnion {\n    __typename\n    ... on ParagraphInterface {\n      id\n    }\n    ...AccordionParagraphFragment\n    ...HeroParagraphFragment\n  }\n"];
+export function graphql(source: "\n  fragment AllParagraphsFragment on ParagraphUnion {\n    __typename\n    ... on ParagraphInterface {\n      id\n    }\n    ...AccordionParagraphFragment\n    ...CardParagraphFragment\n    ...CardsParagraphFragment\n    ...HeroParagraphFragment\n    ...WysiwygParagraphFragment\n  }\n"): (typeof documents)["\n  fragment AllParagraphsFragment on ParagraphUnion {\n    __typename\n    ... on ParagraphInterface {\n      id\n    }\n    ...AccordionParagraphFragment\n    ...CardParagraphFragment\n    ...CardsParagraphFragment\n    ...HeroParagraphFragment\n    ...WysiwygParagraphFragment\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  fragment CardParagraphFragment on ParagraphCard {\n    id\n    cardLink {\n      url\n    }\n    cardMedia {\n      ... on MediaImage {\n        mediaImage {\n          alt\n          variations(styles: LARGE) {\n            height\n            url\n            width\n          }\n        }\n      }\n    }\n    cardSubtitle\n    cardTitle\n  }\n"): (typeof documents)["\n  fragment CardParagraphFragment on ParagraphCard {\n    id\n    cardLink {\n      url\n    }\n    cardMedia {\n      ... on MediaImage {\n        mediaImage {\n          alt\n          variations(styles: LARGE) {\n            height\n            url\n            width\n          }\n        }\n      }\n    }\n    cardSubtitle\n    cardTitle\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  fragment CardsParagraphFragment on ParagraphCards {\n    cards {\n      __typename\n      ... on ParagraphInterface {\n        id\n      }\n      ...CardParagraphFragment\n    }\n  }\n"): (typeof documents)["\n  fragment CardsParagraphFragment on ParagraphCards {\n    cards {\n      __typename\n      ... on ParagraphInterface {\n        id\n      }\n      ...CardParagraphFragment\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  fragment HeroParagraphFragment on ParagraphHero {\n    id\n    heroAlignment\n    heroBody {\n      processed\n    }\n    heroHasOverlay\n    heroHeading\n    heroImage {\n      ... on MediaImage {\n        id\n        name\n        mediaImage {\n          alt\n          height\n          width\n          url\n        }\n      }\n    }\n    heroLink {\n      title\n      url\n    }\n  }\n"): (typeof documents)["\n  fragment HeroParagraphFragment on ParagraphHero {\n    id\n    heroAlignment\n    heroBody {\n      processed\n    }\n    heroHasOverlay\n    heroHeading\n    heroImage {\n      ... on MediaImage {\n        id\n        name\n        mediaImage {\n          alt\n          height\n          width\n          url\n        }\n      }\n    }\n    heroLink {\n      title\n      url\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  fragment WysiwygParagraphFragment on ParagraphWysiwyg {\n    wysiwyg {\n      processed\n    }\n  }\n"): (typeof documents)["\n  fragment WysiwygParagraphFragment on ParagraphWysiwyg {\n    wysiwyg {\n      processed\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
