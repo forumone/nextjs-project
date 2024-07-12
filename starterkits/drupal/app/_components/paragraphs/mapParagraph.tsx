@@ -16,7 +16,10 @@ const paragraphMapping: Record<
   ComponentType<ParagraphComponentType>
 > = {
   ParagraphAccordion: dynamic(() => import('./AccordionParagraph')),
+  ParagraphCard: dynamic(() => import('./CardParagraph')),
+  ParagraphCards: dynamic(() => import('./CardsParagraph')),
   ParagraphHero: dynamic(() => import('./HeroParagraph')),
+  ParagraphWysiwyg: dynamic(() => import('./WysiwygParagraph')),
 };
 
 /**
