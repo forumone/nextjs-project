@@ -11,6 +11,7 @@ const AllParagraphsFragment = graphql(`
       id
     }
     ...AccordionParagraphFragment
+    ...BlockEmbedParagraphFragment
     ...CardParagraphFragment
     ...CardsParagraphFragment
     ...HeroParagraphFragment
