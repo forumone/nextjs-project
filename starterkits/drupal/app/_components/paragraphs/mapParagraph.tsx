@@ -3,19 +3,24 @@ import dynamic from 'next/dynamic';
 import { ComponentType, JSX } from 'react';
 import AllParagraphsFragment from './AllParagraphsFragment';
 
+type ParagraphComponentType = {
+  paragraph: object;
+};
+
+/**
+ * Maps the paragraph type as returned by GraphQL with the integration template.
+ * As you add or remove paragraph types, you'll need to update this map.
+ */
 const paragraphMapping: Record<
   string,
-  ComponentType<{ paragraph: FragmentType<never> }>
+  ComponentType<ParagraphComponentType>
 > = {
-  ParagraphQuote: dynamic(() => import('./QuoteParagraph')),
-  ParagraphTrivia: dynamic(() => import('./TriviaParagraph')),
+  ParagraphAccordion: dynamic(() => import('./AccordionParagraph')),
+  ParagraphHero: dynamic(() => import('./HeroParagraph')),
 };
 
 /**
  * Imports the appropriate template based on the paragraph type.
- *
- * If you are using the Paragraphs module, you'll want to copy this file but
- * replace with your paragraph types and templates.
  */
 function mapParagraph(
   entity: FragmentType<typeof AllParagraphsFragment>,

@@ -381,6 +381,197 @@ export type NodePage = NodeInterface & {
 /** Entity type node. */
 export type NodeUnion = NodeArticle | NodePage;
 
+/** An accordion component for information that can be collapsed and expanded. */
+export type ParagraphAccordion = ParagraphInterface & {
+  __typename?: 'ParagraphAccordion';
+  /** Accordion Items */
+  accordionItems: Array<ParagraphUnion>;
+  /** The time that the Paragraph was created. */
+  created: DateTime;
+  /** The Universally Unique IDentifier (UUID). */
+  id: Scalars['ID']['output'];
+  /** The paragraphs entity language code. */
+  langcode: Language;
+  /** Published */
+  status: Scalars['Boolean']['output'];
+};
+
+/** Entity type paragraph. */
+export type ParagraphAccordionItem = ParagraphInterface & {
+  __typename?: 'ParagraphAccordionItem';
+  /** Body */
+  accordionBody?: Maybe<Text>;
+  /** Heading text for the accordion. A user will be able to click on the heading to show/hide the accordion body. */
+  accordionHeading: Scalars['String']['output'];
+  /** The time that the Paragraph was created. */
+  created: DateTime;
+  /** The Universally Unique IDentifier (UUID). */
+  id: Scalars['ID']['output'];
+  /** The paragraphs entity language code. */
+  langcode: Language;
+  /** Published */
+  status: Scalars['Boolean']['output'];
+};
+
+/** Entity type paragraph. */
+export type ParagraphBlockEmbed = ParagraphInterface & {
+  __typename?: 'ParagraphBlockEmbed';
+  /** Block */
+  block?: Maybe<BlockUnion>;
+  /** The time that the Paragraph was created. */
+  created: DateTime;
+  /** The Universally Unique IDentifier (UUID). */
+  id: Scalars['ID']['output'];
+  /** The paragraphs entity language code. */
+  langcode: Language;
+  /** Published */
+  status: Scalars['Boolean']['output'];
+};
+
+/** A simple callout component. */
+export type ParagraphCallToAction = ParagraphInterface & {
+  __typename?: 'ParagraphCallToAction';
+  /** The time that the Paragraph was created. */
+  created: DateTime;
+  /** Body */
+  ctaBody?: Maybe<Text>;
+  /** Heading */
+  ctaHeading: Scalars['String']['output'];
+  /** Link */
+  ctaLink?: Maybe<Link>;
+  /** Media */
+  ctaMedia?: Maybe<MediaUnion>;
+  /** The Universally Unique IDentifier (UUID). */
+  id: Scalars['ID']['output'];
+  /** The paragraphs entity language code. */
+  langcode: Language;
+  /** Published */
+  status: Scalars['Boolean']['output'];
+};
+
+/** Entity type paragraph. */
+export type ParagraphCard = ParagraphInterface & {
+  __typename?: 'ParagraphCard';
+  /** Card Link */
+  cardLink?: Maybe<Link>;
+  /** Card Media */
+  cardMedia: MediaUnion;
+  /** Card Subtitle */
+  cardSubtitle?: Maybe<Scalars['String']['output']>;
+  /** Card Title */
+  cardTitle: Scalars['String']['output'];
+  /** The time that the Paragraph was created. */
+  created: DateTime;
+  /** The Universally Unique IDentifier (UUID). */
+  id: Scalars['ID']['output'];
+  /** The paragraphs entity language code. */
+  langcode: Language;
+  /** Published */
+  status: Scalars['Boolean']['output'];
+};
+
+/** Entity type paragraph. */
+export type ParagraphCards = ParagraphInterface & {
+  __typename?: 'ParagraphCards';
+  /** Cards */
+  cards: Array<ParagraphUnion>;
+  /** The time that the Paragraph was created. */
+  created: DateTime;
+  /** The Universally Unique IDentifier (UUID). */
+  id: Scalars['ID']['output'];
+  /** The paragraphs entity language code. */
+  langcode: Language;
+  /** Published */
+  status: Scalars['Boolean']['output'];
+};
+
+/** A Card that references any node and can be selected via the Card(s) paragraph. */
+export type ParagraphDynamicCard = ParagraphInterface & {
+  __typename?: 'ParagraphDynamicCard';
+  /** Card Reference */
+  cardReference?: Maybe<NodeUnion>;
+  /** The time that the Paragraph was created. */
+  created: DateTime;
+  /** The Universally Unique IDentifier (UUID). */
+  id: Scalars['ID']['output'];
+  /** The paragraphs entity language code. */
+  langcode: Language;
+  /** Published */
+  status: Scalars['Boolean']['output'];
+};
+
+/** A predefined Dynamic List of content. */
+export type ParagraphDynamicList = ParagraphInterface & {
+  __typename?: 'ParagraphDynamicList';
+  /** The time that the Paragraph was created. */
+  created: DateTime;
+  /** The Universally Unique IDentifier (UUID). */
+  id: Scalars['ID']['output'];
+  /** The paragraphs entity language code. */
+  langcode: Language;
+  /** Published */
+  status: Scalars['Boolean']['output'];
+};
+
+/** A component providing a banner area with image, heading, summary text and an optional link. */
+export type ParagraphHero = ParagraphInterface & {
+  __typename?: 'ParagraphHero';
+  /** The time that the Paragraph was created. */
+  created: DateTime;
+  /**
+   * Sets the alignment of the heading, body, & button within the hero. The default
+   * is centered. If left is selected, elements are aligned left and left
+   * justified. If right is selected, elements are centered and left justified.
+   */
+  heroAlignment?: Maybe<Scalars['String']['output']>;
+  /** Summary text displayed in hero below title text. */
+  heroBody?: Maybe<Text>;
+  /** Flag to display semi-transparent color block over image. */
+  heroHasOverlay?: Maybe<Scalars['Boolean']['output']>;
+  /** Title text for the hero. */
+  heroHeading?: Maybe<Scalars['String']['output']>;
+  /** Background image used for the hero. */
+  heroImage: MediaUnion;
+  /** Optional hero link. */
+  heroLink?: Maybe<Link>;
+  /** The Universally Unique IDentifier (UUID). */
+  id: Scalars['ID']['output'];
+  /** The paragraphs entity language code. */
+  langcode: Language;
+  /** Published */
+  status: Scalars['Boolean']['output'];
+};
+
+/** Entity type paragraph. */
+export type ParagraphInterface = {
+  /** The time that the Paragraph was created. */
+  created: DateTime;
+  /** The Universally Unique IDentifier (UUID). */
+  id: Scalars['ID']['output'];
+  /** The paragraphs entity language code. */
+  langcode: Language;
+  /** Published */
+  status: Scalars['Boolean']['output'];
+};
+
+/** Entity type paragraph. */
+export type ParagraphUnion = ParagraphAccordion | ParagraphAccordionItem | ParagraphBlockEmbed | ParagraphCallToAction | ParagraphCard | ParagraphCards | ParagraphDynamicCard | ParagraphDynamicList | ParagraphHero | ParagraphWysiwyg;
+
+/** A WYSIWYG rich text field. */
+export type ParagraphWysiwyg = ParagraphInterface & {
+  __typename?: 'ParagraphWysiwyg';
+  /** The time that the Paragraph was created. */
+  created: DateTime;
+  /** The Universally Unique IDentifier (UUID). */
+  id: Scalars['ID']['output'];
+  /** The paragraphs entity language code. */
+  langcode: Language;
+  /** Published */
+  status: Scalars['Boolean']['output'];
+  /** WYSIWYG */
+  wysiwyg: Text;
+};
+
 /** The schema's entry-point for queries. */
 export type Query = {
   __typename?: 'Query';
@@ -390,6 +581,8 @@ export type Query = {
   info: SchemaInformation;
   /** Load a Menu by name. */
   menu?: Maybe<Menu>;
+  /** Load a Paragraph entity by id. */
+  paragraph?: Maybe<ParagraphUnion>;
   /** Load a Route by path. */
   route?: Maybe<RouteUnion>;
 };
@@ -404,6 +597,12 @@ export type QueryBlockArgs = {
 /** The schema's entry-point for queries. */
 export type QueryMenuArgs = {
   name: MenuAvailable;
+};
+
+
+/** The schema's entry-point for queries. */
+export type QueryParagraphArgs = {
+  id: Scalars['ID']['input'];
 };
 
 
@@ -611,6 +810,43 @@ export type BasicPageFragmentFragment = { __typename?: 'NodePage', title: string
 
 export type MenuItemFragmentFragment = { __typename?: 'MenuItem', title: string, id: string, url?: string | null, internal: boolean, attributes: { __typename?: 'MenuItemAttributes', class?: string | null } } & { ' $fragmentName'?: 'MenuItemFragmentFragment' };
 
+export type AccordionItemParagraphFragmentFragment = { __typename?: 'ParagraphAccordionItem', id: string, accordionHeading: string, accordionBody?: { __typename?: 'Text', processed?: any | null } | null } & { ' $fragmentName'?: 'AccordionItemParagraphFragmentFragment' };
+
+export type AccordionParagraphFragmentFragment = { __typename?: 'ParagraphAccordion', id: string, accordionItems: Array<{ __typename: 'ParagraphAccordion' } | (
+    { __typename: 'ParagraphAccordionItem' }
+    & { ' $fragmentRefs'?: { 'AccordionItemParagraphFragmentFragment': AccordionItemParagraphFragmentFragment } }
+  ) | { __typename: 'ParagraphBlockEmbed' } | { __typename: 'ParagraphCallToAction' } | { __typename: 'ParagraphCard' } | { __typename: 'ParagraphCards' } | { __typename: 'ParagraphDynamicCard' } | { __typename: 'ParagraphDynamicList' } | { __typename: 'ParagraphHero' } | { __typename: 'ParagraphWysiwyg' }> } & { ' $fragmentName'?: 'AccordionParagraphFragmentFragment' };
+
+type AllParagraphsFragment_ParagraphAccordion_Fragment = (
+  { __typename: 'ParagraphAccordion', id: string }
+  & { ' $fragmentRefs'?: { 'AccordionParagraphFragmentFragment': AccordionParagraphFragmentFragment } }
+) & { ' $fragmentName'?: 'AllParagraphsFragment_ParagraphAccordion_Fragment' };
+
+type AllParagraphsFragment_ParagraphAccordionItem_Fragment = { __typename: 'ParagraphAccordionItem', id: string } & { ' $fragmentName'?: 'AllParagraphsFragment_ParagraphAccordionItem_Fragment' };
+
+type AllParagraphsFragment_ParagraphBlockEmbed_Fragment = { __typename: 'ParagraphBlockEmbed', id: string } & { ' $fragmentName'?: 'AllParagraphsFragment_ParagraphBlockEmbed_Fragment' };
+
+type AllParagraphsFragment_ParagraphCallToAction_Fragment = { __typename: 'ParagraphCallToAction', id: string } & { ' $fragmentName'?: 'AllParagraphsFragment_ParagraphCallToAction_Fragment' };
+
+type AllParagraphsFragment_ParagraphCard_Fragment = { __typename: 'ParagraphCard', id: string } & { ' $fragmentName'?: 'AllParagraphsFragment_ParagraphCard_Fragment' };
+
+type AllParagraphsFragment_ParagraphCards_Fragment = { __typename: 'ParagraphCards', id: string } & { ' $fragmentName'?: 'AllParagraphsFragment_ParagraphCards_Fragment' };
+
+type AllParagraphsFragment_ParagraphDynamicCard_Fragment = { __typename: 'ParagraphDynamicCard', id: string } & { ' $fragmentName'?: 'AllParagraphsFragment_ParagraphDynamicCard_Fragment' };
+
+type AllParagraphsFragment_ParagraphDynamicList_Fragment = { __typename: 'ParagraphDynamicList', id: string } & { ' $fragmentName'?: 'AllParagraphsFragment_ParagraphDynamicList_Fragment' };
+
+type AllParagraphsFragment_ParagraphHero_Fragment = (
+  { __typename: 'ParagraphHero', id: string }
+  & { ' $fragmentRefs'?: { 'HeroParagraphFragmentFragment': HeroParagraphFragmentFragment } }
+) & { ' $fragmentName'?: 'AllParagraphsFragment_ParagraphHero_Fragment' };
+
+type AllParagraphsFragment_ParagraphWysiwyg_Fragment = { __typename: 'ParagraphWysiwyg', id: string } & { ' $fragmentName'?: 'AllParagraphsFragment_ParagraphWysiwyg_Fragment' };
+
+export type AllParagraphsFragmentFragment = AllParagraphsFragment_ParagraphAccordion_Fragment | AllParagraphsFragment_ParagraphAccordionItem_Fragment | AllParagraphsFragment_ParagraphBlockEmbed_Fragment | AllParagraphsFragment_ParagraphCallToAction_Fragment | AllParagraphsFragment_ParagraphCard_Fragment | AllParagraphsFragment_ParagraphCards_Fragment | AllParagraphsFragment_ParagraphDynamicCard_Fragment | AllParagraphsFragment_ParagraphDynamicList_Fragment | AllParagraphsFragment_ParagraphHero_Fragment | AllParagraphsFragment_ParagraphWysiwyg_Fragment;
+
+export type HeroParagraphFragmentFragment = { __typename?: 'ParagraphHero', id: string, heroAlignment?: string | null, heroHasOverlay?: boolean | null, heroHeading?: string | null, heroBody?: { __typename?: 'Text', processed?: any | null } | null, heroImage: { __typename?: 'MediaImage', id: string, name: string, mediaImage: { __typename?: 'Image', alt?: string | null, height: number, width: number, url: string } }, heroLink?: { __typename?: 'Link', title?: string | null, url?: string | null } | null } & { ' $fragmentName'?: 'HeroParagraphFragmentFragment' };
+
 export type GetArticleByPathQueryVariables = Exact<{
   path: Scalars['String']['input'];
 }>;
@@ -624,5 +860,9 @@ export type GetArticleByPathQuery = { __typename?: 'Query', route?: { __typename
 export const ArticleFullFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticleFullFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"NodeArticle"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"created"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"timestamp"}}]}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"processed"}}]}}]}}]} as unknown as DocumentNode<ArticleFullFragmentFragment, unknown>;
 export const BasicPageFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"BasicPageFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"NodePage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"processed"}}]}}]}}]} as unknown as DocumentNode<BasicPageFragmentFragment, unknown>;
 export const MenuItemFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"MenuItemFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"MenuItem"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"class"}}]}},{"kind":"Field","name":{"kind":"Name","value":"internal"}}]}}]} as unknown as DocumentNode<MenuItemFragmentFragment, unknown>;
+export const AccordionItemParagraphFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"AccordionItemParagraphFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ParagraphAccordionItem"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"accordionHeading"}},{"kind":"Field","name":{"kind":"Name","value":"accordionBody"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"processed"}}]}}]}}]} as unknown as DocumentNode<AccordionItemParagraphFragmentFragment, unknown>;
+export const AccordionParagraphFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"AccordionParagraphFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ParagraphAccordion"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"accordionItems"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"AccordionItemParagraphFragment"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"AccordionItemParagraphFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ParagraphAccordionItem"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"accordionHeading"}},{"kind":"Field","name":{"kind":"Name","value":"accordionBody"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"processed"}}]}}]}}]} as unknown as DocumentNode<AccordionParagraphFragmentFragment, unknown>;
+export const HeroParagraphFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"HeroParagraphFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ParagraphHero"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"heroAlignment"}},{"kind":"Field","name":{"kind":"Name","value":"heroBody"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"processed"}}]}},{"kind":"Field","name":{"kind":"Name","value":"heroHasOverlay"}},{"kind":"Field","name":{"kind":"Name","value":"heroHeading"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"MediaImage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"mediaImage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"alt"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"heroLink"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]} as unknown as DocumentNode<HeroParagraphFragmentFragment, unknown>;
+export const AllParagraphsFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"AllParagraphsFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ParagraphUnion"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ParagraphInterface"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"AccordionParagraphFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"HeroParagraphFragment"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"AccordionItemParagraphFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ParagraphAccordionItem"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"accordionHeading"}},{"kind":"Field","name":{"kind":"Name","value":"accordionBody"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"processed"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"AccordionParagraphFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ParagraphAccordion"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"accordionItems"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"AccordionItemParagraphFragment"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"HeroParagraphFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ParagraphHero"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"heroAlignment"}},{"kind":"Field","name":{"kind":"Name","value":"heroBody"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"processed"}}]}},{"kind":"Field","name":{"kind":"Name","value":"heroHasOverlay"}},{"kind":"Field","name":{"kind":"Name","value":"heroHeading"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"MediaImage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"mediaImage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"alt"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"heroLink"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]} as unknown as DocumentNode<AllParagraphsFragmentFragment, unknown>;
 export const GetNodeByPathDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetNodeByPath"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"path"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"route"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"path"},"value":{"kind":"Variable","name":{"kind":"Name","value":"path"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"RouteInternal"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"entity"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"NodeInterface"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"status"}}]}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"BasicPageFragment"}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"BasicPageFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"NodePage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"processed"}}]}}]}}]} as unknown as DocumentNode<GetNodeByPathQuery, GetNodeByPathQueryVariables>;
 export const GetArticleByPathDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetArticleByPath"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"path"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"route"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"path"},"value":{"kind":"Variable","name":{"kind":"Name","value":"path"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"RouteInternal"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"entity"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"NodeInterface"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"status"}}]}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ArticleFullFragment"}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticleFullFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"NodeArticle"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"created"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"timestamp"}}]}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"processed"}}]}}]}}]} as unknown as DocumentNode<GetArticleByPathQuery, GetArticleByPathQueryVariables>;

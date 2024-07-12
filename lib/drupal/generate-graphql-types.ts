@@ -8,11 +8,11 @@ import { resolve } from 'node:path';
 // script is run. Using ts-ignore here because ts-expect-error will then error
 // once the script is run and the files *do* exist.
 // @ts-ignore
-import codegenConfig from '@/codegen';
+import codegenConfig from '../../codegen';
 // @ts-ignore
-import drupal from '@/util/drupal';
+import drupal from '../../util/drupal';
 // @ts-ignore
-import graphqlEndpoint from '@/util/drupal/graphqlEndpoint';
+import graphqlEndpoint from '../../util/graphqlEndpoint';
 
 async function generateGraphQLTypes() {
   try {
