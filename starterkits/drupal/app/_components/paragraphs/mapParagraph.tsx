@@ -16,6 +16,7 @@ const paragraphMapping: Record<
   ComponentType<ParagraphComponentType>
 > = {
   ParagraphAccordion: dynamic(() => import('./AccordionParagraph')),
+  ParagraphBlockEmbed: dynamic(() => import('./BlockEmbedParagraph')),
   ParagraphCard: dynamic(() => import('./CardParagraph')),
   ParagraphCards: dynamic(() => import('./CardsParagraph')),
   ParagraphHero: dynamic(() => import('./HeroParagraph')),
@@ -45,4 +46,5 @@ function mapParagraph(
   return <ParagraphComponent paragraph={paragraph} key={paragraph.id} />;
 }
 
+export { paragraphMapping };
 export default mapParagraph;
