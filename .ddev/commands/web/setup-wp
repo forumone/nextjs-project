@@ -24,4 +24,5 @@ cp -r ./starterkits/wp/faust.config.js ./
 rm ./next.config.js
 cp -r ./starterkits/wp/next.config.mjs ./
 cp -r ./starterkits/wp/possibleTypes.json ./
+cp ./starterkits/wp/public/images/logo-183x300.png ./public/images/
 pm2 restart all
