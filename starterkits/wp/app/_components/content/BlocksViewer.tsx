@@ -1,8 +1,8 @@
-import { isNotNullNorUndefined } from '@/utils/isNullOrUndefined';
+import { isNotNullNorUndefined } from '@/util/isNullOrUndefined';
 import {
   Data,
   flatListToHierarchical,
-} from '@/utils/wp/flatListToHierarchical';
+} from '@/util/wp/flatListToHierarchical';
 import { Fragment, JSX } from 'react';
 import customBlocks from '../blocks/custom';
 import FaustBlockViewer from './FaustBlockViewer';

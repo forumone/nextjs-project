@@ -1,4 +1,4 @@
-import { LayoutMetadataQuery } from '@/types/wp/__generated__/graphql';
+import { LayoutMetadataQuery } from '@/types/__generated__/graphql';
 import { getClient } from '@faustwp/experimental-app-router';
 import { MetadataRoute } from 'next';
 import layoutMetadataQuery from './layoutMetadataQuery';

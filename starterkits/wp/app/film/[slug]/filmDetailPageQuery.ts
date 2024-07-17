@@ -1,4 +1,4 @@
-import WpBlocksFragment from '@/utils/wp/WpBlocksFragment';
+import WpBlocksFragment from '@/util/wp/WpBlocksFragment';
 import { gql } from '@apollo/client';
 
 const filmDetailPageQuery = gql`

@@ -21,9 +21,9 @@ import '@/source/06-utility/index.css';
 import {
   GetLayoutQuery,
   LayoutMetadataQuery,
-} from '@/types/wp/__generated__/graphql';
-import { arrayFromAcf } from '@/utils/wp/acfTools';
-import { isNotNullNorUndefined } from '@/utils/isNullOrUndefined';
+} from '@/types/__generated__/graphql';
+import { arrayFromAcf } from '@/util/wp/acfTools';
+import { isNotNullNorUndefined } from '@/util/isNullOrUndefined';
 import { gql } from '@apollo/client';
 import { getClient } from '@faustwp/experimental-app-router';
 import { FaustProvider } from '@faustwp/experimental-app-router/ssr';

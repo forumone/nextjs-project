@@ -1,7 +1,7 @@
 import BlocksViewer from '@/app/_components/content/BlocksViewer';
 import Main from '@/source/02-layouts/Main/Main';
 import Article from '@/source/03-components/Article/Article';
-import { NextSearchParamsProp } from '@/types/wp/NextSearchParams';
+import { NextSearchParamsProp } from '@/types/NextSearchParams';
 import {
   ContentNodeIdTypeEnum,
   GetContentNodeQuery,
@@ -9,8 +9,8 @@ import {
   GetIndexPostsQuery,
   GetReadingSettingsQuery,
   HomeMetadataQuery,
-} from '@/types/wp/__generated__/graphql';
-import { hasPreviewProps } from '@/utils/wp/hasPreviewProp';
+} from '@/types/__generated__/graphql';
+import { hasPreviewProps } from '@/util/wp/hasPreviewProp';
 import { getAuthClient, getClient } from '@faustwp/experimental-app-router';
 import { Metadata } from 'next';
 import Link from 'next/link';

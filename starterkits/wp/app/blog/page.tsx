@@ -1,13 +1,13 @@
 import LandingPage, {
   LandingPageCard,
 } from '@/app/_components/content/LandingPage';
-import { NextSearchParamsProp } from '@/types/wp/NextSearchParams';
+import { NextSearchParamsProp } from '@/types/NextSearchParams';
 import {
   BlogArchiveQuery,
   BlogArchiveQueryVariables,
-} from '@/types/wp/__generated__/graphql';
-import { isNotNullNorUndefined } from '@/utils/isNullOrUndefined';
-import normalizeImageUrl from '@/utils/wp/normalizeImageUrl';
+} from '@/types/__generated__/graphql';
+import { isNotNullNorUndefined } from '@/util/isNullOrUndefined';
+import normalizeImageUrl from '@/util/wp/normalizeImageUrl';
 import { getClient } from '@faustwp/experimental-app-router';
 import { Metadata } from 'next';
 import ArchiveParams from '../film/ArchiveParams';

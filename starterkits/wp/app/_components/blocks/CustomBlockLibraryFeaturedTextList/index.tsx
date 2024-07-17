@@ -1,7 +1,7 @@
 import Box from '@/source/03-components/Box/Box';
-import { FragmentType, useFragment } from '@/types/wp/__generated__';
-import { CustomBlockLibraryFeaturedTextListFragmentFragmentDoc } from '@/types/wp/__generated__/graphql';
-import { isNotNullNorUndefined } from '@/utils/isNullOrUndefined';
+import { FragmentType, useFragment } from '@/types/__generated__';
+import { CustomBlockLibraryFeaturedTextListFragmentFragmentDoc } from '@/types/__generated__/graphql';
+import { isNotNullNorUndefined } from '@/util/isNullOrUndefined';
 import { JSX } from 'react';
 import fragments from './fragments';
 

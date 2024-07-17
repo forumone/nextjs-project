@@ -1,5 +1,5 @@
 import FeaturedFilms from '@/source/03-components/FeaturedFilms/FeaturedFilms';
-import { CustomBlockLibraryFeaturedFilmsFragmentFragment } from '@/types/wp/__generated__/graphql';
+import { CustomBlockLibraryFeaturedFilmsFragmentFragment } from '@/types/__generated__/graphql';
 import BlocksViewer from '../../content/BlocksViewer';
 import fragments from './fragments';
 

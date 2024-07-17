@@ -1,6 +1,6 @@
 'use client';
 
-import { Data } from '@/utils/wp/flatListToHierarchical';
+import { Data } from '@/util/wp/flatListToHierarchical';
 import { WordPressBlocksViewer } from '@faustwp/blocks';
 import { JSX } from 'react';
 

@@ -1,5 +1,5 @@
 import { FilmLink } from '@/source/03-components/FeaturedFilms/FeaturedFilms';
-import { CustomBlockLibraryFilmSelectorFragmentFragment } from '@/types/wp/__generated__/graphql';
+import { CustomBlockLibraryFilmSelectorFragmentFragment } from '@/types/__generated__/graphql';
 import fragments from './fragments';
 
 function CustomBlockLibraryFilmSelector({

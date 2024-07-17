@@ -1,4 +1,4 @@
-import { CustomBlockLibraryPostSelectorFragmentFragment } from '@/types/wp/__generated__/graphql';
+import { CustomBlockLibraryPostSelectorFragmentFragment } from '@/types/__generated__/graphql';
 import fragments from './fragments';
 
 function CustomBlockLibraryPostSelector({

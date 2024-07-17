@@ -1,11 +1,11 @@
 import Main from '@/source/02-layouts/Main/Main';
 import Article from '@/source/03-components/Article/Article';
 import { LinkButton } from '@/source/03-components/Button';
-import { NextSearchParamsProp } from '@/types/wp/NextSearchParams';
+import { NextSearchParamsProp } from '@/types/NextSearchParams';
 import {
   SearchQuery,
   SearchQueryVariables,
-} from '@/types/wp/__generated__/graphql';
+} from '@/types/__generated__/graphql';
 import { getClient } from '@faustwp/experimental-app-router';
 import parse from 'html-react-parser';
 import { Metadata } from 'next';

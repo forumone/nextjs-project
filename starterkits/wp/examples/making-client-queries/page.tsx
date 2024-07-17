@@ -1,6 +1,6 @@
 'use client';
 
-import { MyQueryQuery } from '@/types/wp/__generated__/graphql';
+import { MyQueryQuery } from '@/types/__generated__/graphql';
 import { gql, useQuery } from '@apollo/client';
 
 /**

@@ -1,12 +1,12 @@
 import BlocksViewer from '@/app/_components/content/BlocksViewer';
 import Film from '@/app/_components/content/Film';
-import { NextSearchParamsProp } from '@/types/wp/NextSearchParams';
+import { NextSearchParamsProp } from '@/types/NextSearchParams';
 import {
   FilmDetailPageQueryQuery,
   FilmDetailPageQueryQueryVariables,
   FilmIdType,
-} from '@/types/wp/__generated__/graphql';
-import normalizeImageUrl from '@/utils/wp/normalizeImageUrl';
+} from '@/types/__generated__/graphql';
+import normalizeImageUrl from '@/util/wp/normalizeImageUrl';
 import { getClient } from '@faustwp/experimental-app-router';
 import { Metadata } from 'next';
 import Image from 'next/image';

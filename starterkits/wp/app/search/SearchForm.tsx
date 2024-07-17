@@ -1,7 +1,7 @@
 'use client';
 
 import { Button } from '@/source/03-components/Button';
-import usePrevious from '@/utils/usePrevious';
+import usePrevious from '@/util/usePrevious';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { FormEventHandler, useEffect, useState } from 'react';
 import SearchParams from './SearchParams';
