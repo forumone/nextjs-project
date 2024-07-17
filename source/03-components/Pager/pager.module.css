@@ -27,7 +27,9 @@
     color: var(--pager-link-color);
     min-inline-size: var(--spacing-5);
     padding: 0.5em;
-    transition: color var(--duration-short) var(--easing-ease-out), background-color var(--duration-standard) var(--easing-ease-out);
+    transition:
+      color var(--duration-short) var(--easing-ease-out),
+      background-color var(--duration-standard) var(--easing-ease-out);
   }
 
   .ellipsis {

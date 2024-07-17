@@ -1,0 +1,21 @@
+@layer components {
+  .title {
+    background: var(--ui-background-dark);
+    color: var(--text-on-dark);
+    font-family: var(--font-family-secondary);
+    font-size: var(--responsive-font-size-5);
+    font-weight: var(--font-weight-regular);
+    line-height: 1;
+    margin-block: 0;
+    padding-block: var(--spacing-1);
+    padding-inline: var(--spacing-2);
+    text-transform: uppercase;
+  }
+
+  .content {
+    background: var(--ui-background);
+    font-size: var(--responsive-font-size-3);
+    padding-block: var(--spacing-2);
+    padding-inline: var(--spacing-2);
+  }
+}

@@ -20,5 +20,4 @@ cp -r ./editor-styles ./starterkits/wp/
 
 cp ./block-fragments.ts ./starterkits/wp/
 
-pm2 restart frontend
-pm2 restart storybook
+pm2 restart all

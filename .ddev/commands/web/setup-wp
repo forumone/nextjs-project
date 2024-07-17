@@ -19,12 +19,9 @@ cp -r ./starterkits/wp/app/* ./app/
 cp -r ./starterkits/wp/editor-styles ./
 cp -r ./starterkits/wp/util/* ./util/
 cp -r ./starterkits/wp/types/* ./types/
-
 cp -r ./starterkits/wp/block-fragments.ts ./
 cp -r ./starterkits/wp/faust.config.js ./
 rm ./next.config.js
 cp -r ./starterkits/wp/next.config.mjs ./
 cp -r ./starterkits/wp/possibleTypes.json ./
-
-pm2 restart frontend
-pm2 restart storybook
+pm2 restart all

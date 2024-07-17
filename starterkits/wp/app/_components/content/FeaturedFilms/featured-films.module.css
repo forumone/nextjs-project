@@ -1,0 +1,49 @@
+@layer components {
+  .block {
+    --film-width: 21rem;
+    --film-gap: var(--spacing-4);
+    --inline-padding: var(--spacing-4);
+    --overlay-color: #020927;
+
+    margin: var(--spacing-6) auto var(--spacing-3);
+    max-width: calc(
+      3 * var(--film-width) + 2 * var(--film-gap) + 2 * var(--inline-padding)
+    ) !important;
+    padding-block: var(--spacing-4);
+    padding-inline: var(--inline-padding);
+    width: fit-content;
+
+    :global(.wp-blocks),
+    .inner-blocks {
+      align-items: stretch;
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--film-gap);
+    }
+  }
+
+  .title {
+    font-size: var(--responsive-font-size-9);
+  }
+
+  .film {
+    align-items: center;
+    background-color: var(--overlay-color);
+    background-position: center;
+    background-size: cover;
+    border: 2px solid var(--brand-green-base);
+    color: #fff;
+    display: flex;
+    font-family: var(--font-family-secondary);
+    font-size: var(--responsive-font-size-8);
+    margin: 0;
+    padding: var(--spacing-2);
+    text-align: center;
+    text-decoration: none;
+    width: var(--film-width);
+
+    & span {
+      flex: 1;
+    }
+  }
+}

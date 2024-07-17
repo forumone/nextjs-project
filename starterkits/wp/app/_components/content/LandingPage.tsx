@@ -1,7 +1,7 @@
+import CardWithBackground from '@/app/_components/content/CardWithBackground/CardWithBackground';
 import { MAIN_ID } from '@/source/00-config/constants';
 import Main from '@/source/02-layouts/Main/Main';
 import { LinkButton } from '@/source/03-components/Button';
-import CardWithBackground from '@/source/03-components/Card/CardWithBackground/CardWithBackground';
 import PageTitle from '@/source/03-components/PageTitle/PageTitle';
 import Image from 'next/image';
 import { JSX, ReactNode } from 'react';

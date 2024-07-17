@@ -1,4 +1,4 @@
-import { FilmLink } from '@/source/03-components/FeaturedFilms/FeaturedFilms';
+import { FilmLink } from '@/app/_components/content/FeaturedFilms/FeaturedFilms';
 import { CustomBlockLibraryFilmSelectorFragmentFragment } from '@/types/__generated__/graphql';
 import fragments from './fragments';
 

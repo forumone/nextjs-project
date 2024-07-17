@@ -1,4 +1,4 @@
-import Box from '@/source/03-components/Box/Box';
+import Box from '@/app/_components/content/Box/Box';
 import { FragmentType, useFragment } from '@/types/__generated__';
 import { CustomBlockLibraryFeaturedTextListFragmentFragmentDoc } from '@/types/__generated__/graphql';
 import { isNotNullNorUndefined } from '@/util/isNullOrUndefined';

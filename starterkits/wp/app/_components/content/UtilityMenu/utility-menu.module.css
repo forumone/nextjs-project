@@ -1,0 +1,19 @@
+@import 'mixins';
+
+@layer components {
+  .menu {
+    @include list-pipeline;
+
+    font-family: var(--font-family-secondary);
+    font-size: var(--font-size-1);
+    font-weight: var(--font-weight-light);
+  }
+
+  .link {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

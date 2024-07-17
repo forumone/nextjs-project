@@ -1,0 +1,9 @@
+@import 'mixins';
+
+@layer components.base {
+  @media (--desktop) {
+    .copyright {
+      text-align: right;
+    }
+  }
+}

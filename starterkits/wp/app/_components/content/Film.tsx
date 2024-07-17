@@ -1,9 +1,8 @@
-import Constrain, {
-  ConstrainSmall,
-} from '@/source/02-layouts/Constrain/Constrain';
+import Poster from '@/app/_components/content/Poster/Poster';
+import Constrain from '@/source/02-layouts/Constrain/Constrain';
+import constrainStyle from '@/source/02-layouts/Constrain/constrain.module.css';
 import Sidebar from '@/source/02-layouts/Sidebar/Sidebar';
 import HeroBgImage from '@/source/03-components/HeroBgImage/HeroBgImage';
-import Poster from '@/source/03-components/Poster/Poster';
 import { JSX, ReactElement, ReactNode } from 'react';
 
 interface FilmProps {
@@ -32,12 +31,12 @@ function Film({
       <HeroBgImage title={title} hasOverlay={true} heroImage={heroImage} />
       <Constrain modifierClasses="u-spacing-block-5">
         {quote && (
-          <ConstrainSmall>
+          <Constrain modifierClasses={constrainStyle['constrain--small']}>
             <blockquote>
               <p>{quote}</p>
               {citation && <cite>{citation}</cite>}
             </blockquote>
-          </ConstrainSmall>
+          </Constrain>
         )}
         <Sidebar
           sidebarFirst={image ? <Poster>{image}</Poster> : <div />}

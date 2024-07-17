@@ -1,0 +1,50 @@
+@layer components {
+  .link {
+    display: block;
+    text-decoration: none;
+
+    img {
+      display: none;
+    }
+  }
+
+  .name {
+    color: var(--text-accent);
+    composes: h1 from global;
+    display: block;
+    font-family: var(--font-family-accent);
+    margin-block: 0;
+  }
+
+  .tagline {
+    display: none;
+  }
+
+  @media (--tablet) {
+    .link {
+      align-items: center;
+      display: grid;
+      grid-template-columns: min(9vw, 92px) 1fr;
+
+      img {
+        display: block;
+        grid-row: span 2;
+      }
+    }
+
+    .name {
+      align-self: flex-end;
+    }
+
+    .tagline {
+      align-self: flex-start;
+      color: var(--text-primary);
+      display: block;
+      font-family: var(--font-family-secondary);
+      font-size: var(--responsive-font-size-3);
+      font-style: italic;
+      font-weight: var(--font-weight-light);
+      margin-block-end: 0;
+    }
+  }
+}

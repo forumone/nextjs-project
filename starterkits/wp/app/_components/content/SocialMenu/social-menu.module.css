@@ -1,0 +1,21 @@
+@import 'mixins';
+
+@layer components {
+  .menu {
+    color: var(--grayscale-white);
+    font-size: var(--font-size-6);
+  }
+
+  .menu a {
+    display: inline-block;
+    margin-right: var(--spacing-1);
+  }
+
+  .menu li:last-of-type a {
+    margin-right: 0;
+  }
+
+  .link {
+    text-decoration: none;
+  }
+}

@@ -1,20 +1,22 @@
 import '@/source/00-config/index.css';
 
+import Copyright from '@/app/_components/content/Copyright/Copyright';
+import Header from '@/app/_components/content/Header/Header';
+import ResponsiveMenu from '@/app/_components/content/ResponsiveMenu/ResponsiveMenu';
+import SiteBranding from '@/app/_components/content/SiteBranding/SiteBranding';
+import SocialMenu, {
+  SocialMenuItem,
+} from '@/app/_components/content/SocialMenu/SocialMenu';
+import UtilityMenu from '@/app/_components/content/UtilityMenu/UtilityMenu';
+import creepster from '@/app/_components/fonts/creepster';
+import lora from '@/app/_components/fonts/lora';
+import raleway from '@/app/_components/fonts/raleway';
 import logo from '@/public/images/logo-183x300.png';
-import { creepster, lora, raleway } from '@/source/01-global/fonts/fonts';
 import '@/source/01-global/index.css';
 import Footer from '@/source/02-layouts/Footer/Footer';
 import Grid from '@/source/02-layouts/Grid/Grid';
-import Header from '@/source/02-layouts/Header/Header';
 import SiteContainer from '@/source/02-layouts/SiteContainer/SiteContainer';
 import BackToTop from '@/source/03-components/BackToTop/BackToTop';
-import Copyright from '@/source/03-components/Copyright/Copyright';
-import ResponsiveMenu from '@/source/03-components/Menu/ResponsiveMenu/ResponsiveMenu';
-import SocialMenu, {
-  SocialMenuItem,
-} from '@/source/03-components/Menu/SocialMenu/SocialMenu';
-import UtilityMenu from '@/source/03-components/Menu/UtilityMenu/UtilityMenu';
-import SiteBranding from '@/source/03-components/SiteBranding/SiteBranding';
 import Skiplink from '@/source/03-components/Skiplink/Skiplink';
 import addBasePath from '@/source/06-utility/addBasePath';
 import '@/source/06-utility/index.css';
@@ -22,8 +24,8 @@ import {
   GetLayoutQuery,
   LayoutMetadataQuery,
 } from '@/types/__generated__/graphql';
-import { arrayFromAcf } from '@/util/wp/acfTools';
 import { isNotNullNorUndefined } from '@/util/isNullOrUndefined';
+import { arrayFromAcf } from '@/util/wp/acfTools';
 import { gql } from '@apollo/client';
 import { getClient } from '@faustwp/experimental-app-router';
 import { FaustProvider } from '@faustwp/experimental-app-router/ssr';

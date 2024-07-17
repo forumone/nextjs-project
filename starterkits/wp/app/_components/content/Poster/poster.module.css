@@ -1,0 +1,8 @@
+@layer components {
+  .wrapper {
+    img {
+      border: 1px solid var(--ui-border-dark);
+      box-shadow: var(--box-shadow-2);
+    }
+  }
+}

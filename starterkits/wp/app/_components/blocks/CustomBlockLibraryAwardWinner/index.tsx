@@ -1,6 +1,6 @@
-import HeroBgImage from '@/source/03-components/HeroBgImage/HeroBgImage';
 import { CustomBlockLibraryAwardWinnerFragmentFragment } from '@/types/__generated__/graphql';
 import fragments from './fragments';
+import HeroBgImage from './HeroBgImage/HeroBgImage';
 
 function CustomBlockLibraryAwardWinner({
   attributes,

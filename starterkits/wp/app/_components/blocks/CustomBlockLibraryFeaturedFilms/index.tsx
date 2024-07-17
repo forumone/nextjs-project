@@ -1,4 +1,4 @@
-import FeaturedFilms from '@/source/03-components/FeaturedFilms/FeaturedFilms';
+import FeaturedFilms from '@/app/_components/content/FeaturedFilms/FeaturedFilms';
 import { CustomBlockLibraryFeaturedFilmsFragmentFragment } from '@/types/__generated__/graphql';
 import BlocksViewer from '../../content/BlocksViewer';
 import fragments from './fragments';

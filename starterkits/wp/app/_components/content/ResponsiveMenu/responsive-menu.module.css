@@ -1,0 +1,40 @@
+@import 'mixins';
+
+@layer components {
+  .menu {
+    @include list-inline;
+
+    font-family: var(--font-family-secondary);
+    gap: var(--spacing-3);
+  }
+
+  .item {
+    display: inline-block;
+    margin-block-end: 0;
+  }
+
+  .link {
+    font-size: var(--responsive-font-size-5);
+    padding: 0;
+    position: relative;
+    text-decoration: none var(--text-link-hover) solid 0.11904762em;
+    text-underline-offset: 0.28571429em;
+    transition-property: color, text-decoration;
+
+    &:hover {
+      text-decoration-line: underline;
+    }
+  }
+
+  @media (--desktop) {
+    .menu {
+      gap: var(--spacing-4);
+    }
+  }
+
+  @media (--desktop-lg) {
+    .menu {
+      gap: var(--spacing-5);
+    }
+  }
+}

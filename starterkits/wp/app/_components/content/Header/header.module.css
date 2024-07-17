@@ -1,0 +1,61 @@
+@layer layouts {
+  .wrapper {
+    box-shadow: var(--box-shadow-3);
+    position: relative;
+  }
+
+  .inner {
+    display: flex;
+    flex-flow: column-reverse;
+    flex-wrap: wrap;
+    padding: var(--spacing-0-5) 0;
+  }
+
+  .primary {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  @media (--tablet) {
+    .wrapper {
+      padding-block: var(--spacing-1) var(--spacing-2);
+    }
+
+    .inner {
+      gap: var(--spacing-2);
+    }
+
+    .primary {
+      flex-direction: column;
+      gap: var(--spacing-2);
+    }
+
+    .primary-menu {
+      display: flex;
+      gap: var(--spacing-3);
+    }
+
+    .utility {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+
+  @media (--desktop) {
+    .primary {
+      align-items: flex-end;
+      flex-direction: row;
+    }
+
+    .primary-menu {
+      gap: var(--spacing-4);
+    }
+  }
+
+  @media (--desktop-lg) {
+    .primary-menu {
+      gap: var(--spacing-5);
+    }
+  }
+}

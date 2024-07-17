@@ -1,0 +1,66 @@
+@import 'mixins';
+
+@layer components {
+  .card {
+    border: 2px solid var(--ui-accent);
+    box-shadow: var(--box-shadow-1);
+    color: var(--text-on-dark);
+    display: flex;
+    flex-basis: 100%;
+    flex-direction: column;
+    margin-bottom: var(--spacing-3);
+    min-height: rem-convert(155px);
+    overflow: hidden;
+    position: relative;
+    transition: box-shadow var(--duration-short) var(--easing-ease-in-out);
+
+    @media (--tablet) {
+      flex-basis: 49%;
+    }
+
+    @media (--desktop) {
+      flex-basis: 32%;
+    }
+
+    &:hover,
+    &:focus-within {
+      box-shadow: var(--box-shadow-3);
+    }
+  }
+
+  .title {
+    @include set-link-vars(var(--text-on-dark), var(--text-on-dark));
+
+    font-size: var(--font-size-7);
+    margin: 0;
+  }
+
+  .title a {
+    font-family: var(--font-family-secondary);
+    font-weight: var(--font-weight-light);
+    text-decoration: none;
+  }
+
+  .body {
+    color: var(--text-on-dark);
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: center;
+    padding: var(--spacing-3);
+    position: relative;
+    text-align: center;
+    z-index: 10;
+  }
+
+  .opaque {
+    background-color: var(--grayscale-black);
+    height: 100%;
+    left: 0;
+    opacity: 0.5;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+  }
+}
