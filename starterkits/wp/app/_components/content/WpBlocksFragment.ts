@@ -4,19 +4,18 @@
 import { gql } from '@apollo/client';
 
 const WpBlocksFragment = gql`
-  
-    fragment CustomBlockLibraryFilmSelectorFragment on CustomBlockLibraryFilmSelector {
-      film {
-        slug
-        title
-        featuredImage {
-          node {
-            sourceUrl(size: SMALL)
-          }
+  fragment CustomBlockLibraryFilmSelectorFragment on CustomBlockLibraryFilmSelector {
+    film {
+      slug
+      title
+      featuredImage {
+        node {
+          sourceUrl(size: SMALL)
         }
       }
     }
-  
+  }
+
   fragment WpBlocksFragment on EditorBlock {
     __typename
     clientId
