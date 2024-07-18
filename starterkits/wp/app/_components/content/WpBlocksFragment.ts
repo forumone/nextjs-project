@@ -5,6 +5,18 @@ import { gql } from '@apollo/client';
 
 const WpBlocksFragment = gql`
   
+    fragment CustomBlockLibraryFilmSelectorFragment on CustomBlockLibraryFilmSelector {
+      film {
+        slug
+        title
+        featuredImage {
+          node {
+            sourceUrl(size: SMALL)
+          }
+        }
+      }
+    }
+  
   fragment WpBlocksFragment on EditorBlock {
     __typename
     clientId
@@ -190,6 +202,63 @@ const WpBlocksFragment = gql`
         textAlign
         textColor
         cssClassName
+      }
+    }
+    ... on CustomBlockLibraryPostSelector {
+      post {
+        title
+        featuredImage {
+          node {
+            sourceUrl
+          }
+        }
+      }
+    }
+    ... on CustomBlockLibraryFilmSelector {
+      film {
+        slug
+        title
+        featuredImage {
+          node {
+            sourceUrl(size: SMALL)
+          }
+        }
+      }
+    }
+    ... on CustomBlockLibraryFeaturedTextList {
+      attributes {
+        title
+      }
+      clientId
+      name
+      innerBlocks {
+        renderedHtml
+      }
+    }
+    ... on CustomBlockLibraryFeaturedFilms {
+      innerBlocks {
+        __typename
+        clientId
+        name
+        renderedHtml
+        parentClientId
+        ...CustomBlockLibraryFilmSelectorFragment
+      }
+    }
+    ... on CustomBlockLibraryAwardWinner {
+      film {
+        title
+        slug
+        featuredImage {
+          node {
+            altText
+            sourceUrl(size: MEDIUM)
+          }
+        }
+      }
+      attributes {
+        backgroundSrc
+        introText
       }
     }
   }

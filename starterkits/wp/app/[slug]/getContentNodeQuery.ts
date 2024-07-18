@@ -1,4 +1,4 @@
-import WpBlocksFragment from '@/util/wp/WpBlocksFragment';
+import WpBlocksFragment from '@/app/_components/content/WpBlocksFragment';
 import { gql } from '@apollo/client';
 
 // Note: For some reason, if we use variable strings for the keys (i.e. `...${SomeFragmentKey}`),

@@ -10,7 +10,7 @@ const config: CodegenConfig = {
   schema: `${process.env.NEXT_PUBLIC_WORDPRESS_URL}/graphql`,
   ignoreNoDocuments: true,
   generates: {
-    './types/wp/__generated__/': {
+    './types/__generated__/': {
       preset: 'client',
       plugins: [],
       presetConfig: {

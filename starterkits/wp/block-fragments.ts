@@ -12,7 +12,7 @@ import { pathToFileURL } from 'node:url';
 
 async function go() {
   const filePath = pathToFileURL(__filename).toString();
-  const outDir = new URL('./utils/wp', filePath).pathname;
+  const outDir = new URL('./app/_components/content', filePath).pathname;
   const outPath = `${outDir}/WpBlocksFragment.ts`;
 
   const fragments: string[] = [];

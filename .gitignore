@@ -39,3 +39,7 @@ tsconfig.tsbuildinfo
 
 # Storybook build files
 storybook-static/
+
+editor-styles/editor-styles.css
+editor-styles/dist/*
+!editor-styles/dist/.gitkeep

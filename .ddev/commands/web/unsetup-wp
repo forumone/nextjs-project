@@ -17,6 +17,9 @@ cp -r ./types ./starterkits/wp/
 
 rm -rf ./starterkits/wp/editor-styles
 cp -r ./editor-styles ./starterkits/wp/
+rm -rf ./starterkits/wp/editor-styles/editor-styles.css
+rm -rf ./starterkits/wp/editor-styles/editor-styles.js
+rm -rf ./starterkits/wp/editor-styles/dist/editor-styles.min.css
 
 cp ./block-fragments.ts ./starterkits/wp/
 
