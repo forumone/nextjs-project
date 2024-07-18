@@ -19,6 +19,7 @@ const meta: Meta<typeof ImageTeaserComponent> = {
 
 type Story = StoryObj<typeof ImageTeaserComponent>;
 const ImageTeaser: Story = {
+  render: args => <ImageTeaserComponent {...args} />,
   args: {
     ...imageTeaserArgs,
     image: parse(imageTeaserArgs.image),

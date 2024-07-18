@@ -1,0 +1,253 @@
+@import 'mixins';
+
+@layer components {
+  .megaMenu {
+    align-items: center;
+    background: var(--background-site);
+    display: flex;
+    margin: 0 0 var(--spacing-2-5);
+    position: relative;
+    width: 100%;
+    z-index: 1;
+
+    &::after {
+      background-color: var(--background-site);
+      content: '';
+      display: block;
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      z-index: 1200;
+    }
+  }
+
+  .item {
+    margin-block-end: 0;
+
+    .megaMenu > & {
+      border-bottom: 1px solid var(--grayscale-white);
+      list-style-type: none;
+      padding: 1.25rem 1.8125rem 1.25rem 0.8125rem;
+  
+      > .link {
+        @include link(var(--text-link), var(--text-link-hover));
+
+        border-bottom: 2px solid transparent;
+        border-radius: 1px;
+        display: block;
+        font-size: var(--font-size-5);
+        font-weight: var(--font-weight-regular);
+        padding: 4.8px 0;
+        position: relative;
+        text-align: left;
+        transition: all 0.4s ease;
+        width: auto;
+        z-index: calc(1200 + 1);
+      }
+  
+      button.link {
+        @include text-button;
+
+        font-size: var(--font-size-5);
+      }
+
+      &:last-child > a {
+        font-weight: var(--font-weight-bold);
+      }
+    }
+  }
+
+  .section {
+    background-color: var(--ui-background-dark);
+    color: var(--text-on-dark);
+    left: 0;
+    margin-bottom: 0;
+    margin-top: 0;
+    overflow-wrap: normal;
+    padding: var(--spacing-7);
+    position: absolute;
+    top: 100%;
+    transform: translate3d(0, 0, 0);
+    transition: transform var(--duration-long) var(--easing-ease-in-out);
+    width: 100%;
+    z-index: 0;
+  
+    /* stylelint-disable no-descending-specificity */
+    a,
+    button {
+      &:focus {
+        @include focus(var(--text-on-dark));
+      }
+    }
+  
+    &[hidden] {
+      display: block;
+      transform: translate3d(0, -100%, 0);
+      z-index: -1;
+    }
+  }
+
+  .sectionInner {
+    @include layout-constrain();
+
+    align-items: flex-start;
+    display: grid;
+    gap: var(--spacing-10);
+    grid-template-columns: 250px 1fr 1fr;
+    margin-top: var(--spacing-2);
+    padding-inline: var(--site-margins);
+  }
+
+  .overview {
+  }
+
+  .sectionTitle {
+    color: var(--text-on-dark);
+    display: block;
+    font-size: var(--font-size-13);
+  }
+
+  .sectionClose {
+    @include text-button;
+
+    color: var(--text-on-dark);
+    height: 50px;
+    position: absolute;
+    right: 10px;
+    text-align: center;
+    top: 10px;
+    transition: opacity var(--duration-short) var(--easing-ease-in);
+    width: 50px;
+  
+    svg {
+      height: 22px;
+      width: 32px;
+    }
+  
+    &:hover {
+      opacity: 0.85;
+    }
+  }
+
+  .subnav {
+    @include list-clean;
+  }
+
+  .subnav .item:not(.has-subnav) {
+    margin-top: var(--spacing-1);
+  }
+
+  .subnav .item.has-subnav {
+    margin-top: 0;
+  }
+
+  .subnav .subnav {
+    margin-top: var(--spacing-1);
+  }
+
+  .subnav .subnav .item {
+    margin-bottom: var(--spacing-1);
+  }
+
+  .subnav .link {
+    border-bottom: 0;
+    color: inherit;
+    font-size: var(--font-size-5);
+    font-weight: var(--font-weight-bold);
+    position: static;
+    text-decoration: none;
+  }
+
+  .subnav a.link {
+    > span {
+      white-space: nowrap;
+  
+      &::after {
+        display: inline-block;
+        margin-left: var(--spacing-1);
+        margin-right: var(--spacing-0-5);
+        position: relative;
+        transition: margin 0.2s;
+        vertical-align: middle;
+        white-space: nowrap;
+      }
+    }
+  
+    /* 
+       Safari 14 doesn't recognize :focus-visible, so
+       combining with the above selector causes the entire
+       styles, including :hover, to be ignored.
+    */
+    &:hover {
+      opacity: 0.85;
+  
+      > span::after {
+        margin-left: var(--spacing-1-5);
+        margin-right: 0;
+      }
+    }
+  
+    &:focus-visible {
+      opacity: 0.85;
+  
+      > span::after {
+        margin-left: var(--spacing-1-5);
+        margin-right: 0;
+      }
+    }
+  }
+
+  .subnav .subnav .link {
+    color: var(--brand-blue-light-1);
+    font-size: var(--font-size-2);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-short);
+    text-transform: none;
+  
+    &:hover {
+      color: var(--grayscale-white);
+      opacity: 1;
+    }
+  
+    &:focus-visible {
+      color: var(--grayscale-white);
+      opacity: 1;
+    }
+  }
+
+  .subnav .subnav a.link {
+    > span::after {
+      content: '';
+      display: none;
+    }
+  }
+
+  @media (--mobile-menu-max) {
+    .section {
+      background-color: rgb(241 241 241 / 98%);
+    }
+  
+    .sectionTitle,
+    .sectionClose {
+      display: none;
+    }
+  }
+  
+  @media (--desktop-lg) {
+    .megaMenu {
+      .section {
+        padding: var(--spacing-10) var(--spacing-12);
+      }
+  
+      .sectionInner {
+        gap: 100px;
+      }
+  
+      .section .subnav {
+        gap: var(--spacing-4);
+      }
+    }
+  }
+}

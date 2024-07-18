@@ -1,0 +1,57 @@
+---
+menuName: 'main'
+items:
+  - title: 'Visit'
+    url: '#0'
+    inActiveTrail: false
+    below:
+      - title: 'Submenu item one'
+        url: '#0'
+        inActiveTrail: false
+      - title: 'Submenu item two'
+        url: '#0'
+        inActiveTrail: false
+      - title: 'Submenu item three'
+        url: '#0'
+        inActiveTrail: false
+  - title: 'About'
+    url: '#0'
+    inActiveTrail: false
+    below:
+      - title: 'Submenu item one'
+        url: '#0'
+        inActiveTrail: false
+      - title: 'Submenu item two'
+        url: '#0'
+        inActiveTrail: false
+      - title: 'Submenu item three'
+        url: '#0'
+        inActiveTrail: false
+    section: 'about'
+  - title: 'Resources'
+    url: '#0'
+    inActiveTrail: false
+    below:
+      - title: 'Submenu item one'
+        url: '#0'
+        inActiveTrail: false
+      - title: 'Submenu item two'
+        url: '#0'
+        inActiveTrail: false
+    section: 'resources'
+  - title: 'Get Involved'
+    url: '#0'
+    inActiveTrail: false
+    below:
+      - title: 'Submenu item one'
+        url: '#0'
+        inActiveTrail: false
+      - title: 'Submenu item two'
+        url: '#0'
+        inActiveTrail: false
+      - title: 'Submenu item three'
+        url: '#0'
+        inActiveTrail: false
+    section: 'get-involved'
+itemClasses: ''
+linkClasses: ''

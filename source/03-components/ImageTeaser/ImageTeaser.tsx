@@ -5,7 +5,7 @@ import { ElementType, ReactNode } from 'react';
 import Media from '../../02-layouts/Media/Media';
 import styles from './image-teaser.module.css';
 
-interface ImageTeaserProps extends GessoComponent {
+export interface ImageTeaserProps extends GessoComponent {
   url?: string;
   title: string;
   image?: ReactNode;
