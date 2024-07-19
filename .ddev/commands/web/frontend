@@ -41,6 +41,9 @@ case $1 in
   generate)
     npm run generate:all
   ;;
+  wp-editor-styles)
+    npm run editor-styles
+  ;;
   "")
     echo "Usage: frontend install|build|deploy|watch|(some other command in the theme service)"
   ;;

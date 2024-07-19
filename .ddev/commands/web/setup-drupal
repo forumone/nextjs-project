@@ -18,5 +18,4 @@ cat ./starterkits/drupal/.env.drupal >> .env.local.example
 cp -r ./starterkits/drupal/app/* ./app
 cp -r ./starterkits/drupal/util/* ./util
 cp -r ./starterkits/drupal/types/* ./types
-pm2 restart frontend
-pm2 restart storybook
+pm2 restart all
