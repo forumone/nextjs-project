@@ -11,17 +11,24 @@ if [ -e ./codegen.ts ] || [ -d ./app/api ]; then
 fi
 
 node lib/wp/merge-package-json.js
-npm install --package-lock-only
-npm ci
 cp ./starterkits/wp/codegen.ts ./
 cat ./starterkits/wp/.env.wp >> .env.local.example
-cp -r ./starterkits/wp/app/* ./app/
+cat ./starterkits/wp/.env.wp >> .env.local
+rm -rf ./app
+cp -r ./starterkits/wp/app ./
 cp -r ./starterkits/wp/editor-styles ./
 cp -r ./starterkits/wp/util/* ./util/
-cp -r ./starterkits/wp/types/* ./types/
+rm -rf ./types
+cp -r ./starterkits/wp/types ./
 cp -r ./starterkits/wp/block-fragments.ts ./
 cp -r ./starterkits/wp/faust.config.js ./
 rm ./next.config.js
 cp -r ./starterkits/wp/next.config.mjs ./
 cp -r ./starterkits/wp/possibleTypes.json ./
-pm2 restart all
+
+# Block until file changes are in the web container...
+ddev mutagen sync
+
+ddev exec npm install --package-lock-only
+ddev exec npm ci
+ddev exec pm2 restart all
