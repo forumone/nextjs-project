@@ -2,12 +2,16 @@ import '@/source/00-config/index.css';
 
 import ClientProvider from '@/app/ClientProvider';
 import layoutMetadataQuery from '@/app/layoutMetadataQuery';
+import '@/faust.config.js';
+import sourceSansPro from '@/source/01-global/fonts/source-sans';
+import '@/source/01-global/index.css';
 import Footer from '@/source/02-layouts/Footer/Footer';
 import Header from '@/source/02-layouts/Header/Header';
 import SiteContainer from '@/source/02-layouts/SiteContainer/SiteContainer';
 import BackToTop from '@/source/03-components/BackToTop/BackToTop';
 import Menu from '@/source/03-components/Menu/Menu';
 import addBasePath from '@/source/06-utility/addBasePath';
+import '@/source/06-utility/index.css';
 import {
   GetLayoutQuery,
   LayoutMetadataQuery,
@@ -76,7 +80,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
   }
 
   return (
-    <html lang="en">
+    <html lang="en" className={sourceSansPro.variable}>
       <body>
         <SiteContainer>
           <FaustProvider>
