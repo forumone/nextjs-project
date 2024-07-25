@@ -78,10 +78,10 @@ const WpBlocksFragment = gql`
     }
     ... on CoreQuote {
       attributes {
-        align
+        textAlign
         anchor
         backgroundColor
-        citation
+        textAlign
         className
         fontFamily
         fontSize
@@ -99,7 +99,7 @@ const WpBlocksFragment = gql`
         alt
         anchor
         borderColor
-        caption
+        
         className
         width
         url
@@ -151,7 +151,7 @@ const WpBlocksFragment = gql`
       attributes {
         anchor
         gradient
-        text
+        textAlign
         textAlign
         textColor
         style
@@ -181,7 +181,7 @@ const WpBlocksFragment = gql`
         align
         anchor
         backgroundColor
-        content
+        
         fontFamily
         fontSize
         gradient

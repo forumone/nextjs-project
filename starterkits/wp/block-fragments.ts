@@ -20,7 +20,28 @@ async function go() {
   // Core fragment sources
   for (const v of Object.values(CoreBlocks)) {
     if (v.fragments.entry.loc) {
-      fragments.push(v.fragments.entry.loc.source.body);
+      let body = v.fragments.entry.loc.source.body;
+
+      // { CoreBlocks } from '@faustwp/blocks' is out of date with the schema
+      // of WP 6.6, so make some changes/removals.
+      switch (v.fragments.key) {
+        case 'CoreButtonBlockFragment':
+          body = body.replace(/\btext\b/, 'textAlign');
+          break;
+        case 'CoreQuoteBlockFragment':
+          body = body
+            .replace(/\balign\b/, 'textAlign')
+            .replace(/\bcitation\b/, 'textAlign');
+          break;
+        case 'CoreImageBlockFragment':
+          body = body.replace(/\bcaption\b/, '');
+          // TODO citation is now on block.mediaDetails.meta.caption
+          break;
+        case 'CoreHeadingBlockFragment':
+          body = body.replace(/\bcontent\b/, '');
+          break;
+      }
+      fragments.push(body);
     }
   }
 
