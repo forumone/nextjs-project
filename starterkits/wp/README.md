@@ -13,7 +13,9 @@ Guide to using `nextjs-project` and Gesso for React for a headless WordPress sit
 
 ## WordPress Setup
 Updating wordpress-project to support headless WordPress is still to come. In the 
-meantime, you can install the [WordPress-Faust example project](https://github.com/forumone/wordpress-faustjs-project), and the `.env.local` defaults are set to connect to it.
+meantime, you can install the [WordPress-Faust example project](https://github.com/forumone/wordpress-faustjs-project), and the `.env.local`
+defaults are set to connect to it. This starter kit assumes that WP has a custom block
+called `CustomBlockLibraryPostSelector` which has the property `post` (a Post).
 
 ## Headless WordPress Starter Kit
 Running `ddev setup-wp` initially adds the required npm packages, tooling, and initial templates

@@ -1,5 +1,5 @@
 /**
- * Generates file ./utils/wp/WpBlocksFragment.ts containing
+ * Generates file ./app/_components/content/WpBlocksFragment.ts containing
  * a fragment with all the WP core block fragments Faust provides.
  *
  * USAGE: ts-node block-fragments.ts
