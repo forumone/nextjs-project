@@ -1,5 +1,5 @@
 /**
- * Generates file ./app/_components/content/WpBlocksFragment.ts containing
+ * Generates file ./app/_components/blocks/WpBlocksFragment.ts containing
  * a fragment with all the WP core block fragments Faust provides.
  *
  * USAGE: ts-node block-fragments.ts
@@ -12,7 +12,7 @@ import { pathToFileURL } from 'node:url';
 
 async function go() {
   const filePath = pathToFileURL(__filename).toString();
-  const outDir = new URL('./app/_components/content', filePath).pathname;
+  const outDir = new URL('./app/_components/blocks', filePath).pathname;
   const outPath = `${outDir}/WpBlocksFragment.ts`;
 
   const fragments: string[] = [];

@@ -1,4 +1,4 @@
-import WpBlocksFragment from '@/app/_components/content/WpBlocksFragment';
+import WpBlocksFragment from '@/app/_components/blocks/WpBlocksFragment';
 import { gql } from '@apollo/client';
 
 const getPostQuery = gql`
