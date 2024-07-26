@@ -45,7 +45,7 @@ async function go() {
     }
   }
 
-  const fragmentFiles = await glob('app/_content/**/fragments.ts', {
+  const fragmentFiles = await glob('app/_components/blocks/**/fragments.ts', {
     absolute: true,
     withFileTypes: false,
   });
