@@ -1,4 +1,4 @@
-import dynamic from 'next/dynamic';
+// import dynamic from 'next/dynamic';
 import { ComponentType } from 'react';
 
 /**
@@ -6,9 +6,9 @@ import { ComponentType } from 'react';
  * custom fragment WpBlocksFragment, handled by the script block-fragments.ts
  */
 const customBlocks: Record<string, ComponentType> = {
-  CustomBlockLibraryPostSelector: dynamic(
-    () => import('./CustomBlockLibraryPostSelector'),
-  ),
+  // AuthorBlock: dynamic(
+  //   () => import('./AuthorBlock'),
+  // ),
 };
 
 export default customBlocks;
