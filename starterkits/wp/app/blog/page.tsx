@@ -8,6 +8,7 @@ import {
   BlogArchiveQuery,
   BlogArchiveQueryVariables,
 } from '@/types/__generated__/graphql';
+import stringParamsFromSearch from '@/util/wp/stringParamsFromSearch';
 import { getClient } from '@faustwp/experimental-app-router';
 import { Metadata } from 'next';
 import Link from 'next/link';
@@ -21,14 +22,11 @@ export const metadata: Metadata = {
 interface BlogArchiveProps extends NextSearchParamsProp {}
 
 async function BlogArchive({ searchParams }: BlogArchiveProps) {
-  function getParam(key: string): string | undefined {
-    const value = searchParams[key];
-    return Array.isArray(value) ? value[0] : value;
-  }
+  const stringParams = stringParamsFromSearch(searchParams);
 
   // Use cursor based pagination. Prioritize "after" over "before".
-  const after = getParam(ArchiveParams.AFTER) || undefined;
-  const before = (!after && getParam(ArchiveParams.BEFORE)) || undefined;
+  const after = stringParams[ArchiveParams.AFTER] || undefined;
+  const before = (!after && stringParams[ArchiveParams.BEFORE]) || undefined;
   // "first" should be 12 for all queries that do not use "before".
   const first = (!before && 12) || undefined;
   const last = (before && 12) || undefined;

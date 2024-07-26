@@ -17,6 +17,10 @@ import {
   PageIdType,
 } from '@/types/__generated__/graphql';
 import { hasPreviewProps } from '@/util/wp/hasPreviewProp';
+import stringParamsFromSearch, {
+  StringParams,
+} from '@/util/wp/stringParamsFromSearch';
+import { ApolloClient } from '@apollo/client';
 import { getAuthClient, getClient } from '@faustwp/experimental-app-router';
 import { Metadata } from 'next';
 import Link from 'next/link';
@@ -45,12 +49,95 @@ export async function generateMetadata(): Promise<Metadata> {
   return metadata;
 }
 
-export default async function Home(props: HomeProps) {
-  function getParam(key: string): string | undefined {
-    const value = props.searchParams[key];
-    return Array.isArray(value) ? value[0] : value;
+async function renderBlogPosts(
+  title: string,
+  params: StringParams,
+  client: ApolloClient<unknown>,
+) {
+  // Blog posts on home page
+
+  // Use cursor based pagination. Prioritize "after" over "before".
+  const after = params[ArchiveParams.AFTER];
+  const before = (!after && params[ArchiveParams.BEFORE]) || undefined;
+  // "first" should be 12 for all queries that do not use "before".
+  const first = (!before && 12) || undefined;
+  const last = (before && 12) || undefined;
+
+  const { data, error } = await client.query<
+    BlogArchiveQuery,
+    BlogArchiveQueryVariables
+  >({
+    query: blogArchiveQuery,
+    variables: {
+      first,
+      after,
+      last,
+      before,
+    },
+  });
+
+  if (error) {
+    throw new Error(error.message);
   }
 
+  const { posts } = data || {};
+  if (!posts) {
+    throw new Error('Query failed.');
+  }
+
+  return (
+    <LandingPage title={title}>
+      <Article title="Posts">
+        <ul>
+          {posts.edges.map(({ node }) => (
+            <li key={node.id}>
+              <Link href={`/blog/${node.slug}`}>{node.title}</Link>
+            </li>
+          ))}
+        </ul>
+        <CursorNavigation pageInfo={posts.pageInfo} />
+      </Article>
+    </LandingPage>
+  );
+}
+
+async function renderFrontPage(
+  title: string,
+  pageId: string,
+  asPreview: boolean,
+  client: ApolloClient<unknown>,
+) {
+  const { data, error } = await client.query<
+    GetPageQuery,
+    GetPageQueryVariables
+  >({
+    query: getPageQuery,
+    variables: {
+      id: pageId,
+      idType: PageIdType.DatabaseId,
+      asPreview,
+    },
+  });
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  const { page } = data;
+  if (!page) {
+    throw new Error('Query failed.');
+  }
+
+  return (
+    <LandingPage title={title}>
+      <Article>
+        <BlocksViewer blocks={page.editorBlocks || []} />
+      </Article>
+    </LandingPage>
+  );
+}
+
+export default async function Home(props: HomeProps) {
   const isPreview = hasPreviewProps(props);
 
   const client = isPreview ? await getAuthClient() : await getClient();
@@ -69,81 +156,18 @@ export default async function Home(props: HomeProps) {
     throw new Error('Query failed.');
   }
 
-  if (frontData.readingSettings.showOnFront !== 'page') {
-    // Blog posts on home page
-
-    // Use cursor based pagination. Prioritize "after" over "before".
-    const after = getParam(ArchiveParams.AFTER) || undefined;
-    const before = (!after && getParam(ArchiveParams.BEFORE)) || undefined;
-    // "first" should be 12 for all queries that do not use "before".
-    const first = (!before && 12) || undefined;
-    const last = (before && 12) || undefined;
-
-    const { data, error } = await client.query<
-      BlogArchiveQuery,
-      BlogArchiveQueryVariables
-    >({
-      query: blogArchiveQuery,
-      variables: {
-        first,
-        after,
-        last,
-        before,
-      },
-    });
-
-    if (error) {
-      throw new Error(error.message);
-    }
-
-    const { posts } = data || {};
-    if (!posts) {
-      throw new Error('Query failed.');
-    }
-
-    return (
-      <LandingPage title={frontData.generalSettings.title || ''}>
-        <Article title="Posts">
-          <ul>
-            {posts.edges.map(({ node }) => (
-              <li key={node.id}>
-                <Link href={`/blog/${node.slug}`}>{node.title}</Link>
-              </li>
-            ))}
-          </ul>
-          <CursorNavigation pageInfo={posts.pageInfo} />
-        </Article>
-      </LandingPage>
+  if (frontData.readingSettings.showOnFront === 'page') {
+    return renderFrontPage(
+      frontData.generalSettings.title || '',
+      String(frontData.readingSettings.pageOnFront),
+      isPreview,
+      client,
     );
   }
 
-  // Page configured as front page
-  const { data, error } = await client.query<
-    GetPageQuery,
-    GetPageQueryVariables
-  >({
-    query: getPageQuery,
-    variables: {
-      id: String(frontData.readingSettings.pageOnFront),
-      idType: PageIdType.DatabaseId,
-      asPreview: isPreview,
-    },
-  });
-
-  if (error) {
-    throw new Error(error.message);
-  }
-
-  const { page } = data;
-  if (!page) {
-    throw new Error('Query failed.');
-  }
-
-  return (
-    <LandingPage title={frontData.generalSettings.title || ''}>
-      <Article>
-        <BlocksViewer blocks={page.editorBlocks || []} />
-      </Article>
-    </LandingPage>
+  return renderBlogPosts(
+    frontData.generalSettings.title || '',
+    stringParamsFromSearch(props.searchParams),
+    client,
   );
 }

@@ -6,6 +6,7 @@ import {
   SearchQuery,
   SearchQueryVariables,
 } from '@/types/__generated__/graphql';
+import stringParamsFromSearch from '@/util/wp/stringParamsFromSearch';
 import { getClient } from '@faustwp/experimental-app-router';
 import parse from 'html-react-parser';
 import { Metadata } from 'next';
@@ -22,15 +23,12 @@ export const metadata: Metadata = {
 interface SearchPageProps extends NextSearchParamsProp {}
 
 async function SearchPage({ searchParams }: SearchPageProps) {
-  function getParam(key: string): string | undefined {
-    const value = searchParams[key];
-    return Array.isArray(value) ? value[0] : value;
-  }
-  const searchString = getParam(SearchParams.SEARCH);
+  const stringParams = stringParamsFromSearch(searchParams);
+  const searchString = stringParams[SearchParams.SEARCH];
 
   // Use cursor based pagination. Prioritize "after" over "before".
-  const after = getParam(SearchParams.AFTER);
-  const before = (!after && getParam(SearchParams.BEFORE)) || undefined;
+  const after = stringParams[SearchParams.AFTER];
+  const before = (!after && stringParams[SearchParams.BEFORE]) || undefined;
   // "first" should be 10 for all queries that do not use "before".
   const first = (!before && 10) || undefined;
   const last = (before && 10) || undefined;
