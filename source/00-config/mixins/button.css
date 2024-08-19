@@ -1,4 +1,4 @@
-@import 'focus';
+@import 'mixins/focus';
 
 @mixin button($border-width: 0, $border-radius: 0) {
   background-color: var(--button-background-color);
