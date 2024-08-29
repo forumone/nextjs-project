@@ -1,0 +1,22 @@
+#!/bin/bash
+
+## Description: Set up project for headless Drupal
+## Usage: setup-drupal
+## Example: "ddev setup-drupal"
+
+if [ -e ./codegen.ts ] || [ -d ./app/api ]; then
+  echo "Drupal setup can only be run once."
+  echo "If you need the starter files, copy them from the /starterkits directory."
+  exit 0;
+fi
+
+node lib/drupal/merge-package-json.js
+npm install --package-lock-only
+npm ci
+cp ./starterkits/drupal/codegen.ts ./codegen.ts
+cat ./starterkits/drupal/.env.drupal >> .env.local.example
+cp -r ./starterkits/drupal/app/* ./app
+cp -r ./starterkits/drupal/util/* ./util
+cp -r ./starterkits/drupal/types/* ./types
+pm2 restart frontend
+pm2 restart storybook

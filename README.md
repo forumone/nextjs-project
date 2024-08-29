@@ -1,6 +1,6 @@
-# NextJS Project Template
+# Next.js Project Template
 
-This is a build guide to help walk you through setting up a new NextJS project.
+This is a build guide to help walk you through setting up a new Next.js project.
 
 ## Requirements
 
@@ -25,15 +25,10 @@ git init
 ```shell
 git remote add origin git@github.com:forumone/[project-name].git
 ```
-4. Update configuration in the `./.ddev/config.yaml`
-   5. Update `name: [project name]` to the correct project name.
+4. Update configuration in the `./.ddev/config.yaml`. Update `name: nextjs-project` to the correct project name.
 
-
-* Project name (`[project-name]`): `[project-name]<ENTER>`
-* Docroot Location (...): `public<ENTER>`
-* Project Type [...]: `php<ENTER>`
-
-6. Go through the rest of the `build process`
+If you are setting up a headless Drupal project, 
+continue with the setup steps in /starterkits/drupal/README.md.
 
 ### Assuming Forum One hosted project,
 

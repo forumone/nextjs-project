@@ -3,7 +3,7 @@ import { GessoComponent } from 'gesso';
 import {
   ElementType,
   MouseEventHandler,
-  ReactElement,
+  ReactNode,
   useEffect,
   useRef,
 } from 'react';
@@ -13,13 +13,13 @@ import styles from './accordion-item.module.css';
 export interface AccordionItemProps extends GessoComponent {
   id: string;
   title: string;
-  content: ReactElement;
+  content: ReactNode;
   titleElement?: ElementType;
   isOpen?: boolean;
   isStepList?: boolean;
   accordionSpeed?: string;
   toggleRef?: React.RefObject<HTMLButtonElement>;
-  handleClick: MouseEventHandler;
+  handleClick?: MouseEventHandler;
 }
 
 function AccordionItem({
