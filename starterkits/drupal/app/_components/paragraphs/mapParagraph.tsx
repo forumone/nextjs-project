@@ -1,20 +1,13 @@
 import { FragmentType, getFragmentData } from '@/types/__generated__';
 import dynamic from 'next/dynamic';
-import { ComponentType, JSX } from 'react';
+import { JSX } from 'react';
 import AllParagraphsFragment from './AllParagraphsFragment';
-
-type ParagraphComponentType = {
-  paragraph: object;
-};
 
 /**
  * Maps the paragraph type as returned by GraphQL with the integration template.
  * As you add or remove paragraph types, you'll need to update this map.
  */
-const paragraphMapping: Record<
-  string,
-  ComponentType<ParagraphComponentType>
-> = {
+const paragraphMapping = {
   ParagraphAccordion: dynamic(() => import('./AccordionParagraph')),
   ParagraphBlockEmbed: dynamic(() => import('./BlockEmbedParagraph')),
   ParagraphCard: dynamic(() => import('./CardParagraph')),
@@ -22,6 +15,14 @@ const paragraphMapping: Record<
   ParagraphHero: dynamic(() => import('./HeroParagraph')),
   ParagraphWysiwyg: dynamic(() => import('./WysiwygParagraph')),
 };
+
+function isMappable(
+  typename?: string,
+): typename is keyof typeof paragraphMapping {
+  return !!(
+    typename && Object.prototype.hasOwnProperty.call(paragraphMapping, typename)
+  );
+}
 
 /**
  * Imports the appropriate template based on the paragraph type.
@@ -31,18 +32,15 @@ function mapParagraph(
 ): JSX.Element | null {
   const paragraph = getFragmentData(AllParagraphsFragment, entity);
 
-  if (
-    !paragraph?.id ||
-    !paragraph?.__typename ||
-    !Object.prototype.hasOwnProperty.call(
-      paragraphMapping,
-      paragraph.__typename,
-    )
-  ) {
+  if (!paragraph?.id || !isMappable(paragraph.__typename)) {
     return null;
   }
 
   const ParagraphComponent = paragraphMapping[paragraph.__typename];
+  // @ts-expect-error We are trusting here that the component dynamically imported via the mapping
+  // expects the type of fragment that we have, i.e. we won't map the BlockEmbed paragraph component to
+  // the ParagraphAccordion type. However, since the import map doesn't guarantee that we aren't doing
+  // that, TypeScript flags the potentially incompatible types.
   return <ParagraphComponent paragraph={paragraph} key={paragraph.id} />;
 }
 

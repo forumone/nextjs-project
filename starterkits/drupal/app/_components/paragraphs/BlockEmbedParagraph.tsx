@@ -21,7 +21,11 @@ function BlockEmbedParagraph({
   );
   return (
     <div
-      dangerouslySetInnerHTML={{ __html: blockEmbedParagraph.block?.render }}
+      dangerouslySetInnerHTML={
+        typeof blockEmbedParagraph.block?.render === 'string'
+          ? { __html: blockEmbedParagraph.block?.render }
+          : undefined
+      }
     />
   );
 }
