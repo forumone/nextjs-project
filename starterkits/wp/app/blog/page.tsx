@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   title: PAGE_TITLE,
 };
 
-interface BlogArchiveProps extends NextSearchParamsProp {}
+type BlogArchiveProps = NextSearchParamsProp;
 
 async function BlogArchive({ searchParams }: BlogArchiveProps) {
   const stringParams = stringParamsFromSearch(searchParams);

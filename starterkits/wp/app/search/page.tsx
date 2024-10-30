@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   title: PAGE_TITLE,
 };
 
-interface SearchPageProps extends NextSearchParamsProp {}
+type SearchPageProps = NextSearchParamsProp;
 
 async function SearchPage({ searchParams }: SearchPageProps) {
   const stringParams = stringParamsFromSearch(searchParams);
