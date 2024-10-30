@@ -1,7 +1,7 @@
 import Grid from '@/source/02-layouts/Grid/Grid';
 import { FragmentType, getFragmentData, graphql } from '@/types/__generated__';
 import { ParagraphCard } from '@/types/__generated__/graphql';
-import entityIsType from '@/util/drupal/entityIsType';
+import entityIsType from '@/util/entityIsType';
 import { paragraphMapping } from './mapParagraph';
 
 const CardsParagraphFragment = graphql(`

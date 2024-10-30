@@ -16,7 +16,8 @@
       {
         "ignoreRestSiblings": true,
         "varsIgnorePattern": "^_",
-        "argsIgnorePattern": "^_"
+        "argsIgnorePattern": "^_",
+        "caughtErrorsIgnorePattern": "^_"
       }
     ],
     "@typescript-eslint/no-explicit-any": "error",

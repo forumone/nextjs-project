@@ -1,6 +1,6 @@
 import Accordion from '@/source/03-components/Accordion/Accordion';
 import { FragmentType, getFragmentData, graphql } from '@/types/__generated__';
-import entityIsType from '@/util/drupal/entityIsType';
+import entityIsType from '@/util/entityIsType';
 
 const AccordionItemParagraphFragment = graphql(`
   fragment AccordionItemParagraphFragment on ParagraphAccordionItem {

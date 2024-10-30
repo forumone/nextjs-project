@@ -33,7 +33,7 @@ async function GET(request: NextRequest) {
       return result;
     }
     draftMode().enable();
-  } catch (error) {
+  } catch (_error: unknown) {
     return new NextResponse(null, {
       status: 422,
     });
