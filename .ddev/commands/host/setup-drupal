@@ -18,4 +18,10 @@ cat ./starterkits/drupal/.env.drupal >> .env.local.example
 cp -r ./starterkits/drupal/app/* ./app
 cp -r ./starterkits/drupal/util/* ./util
 cp -r ./starterkits/drupal/types/* ./types
-pm2 restart all
+
+# Block until file changes are in the web container...
+ddev mutagen sync
+
+ddev exec npm install --package-lock-only
+ddev exec npm ci
+ddev exec pm2 restart all

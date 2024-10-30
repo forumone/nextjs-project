@@ -32,18 +32,6 @@ if (!layerDefinition.startsWith('@layer')) {
 
 /** @type {import('next').NextConfig} */
 export default withFaust({
-  // TODO: Figure out if we need. Taken from app-router example of faust
-  // https://github.com/wpengine/faustjs/blob/canary/examples/next/app-router/next.config.js#L6-L10
-  // headers: async () => {
-  //   return [
-  //     {
-  //       source: '/:path*',
-  //       headers: createSecureHeaders({
-  //         xssProtection: false,
-  //       }),
-  //     },
-  //   ];
-  // },
   async rewrites() {
     return [
       {
