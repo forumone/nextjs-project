@@ -11,16 +11,18 @@ if [ -e ./codegen.ts ] || [ -d ./app/api ]; then
 fi
 
 node lib/drupal/merge-package-json.js
-npm install --package-lock-only
-npm ci
-cp ./starterkits/drupal/codegen.ts ./codegen.ts
+cp ./starterkits/drupal/codegen.ts ./
 cat ./starterkits/drupal/.env.drupal >> .env.local.example
-cp -r ./starterkits/drupal/app/* ./app
-cp -r ./starterkits/drupal/util/* ./util
-cp -r ./starterkits/drupal/types/* ./types
+cat ./starterkits/drupal/.env.drupal >> .env.local
+rm -rf ./app
+cp -r ./starterkits/drupal/app ./
+mkdir ./util/drupal
+cp -r ./starterkits/drupal/util/* ./util/drupal
+rm -rf ./types
+cp -r ./starterkits/drupal/types ./
 
 # Block until file changes are in the web container...
-ddev mutagen sync
+ddev mutagen sync || true
 
 ddev exec npm install --package-lock-only
 ddev exec npm ci

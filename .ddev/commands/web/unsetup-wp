@@ -4,13 +4,14 @@
 ## Usage: unsetup-wp
 ## Example: "ddev unsetup-wp"
 
-cp ./codegen.ts ./starterkits/wp/
+mv ./codegen.ts ./starterkits/wp/
 
 rm -rf ./starterkits/wp/app
 cp -r ./app ./starterkits/wp/
 
-rm -rf ./starterkits/wp/util/wp
+rm -rf ./starterkits/wp/util/
 cp -r ./util/wp ./starterkits/wp/util/
+rm -rf ./util/drupal
 
 rm -rf ./starterkits/wp/types
 cp -r ./types ./starterkits/wp/
