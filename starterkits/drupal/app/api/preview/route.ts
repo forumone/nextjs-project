@@ -1,4 +1,4 @@
-import drupal from '@/util/drupal';
+import drupal from '@/util/drupal/drupal';
 import { draftMode } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { NextRequest, NextResponse } from 'next/server';
@@ -33,7 +33,7 @@ async function GET(request: NextRequest) {
       return result;
     }
     draftMode().enable();
-  } catch (error) {
+  } catch (_error: unknown) {
     return new NextResponse(null, {
       status: 422,
     });

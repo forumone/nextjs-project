@@ -28,7 +28,7 @@ import LoginForm from './[slug]/LoginForm';
 import homeMetadataQuery from './homeMetadataQuery';
 import readingSettingsQuery from './readingSettingsQuery';
 
-interface HomeProps extends NextSearchParamsProp {}
+type HomeProps = NextSearchParamsProp;
 
 export async function generateMetadata(): Promise<Metadata> {
   const client = await getClient();

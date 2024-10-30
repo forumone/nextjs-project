@@ -4,7 +4,7 @@ import coreBlocks from '@/app/_components/blocks/core';
 import { WordPressBlocksProvider } from '@faustwp/blocks';
 import { PropsWithChildren } from 'react';
 
-interface ClientProviderProps extends PropsWithChildren {}
+type ClientProviderProps = PropsWithChildren;
 /**
  * Wrapper for client side providers.
  * If a provider requires client side things like `useContext`, throw it in here.

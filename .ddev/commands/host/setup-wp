@@ -17,7 +17,8 @@ cat ./starterkits/wp/.env.wp >> .env.local
 rm -rf ./app
 cp -r ./starterkits/wp/app ./
 cp -r ./starterkits/wp/editor-styles ./
-cp -r ./starterkits/wp/util/* ./util/
+mkdir ./util/wp
+cp -r ./starterkits/wp/util/* ./util/wp/
 rm -rf ./types
 cp -r ./starterkits/wp/types ./
 cp -r ./starterkits/wp/block-fragments.ts ./
@@ -27,7 +28,7 @@ cp -r ./starterkits/wp/next.config.mjs ./
 cp -r ./starterkits/wp/possibleTypes.json ./
 
 # Block until file changes are in the web container...
-ddev mutagen sync
+ddev mutagen sync || true
 
 ddev exec npm install --package-lock-only
 ddev exec npm ci
