@@ -15,6 +15,8 @@ case $1 in
     npm run export
   ;;
   restart)
+    echo "Removing .next cache directory"
+    rm -rf .next
     pm2 restart $2
   ;;
   monit)
@@ -40,6 +42,9 @@ case $1 in
   ;;
   generate)
     npm run generate:all
+  ;;
+  wp-editor-styles)
+    npm run editor-styles
   ;;
   "")
     echo "Usage: frontend install|build|deploy|watch|(some other command in the theme service)"

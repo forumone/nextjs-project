@@ -1,0 +1,34 @@
+#!/bin/bash
+
+## Description: Set up project for headless WordPress
+## Usage: setup-wp
+## Example: "ddev setup-wp"
+
+if [ -e ./codegen.ts ] || [ -d ./app/api ]; then
+  echo "WordPress setup can only be run once."
+  echo "If you need the starter files, copy them from the /starterkits directory."
+  exit 0;
+fi
+
+node lib/wp/merge-package-json.js
+cp ./starterkits/wp/codegen.ts ./
+cat ./starterkits/wp/.env.wp >> .env.local.example
+cat ./starterkits/wp/.env.wp >> .env.local
+rm -rf ./app
+cp -r ./starterkits/wp/app ./
+cp -r ./starterkits/wp/editor-styles ./
+cp -r ./starterkits/wp/util/* ./util/
+rm -rf ./types
+cp -r ./starterkits/wp/types ./
+cp -r ./starterkits/wp/block-fragments.ts ./
+cp -r ./starterkits/wp/faust.config.js ./
+rm ./next.config.js
+cp -r ./starterkits/wp/next.config.mjs ./
+cp -r ./starterkits/wp/possibleTypes.json ./
+
+# Block until file changes are in the web container...
+ddev mutagen sync
+
+ddev exec npm install --package-lock-only
+ddev exec npm ci
+ddev exec pm2 restart all
