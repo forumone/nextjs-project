@@ -24,7 +24,7 @@ hooks:
     - exec: pm2 start --name frontend node_modules/.bin/next -- dev
       service: web
       # pm2 does not live in the node path, so have to call binary directly
-    - exec: pm2 start --name storybook node_modules/.bin/storybook -- dev -p 6006
+    - exec: pm2 start --name storybook node_modules/.bin/storybook -- dev --no-open -p 6006
       service: web
 
 # Key features of ddev's config.yaml:
