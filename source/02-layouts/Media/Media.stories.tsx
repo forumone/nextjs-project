@@ -1,8 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
-import parse from 'html-react-parser';
 import MediaLayout from './Media';
 import styles from './media.module.css';
-import mediaArgs from './media.yml';
+import mediaArgs from './mediaArgs';
 
 const meta: Meta<typeof MediaLayout> = {
   title: 'Layouts/Media',
@@ -22,8 +21,6 @@ type Story = StoryObj<typeof MediaLayout>;
 const Default: Story = {
   args: {
     ...mediaArgs,
-    media: parse(mediaArgs.media),
-    mediaContent: parse(mediaArgs.mediaContent),
   },
 };
 

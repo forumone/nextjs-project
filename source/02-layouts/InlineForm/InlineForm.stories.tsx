@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 import SampleContent from '../../06-utility/storybook/SampleContent';
 import InlineFormLayout from './InlineForm';
-import inlineFormArgs from './inline-form.yml';
+import inlineFormArgs from './inlineFormArgs';
 
 const meta: Meta<typeof InlineFormLayout> = {
   title: 'Layouts/Inline Form',

@@ -1,12 +1,12 @@
 import clsx from 'clsx';
 import { ConstrainComponent } from 'gesso';
-import { ReactNode } from 'react';
+import { JSX, ReactNode } from 'react';
 import Constrain from '../Constrain/Constrain';
 import styles from './main.module.css';
 
 interface MainProps extends ConstrainComponent {
   id?: string;
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 function Main({
@@ -31,3 +31,4 @@ function Main({
 }
 
 export default Main;
+export type { MainProps };

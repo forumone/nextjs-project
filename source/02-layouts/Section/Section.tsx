@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { ConstrainComponent } from 'gesso';
-import { ElementType, ReactNode } from 'react';
+import { ElementType, JSX, ReactNode } from 'react';
 import Constrain from '../Constrain/Constrain';
 import styles from './section.module.css';
 
@@ -29,3 +29,4 @@ function Section({
 }
 
 export default Section;
+export type { SectionProps };

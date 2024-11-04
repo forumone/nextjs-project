@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { GessoComponent } from 'gesso';
-import { ReactNode } from 'react';
+import { JSX, ReactNode } from 'react';
 import styles from './sidebar.module.css';
 
 interface SidebarProps extends GessoComponent {
@@ -48,3 +48,4 @@ function Sidebar({
 }
 
 export default Sidebar;
+export type { SidebarProps };

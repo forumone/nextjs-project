@@ -31,7 +31,7 @@
   },
   "overrides": [
     {
-      "files": ["**/*.stories.tsx"],
+      "files": ["**/*.stories.tsx", "**/*Args.tsx"],
       "rules": {
         "@next/next/no-img-element": "off",
         "@typescript-eslint/no-unsafe-assignment": "off",
