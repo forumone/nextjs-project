@@ -6,8 +6,12 @@ module.exports = {
     '@csstools/postcss-global-data': {
       files: ['./source/00-config/vars/breakpoints.css'],
     },
+    'postcss-import': {
+      filter: url => url.indexOf('mixins') === -1,
+    },
     'postcss-advanced-variables': {
       importPaths: [path.resolve(__dirname, './source/00-config')],
+      importFilter: id => id.indexOf('mixins') > -1,
     },
     [require.resolve('./lib/iff.js')]: {},
     'postcss-rem': {},

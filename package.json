@@ -62,6 +62,7 @@
     "plop": "^4.0.1",
     "postcss": "^8.4.33",
     "postcss-advanced-variables": "github:kmonahan/postcss-advanced-variables",
+    "postcss-import": "^16.1.0",
     "postcss-loader": "^8.1.1",
     "postcss-nesting": "^13.0.0",
     "postcss-preset-env": "^10.0.0",
