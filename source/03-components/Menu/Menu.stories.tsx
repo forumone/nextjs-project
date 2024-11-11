@@ -1,8 +1,8 @@
 import { Meta, StoryObj } from '@storybook/react';
 import Menu from './Menu';
 import footerStyles from './menu-footer.module.css';
-import footerMenuArgs from './menu-footer.yml';
-import menuArgs from './menu.yml';
+import menuArgs from './menuArgs';
+import footerMenuArgs from './menuFooterArgs';
 
 const meta: Meta<typeof Menu> = {
   title: 'Components/Menu',

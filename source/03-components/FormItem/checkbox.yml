@@ -1,6 +1,0 @@
----
-id: 'checkbox'
-label: 'Checkbox'
-labelDisplay: 'after'
-type: 'checkbox'
-description: 'The description for this form field.'

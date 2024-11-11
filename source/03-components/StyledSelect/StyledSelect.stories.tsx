@@ -1,8 +1,8 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { withGlobalWrapper } from '../../../.storybook/decorators';
 import StyledSelectComponent from './StyledSelect';
-import styledSelectArgs from './styled-select.yml';
-import withGroupsArgs from './with-groups.yml';
+import styledSelectArgs from './styledSelectArgs';
+import withGroupsArgs from './withGroupsArgs';
 
 const meta: Meta<typeof StyledSelectComponent> = {
   title: 'Components/Styled Select',

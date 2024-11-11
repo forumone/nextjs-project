@@ -1,8 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
-import parse from 'html-react-parser';
 import { withGlobalWrapper } from '../../../.storybook/decorators';
 import ImageTeaserComponent from './ImageTeaser';
-import imageTeaserArgs from './image-teaser.yml';
+import imageTeaserArgs from './imageTeaserArgs';
 
 const meta: Meta<typeof ImageTeaserComponent> = {
   title: 'Components/Image Teaser',
@@ -13,11 +12,7 @@ const meta: Meta<typeof ImageTeaserComponent> = {
 
 type Story = StoryObj<typeof ImageTeaserComponent>;
 const ImageTeaser: Story = {
-  args: {
-    ...imageTeaserArgs,
-    image: parse(imageTeaserArgs.image),
-    summary: parse(imageTeaserArgs.summary),
-  },
+  args: imageTeaserArgs,
 };
 
 export default meta;

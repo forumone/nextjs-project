@@ -1,9 +1,8 @@
 import { Meta, StoryObj } from '@storybook/react';
-import parse from 'html-react-parser';
 import Constrain from '../../02-layouts/Constrain/Constrain';
 import { Button } from '../Button';
 import ModalComponent from './Modal';
-import modalArgs from './modal.yml';
+import modalArgs from './modalArgs';
 
 const meta: Meta<typeof ModalComponent> = {
   title: 'Components/Modal',
@@ -15,10 +14,7 @@ type Story = StoryObj<typeof ModalComponent>;
 
 const Default: Story = {
   render: args => <ModalComponent {...args} />,
-  args: {
-    ...modalArgs,
-    children: parse(modalArgs.children),
-  },
+  args: modalArgs,
   decorators: [
     Component => (
       <Constrain modifierClasses="u-spacing-block-5">

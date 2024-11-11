@@ -1,9 +1,8 @@
 import { Meta, StoryObj } from '@storybook/react';
-import parse from 'html-react-parser';
 import { withGlobalWrapper } from '../../../.storybook/decorators';
 import { Select } from './FormItem';
-import withGroupArgs from './select-with-groups.yml';
-import selectArgs from './select.yml';
+import selectArgs from './selectArgs';
+import withGroupArgs from './selectWithGroups';
 
 const meta: Meta<typeof Select> = {
   title: 'Components/Form Item/Select',
@@ -36,16 +35,10 @@ const meta: Meta<typeof Select> = {
 
 type Story = StoryObj<typeof Select>;
 const Default: Story = {
-  args: {
-    ...selectArgs,
-    children: parse(selectArgs.children),
-  },
+  args: selectArgs,
 };
 const WithGroups: Story = {
-  args: {
-    ...withGroupArgs,
-    children: parse(withGroupArgs.children),
-  },
+  args: withGroupArgs,
 };
 
 export default meta;

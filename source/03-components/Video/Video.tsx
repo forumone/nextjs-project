@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { GessoComponent } from 'gesso';
+import { JSX } from 'react';
 import styles from './video.module.css';
 
 interface VideoProps extends GessoComponent {
@@ -20,3 +21,4 @@ function Video({
 }
 
 export default Video;
+export type { VideoProps };

@@ -44,3 +44,4 @@ function ImageTeaser({
 }
 
 export default ImageTeaser;
+export type { ImageTeaserProps };

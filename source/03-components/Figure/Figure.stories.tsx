@@ -1,10 +1,9 @@
 import { Meta, StoryObj } from '@storybook/react';
-import parse from 'html-react-parser';
 import { withGlobalWrapper } from '../../../.storybook/decorators';
 import { Video } from '../Video/Video.stories';
 import FigureComponent from './Figure';
 import styles from './figure.module.css';
-import figureArgs from './figure.yml';
+import figureArgs from './figureArgs';
 
 const meta: Meta<typeof FigureComponent> = {
   title: 'Components/Figure',
@@ -16,10 +15,7 @@ const meta: Meta<typeof FigureComponent> = {
 type Story = StoryObj<typeof FigureComponent>;
 
 const Default: Story = {
-  args: {
-    ...figureArgs,
-    media: parse(figureArgs.media),
-  },
+  args: figureArgs,
 };
 
 const FigureCentered: Story = {

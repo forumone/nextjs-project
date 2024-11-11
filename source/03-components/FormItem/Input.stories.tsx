@@ -1,22 +1,22 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { withGlobalWrapper } from '../../../.storybook/decorators';
 import { Input } from './FormItem';
-import colorArgs from './color.yml';
-import dateArgs from './date.yml';
-import decimalArgs from './decimal.yml';
-import emailArgs from './email.yml';
-import fileArgs from './file.yml';
-import floatArgs from './float.yml';
-import integerArgs from './integer.yml';
-import monthArgs from './month.yml';
-import passwordArgs from './password.yml';
-import rangeArgs from './range.yml';
-import searchArgs from './search.yml';
-import telephoneArgs from './telephone.yml';
-import textArgs from './text.yml';
-import timeArgs from './time.yml';
-import urlArgs from './url.yml';
-import weekArgs from './week.yml';
+import colorArgs from './colorArgs';
+import dateArgs from './dateArgs';
+import decimalArgs from './decimalArgs';
+import emailArgs from './emailArgs';
+import fileArgs from './fileArgs';
+import floatArgs from './floatArgs';
+import integerArgs from './integerArgs';
+import monthArgs from './monthArgs';
+import passwordArgs from './passwordArgs';
+import rangeArgs from './rangeArgs';
+import searchArgs from './searchArgs';
+import telephoneArgs from './telephoneArgs';
+import textArgs from './textArgs';
+import timeArgs from './timeArgs';
+import urlArgs from './urlArgs';
+import weekArgs from './weekArgs';
 
 const meta: Meta<typeof Input> = {
   title: 'Components/Form Item/Input',

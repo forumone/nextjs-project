@@ -1,3 +1,4 @@
+import { JSX } from 'react';
 import Select, { GroupBase, Props, ThemeConfig } from 'react-select';
 import DropdownOption from './DropdownOption';
 import StyledDropdownIndicator from './StyledDropdownIndicator';

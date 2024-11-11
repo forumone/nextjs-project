@@ -114,3 +114,4 @@ function OverlayMenu({
 }
 
 export default OverlayMenu;
+export type { OverlayMenuProps };

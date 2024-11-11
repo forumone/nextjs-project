@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { withGlobalWrapper } from '../../../.storybook/decorators';
 import { Textarea } from './FormItem';
-import textareaArgs from './textarea.yml';
+import textareaArgs from './textareaArgs';
 
 const meta: Meta<typeof Textarea> = {
   title: 'Components/Form Item/Textarea',

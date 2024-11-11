@@ -1,8 +1,8 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { withGlobalWrapper } from '../../../.storybook/decorators';
 import { Input } from './FormItem';
-import checkboxArgs from './checkbox.yml';
-import radioArgs from './radio.yml';
+import checkboxArgs from './checkboxArgs';
+import radioArgs from './radioArgs';
 
 const meta: Meta<typeof Input> = {
   title: 'Components/Form Item',

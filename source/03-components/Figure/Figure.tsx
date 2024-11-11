@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { GessoComponent } from 'gesso';
-import { ReactNode } from 'react';
+import { JSX, ReactNode } from 'react';
 import styles from './figure.module.css';
 
 interface FigureProps extends GessoComponent {
@@ -18,3 +18,4 @@ function Figure({ media, caption, modifierClasses }: FigureProps): JSX.Element {
 }
 
 export default Figure;
+export type { FigureProps };

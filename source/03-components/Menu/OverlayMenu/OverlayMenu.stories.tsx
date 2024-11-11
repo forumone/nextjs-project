@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import OverlayMenuComponent from './OverlayMenu';
-import overlayMenuArgs from './overlay-menu.yml';
+import overlayMenuArgs from './overlayMenuArgs';
 
 const meta: Meta<typeof OverlayMenuComponent> = {
   title: 'Components/Menu/Overlay Menu',

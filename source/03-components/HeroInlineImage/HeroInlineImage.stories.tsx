@@ -1,8 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
-import parse from 'html-react-parser';
 import HeroInlineImage from './HeroInlineImage';
 import styles from './hero-inline-image.module.css';
-import heroInlineImageArgs from './hero-inline-image.yml';
+import heroInlineImageArgs from './heroInlineImageArgs';
 
 const meta: Meta<typeof HeroInlineImage> = {
   title: 'Components/Hero/Hero With Inline Image',
@@ -12,11 +11,7 @@ const meta: Meta<typeof HeroInlineImage> = {
 
 type Story = StoryObj<typeof HeroInlineImage>;
 const Default: Story = {
-  args: {
-    ...heroInlineImageArgs,
-    summary: parse(heroInlineImageArgs.summary),
-    heroImage: parse(heroInlineImageArgs.heroImage),
-  },
+  args: heroInlineImageArgs,
 };
 const Left: Story = {
   args: {
