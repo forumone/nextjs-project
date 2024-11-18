@@ -54,3 +54,4 @@ function ResponsiveMenu({
 }
 
 export default ResponsiveMenu;
+export type { ResponsiveMenuProps };

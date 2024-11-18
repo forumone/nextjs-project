@@ -1,6 +1,6 @@
-@layer utility {
-  @import 'accessibility.css';
-  @import 'alignment.css';
-  @import 'clearfix.css';
-  @import 'spacing.css';
-}
+@import 'mixins';
+
+@import 'accessibility.css' layer(utility);
+@import 'alignment.css' layer(utility);
+@import 'clearfix.css' layer(utility);
+@import 'spacing.css' layer(utility);

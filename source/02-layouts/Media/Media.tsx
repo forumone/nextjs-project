@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { GessoComponent } from 'gesso';
-import { ReactNode } from 'react';
+import { JSX, ReactNode } from 'react';
 import styles from './media.module.css';
 
 interface MediaProps extends GessoComponent {
@@ -22,3 +22,4 @@ function Media({
 }
 
 export default Media;
+export type { MediaProps };

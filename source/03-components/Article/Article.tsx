@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { GessoComponent } from 'gesso';
-import { ReactNode } from 'react';
+import { JSX, ReactNode } from 'react';
 import listStyles from '../List/list.module.css';
 import PageTitle from '../PageTitle/PageTitle';
 import Wysiwyg from '../Wysiwyg/Wysiwyg';
@@ -39,3 +39,4 @@ function Article({
 }
 
 export default Article;
+export type { ArticleProps };

@@ -131,3 +131,4 @@ function Pager({
 }
 
 export default Pager;
+export type { PagerProps };

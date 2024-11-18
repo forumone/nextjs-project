@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import PagerComponent from './Pager';
-import data from './pager.yml';
+import pagerArgs from './pagerArgs';
 
 const settings: Meta<typeof PagerComponent> = {
   title: 'Components/Pager',
@@ -13,7 +13,7 @@ const settings: Meta<typeof PagerComponent> = {
 };
 
 const Pager: StoryObj<typeof PagerComponent> = {
-  args: data,
+  args: pagerArgs,
   parameters: {
     nextjs: {
       navigation: {

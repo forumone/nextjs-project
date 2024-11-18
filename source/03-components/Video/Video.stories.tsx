@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { withGlobalWrapper } from '../../../.storybook/decorators';
 import VideoComponent from './Video';
-import videoArgs from './video.yml';
+import videoArgs from './videoArgs';
 
 const meta: Meta<typeof VideoComponent> = {
   title: 'Components/Video',

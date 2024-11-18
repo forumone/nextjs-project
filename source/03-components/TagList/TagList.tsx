@@ -20,3 +20,4 @@ function TagList({ items, modifierClasses }: TagListProps): JSX.Element {
 }
 
 export default TagList;
+export type { TagListProps };

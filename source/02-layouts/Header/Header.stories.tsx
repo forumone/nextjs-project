@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 import SampleContent from '../../06-utility/storybook/SampleContent';
 import HeaderLayout from './Header';
-import headerArgs from './header.yml';
+import headerArgs from './headerArgs';
 
 const meta: Meta<typeof HeaderLayout> = {
   title: 'Layouts/Header',

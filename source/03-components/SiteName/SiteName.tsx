@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import { GessoComponent } from 'gesso';
 import Link from 'next/link';
+import { JSX } from 'react';
 import styles from './site-name.module.css';
 
 interface SiteNameProps extends GessoComponent {
@@ -28,3 +29,4 @@ function SiteName({
 }
 
 export default SiteName;
+export type { SiteNameProps };

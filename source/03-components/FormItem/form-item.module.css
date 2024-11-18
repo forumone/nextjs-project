@@ -1,10 +1,8 @@
 @import 'mixins';
 
-@layer components {
-  @import 'form-item-base.css';
-  @import 'form-item-checkbox.css';
-  @import 'form-item-input.css';
-  @import 'form-item-range.css';
-  @import 'form-item-radio.css';
-  @import 'form-item-select.css';
-}
+@import 'form-item-base.css' layer(components);
+@import 'form-item-checkbox.css' layer(components);
+@import 'form-item-input.css' layer(components);
+@import 'form-item-range.css' layer(components);
+@import 'form-item-radio.css' layer(components);
+@import 'form-item-select.css' layer(components);

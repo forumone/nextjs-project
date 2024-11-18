@@ -1,6 +1,0 @@
----
-id: 'integer'
-label: 'Number (integer)'
-type: 'number'
-placeholder: 'Placeholder'
-step: 1

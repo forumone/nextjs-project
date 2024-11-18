@@ -43,3 +43,4 @@ function HeroInlineImage({
 }
 
 export default HeroInlineImage;
+export type { HeroInlineImageProps };

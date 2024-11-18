@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { GessoComponent } from 'gesso';
 import Link from 'next/link';
-import { ElementType } from 'react';
+import { ElementType, JSX } from 'react';
 import styles from './button-group.module.css';
 
 interface Button {
@@ -65,3 +65,4 @@ function ButtonGroup({
 }
 
 export default ButtonGroup;
+export type { ButtonGroupProps };

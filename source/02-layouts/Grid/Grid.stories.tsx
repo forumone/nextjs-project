@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 import SampleContent from '../../06-utility/storybook/SampleContent';
 import GridLayout from './Grid';
-import gridArgs from './grid.yml';
+import gridArgs from './gridArgs';
 
 function GridDemo(): JSX.Element {
   const arr = Array.from(Array(6).keys());

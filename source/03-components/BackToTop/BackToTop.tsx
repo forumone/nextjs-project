@@ -2,7 +2,7 @@
 
 import clsx from 'clsx';
 import { GessoComponent } from 'gesso';
-import { MouseEvent, useEffect, useState } from 'react';
+import { JSX, MouseEvent, useEffect, useState } from 'react';
 import AngleUp from '../../01-global/icon/icons/AngleUp';
 import styles from './back-to-top.module.css';
 
@@ -76,3 +76,4 @@ function BackToTop({
 }
 
 export default BackToTop;
+export type { BackToTopProps };

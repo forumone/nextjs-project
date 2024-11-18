@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { GessoComponent } from 'gesso';
-import { ReactNode } from 'react';
+import { JSX, ReactNode } from 'react';
 import styles from './constrain.module.css';
 
 interface ConstrainProps extends GessoComponent {
@@ -21,3 +21,4 @@ function Constrain({
 }
 
 export default Constrain;
+export type { ConstrainProps };

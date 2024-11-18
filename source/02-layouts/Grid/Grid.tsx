@@ -26,3 +26,4 @@ function Grid({
 }
 
 export default Grid;
+export type { GridProps };

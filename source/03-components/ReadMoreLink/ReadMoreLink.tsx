@@ -45,3 +45,4 @@ function ReadMoreLink({
 }
 
 export default ReadMoreLink;
+export type { ReadMoreLinkProps };

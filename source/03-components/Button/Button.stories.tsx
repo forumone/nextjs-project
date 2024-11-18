@@ -5,7 +5,7 @@ import {
   LinkButton as LinkButtonComponent,
   SharedButtonProps,
 } from './Button';
-import buttonArgs from './button.yml';
+import buttonArgs from './buttonArgs';
 
 function DemoButtons({ label, ...props }: SharedButtonProps): JSX.Element {
   return (
@@ -32,7 +32,6 @@ const meta: Meta<typeof DemoButtons> = {
       control: {
         type: 'radio',
       },
-      defaultValue: 'primary',
     },
   },
 };
