@@ -93,6 +93,7 @@ async function generator(plop) {
 
   plop.setPartial('propsName', '{{ componentName }}Props');
   plop.setPartial('componentAlias', '{{ componentName }}Component');
+  plop.setPartial('argsName', '{{ camelCase componentName }}Args');
 
   plop.setGenerator('component', {
     description: 'Create a new React component',
@@ -194,7 +195,7 @@ Include Story?: {{ useStorybook }}
       if (data.useStorybook) {
         actions.push({
           type: 'add',
-          path: './source/{{ componentLocation }}/{{ componentName }}/{{ kebabCase componentName }}.yml',
+          path: './source/{{ componentLocation }}/{{ componentName }}/{{ camelCase componentName }}Args.ts',
           templateFile: './lib/plop-templates/Data.hbs',
         });
         actions.push({
