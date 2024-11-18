@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { withGlobalWrapper } from '../../../.storybook/decorators';
 import ReadMoreLinkComponent from './ReadMoreLink';
-import readMoreLinkArgs from './read-more-link.yml';
+import readMoreLinkArgs from './readMoreLinkArgs';
 
 const meta: Meta<typeof ReadMoreLinkComponent> = {
   title: 'Components/Read More Link',

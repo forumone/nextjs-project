@@ -1,22 +1,22 @@
 import { Meta, StoryObj } from '@storybook/react';
-import SampleContent from '../../06-utility/storybook/SampleContent';
 import SiteContainerLayout from './SiteContainer';
-import siteContainerArgs from './site-container.yml';
+import siteContainerArgs from './siteContainerArgs';
 
 const meta: Meta<typeof SiteContainerLayout> = {
   title: 'Layouts/Site Container',
   component: SiteContainerLayout,
+  parameters: {
+    controls: {
+      exclude: ['children'],
+    },
+  },
 };
 
 type Story = StoryObj<typeof SiteContainerLayout>;
 
 const SiteContainer: Story = {
-  render: args => (
-    <SiteContainerLayout {...args}>
-      <SampleContent>Site Container Layout Content</SampleContent>
-    </SiteContainerLayout>
-  ),
   args: siteContainerArgs,
 };
+
 export default meta;
 export { SiteContainer };

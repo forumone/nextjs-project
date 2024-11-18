@@ -1,8 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
-import parse from 'html-react-parser';
 import HeroBgImage from './HeroBgImage';
 import styles from './hero-bg-image.module.css';
-import heroBgImageArgs from './hero-bg-image.yml';
+import heroBgImageArgs from './heroBgImageArgs';
 
 const meta: Meta<typeof HeroBgImage> = {
   title: 'Components/Hero/Hero With Background Image',
@@ -12,11 +11,7 @@ const meta: Meta<typeof HeroBgImage> = {
 
 type Story = StoryObj<typeof HeroBgImage>;
 const Default: Story = {
-  args: {
-    ...heroBgImageArgs,
-    summary: parse(heroBgImageArgs.summary),
-    heroImage: parse(heroBgImageArgs.heroImage),
-  },
+  args: heroBgImageArgs,
 };
 const Left: Story = {
   args: {

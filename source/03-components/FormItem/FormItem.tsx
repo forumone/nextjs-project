@@ -31,7 +31,7 @@ interface FormItemProps extends GessoComponent {
 type InputProps = Omit<FormItemProps, 'children'> &
   InputHTMLAttributes<HTMLInputElement>;
 type SelectProps = FormItemProps & SelectHTMLAttributes<HTMLSelectElement>;
-type TextareaProps = FormItemProps &
+type TextareaProps = Omit<FormItemProps, 'children'> &
   TextareaHTMLAttributes<HTMLTextAreaElement>;
 
 function FormItem({
@@ -234,3 +234,4 @@ function Textarea({
 
 export default FormItem;
 export { Input, Select, Textarea };
+export type { InputProps, SelectProps, TextareaProps };

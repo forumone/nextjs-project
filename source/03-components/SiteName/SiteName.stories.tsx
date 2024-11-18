@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { withGlobalWrapper } from '../../../.storybook/decorators';
 import SiteNameComponent from './SiteName';
-import siteNameArgs from './site-name.yml';
+import siteNameArgs from './siteNameArgs';
 
 const meta: Meta<typeof SiteNameComponent> = {
   title: 'Components/Site Name',

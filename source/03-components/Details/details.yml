@@ -1,7 +1,0 @@
----
-detailsSummary: 'Details summary'
-detailsDescription: 'Details description'
-modifierClasses: ''
-isRequired: false
-children: |-
-  <p>Details content</p>

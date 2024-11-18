@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 import SampleContent from '../../06-utility/storybook/SampleContent';
 import FooterLayout from './Footer';
-import footerArgs from './footer.yml';
+import footerArgs from './footerArgs';
 
 const meta: Meta<typeof FooterLayout> = {
   title: 'Layouts/Footer',

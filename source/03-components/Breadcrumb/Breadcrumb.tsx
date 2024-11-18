@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { GessoComponent } from 'gesso';
 import Link from 'next/link';
-import { ElementType } from 'react';
+import { ElementType, JSX } from 'react';
 import Constrain from '../../02-layouts/Constrain/Constrain';
 import styles from './breadcrumb.module.css';
 
@@ -58,3 +58,4 @@ function Breadcrumb({
 }
 
 export default Breadcrumb;
+export type { BreadcrumbProps, Crumbs };

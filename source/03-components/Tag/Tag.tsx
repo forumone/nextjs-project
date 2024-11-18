@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import Link from 'next/link';
+import { JSX } from 'react';
 import styles from './tag.module.css';
 
 interface TagProps {

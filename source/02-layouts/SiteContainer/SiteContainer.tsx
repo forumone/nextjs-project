@@ -1,5 +1,5 @@
 import { GessoComponent } from 'gesso';
-import { ReactNode } from 'react';
+import { JSX, ReactNode } from 'react';
 import styles from './site-container.module.css';
 
 interface SiteContainerProps extends GessoComponent {
@@ -11,3 +11,4 @@ function SiteContainer({ children }: SiteContainerProps): JSX.Element {
 }
 
 export default SiteContainer;
+export type { SiteContainerProps };

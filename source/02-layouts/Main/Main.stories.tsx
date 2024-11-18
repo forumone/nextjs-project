@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 import SampleContent from '../../06-utility/storybook/SampleContent';
 import MainLayout from './Main';
-import mainArgs from './main.yml';
+import mainArgs from './mainArgs';
 
 const meta: Meta<typeof MainLayout> = {
   title: 'Layouts/Main',

@@ -3,18 +3,19 @@
 import clsx from 'clsx';
 import { GessoComponent } from 'gesso';
 import {
+  JSX,
   KeyboardEventHandler,
   MouseEventHandler,
+  PropsWithChildren,
   useEffect,
   useId,
   useRef,
 } from 'react';
 import styles from './modal.module.css';
 
-interface ModalProps extends GessoComponent {
+interface ModalProps extends PropsWithChildren<GessoComponent> {
   id?: string;
   title?: string;
-  children: React.ReactNode;
   defaultOpen?: boolean;
 }
 
@@ -152,3 +153,4 @@ function Modal({
 }
 
 export default Modal;
+export type { ModalProps };

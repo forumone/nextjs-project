@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import ResponsiveTableComponent from './ResponsiveTable';
-import responsiveTableArgs from './responsive-table.yml';
+import responsiveTableArgs from './responsiveTableArgs';
 
 const meta: Meta<typeof ResponsiveTableComponent> = {
   title: 'Layouts/Responsive Table',

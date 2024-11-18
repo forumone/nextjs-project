@@ -1,9 +1,8 @@
 import { Meta, StoryObj } from '@storybook/react';
-import parse from 'html-react-parser';
 import { withGlobalWrapper } from '../../../.storybook/decorators';
 import FieldsetComponent from './Fieldset';
 import styles from './fieldset.module.css';
-import fieldsetArgs from './fieldset.yml';
+import fieldsetArgs from './fieldsetArgs';
 
 const meta: Meta<typeof FieldsetComponent> = {
   title: 'Components/Fieldset',
@@ -21,8 +20,6 @@ type Story = StoryObj<typeof FieldsetComponent>;
 const Fieldset: Story = {
   args: {
     ...fieldsetArgs,
-    description: parse(fieldsetArgs.description),
-    children: parse(fieldsetArgs.children),
     modifierClasses: styles['fieldset--default'],
   },
 };

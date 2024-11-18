@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { ConstrainComponent } from 'gesso';
-import { ReactNode } from 'react';
+import { JSX, ReactNode } from 'react';
 import Constrain from '../Constrain/Constrain';
 import styles from './footer.module.css';
 
@@ -27,3 +27,4 @@ function Footer({
 }
 
 export default Footer;
+export type { FooterProps };

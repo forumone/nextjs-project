@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { ComponentProps } from 'react';
+import { ComponentProps, JSX } from 'react';
 import styles from './button.module.css';
 
 interface SharedButtonProps {
@@ -23,13 +23,13 @@ type LinkProps = SharedButtonProps & ComponentProps<'a'>;
 /**
  * Primary UI component for user interaction
  */
-const Button = ({
+function Button({
   variant,
   styleSize = 'medium',
   label,
   type = 'button',
   ...props
-}: ButtonProps) => {
+}: ButtonProps): JSX.Element {
   return (
     <button
       type={type}
@@ -43,14 +43,14 @@ const Button = ({
       {label}
     </button>
   );
-};
+}
 
-const LinkButton = ({
+function LinkButton({
   variant,
   styleSize = 'medium',
   label,
   ...props
-}: LinkProps) => {
+}: LinkProps): JSX.Element {
   return (
     <a
       className={clsx(
@@ -63,7 +63,7 @@ const LinkButton = ({
       {label}
     </a>
   );
-};
+}
 
 export { Button, LinkButton };
 export type { ButtonProps, LinkProps, SharedButtonProps };

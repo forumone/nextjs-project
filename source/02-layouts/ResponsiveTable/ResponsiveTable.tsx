@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { GessoComponent } from 'gesso';
-import { ReactNode } from 'react';
+import { JSX, ReactNode } from 'react';
 import styles from './responsive-table.module.css';
 
 interface ResponsiveTableProps extends GessoComponent {
@@ -26,3 +26,4 @@ function ResponsiveTable({
 }
 
 export default ResponsiveTable;
+export type { ResponsiveTableProps };

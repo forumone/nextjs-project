@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 import SampleContent from '../../06-utility/storybook/SampleContent';
 import SidebarLayout from './Sidebar';
-import sidebarArgs from './sidebar.yml';
+import sidebarArgs from './sidebarArgs';
 
 const meta: Meta<typeof SidebarLayout> = {
   title: 'Layouts/Sidebar',

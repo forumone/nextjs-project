@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { GessoComponent } from 'gesso';
-import { ReactNode } from 'react';
+import { JSX, ReactNode } from 'react';
 import styles from './details.module.css';
 
 interface DetailsProps extends GessoComponent {
@@ -38,3 +38,4 @@ function Details({
 }
 
 export default Details;
+export type { DetailsProps };

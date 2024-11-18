@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { GessoComponent } from 'gesso';
+import { JSX } from 'react';
 import { MAIN_ID } from '../../00-config/constants';
 import styles from './skiplink.module.css';
 
@@ -24,3 +25,4 @@ function Skiplink({
 }
 
 export default Skiplink;
+export type { SkiplinkProps };

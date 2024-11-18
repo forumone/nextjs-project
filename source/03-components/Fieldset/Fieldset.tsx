@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { GessoComponent } from 'gesso';
-import { ReactNode } from 'react';
+import { JSX, ReactNode } from 'react';
 import styles from './fieldset.module.css';
 
 interface FieldsetProps extends GessoComponent {
@@ -66,3 +66,4 @@ function Fieldset({
 }
 
 export default Fieldset;
+export type { FieldsetProps };

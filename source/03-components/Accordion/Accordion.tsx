@@ -2,7 +2,7 @@
 
 import clsx from 'clsx';
 import { GessoComponent } from 'gesso';
-import { KeyboardEvent, createRef, useId, useMemo, useState } from 'react';
+import { JSX, KeyboardEvent, createRef, useId, useMemo, useState } from 'react';
 import getCssVar from '../../06-utility/getCssVar';
 import AccordionItem, { AccordionItemProps } from './AccordionItem';
 import styles from './accordion.module.css';
@@ -151,3 +151,4 @@ function Accordion({
 }
 
 export default Accordion;
+export type { AccordionProps };

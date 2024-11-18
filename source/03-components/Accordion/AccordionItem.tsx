@@ -2,15 +2,17 @@ import clsx from 'clsx';
 import { GessoComponent } from 'gesso';
 import {
   ElementType,
+  JSX,
   MouseEventHandler,
   ReactNode,
+  RefObject,
   useEffect,
   useRef,
 } from 'react';
 import { slideCollapse, slideExpand } from '../../06-utility/slide';
 import styles from './accordion-item.module.css';
 
-export interface AccordionItemProps extends GessoComponent {
+interface AccordionItemProps extends GessoComponent {
   id: string;
   title: string;
   content: ReactNode;
@@ -18,7 +20,7 @@ export interface AccordionItemProps extends GessoComponent {
   isOpen?: boolean;
   isStepList?: boolean;
   accordionSpeed?: string;
-  toggleRef?: React.RefObject<HTMLButtonElement>;
+  toggleRef?: RefObject<HTMLButtonElement>;
   handleClick?: MouseEventHandler;
 }
 
@@ -84,3 +86,4 @@ function AccordionItem({
 }
 
 export default AccordionItem;
+export type { AccordionItemProps };
