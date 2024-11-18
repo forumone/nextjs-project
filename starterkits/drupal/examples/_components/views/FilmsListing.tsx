@@ -3,11 +3,11 @@
  * Component to integrate a paginated view of films.
  */
 
+import Pager from '@/source/03-components/Pager/Pager';
 import ListingPage from '@/source/04-templates/ListingPage/ListingPage;';
 import { FragmentType, getFragmentData, graphql } from '@/types/__generated__';
 import entityIsType from '@/util/entityIsType';
 import { JSX, Suspense } from 'react';
-import Pager from '../../../../../source/03-components/Pager/pagerArgs';
 import FilmTeaser, { FilmTeaserFragment } from '../content/FilmTeaser';
 
 /**
