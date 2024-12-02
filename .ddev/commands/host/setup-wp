@@ -36,6 +36,6 @@ if [ ${DDEV_MUTAGEN_ENABLED} ]; then
   ddev mutagen sync || true
 fi
 
-INSTALL_PACKAGES=npm install --package-lock-only && npm ci && pm2 restart all
-
-ddev exec -s=frontend "${INSTALL_PACKAGES}" || ddev exec "${INSTALL_PACKAGES}"
+ddev exec -s=frontend "npm install --package-lock-only" || ddev exec "npm install --package-lock-only"
+ddev exec -s=frontend "npm ci" || ddev exec "npm ci"
+ddev exec -s=frontend "pm2 restart all" || ddev exec "pm2 restart all"
