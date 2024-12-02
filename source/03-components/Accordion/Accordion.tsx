@@ -9,11 +9,10 @@ import styles from './accordion.module.css';
 
 // The Accordion component provides props itself for the AccordionItems,
 // so omit those from the item objects.
-interface BaseAccordionItem
-  extends Omit<
-    AccordionItemProps,
-    'accordionSpeed' | 'handleClick' | 'isStepList' | 'toggleRef'
-  > {}
+type BaseAccordionItem = Omit<
+  AccordionItemProps,
+  'accordionSpeed' | 'handleClick' | 'isStepList' | 'toggleRef'
+>;
 
 interface AccordionProps extends GessoComponent {
   accordionItems: BaseAccordionItem[];
