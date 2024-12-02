@@ -1,8 +1,12 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 ## Description: Set up project for headless WordPress
 ## Usage: setup-wp
 ## Example: "ddev setup-wp"
+
+if [ -d "/${DDEV_APPROOT}/frontend" ]; then
+  cd "/${DDEV_APPROOT}/frontend" || exit ;
+fi
 
 if [ -e ./codegen.ts ] || [ -d ./app/api ]; then
   echo "WordPress setup can only be run once."
@@ -28,8 +32,10 @@ cp -r ./starterkits/wp/next.config.mjs ./
 cp -r ./starterkits/wp/possibleTypes.json ./
 
 # Block until file changes are in the web container...
-ddev mutagen sync || true
+if [ ${DDEV_MUTAGEN_ENABLED} ]; then
+  ddev mutagen sync || true
+fi
 
-ddev exec npm install --package-lock-only
-ddev exec npm ci
-ddev exec pm2 restart all
+INSTALL_PACKAGES=npm install --package-lock-only && npm ci && pm2 restart all
+
+ddev exec -s=frontend "${INSTALL_PACKAGES}" || ddev exec "${INSTALL_PACKAGES}"
