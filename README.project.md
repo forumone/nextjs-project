@@ -87,14 +87,14 @@ ddev nextjs icons
 ## Helpful commands
 
 ### Monitoring the applications
-If you want to monitor the status of `app` or `storybook`. Please use `ddev frontend monit`
+If you want to monitor the status of `next` or `storybook`. Please use `ddev frontend monit`
 
 ### Restarting a specific service
-If you want to restart `storybook` or `app`, please use the following:
+If you want to restart `storybook` or `next`, please use the following:
 
 `app`
 ```bash
-ddev frontend restart frontend
+ddev frontend restart next
 ```
 `storybook`
 ```bash
