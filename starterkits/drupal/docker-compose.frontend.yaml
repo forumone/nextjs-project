@@ -8,7 +8,7 @@ services:
       - 3000
       - 6006
     volumes:
-      - ./../next:/var/www/html/frontend:cached
+      - ./../frontend:/var/www/html/frontend:cached
       - ".:/mnt/ddev_config"
       - ddev-global-cache:/mnt/ddev-global-cache
     working_dir: /var/www/html/frontend
