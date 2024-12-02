@@ -39,3 +39,4 @@ function Article({
 }
 
 export default Article;
+export type { ArticleProps };
