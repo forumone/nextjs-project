@@ -1,7 +1,9 @@
+import LandingPageFull from '@/app/_components/content/LandingPageFull';
 import { graphql } from '@/types/__generated__';
 import {
   GetNodeByPathQuery,
   GetNodeByPathQueryVariables,
+  NodeLandingPage,
   NodePage,
 } from '@/types/__generated__/graphql';
 import {
@@ -10,6 +12,7 @@ import {
   routeIsInternal,
 } from '@/util/drupal/dataIsEntityType';
 import query from '@/util/drupal/query';
+import entityIsType from '@/util/entityIsType';
 import { draftMode } from 'next/headers';
 import { notFound } from 'next/navigation';
 import BasicPageFull from '../_components/content/BasicPageFull';
@@ -25,6 +28,7 @@ const getNodeByPath = graphql(`
             status
           }
           ...BasicPageFragment
+          ...LandingPageFragment
         }
       }
     }
@@ -42,10 +46,18 @@ async function NodeFull({ params }: { params: { slug: string[] } }) {
   if (
     !!data &&
     routeIsInternal(data.route) &&
-    entityExists<NodePage>(data.route.entity, 'NodePage') &&
+    (entityExists<NodePage>(data.route.entity, 'NodePage') ||
+      entityExists<NodeLandingPage>(data.route.entity, 'NodeLandingPage')) &&
     canShowEntity(data.route.entity, isEnabled)
   ) {
-    return <BasicPageFull entity={data.route.entity} />;
+    return entityIsType<NodeLandingPage>(
+      data.route.entity,
+      'NodeLandingPage',
+    ) ? (
+      <LandingPageFull entity={data.route.entity} />
+    ) : (
+      <BasicPageFull entity={data.route.entity} />
+    );
   } else {
     notFound();
   }
