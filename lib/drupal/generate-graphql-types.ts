@@ -10,9 +10,9 @@ import { resolve } from 'node:path';
 // @ts-ignore
 import codegenConfig from '../../codegen';
 // @ts-ignore
-import drupal from '../../util/drupal';
+import drupal from '../../util/drupal/drupal';
 // @ts-ignore
-import graphqlEndpoint from '../../util/graphqlEndpoint';
+import graphqlEndpoint from '../../util/drupal/graphqlEndpoint';
 
 async function generateGraphQLTypes() {
   try {

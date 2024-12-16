@@ -7,8 +7,15 @@ import getCssVar from '../../06-utility/getCssVar';
 import AccordionItem, { AccordionItemProps } from './AccordionItem';
 import styles from './accordion.module.css';
 
+// The Accordion component provides props itself for the AccordionItems,
+// so omit those from the item objects.
+type BaseAccordionItem = Omit<
+  AccordionItemProps,
+  'accordionSpeed' | 'handleClick' | 'isStepList' | 'toggleRef'
+>;
+
 interface AccordionProps extends GessoComponent {
-  accordionItems: AccordionItemProps[];
+  accordionItems: BaseAccordionItem[];
   accordionSpeed?: string;
   allowMultiple?: boolean;
   allowToggle?: boolean;
@@ -36,7 +43,7 @@ function Accordion({
     return refs;
   }, [accordionItemsStatus]);
 
-  const openAccordionItem = (items: AccordionItemProps[], index: number) => {
+  const openAccordionItem = (items: BaseAccordionItem[], index: number) => {
     return [
       ...items.slice(0, index),
       {
@@ -47,7 +54,7 @@ function Accordion({
     ];
   };
 
-  const closeAccordionItem = (items: AccordionItemProps[], index: number) => {
+  const closeAccordionItem = (items: BaseAccordionItem[], index: number) => {
     return [
       ...items.slice(0, index),
       {
