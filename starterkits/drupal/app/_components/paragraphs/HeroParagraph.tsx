@@ -6,12 +6,12 @@ const HeroParagraphFragment = graphql(`
   fragment HeroParagraphFragment on ParagraphHero {
     id
     heroAlignment
-    heroBody {
+    heroBody: wysiwyg {
       processed
     }
     heroHasOverlay
-    heroHeading
-    heroImage {
+    heroHeading: title
+    heroImage: mediaItem {
       ... on MediaImage {
         id
         name
@@ -23,7 +23,7 @@ const HeroParagraphFragment = graphql(`
         }
       }
     }
-    heroLink {
+    heroLink: link {
       title
       url
     }
