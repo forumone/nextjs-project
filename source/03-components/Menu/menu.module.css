@@ -14,4 +14,25 @@
 
   .subnav {
   }
+
+  .toggle {
+    @include text-button;
+
+    background-image: url('/images/menu-arrow-right.svg');
+    background-size: var(--spacing-3) var(--spacing-3);
+    block-size: calc(var(--spacing-3) + 2px);
+    border: 1px solid currentColor;
+    color: inherit;
+    display: block;
+    inline-size: calc(var(--spacing-3) + 2px);
+    inset-block-start: 50%;
+    inset-inline-end: var(--spacing-0-5);
+    position: absolute;
+    transform: translateY(-50%);
+
+    &:hover,
+    &:focus-visible {
+      background-color: var(--ui-background-darker);
+    }
+  }
 }

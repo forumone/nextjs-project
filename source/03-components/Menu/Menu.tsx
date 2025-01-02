@@ -8,6 +8,7 @@ import {
   ReactNode,
 } from 'react';
 import MenuLinks, { MenuLinksProps } from './MenuLinks';
+import styles from './menu.module.css';
 
 interface MenuItemProps {
   title: ReactNode;
@@ -34,12 +35,29 @@ interface MenuProps extends BaseMenuProps {
 const MenuLink = forwardRef<
   HTMLButtonElement | HTMLAnchorElement,
   MenuItemProps & Omit<HTMLAttributes<HTMLElement>, 'title'>
->(function MenuLink({ title, url, isButton, ...props }, ref): JSX.Element {
+>(function MenuLink(
+  { title, url, isButton, onClick, ...props },
+  ref,
+): JSX.Element {
   if (url === '<button>' || isButton) {
     return (
-      <button ref={ref as ForwardedRef<HTMLButtonElement>} {...props}>
+      <button
+        ref={ref as ForwardedRef<HTMLButtonElement>}
+        onClick={onClick}
+        {...props}
+      >
         {title}
       </button>
+    );
+  }
+  if (onClick) {
+    return (
+      <Link href={url} ref={ref as ForwardedRef<HTMLAnchorElement>} {...props}>
+        {title}
+        <button onClick={onClick} className={styles.toggle}>
+          <span className="u-visually-hidden">Toggle Subnav</span>
+        </button>
+      </Link>
     );
   }
   return (

@@ -31,7 +31,7 @@ const MenuListItem = forwardRef<
   ref,
 ): JSX.Element {
   const [hideSubnav, setHideSubnav] = useState(
-    showSubmenuOnHover || showSubmenuOnKeyUp || showSubmenuOnClick,
+    !!showSubmenuOnHover || !!showSubmenuOnKeyUp || !!showSubmenuOnClick,
   );
 
   if (!item.below) {
@@ -70,12 +70,10 @@ const MenuListItem = forwardRef<
         url={item.url}
         isButton={item.isButton}
         aria-expanded={hideSubnav ? 'false' : 'true'}
-        className={clsx(
-          styles.link,
-          linkClasses,
-          'has-subnav',
-          item.inActiveTrail && 'in-active-trail',
-        )}
+        className={clsx(styles.link, linkClasses, {
+          'has-subnav': menuLevel === 0 || !showSubmenuOnClick,
+          'in-active-trail': item.inActiveTrail,
+        })}
         onClick={
           showSubmenuOnClick ? () => setHideSubnav(prev => !prev) : undefined
         }
@@ -101,6 +99,9 @@ const MenuListItem = forwardRef<
         linkClasses={linkClasses}
         subnavClasses={subnavClasses}
         isVisible={!hideSubnav}
+        showSubmenuOnClick={showSubmenuOnClick}
+        showSubmenuOnHover={showSubmenuOnHover}
+        showSubmenuOnKeyUp={showSubmenuOnKeyUp}
       />
     </li>
   );
