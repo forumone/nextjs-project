@@ -4,7 +4,7 @@
  * shown on mobile.
  */
 
-import { MenuItem as GessoMenuItem } from '@/source/03-components/Menu/Menu';
+import { MenuItemProps as GessoMenuItem } from '@/source/03-components/Menu/Menu';
 import ResponsiveMenu from '@/source/03-components/Menu/ResponsiveMenu/ResponsiveMenu';
 import { FragmentType, getFragmentData, graphql } from '@/types/__generated__';
 import { prepMenuItems } from '@/util/prepMenuItems';

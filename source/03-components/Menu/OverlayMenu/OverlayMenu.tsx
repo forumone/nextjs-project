@@ -5,11 +5,11 @@ import { GessoComponent } from 'gesso';
 import { JSX, useCallback, useEffect, useId, useRef, useState } from 'react';
 import HamburgerButton from '../../HamburgerButton/HamburgerButton';
 import buttonStyles from '../../HamburgerButton/hamburger-button.module.css';
-import Menu, { MenuItem } from '../Menu';
+import Menu, { MenuItemProps } from '../Menu';
 import styles from './overlay-menu.module.css';
 
 interface OverlayMenuProps extends GessoComponent {
-  items: MenuItem[];
+  items: MenuItemProps[];
 }
 
 const focusableElementsString =

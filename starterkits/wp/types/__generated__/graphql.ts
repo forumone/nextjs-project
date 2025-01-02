@@ -2,22 +2,35 @@
 import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
-export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
+export type Exact<T extends { [key: string]: unknown }> = {
+  [K in keyof T]: T[K];
+};
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]?: Maybe<T[SubKey]>;
+};
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]: Maybe<T[SubKey]>;
+};
+export type MakeEmpty<
+  T extends { [key: string]: unknown },
+  K extends keyof T,
+> = { [_ in K]?: never };
+export type Incremental<T> =
+  | T
+  | {
+      [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never;
+    };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: { input: string; output: string; }
-  String: { input: string; output: string; }
-  Boolean: { input: boolean; output: boolean; }
-  Int: { input: number; output: number; }
-  Float: { input: number; output: number; }
+  ID: { input: string; output: string };
+  String: { input: string; output: string };
+  Boolean: { input: boolean; output: boolean };
+  Int: { input: number; output: number };
+  Float: { input: number; output: number };
   /** Generic Array Scalar Type */
-  BlockAttributesArray: { input: any; output: any; }
+  BlockAttributesArray: { input: any; output: any };
   /** Generic Object Scalar Type */
-  BlockAttributesObject: { input: any; output: any; }
+  BlockAttributesObject: { input: any; output: any };
 };
 
 /** Avatars are profile images for users. WordPress by default uses the Gravatar service to host and fetch avatars from. */
@@ -56,7 +69,7 @@ export enum AvatarRatingEnum {
   /** Indicates an R level avatar rating level. */
   R = 'R',
   /** Indicates an X level avatar rating level. */
-  X = 'X'
+  X = 'X',
 }
 
 /** Block that supports Anchor field */
@@ -66,66 +79,71 @@ export type BlockWithSupportsAnchor = {
 };
 
 /** The category type */
-export type Category = DatabaseIdentifier & HierarchicalNode & HierarchicalTermNode & MenuItemLinkable & Node & TermNode & UniformResourceIdentifiable & {
-  __typename?: 'Category';
-  /** The ancestors of the node. Default ordered as lowest (closest to the child) to highest (closest to the root). */
-  ancestors?: Maybe<CategoryToAncestorsCategoryConnection>;
-  /**
-   * The id field matches the WP_Post-&gt;ID field.
-   * @deprecated Deprecated in favor of databaseId
-   */
-  categoryId?: Maybe<Scalars['Int']['output']>;
-  /** Connection between the category type and its children categories. */
-  children?: Maybe<CategoryToCategoryConnection>;
-  /** @deprecated Deprecated in favor of using Next.js pages */
-  conditionalTags?: Maybe<ConditionalTags>;
-  /** Connection between the Category type and the ContentNode type */
-  contentNodes?: Maybe<CategoryToContentNodeConnection>;
-  /** The number of objects connected to the object */
-  count?: Maybe<Scalars['Int']['output']>;
-  /** The unique identifier stored in the database */
-  databaseId: Scalars['Int']['output'];
-  /** The description of the object */
-  description?: Maybe<Scalars['String']['output']>;
-  /** Connection between the TermNode type and the EnqueuedScript type */
-  enqueuedScripts?: Maybe<TermNodeToEnqueuedScriptConnection>;
-  /** Connection between the TermNode type and the EnqueuedStylesheet type */
-  enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
-  /** The globally unique ID for the object */
-  id: Scalars['ID']['output'];
-  /** Whether the node is a Content Node */
-  isContentNode: Scalars['Boolean']['output'];
-  /** Whether the object is restricted from the current viewer */
-  isRestricted?: Maybe<Scalars['Boolean']['output']>;
-  /** Whether the node is a Term */
-  isTermNode: Scalars['Boolean']['output'];
-  /** The link to the term */
-  link?: Maybe<Scalars['String']['output']>;
-  /** The human friendly name of the object. */
-  name?: Maybe<Scalars['String']['output']>;
-  /** Connection between the category type and its parent category. */
-  parent?: Maybe<CategoryToParentCategoryConnectionEdge>;
-  /** Database id of the parent node */
-  parentDatabaseId?: Maybe<Scalars['Int']['output']>;
-  /** The globally unique identifier of the parent node. */
-  parentId?: Maybe<Scalars['ID']['output']>;
-  /** Connection between the Category type and the post type */
-  posts?: Maybe<CategoryToPostConnection>;
-  /** An alphanumeric identifier for the object unique to its type. */
-  slug?: Maybe<Scalars['String']['output']>;
-  /** Connection between the Category type and the Taxonomy type */
-  taxonomy?: Maybe<CategoryToTaxonomyConnectionEdge>;
-  /** The name of the taxonomy that the object is associated with */
-  taxonomyName?: Maybe<Scalars['String']['output']>;
-  templates?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The ID of the term group that this term object belongs to */
-  termGroupId?: Maybe<Scalars['Int']['output']>;
-  /** The taxonomy ID that the object is associated with */
-  termTaxonomyId?: Maybe<Scalars['Int']['output']>;
-  /** The unique resource identifier path */
-  uri?: Maybe<Scalars['String']['output']>;
-};
-
+export type Category = DatabaseIdentifier &
+  HierarchicalNode &
+  HierarchicalTermNode &
+  MenuItemLinkable &
+  Node &
+  TermNode &
+  UniformResourceIdentifiable & {
+    __typename?: 'Category';
+    /** The ancestors of the node. Default ordered as lowest (closest to the child) to highest (closest to the root). */
+    ancestors?: Maybe<CategoryToAncestorsCategoryConnection>;
+    /**
+     * The id field matches the WP_Post-&gt;ID field.
+     * @deprecated Deprecated in favor of databaseId
+     */
+    categoryId?: Maybe<Scalars['Int']['output']>;
+    /** Connection between the category type and its children categories. */
+    children?: Maybe<CategoryToCategoryConnection>;
+    /** @deprecated Deprecated in favor of using Next.js pages */
+    conditionalTags?: Maybe<ConditionalTags>;
+    /** Connection between the Category type and the ContentNode type */
+    contentNodes?: Maybe<CategoryToContentNodeConnection>;
+    /** The number of objects connected to the object */
+    count?: Maybe<Scalars['Int']['output']>;
+    /** The unique identifier stored in the database */
+    databaseId: Scalars['Int']['output'];
+    /** The description of the object */
+    description?: Maybe<Scalars['String']['output']>;
+    /** Connection between the TermNode type and the EnqueuedScript type */
+    enqueuedScripts?: Maybe<TermNodeToEnqueuedScriptConnection>;
+    /** Connection between the TermNode type and the EnqueuedStylesheet type */
+    enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
+    /** The globally unique ID for the object */
+    id: Scalars['ID']['output'];
+    /** Whether the node is a Content Node */
+    isContentNode: Scalars['Boolean']['output'];
+    /** Whether the object is restricted from the current viewer */
+    isRestricted?: Maybe<Scalars['Boolean']['output']>;
+    /** Whether the node is a Term */
+    isTermNode: Scalars['Boolean']['output'];
+    /** The link to the term */
+    link?: Maybe<Scalars['String']['output']>;
+    /** The human friendly name of the object. */
+    name?: Maybe<Scalars['String']['output']>;
+    /** Connection between the category type and its parent category. */
+    parent?: Maybe<CategoryToParentCategoryConnectionEdge>;
+    /** Database id of the parent node */
+    parentDatabaseId?: Maybe<Scalars['Int']['output']>;
+    /** The globally unique identifier of the parent node. */
+    parentId?: Maybe<Scalars['ID']['output']>;
+    /** Connection between the Category type and the post type */
+    posts?: Maybe<CategoryToPostConnection>;
+    /** An alphanumeric identifier for the object unique to its type. */
+    slug?: Maybe<Scalars['String']['output']>;
+    /** Connection between the Category type and the Taxonomy type */
+    taxonomy?: Maybe<CategoryToTaxonomyConnectionEdge>;
+    /** The name of the taxonomy that the object is associated with */
+    taxonomyName?: Maybe<Scalars['String']['output']>;
+    templates?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The ID of the term group that this term object belongs to */
+    termGroupId?: Maybe<Scalars['Int']['output']>;
+    /** The taxonomy ID that the object is associated with */
+    termTaxonomyId?: Maybe<Scalars['Int']['output']>;
+    /** The unique resource identifier path */
+    uri?: Maybe<Scalars['String']['output']>;
+  };
 
 /** The category type */
 export type CategoryAncestorsArgs = {
@@ -134,7 +152,6 @@ export type CategoryAncestorsArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
 };
-
 
 /** The category type */
 export type CategoryChildrenArgs = {
@@ -145,7 +162,6 @@ export type CategoryChildrenArgs = {
   where?: InputMaybe<CategoryToCategoryConnectionWhereArgs>;
 };
 
-
 /** The category type */
 export type CategoryContentNodesArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -155,7 +171,6 @@ export type CategoryContentNodesArgs = {
   where?: InputMaybe<CategoryToContentNodeConnectionWhereArgs>;
 };
 
-
 /** The category type */
 export type CategoryEnqueuedScriptsArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -164,7 +179,6 @@ export type CategoryEnqueuedScriptsArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
 };
 
-
 /** The category type */
 export type CategoryEnqueuedStylesheetsArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -172,7 +186,6 @@ export type CategoryEnqueuedStylesheetsArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
 };
-
 
 /** The category type */
 export type CategoryPostsArgs = {
@@ -224,74 +237,83 @@ export enum CategoryIdType {
   /** Url friendly name of the node */
   Slug = 'SLUG',
   /** The URI for the node */
-  Uri = 'URI'
+  Uri = 'URI',
 }
 
 /** Connection between the Category type and the category type */
-export type CategoryToAncestorsCategoryConnection = CategoryConnection & Connection & {
-  __typename?: 'CategoryToAncestorsCategoryConnection';
-  /** Edges for the CategoryToAncestorsCategoryConnection connection */
-  edges: Array<CategoryToAncestorsCategoryConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<Category>;
-  /** Information about pagination in a connection. */
-  pageInfo: CategoryToAncestorsCategoryConnectionPageInfo;
-};
+export type CategoryToAncestorsCategoryConnection = CategoryConnection &
+  Connection & {
+    __typename?: 'CategoryToAncestorsCategoryConnection';
+    /** Edges for the CategoryToAncestorsCategoryConnection connection */
+    edges: Array<CategoryToAncestorsCategoryConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<Category>;
+    /** Information about pagination in a connection. */
+    pageInfo: CategoryToAncestorsCategoryConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type CategoryToAncestorsCategoryConnectionEdge = CategoryConnectionEdge & Edge & {
-  __typename?: 'CategoryToAncestorsCategoryConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: Category;
-};
+export type CategoryToAncestorsCategoryConnectionEdge = CategoryConnectionEdge &
+  Edge & {
+    __typename?: 'CategoryToAncestorsCategoryConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: Category;
+  };
 
 /** Page Info on the &quot;CategoryToAncestorsCategoryConnection&quot; */
-export type CategoryToAncestorsCategoryConnectionPageInfo = CategoryConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'CategoryToAncestorsCategoryConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type CategoryToAncestorsCategoryConnectionPageInfo =
+  CategoryConnectionPageInfo &
+    PageInfo &
+    WpPageInfo & {
+      __typename?: 'CategoryToAncestorsCategoryConnectionPageInfo';
+      /** When paginating forwards, the cursor to continue. */
+      endCursor?: Maybe<Scalars['String']['output']>;
+      /** When paginating forwards, are there more items? */
+      hasNextPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, are there more items? */
+      hasPreviousPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, the cursor to continue. */
+      startCursor?: Maybe<Scalars['String']['output']>;
+    };
 
 /** Connection between the Category type and the category type */
-export type CategoryToCategoryConnection = CategoryConnection & Connection & {
-  __typename?: 'CategoryToCategoryConnection';
-  /** Edges for the CategoryToCategoryConnection connection */
-  edges: Array<CategoryToCategoryConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<Category>;
-  /** Information about pagination in a connection. */
-  pageInfo: CategoryToCategoryConnectionPageInfo;
-};
+export type CategoryToCategoryConnection = CategoryConnection &
+  Connection & {
+    __typename?: 'CategoryToCategoryConnection';
+    /** Edges for the CategoryToCategoryConnection connection */
+    edges: Array<CategoryToCategoryConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<Category>;
+    /** Information about pagination in a connection. */
+    pageInfo: CategoryToCategoryConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type CategoryToCategoryConnectionEdge = CategoryConnectionEdge & Edge & {
-  __typename?: 'CategoryToCategoryConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: Category;
-};
+export type CategoryToCategoryConnectionEdge = CategoryConnectionEdge &
+  Edge & {
+    __typename?: 'CategoryToCategoryConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: Category;
+  };
 
 /** Page Info on the &quot;CategoryToCategoryConnection&quot; */
-export type CategoryToCategoryConnectionPageInfo = CategoryConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'CategoryToCategoryConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type CategoryToCategoryConnectionPageInfo = CategoryConnectionPageInfo &
+  PageInfo &
+  WpPageInfo & {
+    __typename?: 'CategoryToCategoryConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Arguments for filtering the CategoryToCategoryConnection connection */
 export type CategoryToCategoryConnectionWhereArgs = {
@@ -340,37 +362,42 @@ export type CategoryToCategoryConnectionWhereArgs = {
 };
 
 /** Connection between the Category type and the ContentNode type */
-export type CategoryToContentNodeConnection = Connection & ContentNodeConnection & {
-  __typename?: 'CategoryToContentNodeConnection';
-  /** Edges for the CategoryToContentNodeConnection connection */
-  edges: Array<CategoryToContentNodeConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<ContentNode>;
-  /** Information about pagination in a connection. */
-  pageInfo: CategoryToContentNodeConnectionPageInfo;
-};
+export type CategoryToContentNodeConnection = Connection &
+  ContentNodeConnection & {
+    __typename?: 'CategoryToContentNodeConnection';
+    /** Edges for the CategoryToContentNodeConnection connection */
+    edges: Array<CategoryToContentNodeConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<ContentNode>;
+    /** Information about pagination in a connection. */
+    pageInfo: CategoryToContentNodeConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type CategoryToContentNodeConnectionEdge = ContentNodeConnectionEdge & Edge & {
-  __typename?: 'CategoryToContentNodeConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: ContentNode;
-};
+export type CategoryToContentNodeConnectionEdge = ContentNodeConnectionEdge &
+  Edge & {
+    __typename?: 'CategoryToContentNodeConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: ContentNode;
+  };
 
 /** Page Info on the &quot;CategoryToContentNodeConnection&quot; */
-export type CategoryToContentNodeConnectionPageInfo = ContentNodeConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'CategoryToContentNodeConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type CategoryToContentNodeConnectionPageInfo =
+  ContentNodeConnectionPageInfo &
+    PageInfo &
+    WpPageInfo & {
+      __typename?: 'CategoryToContentNodeConnectionPageInfo';
+      /** When paginating forwards, the cursor to continue. */
+      endCursor?: Maybe<Scalars['String']['output']>;
+      /** When paginating forwards, are there more items? */
+      hasNextPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, are there more items? */
+      hasPreviousPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, the cursor to continue. */
+      startCursor?: Maybe<Scalars['String']['output']>;
+    };
 
 /** Arguments for filtering the CategoryToContentNodeConnection connection */
 export type CategoryToContentNodeConnectionWhereArgs = {
@@ -413,46 +440,52 @@ export type CategoryToContentNodeConnectionWhereArgs = {
 };
 
 /** Connection between the Category type and the category type */
-export type CategoryToParentCategoryConnectionEdge = CategoryConnectionEdge & Edge & OneToOneConnection & {
-  __typename?: 'CategoryToParentCategoryConnectionEdge';
-  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The node of the connection, without the edges */
-  node: Category;
-};
+export type CategoryToParentCategoryConnectionEdge = CategoryConnectionEdge &
+  Edge &
+  OneToOneConnection & {
+    __typename?: 'CategoryToParentCategoryConnectionEdge';
+    /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The node of the connection, without the edges */
+    node: Category;
+  };
 
 /** Connection between the Category type and the post type */
-export type CategoryToPostConnection = Connection & PostConnection & {
-  __typename?: 'CategoryToPostConnection';
-  /** Edges for the CategoryToPostConnection connection */
-  edges: Array<CategoryToPostConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<Post>;
-  /** Information about pagination in a connection. */
-  pageInfo: CategoryToPostConnectionPageInfo;
-};
+export type CategoryToPostConnection = Connection &
+  PostConnection & {
+    __typename?: 'CategoryToPostConnection';
+    /** Edges for the CategoryToPostConnection connection */
+    edges: Array<CategoryToPostConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<Post>;
+    /** Information about pagination in a connection. */
+    pageInfo: CategoryToPostConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type CategoryToPostConnectionEdge = Edge & PostConnectionEdge & {
-  __typename?: 'CategoryToPostConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: Post;
-};
+export type CategoryToPostConnectionEdge = Edge &
+  PostConnectionEdge & {
+    __typename?: 'CategoryToPostConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: Post;
+  };
 
 /** Page Info on the &quot;CategoryToPostConnection&quot; */
-export type CategoryToPostConnectionPageInfo = PageInfo & PostConnectionPageInfo & WpPageInfo & {
-  __typename?: 'CategoryToPostConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type CategoryToPostConnectionPageInfo = PageInfo &
+  PostConnectionPageInfo &
+  WpPageInfo & {
+    __typename?: 'CategoryToPostConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Arguments for filtering the CategoryToPostConnection connection */
 export type CategoryToPostConnectionWhereArgs = {
@@ -521,75 +554,75 @@ export type CategoryToPostConnectionWhereArgs = {
 };
 
 /** Connection between the Category type and the Taxonomy type */
-export type CategoryToTaxonomyConnectionEdge = Edge & OneToOneConnection & TaxonomyConnectionEdge & {
-  __typename?: 'CategoryToTaxonomyConnectionEdge';
-  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The node of the connection, without the edges */
-  node: Taxonomy;
-};
+export type CategoryToTaxonomyConnectionEdge = Edge &
+  OneToOneConnection &
+  TaxonomyConnectionEdge & {
+    __typename?: 'CategoryToTaxonomyConnectionEdge';
+    /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The node of the connection, without the edges */
+    node: Taxonomy;
+  };
 
 /** A Comment object */
-export type Comment = DatabaseIdentifier & Node & {
-  __typename?: 'Comment';
-  /** User agent used to post the comment. This field is equivalent to WP_Comment-&gt;comment_agent and the value matching the &quot;comment_agent&quot; column in SQL. */
-  agent?: Maybe<Scalars['String']['output']>;
-  /**
-   * The approval status of the comment. This field is equivalent to WP_Comment-&gt;comment_approved and the value matching the &quot;comment_approved&quot; column in SQL.
-   * @deprecated Deprecated in favor of the `status` field
-   */
-  approved?: Maybe<Scalars['Boolean']['output']>;
-  /** The author of the comment */
-  author?: Maybe<CommentToCommenterConnectionEdge>;
-  /** IP address for the author. This field is equivalent to WP_Comment-&gt;comment_author_IP and the value matching the &quot;comment_author_IP&quot; column in SQL. */
-  authorIp?: Maybe<Scalars['String']['output']>;
-  /**
-   * ID for the comment, unique among comments.
-   * @deprecated Deprecated in favor of databaseId
-   */
-  commentId?: Maybe<Scalars['Int']['output']>;
-  /** Connection between the Comment type and the ContentNode type */
-  commentedOn?: Maybe<CommentToContentNodeConnectionEdge>;
-  /** Content of the comment. This field is equivalent to WP_Comment-&gt;comment_content and the value matching the &quot;comment_content&quot; column in SQL. */
-  content?: Maybe<Scalars['String']['output']>;
-  /** The unique identifier stored in the database */
-  databaseId: Scalars['Int']['output'];
-  /** Date the comment was posted in local time. This field is equivalent to WP_Comment-&gt;date and the value matching the &quot;date&quot; column in SQL. */
-  date?: Maybe<Scalars['String']['output']>;
-  /** Date the comment was posted in GMT. This field is equivalent to WP_Comment-&gt;date_gmt and the value matching the &quot;date_gmt&quot; column in SQL. */
-  dateGmt?: Maybe<Scalars['String']['output']>;
-  /** The globally unique identifier for the comment object */
-  id: Scalars['ID']['output'];
-  /** Whether the object is restricted from the current viewer */
-  isRestricted?: Maybe<Scalars['Boolean']['output']>;
-  /** Karma value for the comment. This field is equivalent to WP_Comment-&gt;comment_karma and the value matching the &quot;comment_karma&quot; column in SQL. */
-  karma?: Maybe<Scalars['Int']['output']>;
-  /** Connection between the Comment type and the Comment type */
-  parent?: Maybe<CommentToParentCommentConnectionEdge>;
-  /** The database id of the parent comment node or null if it is the root comment */
-  parentDatabaseId?: Maybe<Scalars['Int']['output']>;
-  /** The globally unique identifier of the parent comment node. */
-  parentId?: Maybe<Scalars['ID']['output']>;
-  /** Connection between the Comment type and the Comment type */
-  replies?: Maybe<CommentToCommentConnection>;
-  /** The approval status of the comment. This field is equivalent to WP_Comment-&gt;comment_approved and the value matching the &quot;comment_approved&quot; column in SQL. */
-  status?: Maybe<CommentStatusEnum>;
-  /** Type of comment. This field is equivalent to WP_Comment-&gt;comment_type and the value matching the &quot;comment_type&quot; column in SQL. */
-  type?: Maybe<Scalars['String']['output']>;
-};
-
+export type Comment = DatabaseIdentifier &
+  Node & {
+    __typename?: 'Comment';
+    /** User agent used to post the comment. This field is equivalent to WP_Comment-&gt;comment_agent and the value matching the &quot;comment_agent&quot; column in SQL. */
+    agent?: Maybe<Scalars['String']['output']>;
+    /**
+     * The approval status of the comment. This field is equivalent to WP_Comment-&gt;comment_approved and the value matching the &quot;comment_approved&quot; column in SQL.
+     * @deprecated Deprecated in favor of the `status` field
+     */
+    approved?: Maybe<Scalars['Boolean']['output']>;
+    /** The author of the comment */
+    author?: Maybe<CommentToCommenterConnectionEdge>;
+    /** IP address for the author. This field is equivalent to WP_Comment-&gt;comment_author_IP and the value matching the &quot;comment_author_IP&quot; column in SQL. */
+    authorIp?: Maybe<Scalars['String']['output']>;
+    /**
+     * ID for the comment, unique among comments.
+     * @deprecated Deprecated in favor of databaseId
+     */
+    commentId?: Maybe<Scalars['Int']['output']>;
+    /** Connection between the Comment type and the ContentNode type */
+    commentedOn?: Maybe<CommentToContentNodeConnectionEdge>;
+    /** Content of the comment. This field is equivalent to WP_Comment-&gt;comment_content and the value matching the &quot;comment_content&quot; column in SQL. */
+    content?: Maybe<Scalars['String']['output']>;
+    /** The unique identifier stored in the database */
+    databaseId: Scalars['Int']['output'];
+    /** Date the comment was posted in local time. This field is equivalent to WP_Comment-&gt;date and the value matching the &quot;date&quot; column in SQL. */
+    date?: Maybe<Scalars['String']['output']>;
+    /** Date the comment was posted in GMT. This field is equivalent to WP_Comment-&gt;date_gmt and the value matching the &quot;date_gmt&quot; column in SQL. */
+    dateGmt?: Maybe<Scalars['String']['output']>;
+    /** The globally unique identifier for the comment object */
+    id: Scalars['ID']['output'];
+    /** Whether the object is restricted from the current viewer */
+    isRestricted?: Maybe<Scalars['Boolean']['output']>;
+    /** Karma value for the comment. This field is equivalent to WP_Comment-&gt;comment_karma and the value matching the &quot;comment_karma&quot; column in SQL. */
+    karma?: Maybe<Scalars['Int']['output']>;
+    /** Connection between the Comment type and the Comment type */
+    parent?: Maybe<CommentToParentCommentConnectionEdge>;
+    /** The database id of the parent comment node or null if it is the root comment */
+    parentDatabaseId?: Maybe<Scalars['Int']['output']>;
+    /** The globally unique identifier of the parent comment node. */
+    parentId?: Maybe<Scalars['ID']['output']>;
+    /** Connection between the Comment type and the Comment type */
+    replies?: Maybe<CommentToCommentConnection>;
+    /** The approval status of the comment. This field is equivalent to WP_Comment-&gt;comment_approved and the value matching the &quot;comment_approved&quot; column in SQL. */
+    status?: Maybe<CommentStatusEnum>;
+    /** Type of comment. This field is equivalent to WP_Comment-&gt;comment_type and the value matching the &quot;comment_type&quot; column in SQL. */
+    type?: Maybe<Scalars['String']['output']>;
+  };
 
 /** A Comment object */
 export type CommentContentArgs = {
   format?: InputMaybe<PostObjectFieldFormatEnum>;
 };
 
-
 /** A Comment object */
 export type CommentParentArgs = {
   where?: InputMaybe<CommentToParentCommentConnectionWhereArgs>;
 };
-
 
 /** A Comment object */
 export type CommentRepliesArgs = {
@@ -601,24 +634,25 @@ export type CommentRepliesArgs = {
 };
 
 /** A Comment Author object */
-export type CommentAuthor = Commenter & DatabaseIdentifier & Node & {
-  __typename?: 'CommentAuthor';
-  /** Avatar object for user. The avatar object can be retrieved in different sizes by specifying the size argument. */
-  avatar?: Maybe<Avatar>;
-  /** The unique identifier stored in the database */
-  databaseId: Scalars['Int']['output'];
-  /** The email for the comment author */
-  email?: Maybe<Scalars['String']['output']>;
-  /** The globally unique identifier for the comment author object */
-  id: Scalars['ID']['output'];
-  /** Whether the object is restricted from the current viewer */
-  isRestricted?: Maybe<Scalars['Boolean']['output']>;
-  /** The name for the comment author. */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The url the comment author. */
-  url?: Maybe<Scalars['String']['output']>;
-};
-
+export type CommentAuthor = Commenter &
+  DatabaseIdentifier &
+  Node & {
+    __typename?: 'CommentAuthor';
+    /** Avatar object for user. The avatar object can be retrieved in different sizes by specifying the size argument. */
+    avatar?: Maybe<Avatar>;
+    /** The unique identifier stored in the database */
+    databaseId: Scalars['Int']['output'];
+    /** The email for the comment author */
+    email?: Maybe<Scalars['String']['output']>;
+    /** The globally unique identifier for the comment author object */
+    id: Scalars['ID']['output'];
+    /** Whether the object is restricted from the current viewer */
+    isRestricted?: Maybe<Scalars['Boolean']['output']>;
+    /** The name for the comment author. */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The url the comment author. */
+    url?: Maybe<Scalars['String']['output']>;
+  };
 
 /** A Comment Author object */
 export type CommentAuthorAvatarArgs = {
@@ -662,7 +696,7 @@ export enum CommentNodeIdTypeEnum {
   /** Identify a resource by the Database ID. */
   DatabaseId = 'DATABASE_ID',
   /** Identify a resource by the (hashed) Global ID. */
-  Id = 'ID'
+  Id = 'ID',
 }
 
 /** The status of the comment object. */
@@ -674,41 +708,45 @@ export enum CommentStatusEnum {
   /** Comments with the Spam status */
   Spam = 'SPAM',
   /** Comments with the Trash status */
-  Trash = 'TRASH'
+  Trash = 'TRASH',
 }
 
 /** Connection between the Comment type and the Comment type */
-export type CommentToCommentConnection = CommentConnection & Connection & {
-  __typename?: 'CommentToCommentConnection';
-  /** Edges for the CommentToCommentConnection connection */
-  edges: Array<CommentToCommentConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<Comment>;
-  /** Information about pagination in a connection. */
-  pageInfo: CommentToCommentConnectionPageInfo;
-};
+export type CommentToCommentConnection = CommentConnection &
+  Connection & {
+    __typename?: 'CommentToCommentConnection';
+    /** Edges for the CommentToCommentConnection connection */
+    edges: Array<CommentToCommentConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<Comment>;
+    /** Information about pagination in a connection. */
+    pageInfo: CommentToCommentConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type CommentToCommentConnectionEdge = CommentConnectionEdge & Edge & {
-  __typename?: 'CommentToCommentConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: Comment;
-};
+export type CommentToCommentConnectionEdge = CommentConnectionEdge &
+  Edge & {
+    __typename?: 'CommentToCommentConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: Comment;
+  };
 
 /** Page Info on the &quot;CommentToCommentConnection&quot; */
-export type CommentToCommentConnectionPageInfo = CommentConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'CommentToCommentConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type CommentToCommentConnectionPageInfo = CommentConnectionPageInfo &
+  PageInfo &
+  WpPageInfo & {
+    __typename?: 'CommentToCommentConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Arguments for filtering the CommentToCommentConnection connection */
 export type CommentToCommentConnectionWhereArgs = {
@@ -773,31 +811,37 @@ export type CommentToCommentConnectionWhereArgs = {
 };
 
 /** Connection between the Comment type and the Commenter type */
-export type CommentToCommenterConnectionEdge = CommenterConnectionEdge & Edge & OneToOneConnection & {
-  __typename?: 'CommentToCommenterConnectionEdge';
-  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The node of the connection, without the edges */
-  node: Commenter;
-};
+export type CommentToCommenterConnectionEdge = CommenterConnectionEdge &
+  Edge &
+  OneToOneConnection & {
+    __typename?: 'CommentToCommenterConnectionEdge';
+    /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The node of the connection, without the edges */
+    node: Commenter;
+  };
 
 /** Connection between the Comment type and the ContentNode type */
-export type CommentToContentNodeConnectionEdge = ContentNodeConnectionEdge & Edge & OneToOneConnection & {
-  __typename?: 'CommentToContentNodeConnectionEdge';
-  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The node of the connection, without the edges */
-  node: ContentNode;
-};
+export type CommentToContentNodeConnectionEdge = ContentNodeConnectionEdge &
+  Edge &
+  OneToOneConnection & {
+    __typename?: 'CommentToContentNodeConnectionEdge';
+    /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The node of the connection, without the edges */
+    node: ContentNode;
+  };
 
 /** Connection between the Comment type and the Comment type */
-export type CommentToParentCommentConnectionEdge = CommentConnectionEdge & Edge & OneToOneConnection & {
-  __typename?: 'CommentToParentCommentConnectionEdge';
-  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The node of the connection, without the edges */
-  node: Comment;
-};
+export type CommentToParentCommentConnectionEdge = CommentConnectionEdge &
+  Edge &
+  OneToOneConnection & {
+    __typename?: 'CommentToParentCommentConnectionEdge';
+    /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The node of the connection, without the edges */
+    node: Comment;
+  };
 
 /** Arguments for filtering the CommentToParentCommentConnection connection */
 export type CommentToParentCommentConnectionWhereArgs = {
@@ -920,7 +964,7 @@ export enum CommentsConnectionOrderbyEnum {
   /** Order by the the type of comment, such as 'comment', 'pingback', or 'trackback'. */
   CommentType = 'COMMENT_TYPE',
   /** Order by the user ID. */
-  UserId = 'USER_ID'
+  UserId = 'USER_ID',
 }
 
 /** GraphQL representation of WordPress Conditional Tags. */
@@ -1107,7 +1151,6 @@ export type ContentNode = {
   uri?: Maybe<Scalars['String']['output']>;
 };
 
-
 /** Nodes used to manage content */
 export type ContentNodeEnqueuedScriptsArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -1115,7 +1158,6 @@ export type ContentNodeEnqueuedScriptsArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
 };
-
 
 /** Nodes used to manage content */
 export type ContentNodeEnqueuedStylesheetsArgs = {
@@ -1162,103 +1204,119 @@ export enum ContentNodeIdTypeEnum {
   /** Identify a resource by the (hashed) Global ID. */
   Id = 'ID',
   /** Identify a resource by the URI. */
-  Uri = 'URI'
+  Uri = 'URI',
 }
 
 /** Connection between the ContentNode type and the ContentType type */
-export type ContentNodeToContentTypeConnectionEdge = ContentTypeConnectionEdge & Edge & OneToOneConnection & {
-  __typename?: 'ContentNodeToContentTypeConnectionEdge';
-  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The node of the connection, without the edges */
-  node: ContentType;
-};
+export type ContentNodeToContentTypeConnectionEdge = ContentTypeConnectionEdge &
+  Edge &
+  OneToOneConnection & {
+    __typename?: 'ContentNodeToContentTypeConnectionEdge';
+    /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The node of the connection, without the edges */
+    node: ContentType;
+  };
 
 /** Connection between the ContentNode type and the User type */
-export type ContentNodeToEditLastConnectionEdge = Edge & OneToOneConnection & UserConnectionEdge & {
-  __typename?: 'ContentNodeToEditLastConnectionEdge';
-  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The node of the connection, without the edges */
-  node: User;
-};
+export type ContentNodeToEditLastConnectionEdge = Edge &
+  OneToOneConnection &
+  UserConnectionEdge & {
+    __typename?: 'ContentNodeToEditLastConnectionEdge';
+    /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The node of the connection, without the edges */
+    node: User;
+  };
 
 /** Connection between the ContentNode type and the User type */
-export type ContentNodeToEditLockConnectionEdge = Edge & OneToOneConnection & UserConnectionEdge & {
-  __typename?: 'ContentNodeToEditLockConnectionEdge';
-  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The timestamp for when the node was last edited */
-  lockTimestamp?: Maybe<Scalars['String']['output']>;
-  /** The node of the connection, without the edges */
-  node: User;
-};
+export type ContentNodeToEditLockConnectionEdge = Edge &
+  OneToOneConnection &
+  UserConnectionEdge & {
+    __typename?: 'ContentNodeToEditLockConnectionEdge';
+    /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The timestamp for when the node was last edited */
+    lockTimestamp?: Maybe<Scalars['String']['output']>;
+    /** The node of the connection, without the edges */
+    node: User;
+  };
 
 /** Connection between the ContentNode type and the EnqueuedScript type */
-export type ContentNodeToEnqueuedScriptConnection = Connection & EnqueuedScriptConnection & {
-  __typename?: 'ContentNodeToEnqueuedScriptConnection';
-  /** Edges for the ContentNodeToEnqueuedScriptConnection connection */
-  edges: Array<ContentNodeToEnqueuedScriptConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<EnqueuedScript>;
-  /** Information about pagination in a connection. */
-  pageInfo: ContentNodeToEnqueuedScriptConnectionPageInfo;
-};
+export type ContentNodeToEnqueuedScriptConnection = Connection &
+  EnqueuedScriptConnection & {
+    __typename?: 'ContentNodeToEnqueuedScriptConnection';
+    /** Edges for the ContentNodeToEnqueuedScriptConnection connection */
+    edges: Array<ContentNodeToEnqueuedScriptConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<EnqueuedScript>;
+    /** Information about pagination in a connection. */
+    pageInfo: ContentNodeToEnqueuedScriptConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type ContentNodeToEnqueuedScriptConnectionEdge = Edge & EnqueuedScriptConnectionEdge & {
-  __typename?: 'ContentNodeToEnqueuedScriptConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: EnqueuedScript;
-};
+export type ContentNodeToEnqueuedScriptConnectionEdge = Edge &
+  EnqueuedScriptConnectionEdge & {
+    __typename?: 'ContentNodeToEnqueuedScriptConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: EnqueuedScript;
+  };
 
 /** Page Info on the &quot;ContentNodeToEnqueuedScriptConnection&quot; */
-export type ContentNodeToEnqueuedScriptConnectionPageInfo = EnqueuedScriptConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'ContentNodeToEnqueuedScriptConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type ContentNodeToEnqueuedScriptConnectionPageInfo =
+  EnqueuedScriptConnectionPageInfo &
+    PageInfo &
+    WpPageInfo & {
+      __typename?: 'ContentNodeToEnqueuedScriptConnectionPageInfo';
+      /** When paginating forwards, the cursor to continue. */
+      endCursor?: Maybe<Scalars['String']['output']>;
+      /** When paginating forwards, are there more items? */
+      hasNextPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, are there more items? */
+      hasPreviousPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, the cursor to continue. */
+      startCursor?: Maybe<Scalars['String']['output']>;
+    };
 
 /** Connection between the ContentNode type and the EnqueuedStylesheet type */
-export type ContentNodeToEnqueuedStylesheetConnection = Connection & EnqueuedStylesheetConnection & {
-  __typename?: 'ContentNodeToEnqueuedStylesheetConnection';
-  /** Edges for the ContentNodeToEnqueuedStylesheetConnection connection */
-  edges: Array<ContentNodeToEnqueuedStylesheetConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<EnqueuedStylesheet>;
-  /** Information about pagination in a connection. */
-  pageInfo: ContentNodeToEnqueuedStylesheetConnectionPageInfo;
-};
+export type ContentNodeToEnqueuedStylesheetConnection = Connection &
+  EnqueuedStylesheetConnection & {
+    __typename?: 'ContentNodeToEnqueuedStylesheetConnection';
+    /** Edges for the ContentNodeToEnqueuedStylesheetConnection connection */
+    edges: Array<ContentNodeToEnqueuedStylesheetConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<EnqueuedStylesheet>;
+    /** Information about pagination in a connection. */
+    pageInfo: ContentNodeToEnqueuedStylesheetConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type ContentNodeToEnqueuedStylesheetConnectionEdge = Edge & EnqueuedStylesheetConnectionEdge & {
-  __typename?: 'ContentNodeToEnqueuedStylesheetConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: EnqueuedStylesheet;
-};
+export type ContentNodeToEnqueuedStylesheetConnectionEdge = Edge &
+  EnqueuedStylesheetConnectionEdge & {
+    __typename?: 'ContentNodeToEnqueuedStylesheetConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: EnqueuedStylesheet;
+  };
 
 /** Page Info on the &quot;ContentNodeToEnqueuedStylesheetConnection&quot; */
-export type ContentNodeToEnqueuedStylesheetConnectionPageInfo = EnqueuedStylesheetConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'ContentNodeToEnqueuedStylesheetConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type ContentNodeToEnqueuedStylesheetConnectionPageInfo =
+  EnqueuedStylesheetConnectionPageInfo &
+    PageInfo &
+    WpPageInfo & {
+      __typename?: 'ContentNodeToEnqueuedStylesheetConnectionPageInfo';
+      /** When paginating forwards, the cursor to continue. */
+      endCursor?: Maybe<Scalars['String']['output']>;
+      /** When paginating forwards, are there more items? */
+      hasNextPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, are there more items? */
+      hasPreviousPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, the cursor to continue. */
+      startCursor?: Maybe<Scalars['String']['output']>;
+    };
 
 /** The template assigned to a node of content */
 export type ContentTemplate = {
@@ -1267,77 +1325,77 @@ export type ContentTemplate = {
 };
 
 /** An Post Type object */
-export type ContentType = Node & UniformResourceIdentifiable & {
-  __typename?: 'ContentType';
-  /** Whether this content type should can be exported. */
-  canExport?: Maybe<Scalars['Boolean']['output']>;
-  /** @deprecated Deprecated in favor of using Next.js pages */
-  conditionalTags?: Maybe<ConditionalTags>;
-  /** Connection between the ContentType type and the Taxonomy type */
-  connectedTaxonomies?: Maybe<ContentTypeToTaxonomyConnection>;
-  /** Connection between the ContentType type and the ContentNode type */
-  contentNodes?: Maybe<ContentTypeToContentNodeConnection>;
-  /** Whether content of this type should be deleted when the author of it is deleted from the system. */
-  deleteWithUser?: Maybe<Scalars['Boolean']['output']>;
-  /** Description of the content type. */
-  description?: Maybe<Scalars['String']['output']>;
-  /** Whether to exclude nodes of this content type from front end search results. */
-  excludeFromSearch?: Maybe<Scalars['Boolean']['output']>;
-  /** The plural name of the content type within the GraphQL Schema. */
-  graphqlPluralName?: Maybe<Scalars['String']['output']>;
-  /** The singular name of the content type within the GraphQL Schema. */
-  graphqlSingleName?: Maybe<Scalars['String']['output']>;
-  /** Whether this content type should have archives. Content archives are generated by type and by date. */
-  hasArchive?: Maybe<Scalars['Boolean']['output']>;
-  /** Whether the content type is hierarchical, for example pages. */
-  hierarchical?: Maybe<Scalars['Boolean']['output']>;
-  /** The globally unique identifier of the post-type object. */
-  id: Scalars['ID']['output'];
-  /** Whether the node is a Content Node */
-  isContentNode: Scalars['Boolean']['output'];
-  /** Whether this page is set to the static front page. */
-  isFrontPage: Scalars['Boolean']['output'];
-  /** Whether this page is set to the blog posts page. */
-  isPostsPage: Scalars['Boolean']['output'];
-  /** Whether the object is restricted from the current viewer */
-  isRestricted?: Maybe<Scalars['Boolean']['output']>;
-  /** Whether the node is a Term */
-  isTermNode: Scalars['Boolean']['output'];
-  /** Display name of the content type. */
-  label?: Maybe<Scalars['String']['output']>;
-  /** Details about the content type labels. */
-  labels?: Maybe<PostTypeLabelDetails>;
-  /** The name of the icon file to display as a menu icon. */
-  menuIcon?: Maybe<Scalars['String']['output']>;
-  /** The position of this post type in the menu. Only applies if show_in_menu is true. */
-  menuPosition?: Maybe<Scalars['Int']['output']>;
-  /** The internal name of the post type. This should not be used for display purposes. */
-  name?: Maybe<Scalars['String']['output']>;
-  /** Whether a content type is intended for use publicly either via the admin interface or by front-end users. While the default settings of exclude_from_search, publicly_queryable, show_ui, and show_in_nav_menus are inherited from public, each does not rely on this relationship and controls a very specific intention. */
-  public?: Maybe<Scalars['Boolean']['output']>;
-  /** Whether queries can be performed on the front end for the content type as part of parse_request(). */
-  publiclyQueryable?: Maybe<Scalars['Boolean']['output']>;
-  /** Name of content type to display in REST API &quot;wp/v2&quot; namespace. */
-  restBase?: Maybe<Scalars['String']['output']>;
-  /** The REST Controller class assigned to handling this content type. */
-  restControllerClass?: Maybe<Scalars['String']['output']>;
-  /** Makes this content type available via the admin bar. */
-  showInAdminBar?: Maybe<Scalars['Boolean']['output']>;
-  /** Whether to add the content type to the GraphQL Schema. */
-  showInGraphql?: Maybe<Scalars['Boolean']['output']>;
-  /** Where to show the content type in the admin menu. To work, $show_ui must be true. If true, the post type is shown in its own top level menu. If false, no menu is shown. If a string of an existing top level menu (eg. &quot;tools.php&quot; or &quot;edit.php?post_type=page&quot;), the post type will be placed as a sub-menu of that. */
-  showInMenu?: Maybe<Scalars['Boolean']['output']>;
-  /** Makes this content type available for selection in navigation menus. */
-  showInNavMenus?: Maybe<Scalars['Boolean']['output']>;
-  /** Whether the content type is associated with a route under the the REST API &quot;wp/v2&quot; namespace. */
-  showInRest?: Maybe<Scalars['Boolean']['output']>;
-  /** Whether to generate and allow a UI for managing this content type in the admin. */
-  showUi?: Maybe<Scalars['Boolean']['output']>;
-  templates?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The unique resource identifier path */
-  uri?: Maybe<Scalars['String']['output']>;
-};
-
+export type ContentType = Node &
+  UniformResourceIdentifiable & {
+    __typename?: 'ContentType';
+    /** Whether this content type should can be exported. */
+    canExport?: Maybe<Scalars['Boolean']['output']>;
+    /** @deprecated Deprecated in favor of using Next.js pages */
+    conditionalTags?: Maybe<ConditionalTags>;
+    /** Connection between the ContentType type and the Taxonomy type */
+    connectedTaxonomies?: Maybe<ContentTypeToTaxonomyConnection>;
+    /** Connection between the ContentType type and the ContentNode type */
+    contentNodes?: Maybe<ContentTypeToContentNodeConnection>;
+    /** Whether content of this type should be deleted when the author of it is deleted from the system. */
+    deleteWithUser?: Maybe<Scalars['Boolean']['output']>;
+    /** Description of the content type. */
+    description?: Maybe<Scalars['String']['output']>;
+    /** Whether to exclude nodes of this content type from front end search results. */
+    excludeFromSearch?: Maybe<Scalars['Boolean']['output']>;
+    /** The plural name of the content type within the GraphQL Schema. */
+    graphqlPluralName?: Maybe<Scalars['String']['output']>;
+    /** The singular name of the content type within the GraphQL Schema. */
+    graphqlSingleName?: Maybe<Scalars['String']['output']>;
+    /** Whether this content type should have archives. Content archives are generated by type and by date. */
+    hasArchive?: Maybe<Scalars['Boolean']['output']>;
+    /** Whether the content type is hierarchical, for example pages. */
+    hierarchical?: Maybe<Scalars['Boolean']['output']>;
+    /** The globally unique identifier of the post-type object. */
+    id: Scalars['ID']['output'];
+    /** Whether the node is a Content Node */
+    isContentNode: Scalars['Boolean']['output'];
+    /** Whether this page is set to the static front page. */
+    isFrontPage: Scalars['Boolean']['output'];
+    /** Whether this page is set to the blog posts page. */
+    isPostsPage: Scalars['Boolean']['output'];
+    /** Whether the object is restricted from the current viewer */
+    isRestricted?: Maybe<Scalars['Boolean']['output']>;
+    /** Whether the node is a Term */
+    isTermNode: Scalars['Boolean']['output'];
+    /** Display name of the content type. */
+    label?: Maybe<Scalars['String']['output']>;
+    /** Details about the content type labels. */
+    labels?: Maybe<PostTypeLabelDetails>;
+    /** The name of the icon file to display as a menu icon. */
+    menuIcon?: Maybe<Scalars['String']['output']>;
+    /** The position of this post type in the menu. Only applies if show_in_menu is true. */
+    menuPosition?: Maybe<Scalars['Int']['output']>;
+    /** The internal name of the post type. This should not be used for display purposes. */
+    name?: Maybe<Scalars['String']['output']>;
+    /** Whether a content type is intended for use publicly either via the admin interface or by front-end users. While the default settings of exclude_from_search, publicly_queryable, show_ui, and show_in_nav_menus are inherited from public, each does not rely on this relationship and controls a very specific intention. */
+    public?: Maybe<Scalars['Boolean']['output']>;
+    /** Whether queries can be performed on the front end for the content type as part of parse_request(). */
+    publiclyQueryable?: Maybe<Scalars['Boolean']['output']>;
+    /** Name of content type to display in REST API &quot;wp/v2&quot; namespace. */
+    restBase?: Maybe<Scalars['String']['output']>;
+    /** The REST Controller class assigned to handling this content type. */
+    restControllerClass?: Maybe<Scalars['String']['output']>;
+    /** Makes this content type available via the admin bar. */
+    showInAdminBar?: Maybe<Scalars['Boolean']['output']>;
+    /** Whether to add the content type to the GraphQL Schema. */
+    showInGraphql?: Maybe<Scalars['Boolean']['output']>;
+    /** Where to show the content type in the admin menu. To work, $show_ui must be true. If true, the post type is shown in its own top level menu. If false, no menu is shown. If a string of an existing top level menu (eg. &quot;tools.php&quot; or &quot;edit.php?post_type=page&quot;), the post type will be placed as a sub-menu of that. */
+    showInMenu?: Maybe<Scalars['Boolean']['output']>;
+    /** Makes this content type available for selection in navigation menus. */
+    showInNavMenus?: Maybe<Scalars['Boolean']['output']>;
+    /** Whether the content type is associated with a route under the the REST API &quot;wp/v2&quot; namespace. */
+    showInRest?: Maybe<Scalars['Boolean']['output']>;
+    /** Whether to generate and allow a UI for managing this content type in the admin. */
+    showUi?: Maybe<Scalars['Boolean']['output']>;
+    templates?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The unique resource identifier path */
+    uri?: Maybe<Scalars['String']['output']>;
+  };
 
 /** An Post Type object */
 export type ContentTypeConnectedTaxonomiesArgs = {
@@ -1346,7 +1404,6 @@ export type ContentTypeConnectedTaxonomiesArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
 };
-
 
 /** An Post Type object */
 export type ContentTypeContentNodesArgs = {
@@ -1396,7 +1453,7 @@ export enum ContentTypeEnum {
   /** The Type of Content object */
   Page = 'PAGE',
   /** The Type of Content object */
-  Post = 'POST'
+  Post = 'POST',
 }
 
 /** The Type of Identifier used to fetch a single Content Type node. To be used along with the "id" field. Default is "ID". */
@@ -1404,41 +1461,46 @@ export enum ContentTypeIdTypeEnum {
   /** The globally unique ID */
   Id = 'ID',
   /** The name of the content type. */
-  Name = 'NAME'
+  Name = 'NAME',
 }
 
 /** Connection between the ContentType type and the ContentNode type */
-export type ContentTypeToContentNodeConnection = Connection & ContentNodeConnection & {
-  __typename?: 'ContentTypeToContentNodeConnection';
-  /** Edges for the ContentTypeToContentNodeConnection connection */
-  edges: Array<ContentTypeToContentNodeConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<ContentNode>;
-  /** Information about pagination in a connection. */
-  pageInfo: ContentTypeToContentNodeConnectionPageInfo;
-};
+export type ContentTypeToContentNodeConnection = Connection &
+  ContentNodeConnection & {
+    __typename?: 'ContentTypeToContentNodeConnection';
+    /** Edges for the ContentTypeToContentNodeConnection connection */
+    edges: Array<ContentTypeToContentNodeConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<ContentNode>;
+    /** Information about pagination in a connection. */
+    pageInfo: ContentTypeToContentNodeConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type ContentTypeToContentNodeConnectionEdge = ContentNodeConnectionEdge & Edge & {
-  __typename?: 'ContentTypeToContentNodeConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: ContentNode;
-};
+export type ContentTypeToContentNodeConnectionEdge = ContentNodeConnectionEdge &
+  Edge & {
+    __typename?: 'ContentTypeToContentNodeConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: ContentNode;
+  };
 
 /** Page Info on the &quot;ContentTypeToContentNodeConnection&quot; */
-export type ContentTypeToContentNodeConnectionPageInfo = ContentNodeConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'ContentTypeToContentNodeConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type ContentTypeToContentNodeConnectionPageInfo =
+  ContentNodeConnectionPageInfo &
+    PageInfo &
+    WpPageInfo & {
+      __typename?: 'ContentTypeToContentNodeConnectionPageInfo';
+      /** When paginating forwards, the cursor to continue. */
+      endCursor?: Maybe<Scalars['String']['output']>;
+      /** When paginating forwards, are there more items? */
+      hasNextPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, are there more items? */
+      hasPreviousPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, the cursor to continue. */
+      startCursor?: Maybe<Scalars['String']['output']>;
+    };
 
 /** Arguments for filtering the ContentTypeToContentNodeConnection connection */
 export type ContentTypeToContentNodeConnectionWhereArgs = {
@@ -1481,80 +1543,87 @@ export type ContentTypeToContentNodeConnectionWhereArgs = {
 };
 
 /** Connection between the ContentType type and the Taxonomy type */
-export type ContentTypeToTaxonomyConnection = Connection & TaxonomyConnection & {
-  __typename?: 'ContentTypeToTaxonomyConnection';
-  /** Edges for the ContentTypeToTaxonomyConnection connection */
-  edges: Array<ContentTypeToTaxonomyConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<Taxonomy>;
-  /** Information about pagination in a connection. */
-  pageInfo: ContentTypeToTaxonomyConnectionPageInfo;
-};
+export type ContentTypeToTaxonomyConnection = Connection &
+  TaxonomyConnection & {
+    __typename?: 'ContentTypeToTaxonomyConnection';
+    /** Edges for the ContentTypeToTaxonomyConnection connection */
+    edges: Array<ContentTypeToTaxonomyConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<Taxonomy>;
+    /** Information about pagination in a connection. */
+    pageInfo: ContentTypeToTaxonomyConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type ContentTypeToTaxonomyConnectionEdge = Edge & TaxonomyConnectionEdge & {
-  __typename?: 'ContentTypeToTaxonomyConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: Taxonomy;
-};
+export type ContentTypeToTaxonomyConnectionEdge = Edge &
+  TaxonomyConnectionEdge & {
+    __typename?: 'ContentTypeToTaxonomyConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: Taxonomy;
+  };
 
 /** Page Info on the &quot;ContentTypeToTaxonomyConnection&quot; */
-export type ContentTypeToTaxonomyConnectionPageInfo = PageInfo & TaxonomyConnectionPageInfo & WpPageInfo & {
-  __typename?: 'ContentTypeToTaxonomyConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type ContentTypeToTaxonomyConnectionPageInfo = PageInfo &
+  TaxonomyConnectionPageInfo &
+  WpPageInfo & {
+    __typename?: 'ContentTypeToTaxonomyConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Allowed Content Types of the Category taxonomy. */
 export enum ContentTypesOfCategoryEnum {
   /** The Type of Content object */
-  Post = 'POST'
+  Post = 'POST',
 }
 
 /** Allowed Content Types of the PostFormat taxonomy. */
 export enum ContentTypesOfPostFormatEnum {
   /** The Type of Content object */
-  Post = 'POST'
+  Post = 'POST',
 }
 
 /** Allowed Content Types of the Tag taxonomy. */
 export enum ContentTypesOfTagEnum {
   /** The Type of Content object */
-  Post = 'POST'
+  Post = 'POST',
 }
 
 /** A block used for editing the site */
-export type CoreArchives = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreArchives';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreArchives Block Type */
-  attributes?: Maybe<CoreArchivesAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreArchives = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreArchives';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreArchives Block Type */
+    attributes?: Maybe<CoreArchivesAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreArchives Block Type */
 export type CoreArchivesAttributes = {
@@ -1584,31 +1653,35 @@ export type CoreArchivesAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreAudio = BlockWithSupportsAnchor & EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreAudio';
-  /** The anchor field for the block. */
-  anchor?: Maybe<Scalars['String']['output']>;
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreAudio Block Type */
-  attributes?: Maybe<CoreAudioAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreAudio = BlockWithSupportsAnchor &
+  EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreAudio';
+    /** The anchor field for the block. */
+    anchor?: Maybe<Scalars['String']['output']>;
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreAudio Block Type */
+    attributes?: Maybe<CoreAudioAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreAudio Block Type */
 export type CoreAudioAttributes = BlockWithSupportsAnchor & {
@@ -1638,29 +1711,32 @@ export type CoreAudioAttributes = BlockWithSupportsAnchor & {
 };
 
 /** A block used for editing the site */
-export type CoreAvatar = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreAvatar';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreAvatar Block Type */
-  attributes?: Maybe<CoreAvatarAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreAvatar = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreAvatar';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreAvatar Block Type */
+    attributes?: Maybe<CoreAvatarAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreAvatar Block Type */
 export type CoreAvatarAttributes = {
@@ -1688,29 +1764,32 @@ export type CoreAvatarAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreBlock = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreBlock';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreBlock Block Type */
-  attributes?: Maybe<CoreBlockAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreBlock = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreBlock';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreBlock Block Type */
+    attributes?: Maybe<CoreBlockAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreBlock Block Type */
 export type CoreBlockAttributes = {
@@ -1726,31 +1805,35 @@ export type CoreBlockAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreButton = BlockWithSupportsAnchor & EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreButton';
-  /** The anchor field for the block. */
-  anchor?: Maybe<Scalars['String']['output']>;
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreButton Block Type */
-  attributes?: Maybe<CoreButtonAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreButton = BlockWithSupportsAnchor &
+  EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreButton';
+    /** The anchor field for the block. */
+    anchor?: Maybe<Scalars['String']['output']>;
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreButton Block Type */
+    attributes?: Maybe<CoreButtonAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreButton Block Type */
 export type CoreButtonAttributes = BlockWithSupportsAnchor & {
@@ -1802,31 +1885,35 @@ export type CoreButtonAttributes = BlockWithSupportsAnchor & {
 };
 
 /** A block used for editing the site */
-export type CoreButtons = BlockWithSupportsAnchor & EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreButtons';
-  /** The anchor field for the block. */
-  anchor?: Maybe<Scalars['String']['output']>;
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreButtons Block Type */
-  attributes?: Maybe<CoreButtonsAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreButtons = BlockWithSupportsAnchor &
+  EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreButtons';
+    /** The anchor field for the block. */
+    anchor?: Maybe<Scalars['String']['output']>;
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreButtons Block Type */
+    attributes?: Maybe<CoreButtonsAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreButtons Block Type */
 export type CoreButtonsAttributes = BlockWithSupportsAnchor & {
@@ -1854,29 +1941,32 @@ export type CoreButtonsAttributes = BlockWithSupportsAnchor & {
 };
 
 /** A block used for editing the site */
-export type CoreCalendar = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreCalendar';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreCalendar Block Type */
-  attributes?: Maybe<CoreCalendarAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreCalendar = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreCalendar';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreCalendar Block Type */
+    attributes?: Maybe<CoreCalendarAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreCalendar Block Type */
 export type CoreCalendarAttributes = {
@@ -1906,29 +1996,32 @@ export type CoreCalendarAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreCategories = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreCategories';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreCategories Block Type */
-  attributes?: Maybe<CoreCategoriesAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreCategories = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreCategories';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreCategories Block Type */
+    attributes?: Maybe<CoreCategoriesAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreCategories Block Type */
 export type CoreCategoriesAttributes = {
@@ -1960,31 +2053,35 @@ export type CoreCategoriesAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreCode = BlockWithSupportsAnchor & EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreCode';
-  /** The anchor field for the block. */
-  anchor?: Maybe<Scalars['String']['output']>;
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreCode Block Type */
-  attributes?: Maybe<CoreCodeAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreCode = BlockWithSupportsAnchor &
+  EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreCode';
+    /** The anchor field for the block. */
+    anchor?: Maybe<Scalars['String']['output']>;
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreCode Block Type */
+    attributes?: Maybe<CoreCodeAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreCode Block Type */
 export type CoreCodeAttributes = BlockWithSupportsAnchor & {
@@ -2020,31 +2117,35 @@ export type CoreCodeAttributes = BlockWithSupportsAnchor & {
 };
 
 /** A block used for editing the site */
-export type CoreColumn = BlockWithSupportsAnchor & EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreColumn';
-  /** The anchor field for the block. */
-  anchor?: Maybe<Scalars['String']['output']>;
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreColumn Block Type */
-  attributes?: Maybe<CoreColumnAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreColumn = BlockWithSupportsAnchor &
+  EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreColumn';
+    /** The anchor field for the block. */
+    anchor?: Maybe<Scalars['String']['output']>;
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreColumn Block Type */
+    attributes?: Maybe<CoreColumnAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreColumn Block Type */
 export type CoreColumnAttributes = BlockWithSupportsAnchor & {
@@ -2084,31 +2185,35 @@ export type CoreColumnAttributes = BlockWithSupportsAnchor & {
 };
 
 /** A block used for editing the site */
-export type CoreColumns = BlockWithSupportsAnchor & EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreColumns';
-  /** The anchor field for the block. */
-  anchor?: Maybe<Scalars['String']['output']>;
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreColumns Block Type */
-  attributes?: Maybe<CoreColumnsAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreColumns = BlockWithSupportsAnchor &
+  EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreColumns';
+    /** The anchor field for the block. */
+    anchor?: Maybe<Scalars['String']['output']>;
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreColumns Block Type */
+    attributes?: Maybe<CoreColumnsAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreColumns Block Type */
 export type CoreColumnsAttributes = BlockWithSupportsAnchor & {
@@ -2148,29 +2253,32 @@ export type CoreColumnsAttributes = BlockWithSupportsAnchor & {
 };
 
 /** A block used for editing the site */
-export type CoreCommentAuthorName = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreCommentAuthorName';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreCommentAuthorName Block Type */
-  attributes?: Maybe<CoreCommentAuthorNameAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreCommentAuthorName = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreCommentAuthorName';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreCommentAuthorName Block Type */
+    attributes?: Maybe<CoreCommentAuthorNameAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreCommentAuthorName Block Type */
 export type CoreCommentAuthorNameAttributes = {
@@ -2202,29 +2310,32 @@ export type CoreCommentAuthorNameAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreCommentContent = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreCommentContent';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreCommentContent Block Type */
-  attributes?: Maybe<CoreCommentContentAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreCommentContent = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreCommentContent';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreCommentContent Block Type */
+    attributes?: Maybe<CoreCommentContentAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreCommentContent Block Type */
 export type CoreCommentContentAttributes = {
@@ -2252,29 +2363,32 @@ export type CoreCommentContentAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreCommentDate = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreCommentDate';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreCommentDate Block Type */
-  attributes?: Maybe<CoreCommentDateAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreCommentDate = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreCommentDate';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreCommentDate Block Type */
+    attributes?: Maybe<CoreCommentDateAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreCommentDate Block Type */
 export type CoreCommentDateAttributes = {
@@ -2304,29 +2418,32 @@ export type CoreCommentDateAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreCommentEditLink = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreCommentEditLink';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreCommentEditLink Block Type */
-  attributes?: Maybe<CoreCommentEditLinkAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreCommentEditLink = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreCommentEditLink';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreCommentEditLink Block Type */
+    attributes?: Maybe<CoreCommentEditLinkAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreCommentEditLink Block Type */
 export type CoreCommentEditLinkAttributes = {
@@ -2354,29 +2471,32 @@ export type CoreCommentEditLinkAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreCommentReplyLink = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreCommentReplyLink';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreCommentReplyLink Block Type */
-  attributes?: Maybe<CoreCommentReplyLinkAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreCommentReplyLink = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreCommentReplyLink';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreCommentReplyLink Block Type */
+    attributes?: Maybe<CoreCommentReplyLinkAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreCommentReplyLink Block Type */
 export type CoreCommentReplyLinkAttributes = {
@@ -2402,29 +2522,32 @@ export type CoreCommentReplyLinkAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreCommentTemplate = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreCommentTemplate';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreCommentTemplate Block Type */
-  attributes?: Maybe<CoreCommentTemplateAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreCommentTemplate = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreCommentTemplate';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreCommentTemplate Block Type */
+    attributes?: Maybe<CoreCommentTemplateAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreCommentTemplate Block Type */
 export type CoreCommentTemplateAttributes = {
@@ -2446,29 +2569,32 @@ export type CoreCommentTemplateAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreComments = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreComments';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreComments Block Type */
-  attributes?: Maybe<CoreCommentsAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreComments = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreComments';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreComments Block Type */
+    attributes?: Maybe<CoreCommentsAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreComments Block Type */
 export type CoreCommentsAttributes = {
@@ -2500,29 +2626,32 @@ export type CoreCommentsAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreCommentsPagination = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreCommentsPagination';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreCommentsPagination Block Type */
-  attributes?: Maybe<CoreCommentsPaginationAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreCommentsPagination = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreCommentsPagination';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreCommentsPagination Block Type */
+    attributes?: Maybe<CoreCommentsPaginationAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreCommentsPagination Block Type */
 export type CoreCommentsPaginationAttributes = {
@@ -2554,29 +2683,32 @@ export type CoreCommentsPaginationAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreCommentsPaginationNext = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreCommentsPaginationNext';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreCommentsPaginationNext Block Type */
-  attributes?: Maybe<CoreCommentsPaginationNextAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreCommentsPaginationNext = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreCommentsPaginationNext';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreCommentsPaginationNext Block Type */
+    attributes?: Maybe<CoreCommentsPaginationNextAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreCommentsPaginationNext Block Type */
 export type CoreCommentsPaginationNextAttributes = {
@@ -2602,29 +2734,32 @@ export type CoreCommentsPaginationNextAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreCommentsPaginationNumbers = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreCommentsPaginationNumbers';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreCommentsPaginationNumbers Block Type */
-  attributes?: Maybe<CoreCommentsPaginationNumbersAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreCommentsPaginationNumbers = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreCommentsPaginationNumbers';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreCommentsPaginationNumbers Block Type */
+    attributes?: Maybe<CoreCommentsPaginationNumbersAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreCommentsPaginationNumbers Block Type */
 export type CoreCommentsPaginationNumbersAttributes = {
@@ -2648,29 +2783,32 @@ export type CoreCommentsPaginationNumbersAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreCommentsPaginationPrevious = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreCommentsPaginationPrevious';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreCommentsPaginationPrevious Block Type */
-  attributes?: Maybe<CoreCommentsPaginationPreviousAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreCommentsPaginationPrevious = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreCommentsPaginationPrevious';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreCommentsPaginationPrevious Block Type */
+    attributes?: Maybe<CoreCommentsPaginationPreviousAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreCommentsPaginationPrevious Block Type */
 export type CoreCommentsPaginationPreviousAttributes = {
@@ -2696,29 +2834,32 @@ export type CoreCommentsPaginationPreviousAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreCommentsTitle = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreCommentsTitle';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreCommentsTitle Block Type */
-  attributes?: Maybe<CoreCommentsTitleAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreCommentsTitle = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreCommentsTitle';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreCommentsTitle Block Type */
+    attributes?: Maybe<CoreCommentsTitleAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreCommentsTitle Block Type */
 export type CoreCommentsTitleAttributes = {
@@ -2756,31 +2897,35 @@ export type CoreCommentsTitleAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreCover = BlockWithSupportsAnchor & EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreCover';
-  /** The anchor field for the block. */
-  anchor?: Maybe<Scalars['String']['output']>;
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreCover Block Type */
-  attributes?: Maybe<CoreCoverAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreCover = BlockWithSupportsAnchor &
+  EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreCover';
+    /** The anchor field for the block. */
+    anchor?: Maybe<Scalars['String']['output']>;
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreCover Block Type */
+    attributes?: Maybe<CoreCoverAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreCover Block Type */
 export type CoreCoverAttributes = BlockWithSupportsAnchor & {
@@ -2850,29 +2995,32 @@ export type CoreCoverAttributes = BlockWithSupportsAnchor & {
 };
 
 /** A block used for editing the site */
-export type CoreDetails = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreDetails';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreDetails Block Type */
-  attributes?: Maybe<CoreDetailsAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreDetails = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreDetails';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreDetails Block Type */
+    attributes?: Maybe<CoreDetailsAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreDetails Block Type */
 export type CoreDetailsAttributes = {
@@ -2906,29 +3054,32 @@ export type CoreDetailsAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreEmbed = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreEmbed';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreEmbed Block Type */
-  attributes?: Maybe<CoreEmbedAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreEmbed = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreEmbed';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreEmbed Block Type */
+    attributes?: Maybe<CoreEmbedAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreEmbed Block Type */
 export type CoreEmbedAttributes = {
@@ -2958,31 +3109,35 @@ export type CoreEmbedAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreFile = BlockWithSupportsAnchor & EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreFile';
-  /** The anchor field for the block. */
-  anchor?: Maybe<Scalars['String']['output']>;
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreFile Block Type */
-  attributes?: Maybe<CoreFileAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreFile = BlockWithSupportsAnchor &
+  EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreFile';
+    /** The anchor field for the block. */
+    anchor?: Maybe<Scalars['String']['output']>;
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreFile Block Type */
+    attributes?: Maybe<CoreFileAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreFile Block Type */
 export type CoreFileAttributes = BlockWithSupportsAnchor & {
@@ -3022,29 +3177,32 @@ export type CoreFileAttributes = BlockWithSupportsAnchor & {
 };
 
 /** A block used for editing the site */
-export type CoreFootnotes = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreFootnotes';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreFootnotes Block Type */
-  attributes?: Maybe<CoreFootnotesAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreFootnotes = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreFootnotes';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreFootnotes Block Type */
+    attributes?: Maybe<CoreFootnotesAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreFootnotes Block Type */
 export type CoreFootnotesAttributes = {
@@ -3070,29 +3228,32 @@ export type CoreFootnotesAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreFreeform = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreFreeform';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreFreeform Block Type */
-  attributes?: Maybe<CoreFreeformAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreFreeform = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreFreeform';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreFreeform Block Type */
+    attributes?: Maybe<CoreFreeformAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreFreeform Block Type */
 export type CoreFreeformAttributes = {
@@ -3106,31 +3267,35 @@ export type CoreFreeformAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreGallery = BlockWithSupportsAnchor & EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreGallery';
-  /** The anchor field for the block. */
-  anchor?: Maybe<Scalars['String']['output']>;
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreGallery Block Type */
-  attributes?: Maybe<CoreGalleryAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreGallery = BlockWithSupportsAnchor &
+  EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreGallery';
+    /** The anchor field for the block. */
+    anchor?: Maybe<Scalars['String']['output']>;
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreGallery Block Type */
+    attributes?: Maybe<CoreGalleryAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreGallery Block Type */
 export type CoreGalleryAttributes = BlockWithSupportsAnchor & {
@@ -3193,31 +3358,35 @@ export type CoreGalleryAttributesImages = {
 };
 
 /** A block used for editing the site */
-export type CoreGroup = BlockWithSupportsAnchor & EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreGroup';
-  /** The anchor field for the block. */
-  anchor?: Maybe<Scalars['String']['output']>;
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreGroup Block Type */
-  attributes?: Maybe<CoreGroupAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreGroup = BlockWithSupportsAnchor &
+  EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreGroup';
+    /** The anchor field for the block. */
+    anchor?: Maybe<Scalars['String']['output']>;
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreGroup Block Type */
+    attributes?: Maybe<CoreGroupAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreGroup Block Type */
 export type CoreGroupAttributes = BlockWithSupportsAnchor & {
@@ -3255,31 +3424,35 @@ export type CoreGroupAttributes = BlockWithSupportsAnchor & {
 };
 
 /** A block used for editing the site */
-export type CoreHeading = BlockWithSupportsAnchor & EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreHeading';
-  /** The anchor field for the block. */
-  anchor?: Maybe<Scalars['String']['output']>;
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreHeading Block Type */
-  attributes?: Maybe<CoreHeadingAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreHeading = BlockWithSupportsAnchor &
+  EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreHeading';
+    /** The anchor field for the block. */
+    anchor?: Maybe<Scalars['String']['output']>;
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreHeading Block Type */
+    attributes?: Maybe<CoreHeadingAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreHeading Block Type */
 export type CoreHeadingAttributes = BlockWithSupportsAnchor & {
@@ -3317,29 +3490,32 @@ export type CoreHeadingAttributes = BlockWithSupportsAnchor & {
 };
 
 /** A block used for editing the site */
-export type CoreHomeLink = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreHomeLink';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreHomeLink Block Type */
-  attributes?: Maybe<CoreHomeLinkAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreHomeLink = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreHomeLink';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreHomeLink Block Type */
+    attributes?: Maybe<CoreHomeLinkAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreHomeLink Block Type */
 export type CoreHomeLinkAttributes = {
@@ -3361,29 +3537,32 @@ export type CoreHomeLinkAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreHtml = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreHtml';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreHtml Block Type */
-  attributes?: Maybe<CoreHtmlAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreHtml = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreHtml';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreHtml Block Type */
+    attributes?: Maybe<CoreHtmlAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreHtml Block Type */
 export type CoreHtmlAttributes = {
@@ -3397,33 +3576,37 @@ export type CoreHtmlAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreImage = BlockWithSupportsAnchor & EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreImage';
-  /** The anchor field for the block. */
-  anchor?: Maybe<Scalars['String']['output']>;
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreImage Block Type */
-  attributes?: Maybe<CoreImageAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** Media Details of the CoreImage Block Type */
-  mediaDetails?: Maybe<MediaDetails>;
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreImage = BlockWithSupportsAnchor &
+  EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreImage';
+    /** The anchor field for the block. */
+    anchor?: Maybe<Scalars['String']['output']>;
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreImage Block Type */
+    attributes?: Maybe<CoreImageAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** Media Details of the CoreImage Block Type */
+    mediaDetails?: Maybe<MediaDetails>;
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreImage Block Type */
 export type CoreImageAttributes = BlockWithSupportsAnchor & {
@@ -3479,29 +3662,32 @@ export type CoreImageAttributes = BlockWithSupportsAnchor & {
 };
 
 /** A block used for editing the site */
-export type CoreLatestComments = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreLatestComments';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreLatestComments Block Type */
-  attributes?: Maybe<CoreLatestCommentsAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreLatestComments = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreLatestComments';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreLatestComments Block Type */
+    attributes?: Maybe<CoreLatestCommentsAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreLatestComments Block Type */
 export type CoreLatestCommentsAttributes = {
@@ -3531,29 +3717,32 @@ export type CoreLatestCommentsAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreLatestPosts = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreLatestPosts';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreLatestPosts Block Type */
-  attributes?: Maybe<CoreLatestPostsAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreLatestPosts = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreLatestPosts';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreLatestPosts Block Type */
+    attributes?: Maybe<CoreLatestPostsAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreLatestPosts Block Type */
 export type CoreLatestPostsAttributes = {
@@ -3617,29 +3806,32 @@ export type CoreLatestPostsAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreLegacyWidget = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreLegacyWidget';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreLegacyWidget Block Type */
-  attributes?: Maybe<CoreLegacyWidgetAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreLegacyWidget = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreLegacyWidget';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreLegacyWidget Block Type */
+    attributes?: Maybe<CoreLegacyWidgetAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreLegacyWidget Block Type */
 export type CoreLegacyWidgetAttributes = {
@@ -3657,31 +3849,35 @@ export type CoreLegacyWidgetAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreList = BlockWithSupportsAnchor & EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreList';
-  /** The anchor field for the block. */
-  anchor?: Maybe<Scalars['String']['output']>;
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreList Block Type */
-  attributes?: Maybe<CoreListAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreList = BlockWithSupportsAnchor &
+  EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreList';
+    /** The anchor field for the block. */
+    anchor?: Maybe<Scalars['String']['output']>;
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreList Block Type */
+    attributes?: Maybe<CoreListAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreList Block Type */
 export type CoreListAttributes = BlockWithSupportsAnchor & {
@@ -3723,29 +3919,32 @@ export type CoreListAttributes = BlockWithSupportsAnchor & {
 };
 
 /** A block used for editing the site */
-export type CoreListItem = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreListItem';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreListItem Block Type */
-  attributes?: Maybe<CoreListItemAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreListItem = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreListItem';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreListItem Block Type */
+    attributes?: Maybe<CoreListItemAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreListItem Block Type */
 export type CoreListItemAttributes = {
@@ -3767,29 +3966,32 @@ export type CoreListItemAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreLoginout = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreLoginout';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreLoginout Block Type */
-  attributes?: Maybe<CoreLoginoutAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreLoginout = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreLoginout';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreLoginout Block Type */
+    attributes?: Maybe<CoreLoginoutAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreLoginout Block Type */
 export type CoreLoginoutAttributes = {
@@ -3813,31 +4015,35 @@ export type CoreLoginoutAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreMediaText = BlockWithSupportsAnchor & EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreMediaText';
-  /** The anchor field for the block. */
-  anchor?: Maybe<Scalars['String']['output']>;
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreMediaText Block Type */
-  attributes?: Maybe<CoreMediaTextAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreMediaText = BlockWithSupportsAnchor &
+  EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreMediaText';
+    /** The anchor field for the block. */
+    anchor?: Maybe<Scalars['String']['output']>;
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreMediaText Block Type */
+    attributes?: Maybe<CoreMediaTextAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreMediaText Block Type */
 export type CoreMediaTextAttributes = BlockWithSupportsAnchor & {
@@ -3905,29 +4111,32 @@ export type CoreMediaTextAttributes = BlockWithSupportsAnchor & {
 };
 
 /** A block used for editing the site */
-export type CoreMissing = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreMissing';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreMissing Block Type */
-  attributes?: Maybe<CoreMissingAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreMissing = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreMissing';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreMissing Block Type */
+    attributes?: Maybe<CoreMissingAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreMissing Block Type */
 export type CoreMissingAttributes = {
@@ -3945,29 +4154,32 @@ export type CoreMissingAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreMore = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreMore';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreMore Block Type */
-  attributes?: Maybe<CoreMoreAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreMore = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreMore';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreMore Block Type */
+    attributes?: Maybe<CoreMoreAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreMore Block Type */
 export type CoreMoreAttributes = {
@@ -3983,29 +4195,32 @@ export type CoreMoreAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreNavigation = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreNavigation';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreNavigation Block Type */
-  attributes?: Maybe<CoreNavigationAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreNavigation = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreNavigation';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreNavigation Block Type */
+    attributes?: Maybe<CoreNavigationAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreNavigation Block Type */
 export type CoreNavigationAttributes = {
@@ -4065,29 +4280,32 @@ export type CoreNavigationAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreNavigationLink = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreNavigationLink';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreNavigationLink Block Type */
-  attributes?: Maybe<CoreNavigationLinkAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreNavigationLink = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreNavigationLink';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreNavigationLink Block Type */
+    attributes?: Maybe<CoreNavigationLinkAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreNavigationLink Block Type */
 export type CoreNavigationLinkAttributes = {
@@ -4127,29 +4345,32 @@ export type CoreNavigationLinkAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreNavigationSubmenu = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreNavigationSubmenu';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreNavigationSubmenu Block Type */
-  attributes?: Maybe<CoreNavigationSubmenuAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreNavigationSubmenu = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreNavigationSubmenu';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreNavigationSubmenu Block Type */
+    attributes?: Maybe<CoreNavigationSubmenuAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreNavigationSubmenu Block Type */
 export type CoreNavigationSubmenuAttributes = {
@@ -4183,29 +4404,32 @@ export type CoreNavigationSubmenuAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreNextpage = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreNextpage';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreNextpage Block Type */
-  attributes?: Maybe<CoreNextpageAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreNextpage = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreNextpage';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreNextpage Block Type */
+    attributes?: Maybe<CoreNextpageAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreNextpage Block Type */
 export type CoreNextpageAttributes = {
@@ -4217,29 +4441,32 @@ export type CoreNextpageAttributes = {
 };
 
 /** A block used for editing the site */
-export type CorePageList = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CorePageList';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CorePageList Block Type */
-  attributes?: Maybe<CorePageListAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CorePageList = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CorePageList';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CorePageList Block Type */
+    attributes?: Maybe<CorePageListAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CorePageList Block Type */
 export type CorePageListAttributes = {
@@ -4263,29 +4490,32 @@ export type CorePageListAttributes = {
 };
 
 /** A block used for editing the site */
-export type CorePageListItem = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CorePageListItem';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CorePageListItem Block Type */
-  attributes?: Maybe<CorePageListItemAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CorePageListItem = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CorePageListItem';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CorePageListItem Block Type */
+    attributes?: Maybe<CorePageListItemAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CorePageListItem Block Type */
 export type CorePageListItemAttributes = {
@@ -4309,31 +4539,35 @@ export type CorePageListItemAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreParagraph = BlockWithSupportsAnchor & EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreParagraph';
-  /** The anchor field for the block. */
-  anchor?: Maybe<Scalars['String']['output']>;
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreParagraph Block Type */
-  attributes?: Maybe<CoreParagraphAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreParagraph = BlockWithSupportsAnchor &
+  EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreParagraph';
+    /** The anchor field for the block. */
+    anchor?: Maybe<Scalars['String']['output']>;
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreParagraph Block Type */
+    attributes?: Maybe<CoreParagraphAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreParagraph Block Type */
 export type CoreParagraphAttributes = BlockWithSupportsAnchor & {
@@ -4373,29 +4607,32 @@ export type CoreParagraphAttributes = BlockWithSupportsAnchor & {
 };
 
 /** A block used for editing the site */
-export type CorePattern = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CorePattern';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CorePattern Block Type */
-  attributes?: Maybe<CorePatternAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CorePattern = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CorePattern';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CorePattern Block Type */
+    attributes?: Maybe<CorePatternAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CorePattern Block Type */
 export type CorePatternAttributes = {
@@ -4411,29 +4648,32 @@ export type CorePatternAttributes = {
 };
 
 /** A block used for editing the site */
-export type CorePostAuthor = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CorePostAuthor';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CorePostAuthor Block Type */
-  attributes?: Maybe<CorePostAuthorAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CorePostAuthor = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CorePostAuthor';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CorePostAuthor Block Type */
+    attributes?: Maybe<CorePostAuthorAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CorePostAuthor Block Type */
 export type CorePostAuthorAttributes = {
@@ -4473,29 +4713,32 @@ export type CorePostAuthorAttributes = {
 };
 
 /** A block used for editing the site */
-export type CorePostAuthorBiography = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CorePostAuthorBiography';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CorePostAuthorBiography Block Type */
-  attributes?: Maybe<CorePostAuthorBiographyAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CorePostAuthorBiography = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CorePostAuthorBiography';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CorePostAuthorBiography Block Type */
+    attributes?: Maybe<CorePostAuthorBiographyAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CorePostAuthorBiography Block Type */
 export type CorePostAuthorBiographyAttributes = {
@@ -4523,29 +4766,32 @@ export type CorePostAuthorBiographyAttributes = {
 };
 
 /** A block used for editing the site */
-export type CorePostAuthorName = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CorePostAuthorName';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CorePostAuthorName Block Type */
-  attributes?: Maybe<CorePostAuthorNameAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CorePostAuthorName = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CorePostAuthorName';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CorePostAuthorName Block Type */
+    attributes?: Maybe<CorePostAuthorNameAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CorePostAuthorName Block Type */
 export type CorePostAuthorNameAttributes = {
@@ -4577,29 +4823,32 @@ export type CorePostAuthorNameAttributes = {
 };
 
 /** A block used for editing the site */
-export type CorePostComments = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CorePostComments';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CorePostComments Block Type */
-  attributes?: Maybe<CorePostCommentsAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CorePostComments = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CorePostComments';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CorePostComments Block Type */
+    attributes?: Maybe<CorePostCommentsAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CorePostComments Block Type */
 export type CorePostCommentsAttributes = {
@@ -4627,29 +4876,32 @@ export type CorePostCommentsAttributes = {
 };
 
 /** A block used for editing the site */
-export type CorePostCommentsForm = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CorePostCommentsForm';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CorePostCommentsForm Block Type */
-  attributes?: Maybe<CorePostCommentsFormAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CorePostCommentsForm = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CorePostCommentsForm';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CorePostCommentsForm Block Type */
+    attributes?: Maybe<CorePostCommentsFormAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CorePostCommentsForm Block Type */
 export type CorePostCommentsFormAttributes = {
@@ -4675,29 +4927,32 @@ export type CorePostCommentsFormAttributes = {
 };
 
 /** A block used for editing the site */
-export type CorePostContent = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CorePostContent';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CorePostContent Block Type */
-  attributes?: Maybe<CorePostContentAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CorePostContent = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CorePostContent';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CorePostContent Block Type */
+    attributes?: Maybe<CorePostContentAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CorePostContent Block Type */
 export type CorePostContentAttributes = {
@@ -4727,29 +4982,32 @@ export type CorePostContentAttributes = {
 };
 
 /** A block used for editing the site */
-export type CorePostDate = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CorePostDate';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CorePostDate Block Type */
-  attributes?: Maybe<CorePostDateAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CorePostDate = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CorePostDate';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CorePostDate Block Type */
+    attributes?: Maybe<CorePostDateAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CorePostDate Block Type */
 export type CorePostDateAttributes = {
@@ -4783,29 +5041,32 @@ export type CorePostDateAttributes = {
 };
 
 /** A block used for editing the site */
-export type CorePostExcerpt = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CorePostExcerpt';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CorePostExcerpt Block Type */
-  attributes?: Maybe<CorePostExcerptAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CorePostExcerpt = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CorePostExcerpt';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CorePostExcerpt Block Type */
+    attributes?: Maybe<CorePostExcerptAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CorePostExcerpt Block Type */
 export type CorePostExcerptAttributes = {
@@ -4839,29 +5100,32 @@ export type CorePostExcerptAttributes = {
 };
 
 /** A block used for editing the site */
-export type CorePostFeaturedImage = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CorePostFeaturedImage';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CorePostFeaturedImage Block Type */
-  attributes?: Maybe<CorePostFeaturedImageAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CorePostFeaturedImage = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CorePostFeaturedImage';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CorePostFeaturedImage Block Type */
+    attributes?: Maybe<CorePostFeaturedImageAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CorePostFeaturedImage Block Type */
 export type CorePostFeaturedImageAttributes = {
@@ -4909,29 +5173,32 @@ export type CorePostFeaturedImageAttributes = {
 };
 
 /** A block used for editing the site */
-export type CorePostNavigationLink = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CorePostNavigationLink';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CorePostNavigationLink Block Type */
-  attributes?: Maybe<CorePostNavigationLinkAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CorePostNavigationLink = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CorePostNavigationLink';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CorePostNavigationLink Block Type */
+    attributes?: Maybe<CorePostNavigationLinkAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CorePostNavigationLink Block Type */
 export type CorePostNavigationLinkAttributes = {
@@ -4969,29 +5236,32 @@ export type CorePostNavigationLinkAttributes = {
 };
 
 /** A block used for editing the site */
-export type CorePostTemplate = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CorePostTemplate';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CorePostTemplate Block Type */
-  attributes?: Maybe<CorePostTemplateAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CorePostTemplate = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CorePostTemplate';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CorePostTemplate Block Type */
+    attributes?: Maybe<CorePostTemplateAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CorePostTemplate Block Type */
 export type CorePostTemplateAttributes = {
@@ -5021,29 +5291,32 @@ export type CorePostTemplateAttributes = {
 };
 
 /** A block used for editing the site */
-export type CorePostTerms = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CorePostTerms';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CorePostTerms Block Type */
-  attributes?: Maybe<CorePostTermsAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CorePostTerms = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CorePostTerms';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CorePostTerms Block Type */
+    attributes?: Maybe<CorePostTermsAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CorePostTerms Block Type */
 export type CorePostTermsAttributes = {
@@ -5079,29 +5352,32 @@ export type CorePostTermsAttributes = {
 };
 
 /** A block used for editing the site */
-export type CorePostTitle = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CorePostTitle';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CorePostTitle Block Type */
-  attributes?: Maybe<CorePostTitleAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CorePostTitle = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CorePostTitle';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CorePostTitle Block Type */
+    attributes?: Maybe<CorePostTitleAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CorePostTitle Block Type */
 export type CorePostTitleAttributes = {
@@ -5139,31 +5415,35 @@ export type CorePostTitleAttributes = {
 };
 
 /** A block used for editing the site */
-export type CorePreformatted = BlockWithSupportsAnchor & EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CorePreformatted';
-  /** The anchor field for the block. */
-  anchor?: Maybe<Scalars['String']['output']>;
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CorePreformatted Block Type */
-  attributes?: Maybe<CorePreformattedAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CorePreformatted = BlockWithSupportsAnchor &
+  EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CorePreformatted';
+    /** The anchor field for the block. */
+    anchor?: Maybe<Scalars['String']['output']>;
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CorePreformatted Block Type */
+    attributes?: Maybe<CorePreformattedAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CorePreformatted Block Type */
 export type CorePreformattedAttributes = BlockWithSupportsAnchor & {
@@ -5191,31 +5471,35 @@ export type CorePreformattedAttributes = BlockWithSupportsAnchor & {
 };
 
 /** A block used for editing the site */
-export type CorePullquote = BlockWithSupportsAnchor & EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CorePullquote';
-  /** The anchor field for the block. */
-  anchor?: Maybe<Scalars['String']['output']>;
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CorePullquote Block Type */
-  attributes?: Maybe<CorePullquoteAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CorePullquote = BlockWithSupportsAnchor &
+  EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CorePullquote';
+    /** The anchor field for the block. */
+    anchor?: Maybe<Scalars['String']['output']>;
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CorePullquote Block Type */
+    attributes?: Maybe<CorePullquoteAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CorePullquote Block Type */
 export type CorePullquoteAttributes = BlockWithSupportsAnchor & {
@@ -5249,29 +5533,32 @@ export type CorePullquoteAttributes = BlockWithSupportsAnchor & {
 };
 
 /** A block used for editing the site */
-export type CoreQuery = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreQuery';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreQuery Block Type */
-  attributes?: Maybe<CoreQueryAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreQuery = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreQuery';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreQuery Block Type */
+    attributes?: Maybe<CoreQueryAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreQuery Block Type */
 export type CoreQueryAttributes = {
@@ -5299,29 +5586,32 @@ export type CoreQueryAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreQueryNoResults = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreQueryNoResults';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreQueryNoResults Block Type */
-  attributes?: Maybe<CoreQueryNoResultsAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreQueryNoResults = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreQueryNoResults';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreQueryNoResults Block Type */
+    attributes?: Maybe<CoreQueryNoResultsAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreQueryNoResults Block Type */
 export type CoreQueryNoResultsAttributes = {
@@ -5349,29 +5639,32 @@ export type CoreQueryNoResultsAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreQueryPagination = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreQueryPagination';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreQueryPagination Block Type */
-  attributes?: Maybe<CoreQueryPaginationAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreQueryPagination = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreQueryPagination';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreQueryPagination Block Type */
+    attributes?: Maybe<CoreQueryPaginationAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreQueryPagination Block Type */
 export type CoreQueryPaginationAttributes = {
@@ -5405,29 +5698,32 @@ export type CoreQueryPaginationAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreQueryPaginationNext = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreQueryPaginationNext';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreQueryPaginationNext Block Type */
-  attributes?: Maybe<CoreQueryPaginationNextAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreQueryPaginationNext = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreQueryPaginationNext';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreQueryPaginationNext Block Type */
+    attributes?: Maybe<CoreQueryPaginationNextAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreQueryPaginationNext Block Type */
 export type CoreQueryPaginationNextAttributes = {
@@ -5453,29 +5749,32 @@ export type CoreQueryPaginationNextAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreQueryPaginationNumbers = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreQueryPaginationNumbers';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreQueryPaginationNumbers Block Type */
-  attributes?: Maybe<CoreQueryPaginationNumbersAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreQueryPaginationNumbers = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreQueryPaginationNumbers';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreQueryPaginationNumbers Block Type */
+    attributes?: Maybe<CoreQueryPaginationNumbersAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreQueryPaginationNumbers Block Type */
 export type CoreQueryPaginationNumbersAttributes = {
@@ -5501,29 +5800,32 @@ export type CoreQueryPaginationNumbersAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreQueryPaginationPrevious = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreQueryPaginationPrevious';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreQueryPaginationPrevious Block Type */
-  attributes?: Maybe<CoreQueryPaginationPreviousAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreQueryPaginationPrevious = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreQueryPaginationPrevious';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreQueryPaginationPrevious Block Type */
+    attributes?: Maybe<CoreQueryPaginationPreviousAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreQueryPaginationPrevious Block Type */
 export type CoreQueryPaginationPreviousAttributes = {
@@ -5549,29 +5851,32 @@ export type CoreQueryPaginationPreviousAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreQueryTitle = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreQueryTitle';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreQueryTitle Block Type */
-  attributes?: Maybe<CoreQueryTitleAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreQueryTitle = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreQueryTitle';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreQueryTitle Block Type */
+    attributes?: Maybe<CoreQueryTitleAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreQueryTitle Block Type */
 export type CoreQueryTitleAttributes = {
@@ -5609,31 +5914,35 @@ export type CoreQueryTitleAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreQuote = BlockWithSupportsAnchor & EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreQuote';
-  /** The anchor field for the block. */
-  anchor?: Maybe<Scalars['String']['output']>;
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreQuote Block Type */
-  attributes?: Maybe<CoreQuoteAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreQuote = BlockWithSupportsAnchor &
+  EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreQuote';
+    /** The anchor field for the block. */
+    anchor?: Maybe<Scalars['String']['output']>;
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreQuote Block Type */
+    attributes?: Maybe<CoreQuoteAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreQuote Block Type */
 export type CoreQuoteAttributes = BlockWithSupportsAnchor & {
@@ -5669,29 +5978,32 @@ export type CoreQuoteAttributes = BlockWithSupportsAnchor & {
 };
 
 /** A block used for editing the site */
-export type CoreReadMore = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreReadMore';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreReadMore Block Type */
-  attributes?: Maybe<CoreReadMoreAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreReadMore = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreReadMore';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreReadMore Block Type */
+    attributes?: Maybe<CoreReadMoreAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreReadMore Block Type */
 export type CoreReadMoreAttributes = {
@@ -5723,29 +6035,32 @@ export type CoreReadMoreAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreRss = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreRss';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreRss Block Type */
-  attributes?: Maybe<CoreRssAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreRss = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreRss';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreRss Block Type */
+    attributes?: Maybe<CoreRssAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreRss Block Type */
 export type CoreRssAttributes = {
@@ -5777,29 +6092,32 @@ export type CoreRssAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreSearch = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreSearch';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreSearch Block Type */
-  attributes?: Maybe<CoreSearchAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreSearch = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreSearch';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreSearch Block Type */
+    attributes?: Maybe<CoreSearchAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreSearch Block Type */
 export type CoreSearchAttributes = {
@@ -5849,31 +6167,35 @@ export type CoreSearchAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreSeparator = BlockWithSupportsAnchor & EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreSeparator';
-  /** The anchor field for the block. */
-  anchor?: Maybe<Scalars['String']['output']>;
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreSeparator Block Type */
-  attributes?: Maybe<CoreSeparatorAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreSeparator = BlockWithSupportsAnchor &
+  EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreSeparator';
+    /** The anchor field for the block. */
+    anchor?: Maybe<Scalars['String']['output']>;
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreSeparator Block Type */
+    attributes?: Maybe<CoreSeparatorAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreSeparator Block Type */
 export type CoreSeparatorAttributes = BlockWithSupportsAnchor & {
@@ -5901,29 +6223,32 @@ export type CoreSeparatorAttributes = BlockWithSupportsAnchor & {
 };
 
 /** A block used for editing the site */
-export type CoreShortcode = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreShortcode';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreShortcode Block Type */
-  attributes?: Maybe<CoreShortcodeAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreShortcode = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreShortcode';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreShortcode Block Type */
+    attributes?: Maybe<CoreShortcodeAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreShortcode Block Type */
 export type CoreShortcodeAttributes = {
@@ -5937,29 +6262,32 @@ export type CoreShortcodeAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreSiteLogo = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreSiteLogo';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreSiteLogo Block Type */
-  attributes?: Maybe<CoreSiteLogoAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreSiteLogo = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreSiteLogo';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreSiteLogo Block Type */
+    attributes?: Maybe<CoreSiteLogoAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreSiteLogo Block Type */
 export type CoreSiteLogoAttributes = {
@@ -5985,29 +6313,32 @@ export type CoreSiteLogoAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreSiteTagline = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreSiteTagline';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreSiteTagline Block Type */
-  attributes?: Maybe<CoreSiteTaglineAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreSiteTagline = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreSiteTagline';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreSiteTagline Block Type */
+    attributes?: Maybe<CoreSiteTaglineAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreSiteTagline Block Type */
 export type CoreSiteTaglineAttributes = {
@@ -6039,29 +6370,32 @@ export type CoreSiteTaglineAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreSiteTitle = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreSiteTitle';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreSiteTitle Block Type */
-  attributes?: Maybe<CoreSiteTitleAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreSiteTitle = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreSiteTitle';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreSiteTitle Block Type */
+    attributes?: Maybe<CoreSiteTitleAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreSiteTitle Block Type */
 export type CoreSiteTitleAttributes = {
@@ -6097,29 +6431,32 @@ export type CoreSiteTitleAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreSocialLink = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreSocialLink';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreSocialLink Block Type */
-  attributes?: Maybe<CoreSocialLinkAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreSocialLink = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreSocialLink';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreSocialLink Block Type */
+    attributes?: Maybe<CoreSocialLinkAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreSocialLink Block Type */
 export type CoreSocialLinkAttributes = {
@@ -6141,31 +6478,35 @@ export type CoreSocialLinkAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreSocialLinks = BlockWithSupportsAnchor & EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreSocialLinks';
-  /** The anchor field for the block. */
-  anchor?: Maybe<Scalars['String']['output']>;
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreSocialLinks Block Type */
-  attributes?: Maybe<CoreSocialLinksAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreSocialLinks = BlockWithSupportsAnchor &
+  EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreSocialLinks';
+    /** The anchor field for the block. */
+    anchor?: Maybe<Scalars['String']['output']>;
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreSocialLinks Block Type */
+    attributes?: Maybe<CoreSocialLinksAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreSocialLinks Block Type */
 export type CoreSocialLinksAttributes = BlockWithSupportsAnchor & {
@@ -6209,31 +6550,35 @@ export type CoreSocialLinksAttributes = BlockWithSupportsAnchor & {
 };
 
 /** A block used for editing the site */
-export type CoreSpacer = BlockWithSupportsAnchor & EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreSpacer';
-  /** The anchor field for the block. */
-  anchor?: Maybe<Scalars['String']['output']>;
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreSpacer Block Type */
-  attributes?: Maybe<CoreSpacerAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreSpacer = BlockWithSupportsAnchor &
+  EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreSpacer';
+    /** The anchor field for the block. */
+    anchor?: Maybe<Scalars['String']['output']>;
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreSpacer Block Type */
+    attributes?: Maybe<CoreSpacerAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreSpacer Block Type */
 export type CoreSpacerAttributes = BlockWithSupportsAnchor & {
@@ -6255,31 +6600,35 @@ export type CoreSpacerAttributes = BlockWithSupportsAnchor & {
 };
 
 /** A block used for editing the site */
-export type CoreTable = BlockWithSupportsAnchor & EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreTable';
-  /** The anchor field for the block. */
-  anchor?: Maybe<Scalars['String']['output']>;
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreTable Block Type */
-  attributes?: Maybe<CoreTableAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreTable = BlockWithSupportsAnchor &
+  EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreTable';
+    /** The anchor field for the block. */
+    anchor?: Maybe<Scalars['String']['output']>;
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreTable Block Type */
+    attributes?: Maybe<CoreTableAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreTable Block Type */
 export type CoreTableAttributes = BlockWithSupportsAnchor & {
@@ -6385,29 +6734,32 @@ export type CoreTableAttributesHeadCells = {
 };
 
 /** A block used for editing the site */
-export type CoreTagCloud = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreTagCloud';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreTagCloud Block Type */
-  attributes?: Maybe<CoreTagCloudAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreTagCloud = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreTagCloud';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreTagCloud Block Type */
+    attributes?: Maybe<CoreTagCloudAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreTagCloud Block Type */
 export type CoreTagCloudAttributes = {
@@ -6437,29 +6789,32 @@ export type CoreTagCloudAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreTemplatePart = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreTemplatePart';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreTemplatePart Block Type */
-  attributes?: Maybe<CoreTemplatePartAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreTemplatePart = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreTemplatePart';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreTemplatePart Block Type */
+    attributes?: Maybe<CoreTemplatePartAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreTemplatePart Block Type */
 export type CoreTemplatePartAttributes = {
@@ -6483,29 +6838,32 @@ export type CoreTemplatePartAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreTermDescription = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreTermDescription';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreTermDescription Block Type */
-  attributes?: Maybe<CoreTermDescriptionAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreTermDescription = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreTermDescription';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreTermDescription Block Type */
+    attributes?: Maybe<CoreTermDescriptionAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreTermDescription Block Type */
 export type CoreTermDescriptionAttributes = {
@@ -6533,29 +6891,32 @@ export type CoreTermDescriptionAttributes = {
 };
 
 /** A block used for editing the site */
-export type CoreTextColumns = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreTextColumns';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreTextColumns Block Type */
-  attributes?: Maybe<CoreTextColumnsAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreTextColumns = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreTextColumns';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreTextColumns Block Type */
+    attributes?: Maybe<CoreTextColumnsAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreTextColumns Block Type */
 export type CoreTextColumnsAttributes = {
@@ -6582,31 +6943,35 @@ export type CoreTextColumnsAttributesContent = {
 };
 
 /** A block used for editing the site */
-export type CoreVerse = BlockWithSupportsAnchor & EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreVerse';
-  /** The anchor field for the block. */
-  anchor?: Maybe<Scalars['String']['output']>;
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreVerse Block Type */
-  attributes?: Maybe<CoreVerseAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreVerse = BlockWithSupportsAnchor &
+  EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreVerse';
+    /** The anchor field for the block. */
+    anchor?: Maybe<Scalars['String']['output']>;
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreVerse Block Type */
+    attributes?: Maybe<CoreVerseAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreVerse Block Type */
 export type CoreVerseAttributes = BlockWithSupportsAnchor & {
@@ -6638,31 +7003,35 @@ export type CoreVerseAttributes = BlockWithSupportsAnchor & {
 };
 
 /** A block used for editing the site */
-export type CoreVideo = BlockWithSupportsAnchor & EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreVideo';
-  /** The anchor field for the block. */
-  anchor?: Maybe<Scalars['String']['output']>;
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreVideo Block Type */
-  attributes?: Maybe<CoreVideoAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreVideo = BlockWithSupportsAnchor &
+  EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreVideo';
+    /** The anchor field for the block. */
+    anchor?: Maybe<Scalars['String']['output']>;
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreVideo Block Type */
+    attributes?: Maybe<CoreVideoAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreVideo Block Type */
 export type CoreVideoAttributes = BlockWithSupportsAnchor & {
@@ -6702,29 +7071,32 @@ export type CoreVideoAttributes = BlockWithSupportsAnchor & {
 };
 
 /** A block used for editing the site */
-export type CoreWidgetGroup = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CoreWidgetGroup';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CoreWidgetGroup Block Type */
-  attributes?: Maybe<CoreWidgetGroupAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CoreWidgetGroup = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CoreWidgetGroup';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CoreWidgetGroup Block Type */
+    attributes?: Maybe<CoreWidgetGroupAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CoreWidgetGroup Block Type */
 export type CoreWidgetGroupAttributes = {
@@ -7053,31 +7425,34 @@ export type CreateUserPayload = {
 };
 
 /** A block used for editing the site */
-export type CustomBlockLibraryAwardWinner = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CustomBlockLibraryAwardWinner';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CustomBlockLibraryAwardWinner Block Type */
-  attributes?: Maybe<CustomBlockLibraryAwardWinnerAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** Selected film */
-  film?: Maybe<Film>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CustomBlockLibraryAwardWinner = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CustomBlockLibraryAwardWinner';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CustomBlockLibraryAwardWinner Block Type */
+    attributes?: Maybe<CustomBlockLibraryAwardWinnerAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** Selected film */
+    film?: Maybe<Film>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CustomBlockLibraryAwardWinner Block Type */
 export type CustomBlockLibraryAwardWinnerAttributes = {
@@ -7103,29 +7478,32 @@ export type CustomBlockLibraryAwardWinnerAttributes = {
 };
 
 /** A block used for editing the site */
-export type CustomBlockLibraryFeaturedFilms = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CustomBlockLibraryFeaturedFilms';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CustomBlockLibraryFeaturedFilms Block Type */
-  attributes?: Maybe<CustomBlockLibraryFeaturedFilmsAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CustomBlockLibraryFeaturedFilms = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CustomBlockLibraryFeaturedFilms';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CustomBlockLibraryFeaturedFilms Block Type */
+    attributes?: Maybe<CustomBlockLibraryFeaturedFilmsAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CustomBlockLibraryFeaturedFilms Block Type */
 export type CustomBlockLibraryFeaturedFilmsAttributes = {
@@ -7139,29 +7517,32 @@ export type CustomBlockLibraryFeaturedFilmsAttributes = {
 };
 
 /** A block used for editing the site */
-export type CustomBlockLibraryFeaturedTextList = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CustomBlockLibraryFeaturedTextList';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CustomBlockLibraryFeaturedTextList Block Type */
-  attributes?: Maybe<CustomBlockLibraryFeaturedTextListAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CustomBlockLibraryFeaturedTextList = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CustomBlockLibraryFeaturedTextList';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CustomBlockLibraryFeaturedTextList Block Type */
+    attributes?: Maybe<CustomBlockLibraryFeaturedTextListAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CustomBlockLibraryFeaturedTextList Block Type */
 export type CustomBlockLibraryFeaturedTextListAttributes = {
@@ -7177,31 +7558,34 @@ export type CustomBlockLibraryFeaturedTextListAttributes = {
 };
 
 /** A block used for editing the site */
-export type CustomBlockLibraryFilmSelector = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CustomBlockLibraryFilmSelector';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CustomBlockLibraryFilmSelector Block Type */
-  attributes?: Maybe<CustomBlockLibraryFilmSelectorAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** Selected film */
-  film?: Maybe<Film>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CustomBlockLibraryFilmSelector = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CustomBlockLibraryFilmSelector';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CustomBlockLibraryFilmSelector Block Type */
+    attributes?: Maybe<CustomBlockLibraryFilmSelectorAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** Selected film */
+    film?: Maybe<Film>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CustomBlockLibraryFilmSelector Block Type */
 export type CustomBlockLibraryFilmSelectorAttributes = {
@@ -7221,31 +7605,34 @@ export type CustomBlockLibraryFilmSelectorAttributes = {
 };
 
 /** A block used for editing the site */
-export type CustomBlockLibraryPostSelector = EditorBlock & FilmEditorBlock & PageEditorBlock & PostEditorBlock & {
-  __typename?: 'CustomBlockLibraryPostSelector';
-  /** The API version of the Gutenberg Block */
-  apiVersion?: Maybe<Scalars['Int']['output']>;
-  /** Attributes of the CustomBlockLibraryPostSelector Block Type */
-  attributes?: Maybe<CustomBlockLibraryPostSelectorAttributes>;
-  /** The name of the category the Block belongs to */
-  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
-  /** The id of the Block */
-  clientId?: Maybe<Scalars['String']['output']>;
-  /** CSS Classnames to apply to the block */
-  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The inner blocks of the Block */
-  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
-  /** Whether the block is Dynamic (server rendered) */
-  isDynamic: Scalars['Boolean']['output'];
-  /** The name of the block */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The parent id of the Block */
-  parentClientId?: Maybe<Scalars['String']['output']>;
-  /** Selected post */
-  post?: Maybe<Post>;
-  /** The rendered HTML for the block */
-  renderedHtml?: Maybe<Scalars['String']['output']>;
-};
+export type CustomBlockLibraryPostSelector = EditorBlock &
+  FilmEditorBlock &
+  PageEditorBlock &
+  PostEditorBlock & {
+    __typename?: 'CustomBlockLibraryPostSelector';
+    /** The API version of the Gutenberg Block */
+    apiVersion?: Maybe<Scalars['Int']['output']>;
+    /** Attributes of the CustomBlockLibraryPostSelector Block Type */
+    attributes?: Maybe<CustomBlockLibraryPostSelectorAttributes>;
+    /** The name of the category the Block belongs to */
+    blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+    /** The id of the Block */
+    clientId?: Maybe<Scalars['String']['output']>;
+    /** CSS Classnames to apply to the block */
+    cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The inner blocks of the Block */
+    innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+    /** Whether the block is Dynamic (server rendered) */
+    isDynamic: Scalars['Boolean']['output'];
+    /** The name of the block */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The parent id of the Block */
+    parentClientId?: Maybe<Scalars['String']['output']>;
+    /** Selected post */
+    post?: Maybe<Post>;
+    /** The rendered HTML for the block */
+    renderedHtml?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Attributes of the CustomBlockLibraryPostSelector Block Type */
 export type CustomBlockLibraryPostSelectorAttributes = {
@@ -7576,39 +7963,40 @@ export type EnqueuedAsset = {
 };
 
 /** Script enqueued by the CMS */
-export type EnqueuedScript = EnqueuedAsset & Node & {
-  __typename?: 'EnqueuedScript';
-  /** The inline code to be run after the asset is loaded. */
-  after?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /**
-   * Deprecated
-   * @deprecated Use `EnqueuedAsset.media` instead.
-   */
-  args?: Maybe<Scalars['Boolean']['output']>;
-  /** The inline code to be run before the asset is loaded. */
-  before?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The HTML conditional comment for the enqueued asset. E.g. IE 6, lte IE 7, etc */
-  conditional?: Maybe<Scalars['String']['output']>;
-  /** Dependencies needed to use this asset */
-  dependencies?: Maybe<Array<Maybe<EnqueuedScript>>>;
-  /**
-   * Extra information needed for the script
-   * @deprecated Use `EnqueuedScript.extraData` instead.
-   */
-  extra?: Maybe<Scalars['String']['output']>;
-  /** Extra data supplied to the enqueued script */
-  extraData?: Maybe<Scalars['String']['output']>;
-  /** The handle of the enqueued asset */
-  handle?: Maybe<Scalars['String']['output']>;
-  /** The global ID of the enqueued script */
-  id: Scalars['ID']['output'];
-  /** The source of the asset */
-  src?: Maybe<Scalars['String']['output']>;
-  /** The loading strategy to use on the script tag */
-  strategy?: Maybe<ScriptLoadingStrategyEnum>;
-  /** The version of the enqueued script */
-  version?: Maybe<Scalars['String']['output']>;
-};
+export type EnqueuedScript = EnqueuedAsset &
+  Node & {
+    __typename?: 'EnqueuedScript';
+    /** The inline code to be run after the asset is loaded. */
+    after?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /**
+     * Deprecated
+     * @deprecated Use `EnqueuedAsset.media` instead.
+     */
+    args?: Maybe<Scalars['Boolean']['output']>;
+    /** The inline code to be run before the asset is loaded. */
+    before?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The HTML conditional comment for the enqueued asset. E.g. IE 6, lte IE 7, etc */
+    conditional?: Maybe<Scalars['String']['output']>;
+    /** Dependencies needed to use this asset */
+    dependencies?: Maybe<Array<Maybe<EnqueuedScript>>>;
+    /**
+     * Extra information needed for the script
+     * @deprecated Use `EnqueuedScript.extraData` instead.
+     */
+    extra?: Maybe<Scalars['String']['output']>;
+    /** Extra data supplied to the enqueued script */
+    extraData?: Maybe<Scalars['String']['output']>;
+    /** The handle of the enqueued asset */
+    handle?: Maybe<Scalars['String']['output']>;
+    /** The global ID of the enqueued script */
+    id: Scalars['ID']['output'];
+    /** The source of the asset */
+    src?: Maybe<Scalars['String']['output']>;
+    /** The loading strategy to use on the script tag */
+    strategy?: Maybe<ScriptLoadingStrategyEnum>;
+    /** The version of the enqueued script */
+    version?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Connection to EnqueuedScript Nodes */
 export type EnqueuedScriptConnection = {
@@ -7641,47 +8029,48 @@ export type EnqueuedScriptConnectionPageInfo = {
 };
 
 /** Stylesheet enqueued by the CMS */
-export type EnqueuedStylesheet = EnqueuedAsset & Node & {
-  __typename?: 'EnqueuedStylesheet';
-  /** The inline code to be run after the asset is loaded. */
-  after?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /**
-   * Deprecated
-   * @deprecated Use `EnqueuedAsset.media` instead.
-   */
-  args?: Maybe<Scalars['Boolean']['output']>;
-  /** The inline code to be run before the asset is loaded. */
-  before?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The HTML conditional comment for the enqueued asset. E.g. IE 6, lte IE 7, etc */
-  conditional?: Maybe<Scalars['String']['output']>;
-  /** Dependencies needed to use this asset */
-  dependencies?: Maybe<Array<Maybe<EnqueuedStylesheet>>>;
-  /**
-   * Extra information needed for the script
-   * @deprecated Use `EnqueuedScript.extraData` instead.
-   */
-  extra?: Maybe<Scalars['String']['output']>;
-  /** The handle of the enqueued asset */
-  handle?: Maybe<Scalars['String']['output']>;
-  /** The global ID of the enqueued stylesheet */
-  id: Scalars['ID']['output'];
-  /** Whether the enqueued style is RTL or not */
-  isRtl?: Maybe<Scalars['Boolean']['output']>;
-  /** The media attribute to use for the link */
-  media?: Maybe<Scalars['String']['output']>;
-  /** The absolute path to the enqueued style. Set when the stylesheet is meant to load inline. */
-  path?: Maybe<Scalars['String']['output']>;
-  /** The `rel` attribute to use for the link */
-  rel?: Maybe<Scalars['String']['output']>;
-  /** The source of the asset */
-  src?: Maybe<Scalars['String']['output']>;
-  /** Optional suffix, used in combination with RTL */
-  suffix?: Maybe<Scalars['String']['output']>;
-  /** The title of the enqueued style. Used for preferred/alternate stylesheets. */
-  title?: Maybe<Scalars['String']['output']>;
-  /** The version of the enqueued style */
-  version?: Maybe<Scalars['String']['output']>;
-};
+export type EnqueuedStylesheet = EnqueuedAsset &
+  Node & {
+    __typename?: 'EnqueuedStylesheet';
+    /** The inline code to be run after the asset is loaded. */
+    after?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /**
+     * Deprecated
+     * @deprecated Use `EnqueuedAsset.media` instead.
+     */
+    args?: Maybe<Scalars['Boolean']['output']>;
+    /** The inline code to be run before the asset is loaded. */
+    before?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The HTML conditional comment for the enqueued asset. E.g. IE 6, lte IE 7, etc */
+    conditional?: Maybe<Scalars['String']['output']>;
+    /** Dependencies needed to use this asset */
+    dependencies?: Maybe<Array<Maybe<EnqueuedStylesheet>>>;
+    /**
+     * Extra information needed for the script
+     * @deprecated Use `EnqueuedScript.extraData` instead.
+     */
+    extra?: Maybe<Scalars['String']['output']>;
+    /** The handle of the enqueued asset */
+    handle?: Maybe<Scalars['String']['output']>;
+    /** The global ID of the enqueued stylesheet */
+    id: Scalars['ID']['output'];
+    /** Whether the enqueued style is RTL or not */
+    isRtl?: Maybe<Scalars['Boolean']['output']>;
+    /** The media attribute to use for the link */
+    media?: Maybe<Scalars['String']['output']>;
+    /** The absolute path to the enqueued style. Set when the stylesheet is meant to load inline. */
+    path?: Maybe<Scalars['String']['output']>;
+    /** The `rel` attribute to use for the link */
+    rel?: Maybe<Scalars['String']['output']>;
+    /** The source of the asset */
+    src?: Maybe<Scalars['String']['output']>;
+    /** Optional suffix, used in combination with RTL */
+    suffix?: Maybe<Scalars['String']['output']>;
+    /** The title of the enqueued style. Used for preferred/alternate stylesheets. */
+    title?: Maybe<Scalars['String']['output']>;
+    /** The version of the enqueued style */
+    version?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Connection to EnqueuedStylesheet Nodes */
 export type EnqueuedStylesheetConnection = {
@@ -7714,100 +8103,110 @@ export type EnqueuedStylesheetConnectionPageInfo = {
 };
 
 /** The film type */
-export type Film = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithContentEditor & NodeWithEditorBlocks & NodeWithExcerpt & NodeWithFeaturedImage & NodeWithFilmEditorBlocks & NodeWithPageAttributes & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable & {
-  __typename?: 'Film';
-  /** @deprecated Deprecated in favor of using Next.js pages */
-  conditionalTags?: Maybe<ConditionalTags>;
-  /** The content of the post. */
-  content?: Maybe<Scalars['String']['output']>;
-  /** Connection between the ContentNode type and the ContentType type */
-  contentType?: Maybe<ContentNodeToContentTypeConnectionEdge>;
-  /** The name of the Content Type the node belongs to */
-  contentTypeName: Scalars['String']['output'];
-  /** The unique identifier stored in the database */
-  databaseId: Scalars['Int']['output'];
-  /** Post publishing date. */
-  date?: Maybe<Scalars['String']['output']>;
-  /** The publishing date set in GMT. */
-  dateGmt?: Maybe<Scalars['String']['output']>;
-  /** The desired slug of the post */
-  desiredSlug?: Maybe<Scalars['String']['output']>;
-  /** If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn&#039;t exist or is greater than 15 seconds */
-  editingLockedBy?: Maybe<ContentNodeToEditLockConnectionEdge>;
-  /** List of Film editor blocks */
-  editorBlocks?: Maybe<Array<Maybe<FilmEditorBlock>>>;
-  /** The RSS enclosure for the object */
-  enclosure?: Maybe<Scalars['String']['output']>;
-  /** Connection between the ContentNode type and the EnqueuedScript type */
-  enqueuedScripts?: Maybe<ContentNodeToEnqueuedScriptConnection>;
-  /** Connection between the ContentNode type and the EnqueuedStylesheet type */
-  enqueuedStylesheets?: Maybe<ContentNodeToEnqueuedStylesheetConnection>;
-  /** The excerpt of the post. */
-  excerpt?: Maybe<Scalars['String']['output']>;
-  /** Connection between the NodeWithFeaturedImage type and the MediaItem type */
-  featuredImage?: Maybe<NodeWithFeaturedImageToMediaItemConnectionEdge>;
-  /** The database identifier for the featured image node assigned to the content node */
-  featuredImageDatabaseId?: Maybe<Scalars['Int']['output']>;
-  /** Globally unique ID of the featured image assigned to the node */
-  featuredImageId?: Maybe<Scalars['ID']['output']>;
-  /**
-   * The id field matches the WP_Post-&gt;ID field.
-   * @deprecated Deprecated in favor of the databaseId field
-   */
-  filmId: Scalars['Int']['output'];
-  /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
-  guid?: Maybe<Scalars['String']['output']>;
-  /** The globally unique identifier of the film object. */
-  id: Scalars['ID']['output'];
-  /** Whether the node is a Content Node */
-  isContentNode: Scalars['Boolean']['output'];
-  /** Whether the object is a node in the preview state */
-  isPreview?: Maybe<Scalars['Boolean']['output']>;
-  /** Whether the object is restricted from the current viewer */
-  isRestricted?: Maybe<Scalars['Boolean']['output']>;
-  /** Whether the node is a Term */
-  isTermNode: Scalars['Boolean']['output'];
-  /** The user that most recently edited the node */
-  lastEditedBy?: Maybe<ContentNodeToEditLastConnectionEdge>;
-  /** The permalink of the post */
-  link?: Maybe<Scalars['String']['output']>;
-  /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
-  menuOrder?: Maybe<Scalars['Int']['output']>;
-  /** The local modified time for a post. If a post was recently updated the modified field will change to match the corresponding time. */
-  modified?: Maybe<Scalars['String']['output']>;
-  /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
-  modifiedGmt?: Maybe<Scalars['String']['output']>;
-  /** Connection between the Film type and the film type */
-  preview?: Maybe<FilmToPreviewConnectionEdge>;
-  /** The database id of the preview node */
-  previewRevisionDatabaseId?: Maybe<Scalars['Int']['output']>;
-  /** Whether the object is a node in the preview state */
-  previewRevisionId?: Maybe<Scalars['ID']['output']>;
-  /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
-  slug?: Maybe<Scalars['String']['output']>;
-  /** The current status of the object */
-  status?: Maybe<Scalars['String']['output']>;
-  /** The template assigned to the node */
-  template?: Maybe<ContentTemplate>;
-  templates?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made. */
-  title?: Maybe<Scalars['String']['output']>;
-  /** The unique resource identifier path */
-  uri?: Maybe<Scalars['String']['output']>;
-};
-
+export type Film = ContentNode &
+  DatabaseIdentifier &
+  MenuItemLinkable &
+  Node &
+  NodeWithContentEditor &
+  NodeWithEditorBlocks &
+  NodeWithExcerpt &
+  NodeWithFeaturedImage &
+  NodeWithFilmEditorBlocks &
+  NodeWithPageAttributes &
+  NodeWithTemplate &
+  NodeWithTitle &
+  Previewable &
+  UniformResourceIdentifiable & {
+    __typename?: 'Film';
+    /** @deprecated Deprecated in favor of using Next.js pages */
+    conditionalTags?: Maybe<ConditionalTags>;
+    /** The content of the post. */
+    content?: Maybe<Scalars['String']['output']>;
+    /** Connection between the ContentNode type and the ContentType type */
+    contentType?: Maybe<ContentNodeToContentTypeConnectionEdge>;
+    /** The name of the Content Type the node belongs to */
+    contentTypeName: Scalars['String']['output'];
+    /** The unique identifier stored in the database */
+    databaseId: Scalars['Int']['output'];
+    /** Post publishing date. */
+    date?: Maybe<Scalars['String']['output']>;
+    /** The publishing date set in GMT. */
+    dateGmt?: Maybe<Scalars['String']['output']>;
+    /** The desired slug of the post */
+    desiredSlug?: Maybe<Scalars['String']['output']>;
+    /** If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn&#039;t exist or is greater than 15 seconds */
+    editingLockedBy?: Maybe<ContentNodeToEditLockConnectionEdge>;
+    /** List of Film editor blocks */
+    editorBlocks?: Maybe<Array<Maybe<FilmEditorBlock>>>;
+    /** The RSS enclosure for the object */
+    enclosure?: Maybe<Scalars['String']['output']>;
+    /** Connection between the ContentNode type and the EnqueuedScript type */
+    enqueuedScripts?: Maybe<ContentNodeToEnqueuedScriptConnection>;
+    /** Connection between the ContentNode type and the EnqueuedStylesheet type */
+    enqueuedStylesheets?: Maybe<ContentNodeToEnqueuedStylesheetConnection>;
+    /** The excerpt of the post. */
+    excerpt?: Maybe<Scalars['String']['output']>;
+    /** Connection between the NodeWithFeaturedImage type and the MediaItem type */
+    featuredImage?: Maybe<NodeWithFeaturedImageToMediaItemConnectionEdge>;
+    /** The database identifier for the featured image node assigned to the content node */
+    featuredImageDatabaseId?: Maybe<Scalars['Int']['output']>;
+    /** Globally unique ID of the featured image assigned to the node */
+    featuredImageId?: Maybe<Scalars['ID']['output']>;
+    /**
+     * The id field matches the WP_Post-&gt;ID field.
+     * @deprecated Deprecated in favor of the databaseId field
+     */
+    filmId: Scalars['Int']['output'];
+    /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+    guid?: Maybe<Scalars['String']['output']>;
+    /** The globally unique identifier of the film object. */
+    id: Scalars['ID']['output'];
+    /** Whether the node is a Content Node */
+    isContentNode: Scalars['Boolean']['output'];
+    /** Whether the object is a node in the preview state */
+    isPreview?: Maybe<Scalars['Boolean']['output']>;
+    /** Whether the object is restricted from the current viewer */
+    isRestricted?: Maybe<Scalars['Boolean']['output']>;
+    /** Whether the node is a Term */
+    isTermNode: Scalars['Boolean']['output'];
+    /** The user that most recently edited the node */
+    lastEditedBy?: Maybe<ContentNodeToEditLastConnectionEdge>;
+    /** The permalink of the post */
+    link?: Maybe<Scalars['String']['output']>;
+    /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
+    menuOrder?: Maybe<Scalars['Int']['output']>;
+    /** The local modified time for a post. If a post was recently updated the modified field will change to match the corresponding time. */
+    modified?: Maybe<Scalars['String']['output']>;
+    /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
+    modifiedGmt?: Maybe<Scalars['String']['output']>;
+    /** Connection between the Film type and the film type */
+    preview?: Maybe<FilmToPreviewConnectionEdge>;
+    /** The database id of the preview node */
+    previewRevisionDatabaseId?: Maybe<Scalars['Int']['output']>;
+    /** Whether the object is a node in the preview state */
+    previewRevisionId?: Maybe<Scalars['ID']['output']>;
+    /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+    slug?: Maybe<Scalars['String']['output']>;
+    /** The current status of the object */
+    status?: Maybe<Scalars['String']['output']>;
+    /** The template assigned to the node */
+    template?: Maybe<ContentTemplate>;
+    templates?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made. */
+    title?: Maybe<Scalars['String']['output']>;
+    /** The unique resource identifier path */
+    uri?: Maybe<Scalars['String']['output']>;
+  };
 
 /** The film type */
 export type FilmContentArgs = {
   format?: InputMaybe<PostObjectFieldFormatEnum>;
 };
 
-
 /** The film type */
 export type FilmEditorBlocksArgs = {
   flat?: InputMaybe<Scalars['Boolean']['input']>;
 };
-
 
 /** The film type */
 export type FilmEnqueuedScriptsArgs = {
@@ -7817,7 +8216,6 @@ export type FilmEnqueuedScriptsArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
 };
 
-
 /** The film type */
 export type FilmEnqueuedStylesheetsArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -7826,12 +8224,10 @@ export type FilmEnqueuedStylesheetsArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
 };
 
-
 /** The film type */
 export type FilmExcerptArgs = {
   format?: InputMaybe<PostObjectFieldFormatEnum>;
 };
-
 
 /** The film type */
 export type FilmTitleArgs = {
@@ -7899,17 +8295,19 @@ export enum FilmIdType {
   /** Identify a resource by the slug. Available to non-hierarchcial Types where the slug is a unique identifier. */
   Slug = 'SLUG',
   /** Identify a resource by the URI. */
-  Uri = 'URI'
+  Uri = 'URI',
 }
 
 /** Connection between the Film type and the film type */
-export type FilmToPreviewConnectionEdge = Edge & FilmConnectionEdge & OneToOneConnection & {
-  __typename?: 'FilmToPreviewConnectionEdge';
-  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The node of the connection, without the edges */
-  node: Film;
-};
+export type FilmToPreviewConnectionEdge = Edge &
+  FilmConnectionEdge &
+  OneToOneConnection & {
+    __typename?: 'FilmToPreviewConnectionEdge';
+    /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The node of the connection, without the edges */
+    node: Film;
+  };
 
 /** The general setting type */
 export type GeneralSettings = {
@@ -7962,7 +8360,7 @@ export enum GlobalStylesheetTypesEnum {
   BaseLayoutStyles = 'BASE_LAYOUT_STYLES',
   Presets = 'PRESETS',
   Styles = 'STYLES',
-  Variables = 'VARIABLES'
+  Variables = 'VARIABLES',
 }
 
 /** Content node with hierarchical (parent/child) relationships */
@@ -8034,7 +8432,6 @@ export type HierarchicalContentNode = {
   uri?: Maybe<Scalars['String']['output']>;
 };
 
-
 /** Content node with hierarchical (parent/child) relationships */
 export type HierarchicalContentNodeAncestorsArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -8043,7 +8440,6 @@ export type HierarchicalContentNodeAncestorsArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<HierarchicalContentNodeToContentNodeAncestorsConnectionWhereArgs>;
 };
-
 
 /** Content node with hierarchical (parent/child) relationships */
 export type HierarchicalContentNodeChildrenArgs = {
@@ -8054,7 +8450,6 @@ export type HierarchicalContentNodeChildrenArgs = {
   where?: InputMaybe<HierarchicalContentNodeToContentNodeChildrenConnectionWhereArgs>;
 };
 
-
 /** Content node with hierarchical (parent/child) relationships */
 export type HierarchicalContentNodeEnqueuedScriptsArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -8062,7 +8457,6 @@ export type HierarchicalContentNodeEnqueuedScriptsArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
 };
-
 
 /** Content node with hierarchical (parent/child) relationships */
 export type HierarchicalContentNodeEnqueuedStylesheetsArgs = {
@@ -8073,37 +8467,44 @@ export type HierarchicalContentNodeEnqueuedStylesheetsArgs = {
 };
 
 /** Connection between the HierarchicalContentNode type and the ContentNode type */
-export type HierarchicalContentNodeToContentNodeAncestorsConnection = Connection & ContentNodeConnection & {
-  __typename?: 'HierarchicalContentNodeToContentNodeAncestorsConnection';
-  /** Edges for the HierarchicalContentNodeToContentNodeAncestorsConnection connection */
-  edges: Array<HierarchicalContentNodeToContentNodeAncestorsConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<ContentNode>;
-  /** Information about pagination in a connection. */
-  pageInfo: HierarchicalContentNodeToContentNodeAncestorsConnectionPageInfo;
-};
+export type HierarchicalContentNodeToContentNodeAncestorsConnection =
+  Connection &
+    ContentNodeConnection & {
+      __typename?: 'HierarchicalContentNodeToContentNodeAncestorsConnection';
+      /** Edges for the HierarchicalContentNodeToContentNodeAncestorsConnection connection */
+      edges: Array<HierarchicalContentNodeToContentNodeAncestorsConnectionEdge>;
+      /** The nodes of the connection, without the edges */
+      nodes: Array<ContentNode>;
+      /** Information about pagination in a connection. */
+      pageInfo: HierarchicalContentNodeToContentNodeAncestorsConnectionPageInfo;
+    };
 
 /** An edge in a connection */
-export type HierarchicalContentNodeToContentNodeAncestorsConnectionEdge = ContentNodeConnectionEdge & Edge & {
-  __typename?: 'HierarchicalContentNodeToContentNodeAncestorsConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: ContentNode;
-};
+export type HierarchicalContentNodeToContentNodeAncestorsConnectionEdge =
+  ContentNodeConnectionEdge &
+    Edge & {
+      __typename?: 'HierarchicalContentNodeToContentNodeAncestorsConnectionEdge';
+      /** A cursor for use in pagination */
+      cursor?: Maybe<Scalars['String']['output']>;
+      /** The item at the end of the edge */
+      node: ContentNode;
+    };
 
 /** Page Info on the &quot;HierarchicalContentNodeToContentNodeAncestorsConnection&quot; */
-export type HierarchicalContentNodeToContentNodeAncestorsConnectionPageInfo = ContentNodeConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'HierarchicalContentNodeToContentNodeAncestorsConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type HierarchicalContentNodeToContentNodeAncestorsConnectionPageInfo =
+  ContentNodeConnectionPageInfo &
+    PageInfo &
+    WpPageInfo & {
+      __typename?: 'HierarchicalContentNodeToContentNodeAncestorsConnectionPageInfo';
+      /** When paginating forwards, the cursor to continue. */
+      endCursor?: Maybe<Scalars['String']['output']>;
+      /** When paginating forwards, are there more items? */
+      hasNextPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, are there more items? */
+      hasPreviousPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, the cursor to continue. */
+      startCursor?: Maybe<Scalars['String']['output']>;
+    };
 
 /** Arguments for filtering the HierarchicalContentNodeToContentNodeAncestorsConnection connection */
 export type HierarchicalContentNodeToContentNodeAncestorsConnectionWhereArgs = {
@@ -8146,37 +8547,44 @@ export type HierarchicalContentNodeToContentNodeAncestorsConnectionWhereArgs = {
 };
 
 /** Connection between the HierarchicalContentNode type and the ContentNode type */
-export type HierarchicalContentNodeToContentNodeChildrenConnection = Connection & ContentNodeConnection & {
-  __typename?: 'HierarchicalContentNodeToContentNodeChildrenConnection';
-  /** Edges for the HierarchicalContentNodeToContentNodeChildrenConnection connection */
-  edges: Array<HierarchicalContentNodeToContentNodeChildrenConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<ContentNode>;
-  /** Information about pagination in a connection. */
-  pageInfo: HierarchicalContentNodeToContentNodeChildrenConnectionPageInfo;
-};
+export type HierarchicalContentNodeToContentNodeChildrenConnection =
+  Connection &
+    ContentNodeConnection & {
+      __typename?: 'HierarchicalContentNodeToContentNodeChildrenConnection';
+      /** Edges for the HierarchicalContentNodeToContentNodeChildrenConnection connection */
+      edges: Array<HierarchicalContentNodeToContentNodeChildrenConnectionEdge>;
+      /** The nodes of the connection, without the edges */
+      nodes: Array<ContentNode>;
+      /** Information about pagination in a connection. */
+      pageInfo: HierarchicalContentNodeToContentNodeChildrenConnectionPageInfo;
+    };
 
 /** An edge in a connection */
-export type HierarchicalContentNodeToContentNodeChildrenConnectionEdge = ContentNodeConnectionEdge & Edge & {
-  __typename?: 'HierarchicalContentNodeToContentNodeChildrenConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: ContentNode;
-};
+export type HierarchicalContentNodeToContentNodeChildrenConnectionEdge =
+  ContentNodeConnectionEdge &
+    Edge & {
+      __typename?: 'HierarchicalContentNodeToContentNodeChildrenConnectionEdge';
+      /** A cursor for use in pagination */
+      cursor?: Maybe<Scalars['String']['output']>;
+      /** The item at the end of the edge */
+      node: ContentNode;
+    };
 
 /** Page Info on the &quot;HierarchicalContentNodeToContentNodeChildrenConnection&quot; */
-export type HierarchicalContentNodeToContentNodeChildrenConnectionPageInfo = ContentNodeConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'HierarchicalContentNodeToContentNodeChildrenConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type HierarchicalContentNodeToContentNodeChildrenConnectionPageInfo =
+  ContentNodeConnectionPageInfo &
+    PageInfo &
+    WpPageInfo & {
+      __typename?: 'HierarchicalContentNodeToContentNodeChildrenConnectionPageInfo';
+      /** When paginating forwards, the cursor to continue. */
+      endCursor?: Maybe<Scalars['String']['output']>;
+      /** When paginating forwards, are there more items? */
+      hasNextPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, are there more items? */
+      hasPreviousPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, the cursor to continue. */
+      startCursor?: Maybe<Scalars['String']['output']>;
+    };
 
 /** Arguments for filtering the HierarchicalContentNodeToContentNodeChildrenConnection connection */
 export type HierarchicalContentNodeToContentNodeChildrenConnectionWhereArgs = {
@@ -8219,13 +8627,16 @@ export type HierarchicalContentNodeToContentNodeChildrenConnectionWhereArgs = {
 };
 
 /** Connection between the HierarchicalContentNode type and the ContentNode type */
-export type HierarchicalContentNodeToParentContentNodeConnectionEdge = ContentNodeConnectionEdge & Edge & OneToOneConnection & {
-  __typename?: 'HierarchicalContentNodeToParentContentNodeConnectionEdge';
-  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The node of the connection, without the edges */
-  node: ContentNode;
-};
+export type HierarchicalContentNodeToParentContentNodeConnectionEdge =
+  ContentNodeConnectionEdge &
+    Edge &
+    OneToOneConnection & {
+      __typename?: 'HierarchicalContentNodeToParentContentNodeConnectionEdge';
+      /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+      cursor?: Maybe<Scalars['String']['output']>;
+      /** The node of the connection, without the edges */
+      node: ContentNode;
+    };
 
 /** Node with hierarchical (parent/child) relationships */
 export type HierarchicalNode = {
@@ -8282,7 +8693,6 @@ export type HierarchicalTermNode = {
   uri?: Maybe<Scalars['String']['output']>;
 };
 
-
 /** Term node with hierarchical (parent/child) relationships */
 export type HierarchicalTermNodeEnqueuedScriptsArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -8290,7 +8700,6 @@ export type HierarchicalTermNodeEnqueuedScriptsArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
 };
-
 
 /** Term node with hierarchical (parent/child) relationships */
 export type HierarchicalTermNodeEnqueuedStylesheetsArgs = {
@@ -8315,7 +8724,6 @@ export type MediaDetails = {
   width?: Maybe<Scalars['Int']['output']>;
 };
 
-
 /** File details for a Media Item */
 export type MediaDetailsSizesArgs = {
   exclude?: InputMaybe<Array<InputMaybe<MediaItemSizeEnum>>>;
@@ -8323,116 +8731,124 @@ export type MediaDetailsSizesArgs = {
 };
 
 /** The mediaItem type */
-export type MediaItem = ContentNode & DatabaseIdentifier & HierarchicalContentNode & HierarchicalNode & Node & NodeWithAuthor & NodeWithComments & NodeWithTemplate & NodeWithTitle & UniformResourceIdentifiable & {
-  __typename?: 'MediaItem';
-  /** Alternative text to display when resource is not displayed */
-  altText?: Maybe<Scalars['String']['output']>;
-  /** Returns ancestors of the node. Default ordered as lowest (closest to the child) to highest (closest to the root). */
-  ancestors?: Maybe<HierarchicalContentNodeToContentNodeAncestorsConnection>;
-  /** Connection between the NodeWithAuthor type and the User type */
-  author?: Maybe<NodeWithAuthorToUserConnectionEdge>;
-  /** The database identifier of the author of the node */
-  authorDatabaseId?: Maybe<Scalars['Int']['output']>;
-  /** The globally unique identifier of the author of the node */
-  authorId?: Maybe<Scalars['ID']['output']>;
-  /** The caption for the resource */
-  caption?: Maybe<Scalars['String']['output']>;
-  /** Connection between the HierarchicalContentNode type and the ContentNode type */
-  children?: Maybe<HierarchicalContentNodeToContentNodeChildrenConnection>;
-  /** The number of comments. Even though WPGraphQL denotes this field as an integer, in WordPress this field should be saved as a numeric string for compatibility. */
-  commentCount?: Maybe<Scalars['Int']['output']>;
-  /** Whether the comments are open or closed for this particular post. */
-  commentStatus?: Maybe<Scalars['String']['output']>;
-  /** Connection between the MediaItem type and the Comment type */
-  comments?: Maybe<MediaItemToCommentConnection>;
-  /** @deprecated Deprecated in favor of using Next.js pages */
-  conditionalTags?: Maybe<ConditionalTags>;
-  /** Connection between the ContentNode type and the ContentType type */
-  contentType?: Maybe<ContentNodeToContentTypeConnectionEdge>;
-  /** The name of the Content Type the node belongs to */
-  contentTypeName: Scalars['String']['output'];
-  /** The unique identifier stored in the database */
-  databaseId: Scalars['Int']['output'];
-  /** Post publishing date. */
-  date?: Maybe<Scalars['String']['output']>;
-  /** The publishing date set in GMT. */
-  dateGmt?: Maybe<Scalars['String']['output']>;
-  /** Description of the image (stored as post_content) */
-  description?: Maybe<Scalars['String']['output']>;
-  /** The desired slug of the post */
-  desiredSlug?: Maybe<Scalars['String']['output']>;
-  /** If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn&#039;t exist or is greater than 15 seconds */
-  editingLockedBy?: Maybe<ContentNodeToEditLockConnectionEdge>;
-  /** The RSS enclosure for the object */
-  enclosure?: Maybe<Scalars['String']['output']>;
-  /** Connection between the ContentNode type and the EnqueuedScript type */
-  enqueuedScripts?: Maybe<ContentNodeToEnqueuedScriptConnection>;
-  /** Connection between the ContentNode type and the EnqueuedStylesheet type */
-  enqueuedStylesheets?: Maybe<ContentNodeToEnqueuedStylesheetConnection>;
-  /** The filesize in bytes of the resource */
-  fileSize?: Maybe<Scalars['Int']['output']>;
-  /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
-  guid?: Maybe<Scalars['String']['output']>;
-  /** The globally unique identifier of the attachment object. */
-  id: Scalars['ID']['output'];
-  /** Whether the node is a Content Node */
-  isContentNode: Scalars['Boolean']['output'];
-  /** Whether the object is a node in the preview state */
-  isPreview?: Maybe<Scalars['Boolean']['output']>;
-  /** Whether the object is restricted from the current viewer */
-  isRestricted?: Maybe<Scalars['Boolean']['output']>;
-  /** Whether the node is a Term */
-  isTermNode: Scalars['Boolean']['output'];
-  /** The user that most recently edited the node */
-  lastEditedBy?: Maybe<ContentNodeToEditLastConnectionEdge>;
-  /** The permalink of the post */
-  link?: Maybe<Scalars['String']['output']>;
-  /** Details about the mediaItem */
-  mediaDetails?: Maybe<MediaDetails>;
-  /**
-   * The id field matches the WP_Post-&gt;ID field.
-   * @deprecated Deprecated in favor of the databaseId field
-   */
-  mediaItemId: Scalars['Int']['output'];
-  /** Url of the mediaItem */
-  mediaItemUrl?: Maybe<Scalars['String']['output']>;
-  /** Type of resource */
-  mediaType?: Maybe<Scalars['String']['output']>;
-  /** The mime type of the mediaItem */
-  mimeType?: Maybe<Scalars['String']['output']>;
-  /** The local modified time for a post. If a post was recently updated the modified field will change to match the corresponding time. */
-  modified?: Maybe<Scalars['String']['output']>;
-  /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
-  modifiedGmt?: Maybe<Scalars['String']['output']>;
-  /** The parent of the node. The parent object can be of various types */
-  parent?: Maybe<HierarchicalContentNodeToParentContentNodeConnectionEdge>;
-  /** Database id of the parent node */
-  parentDatabaseId?: Maybe<Scalars['Int']['output']>;
-  /** The globally unique identifier of the parent node. */
-  parentId?: Maybe<Scalars['ID']['output']>;
-  /** The database id of the preview node */
-  previewRevisionDatabaseId?: Maybe<Scalars['Int']['output']>;
-  /** Whether the object is a node in the preview state */
-  previewRevisionId?: Maybe<Scalars['ID']['output']>;
-  /** The sizes attribute value for an image. */
-  sizes?: Maybe<Scalars['String']['output']>;
-  /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
-  slug?: Maybe<Scalars['String']['output']>;
-  /** Url of the mediaItem */
-  sourceUrl?: Maybe<Scalars['String']['output']>;
-  /** The srcset attribute specifies the URL of the image to use in different situations. It is a comma separated string of urls and their widths. */
-  srcSet?: Maybe<Scalars['String']['output']>;
-  /** The current status of the object */
-  status?: Maybe<Scalars['String']['output']>;
-  /** The template assigned to a node of content */
-  template?: Maybe<ContentTemplate>;
-  templates?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made. */
-  title?: Maybe<Scalars['String']['output']>;
-  /** The unique resource identifier path */
-  uri?: Maybe<Scalars['String']['output']>;
-};
-
+export type MediaItem = ContentNode &
+  DatabaseIdentifier &
+  HierarchicalContentNode &
+  HierarchicalNode &
+  Node &
+  NodeWithAuthor &
+  NodeWithComments &
+  NodeWithTemplate &
+  NodeWithTitle &
+  UniformResourceIdentifiable & {
+    __typename?: 'MediaItem';
+    /** Alternative text to display when resource is not displayed */
+    altText?: Maybe<Scalars['String']['output']>;
+    /** Returns ancestors of the node. Default ordered as lowest (closest to the child) to highest (closest to the root). */
+    ancestors?: Maybe<HierarchicalContentNodeToContentNodeAncestorsConnection>;
+    /** Connection between the NodeWithAuthor type and the User type */
+    author?: Maybe<NodeWithAuthorToUserConnectionEdge>;
+    /** The database identifier of the author of the node */
+    authorDatabaseId?: Maybe<Scalars['Int']['output']>;
+    /** The globally unique identifier of the author of the node */
+    authorId?: Maybe<Scalars['ID']['output']>;
+    /** The caption for the resource */
+    caption?: Maybe<Scalars['String']['output']>;
+    /** Connection between the HierarchicalContentNode type and the ContentNode type */
+    children?: Maybe<HierarchicalContentNodeToContentNodeChildrenConnection>;
+    /** The number of comments. Even though WPGraphQL denotes this field as an integer, in WordPress this field should be saved as a numeric string for compatibility. */
+    commentCount?: Maybe<Scalars['Int']['output']>;
+    /** Whether the comments are open or closed for this particular post. */
+    commentStatus?: Maybe<Scalars['String']['output']>;
+    /** Connection between the MediaItem type and the Comment type */
+    comments?: Maybe<MediaItemToCommentConnection>;
+    /** @deprecated Deprecated in favor of using Next.js pages */
+    conditionalTags?: Maybe<ConditionalTags>;
+    /** Connection between the ContentNode type and the ContentType type */
+    contentType?: Maybe<ContentNodeToContentTypeConnectionEdge>;
+    /** The name of the Content Type the node belongs to */
+    contentTypeName: Scalars['String']['output'];
+    /** The unique identifier stored in the database */
+    databaseId: Scalars['Int']['output'];
+    /** Post publishing date. */
+    date?: Maybe<Scalars['String']['output']>;
+    /** The publishing date set in GMT. */
+    dateGmt?: Maybe<Scalars['String']['output']>;
+    /** Description of the image (stored as post_content) */
+    description?: Maybe<Scalars['String']['output']>;
+    /** The desired slug of the post */
+    desiredSlug?: Maybe<Scalars['String']['output']>;
+    /** If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn&#039;t exist or is greater than 15 seconds */
+    editingLockedBy?: Maybe<ContentNodeToEditLockConnectionEdge>;
+    /** The RSS enclosure for the object */
+    enclosure?: Maybe<Scalars['String']['output']>;
+    /** Connection between the ContentNode type and the EnqueuedScript type */
+    enqueuedScripts?: Maybe<ContentNodeToEnqueuedScriptConnection>;
+    /** Connection between the ContentNode type and the EnqueuedStylesheet type */
+    enqueuedStylesheets?: Maybe<ContentNodeToEnqueuedStylesheetConnection>;
+    /** The filesize in bytes of the resource */
+    fileSize?: Maybe<Scalars['Int']['output']>;
+    /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+    guid?: Maybe<Scalars['String']['output']>;
+    /** The globally unique identifier of the attachment object. */
+    id: Scalars['ID']['output'];
+    /** Whether the node is a Content Node */
+    isContentNode: Scalars['Boolean']['output'];
+    /** Whether the object is a node in the preview state */
+    isPreview?: Maybe<Scalars['Boolean']['output']>;
+    /** Whether the object is restricted from the current viewer */
+    isRestricted?: Maybe<Scalars['Boolean']['output']>;
+    /** Whether the node is a Term */
+    isTermNode: Scalars['Boolean']['output'];
+    /** The user that most recently edited the node */
+    lastEditedBy?: Maybe<ContentNodeToEditLastConnectionEdge>;
+    /** The permalink of the post */
+    link?: Maybe<Scalars['String']['output']>;
+    /** Details about the mediaItem */
+    mediaDetails?: Maybe<MediaDetails>;
+    /**
+     * The id field matches the WP_Post-&gt;ID field.
+     * @deprecated Deprecated in favor of the databaseId field
+     */
+    mediaItemId: Scalars['Int']['output'];
+    /** Url of the mediaItem */
+    mediaItemUrl?: Maybe<Scalars['String']['output']>;
+    /** Type of resource */
+    mediaType?: Maybe<Scalars['String']['output']>;
+    /** The mime type of the mediaItem */
+    mimeType?: Maybe<Scalars['String']['output']>;
+    /** The local modified time for a post. If a post was recently updated the modified field will change to match the corresponding time. */
+    modified?: Maybe<Scalars['String']['output']>;
+    /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
+    modifiedGmt?: Maybe<Scalars['String']['output']>;
+    /** The parent of the node. The parent object can be of various types */
+    parent?: Maybe<HierarchicalContentNodeToParentContentNodeConnectionEdge>;
+    /** Database id of the parent node */
+    parentDatabaseId?: Maybe<Scalars['Int']['output']>;
+    /** The globally unique identifier of the parent node. */
+    parentId?: Maybe<Scalars['ID']['output']>;
+    /** The database id of the preview node */
+    previewRevisionDatabaseId?: Maybe<Scalars['Int']['output']>;
+    /** Whether the object is a node in the preview state */
+    previewRevisionId?: Maybe<Scalars['ID']['output']>;
+    /** The sizes attribute value for an image. */
+    sizes?: Maybe<Scalars['String']['output']>;
+    /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+    slug?: Maybe<Scalars['String']['output']>;
+    /** Url of the mediaItem */
+    sourceUrl?: Maybe<Scalars['String']['output']>;
+    /** The srcset attribute specifies the URL of the image to use in different situations. It is a comma separated string of urls and their widths. */
+    srcSet?: Maybe<Scalars['String']['output']>;
+    /** The current status of the object */
+    status?: Maybe<Scalars['String']['output']>;
+    /** The template assigned to a node of content */
+    template?: Maybe<ContentTemplate>;
+    templates?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made. */
+    title?: Maybe<Scalars['String']['output']>;
+    /** The unique resource identifier path */
+    uri?: Maybe<Scalars['String']['output']>;
+  };
 
 /** The mediaItem type */
 export type MediaItemAncestorsArgs = {
@@ -8443,12 +8859,10 @@ export type MediaItemAncestorsArgs = {
   where?: InputMaybe<HierarchicalContentNodeToContentNodeAncestorsConnectionWhereArgs>;
 };
 
-
 /** The mediaItem type */
 export type MediaItemCaptionArgs = {
   format?: InputMaybe<PostObjectFieldFormatEnum>;
 };
-
 
 /** The mediaItem type */
 export type MediaItemChildrenArgs = {
@@ -8459,7 +8873,6 @@ export type MediaItemChildrenArgs = {
   where?: InputMaybe<HierarchicalContentNodeToContentNodeChildrenConnectionWhereArgs>;
 };
 
-
 /** The mediaItem type */
 export type MediaItemCommentsArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -8469,12 +8882,10 @@ export type MediaItemCommentsArgs = {
   where?: InputMaybe<MediaItemToCommentConnectionWhereArgs>;
 };
 
-
 /** The mediaItem type */
 export type MediaItemDescriptionArgs = {
   format?: InputMaybe<PostObjectFieldFormatEnum>;
 };
-
 
 /** The mediaItem type */
 export type MediaItemEnqueuedScriptsArgs = {
@@ -8484,7 +8895,6 @@ export type MediaItemEnqueuedScriptsArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
 };
 
-
 /** The mediaItem type */
 export type MediaItemEnqueuedStylesheetsArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -8493,30 +8903,25 @@ export type MediaItemEnqueuedStylesheetsArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
 };
 
-
 /** The mediaItem type */
 export type MediaItemFileSizeArgs = {
   size?: InputMaybe<MediaItemSizeEnum>;
 };
-
 
 /** The mediaItem type */
 export type MediaItemSizesArgs = {
   size?: InputMaybe<MediaItemSizeEnum>;
 };
 
-
 /** The mediaItem type */
 export type MediaItemSourceUrlArgs = {
   size?: InputMaybe<MediaItemSizeEnum>;
 };
 
-
 /** The mediaItem type */
 export type MediaItemSrcSetArgs = {
   size?: InputMaybe<MediaItemSizeEnum>;
 };
-
 
 /** The mediaItem type */
 export type MediaItemTitleArgs = {
@@ -8564,7 +8969,7 @@ export enum MediaItemIdType {
   /** Identify a media item by its source url */
   SourceUrl = 'SOURCE_URL',
   /** Identify a resource by the URI. */
-  Uri = 'URI'
+  Uri = 'URI',
 }
 
 /** Meta connected to a MediaItem */
@@ -8609,7 +9014,7 @@ export enum MediaItemSizeEnum {
   /** MediaItem with the 1536x1536 size */
   '1536X1536' = '_1536X1536',
   /** MediaItem with the 2048x2048 size */
-  '2048X2048' = '_2048X2048'
+  '2048X2048' = '_2048X2048',
 }
 
 /** The status of the media item object. */
@@ -8621,41 +9026,45 @@ export enum MediaItemStatusEnum {
   /** Objects with the private status */
   Private = 'PRIVATE',
   /** Objects with the trash status */
-  Trash = 'TRASH'
+  Trash = 'TRASH',
 }
 
 /** Connection between the MediaItem type and the Comment type */
-export type MediaItemToCommentConnection = CommentConnection & Connection & {
-  __typename?: 'MediaItemToCommentConnection';
-  /** Edges for the MediaItemToCommentConnection connection */
-  edges: Array<MediaItemToCommentConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<Comment>;
-  /** Information about pagination in a connection. */
-  pageInfo: MediaItemToCommentConnectionPageInfo;
-};
+export type MediaItemToCommentConnection = CommentConnection &
+  Connection & {
+    __typename?: 'MediaItemToCommentConnection';
+    /** Edges for the MediaItemToCommentConnection connection */
+    edges: Array<MediaItemToCommentConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<Comment>;
+    /** Information about pagination in a connection. */
+    pageInfo: MediaItemToCommentConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type MediaItemToCommentConnectionEdge = CommentConnectionEdge & Edge & {
-  __typename?: 'MediaItemToCommentConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: Comment;
-};
+export type MediaItemToCommentConnectionEdge = CommentConnectionEdge &
+  Edge & {
+    __typename?: 'MediaItemToCommentConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: Comment;
+  };
 
 /** Page Info on the &quot;MediaItemToCommentConnection&quot; */
-export type MediaItemToCommentConnectionPageInfo = CommentConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'MediaItemToCommentConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type MediaItemToCommentConnectionPageInfo = CommentConnectionPageInfo &
+  PageInfo &
+  WpPageInfo & {
+    __typename?: 'MediaItemToCommentConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Arguments for filtering the MediaItemToCommentConnection connection */
 export type MediaItemToCommentConnectionWhereArgs = {
@@ -8739,31 +9148,31 @@ export type MediaSize = {
 };
 
 /** Menus are the containers for navigation items. Menus can be assigned to menu locations, which are typically registered by the active theme. */
-export type Menu = DatabaseIdentifier & Node & {
-  __typename?: 'Menu';
-  /** The number of items in the menu */
-  count?: Maybe<Scalars['Int']['output']>;
-  /** The unique identifier stored in the database */
-  databaseId: Scalars['Int']['output'];
-  /** The globally unique identifier of the nav menu object. */
-  id: Scalars['ID']['output'];
-  /** Whether the object is restricted from the current viewer */
-  isRestricted?: Maybe<Scalars['Boolean']['output']>;
-  /** The locations a menu is assigned to */
-  locations?: Maybe<Array<Maybe<MenuLocationEnum>>>;
-  /**
-   * WP ID of the nav menu.
-   * @deprecated Deprecated in favor of the databaseId field
-   */
-  menuId?: Maybe<Scalars['Int']['output']>;
-  /** Connection between the Menu type and the MenuItem type */
-  menuItems?: Maybe<MenuToMenuItemConnection>;
-  /** Display name of the menu. Equivalent to WP_Term-&gt;name. */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The url friendly name of the menu. Equivalent to WP_Term-&gt;slug */
-  slug?: Maybe<Scalars['String']['output']>;
-};
-
+export type Menu = DatabaseIdentifier &
+  Node & {
+    __typename?: 'Menu';
+    /** The number of items in the menu */
+    count?: Maybe<Scalars['Int']['output']>;
+    /** The unique identifier stored in the database */
+    databaseId: Scalars['Int']['output'];
+    /** The globally unique identifier of the nav menu object. */
+    id: Scalars['ID']['output'];
+    /** Whether the object is restricted from the current viewer */
+    isRestricted?: Maybe<Scalars['Boolean']['output']>;
+    /** The locations a menu is assigned to */
+    locations?: Maybe<Array<Maybe<MenuLocationEnum>>>;
+    /**
+     * WP ID of the nav menu.
+     * @deprecated Deprecated in favor of the databaseId field
+     */
+    menuId?: Maybe<Scalars['Int']['output']>;
+    /** Connection between the Menu type and the MenuItemProps type */
+    menuItems?: Maybe<MenuToMenuItemConnection>;
+    /** Display name of the menu. Equivalent to WP_Term-&gt;name. */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The url friendly name of the menu. Equivalent to WP_Term-&gt;slug */
+    slug?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Menus are the containers for navigation items. Menus can be assigned to menu locations, which are typically registered by the active theme. */
 export type MenuMenuItemsArgs = {
@@ -8805,58 +9214,58 @@ export type MenuConnectionPageInfo = {
 };
 
 /** Navigation menu items are the individual items assigned to a menu. These are rendered as the links in a navigation menu. */
-export type MenuItem = DatabaseIdentifier & Node & {
-  __typename?: 'MenuItem';
-  /** Connection between the MenuItem type and the MenuItem type */
-  childItems?: Maybe<MenuItemToMenuItemConnection>;
-  /** Connection from MenuItem to it&#039;s connected node */
-  connectedNode?: Maybe<MenuItemToMenuItemLinkableConnectionEdge>;
-  /**
-   * The object connected to this menu item.
-   * @deprecated Deprecated in favor of the connectedNode field
-   */
-  connectedObject?: Maybe<MenuItemObjectUnion>;
-  /** Class attribute for the menu item link */
-  cssClasses?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The unique identifier stored in the database */
-  databaseId: Scalars['Int']['output'];
-  /** Description of the menu item. */
-  description?: Maybe<Scalars['String']['output']>;
-  /** The globally unique identifier of the nav menu item object. */
-  id: Scalars['ID']['output'];
-  /** Whether the object is restricted from the current viewer */
-  isRestricted?: Maybe<Scalars['Boolean']['output']>;
-  /** Label or title of the menu item. */
-  label?: Maybe<Scalars['String']['output']>;
-  /** Link relationship (XFN) of the menu item. */
-  linkRelationship?: Maybe<Scalars['String']['output']>;
-  /** The locations the menu item&#039;s Menu is assigned to */
-  locations?: Maybe<Array<Maybe<MenuLocationEnum>>>;
-  /** The Menu a MenuItem is part of */
-  menu?: Maybe<MenuItemToMenuConnectionEdge>;
-  /**
-   * WP ID of the menu item.
-   * @deprecated Deprecated in favor of the databaseId field
-   */
-  menuItemId?: Maybe<Scalars['Int']['output']>;
-  /** Menu item order */
-  order?: Maybe<Scalars['Int']['output']>;
-  /** The database id of the parent menu item or null if it is the root */
-  parentDatabaseId?: Maybe<Scalars['Int']['output']>;
-  /** The globally unique identifier of the parent nav menu item object. */
-  parentId?: Maybe<Scalars['ID']['output']>;
-  /** Path for the resource. Relative path for internal resources. Absolute path for external resources. */
-  path?: Maybe<Scalars['String']['output']>;
-  /** Target attribute for the menu item link. */
-  target?: Maybe<Scalars['String']['output']>;
-  /** Title attribute for the menu item link */
-  title?: Maybe<Scalars['String']['output']>;
-  /** The uri of the resource the menu item links to */
-  uri?: Maybe<Scalars['String']['output']>;
-  /** URL or destination of the menu item. */
-  url?: Maybe<Scalars['String']['output']>;
-};
-
+export type MenuItem = DatabaseIdentifier &
+  Node & {
+    __typename?: 'MenuItem';
+    /** Connection between the MenuItemProps type and the MenuItemProps type */
+    childItems?: Maybe<MenuItemToMenuItemConnection>;
+    /** Connection from MenuItemProps to it&#039;s connected node */
+    connectedNode?: Maybe<MenuItemToMenuItemLinkableConnectionEdge>;
+    /**
+     * The object connected to this menu item.
+     * @deprecated Deprecated in favor of the connectedNode field
+     */
+    connectedObject?: Maybe<MenuItemObjectUnion>;
+    /** Class attribute for the menu item link */
+    cssClasses?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The unique identifier stored in the database */
+    databaseId: Scalars['Int']['output'];
+    /** Description of the menu item. */
+    description?: Maybe<Scalars['String']['output']>;
+    /** The globally unique identifier of the nav menu item object. */
+    id: Scalars['ID']['output'];
+    /** Whether the object is restricted from the current viewer */
+    isRestricted?: Maybe<Scalars['Boolean']['output']>;
+    /** Label or title of the menu item. */
+    label?: Maybe<Scalars['String']['output']>;
+    /** Link relationship (XFN) of the menu item. */
+    linkRelationship?: Maybe<Scalars['String']['output']>;
+    /** The locations the menu item&#039;s Menu is assigned to */
+    locations?: Maybe<Array<Maybe<MenuLocationEnum>>>;
+    /** The Menu a MenuItemProps is part of */
+    menu?: Maybe<MenuItemToMenuConnectionEdge>;
+    /**
+     * WP ID of the menu item.
+     * @deprecated Deprecated in favor of the databaseId field
+     */
+    menuItemId?: Maybe<Scalars['Int']['output']>;
+    /** Menu item order */
+    order?: Maybe<Scalars['Int']['output']>;
+    /** The database id of the parent menu item or null if it is the root */
+    parentDatabaseId?: Maybe<Scalars['Int']['output']>;
+    /** The globally unique identifier of the parent nav menu item object. */
+    parentId?: Maybe<Scalars['ID']['output']>;
+    /** Path for the resource. Relative path for internal resources. Absolute path for external resources. */
+    path?: Maybe<Scalars['String']['output']>;
+    /** Target attribute for the menu item link. */
+    target?: Maybe<Scalars['String']['output']>;
+    /** Title attribute for the menu item link */
+    title?: Maybe<Scalars['String']['output']>;
+    /** The uri of the resource the menu item links to */
+    uri?: Maybe<Scalars['String']['output']>;
+    /** URL or destination of the menu item. */
+    url?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Navigation menu items are the individual items assigned to a menu. These are rendered as the links in a navigation menu. */
 export type MenuItemChildItemsArgs = {
@@ -8867,21 +9276,21 @@ export type MenuItemChildItemsArgs = {
   where?: InputMaybe<MenuItemToMenuItemConnectionWhereArgs>;
 };
 
-/** Connection to MenuItem Nodes */
+/** Connection to MenuItemProps Nodes */
 export type MenuItemConnection = {
-  /** A list of edges (relational context) between RootQuery and connected MenuItem Nodes */
+  /** A list of edges (relational context) between RootQuery and connected MenuItemProps Nodes */
   edges: Array<MenuItemConnectionEdge>;
-  /** A list of connected MenuItem Nodes */
+  /** A list of connected MenuItemProps Nodes */
   nodes: Array<MenuItem>;
   /** Information about pagination in a connection. */
   pageInfo: MenuItemConnectionPageInfo;
 };
 
-/** Edge between a Node and a connected MenuItem */
+/** Edge between a Node and a connected MenuItemProps */
 export type MenuItemConnectionEdge = {
   /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
   cursor?: Maybe<Scalars['String']['output']>;
-  /** The connected MenuItem Node */
+  /** The connected MenuItemProps Node */
   node: MenuItem;
 };
 
@@ -8927,53 +9336,59 @@ export enum MenuItemNodeIdTypeEnum {
   /** Identify a resource by the Database ID. */
   DatabaseId = 'DATABASE_ID',
   /** Identify a resource by the (hashed) Global ID. */
-  Id = 'ID'
+  Id = 'ID',
 }
 
 /** Deprecated in favor of MenuItemLinkeable Interface */
 export type MenuItemObjectUnion = Category | Film | Page | Post | Tag;
 
-/** Connection between the MenuItem type and the Menu type */
-export type MenuItemToMenuConnectionEdge = Edge & MenuConnectionEdge & OneToOneConnection & {
-  __typename?: 'MenuItemToMenuConnectionEdge';
-  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The node of the connection, without the edges */
-  node: Menu;
-};
+/** Connection between the MenuItemProps type and the Menu type */
+export type MenuItemToMenuConnectionEdge = Edge &
+  MenuConnectionEdge &
+  OneToOneConnection & {
+    __typename?: 'MenuItemToMenuConnectionEdge';
+    /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The node of the connection, without the edges */
+    node: Menu;
+  };
 
-/** Connection between the MenuItem type and the MenuItem type */
-export type MenuItemToMenuItemConnection = Connection & MenuItemConnection & {
-  __typename?: 'MenuItemToMenuItemConnection';
-  /** Edges for the MenuItemToMenuItemConnection connection */
-  edges: Array<MenuItemToMenuItemConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<MenuItem>;
-  /** Information about pagination in a connection. */
-  pageInfo: MenuItemToMenuItemConnectionPageInfo;
-};
+/** Connection between the MenuItemProps type and the MenuItemProps type */
+export type MenuItemToMenuItemConnection = Connection &
+  MenuItemConnection & {
+    __typename?: 'MenuItemToMenuItemConnection';
+    /** Edges for the MenuItemToMenuItemConnection connection */
+    edges: Array<MenuItemToMenuItemConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<MenuItem>;
+    /** Information about pagination in a connection. */
+    pageInfo: MenuItemToMenuItemConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type MenuItemToMenuItemConnectionEdge = Edge & MenuItemConnectionEdge & {
-  __typename?: 'MenuItemToMenuItemConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: MenuItem;
-};
+export type MenuItemToMenuItemConnectionEdge = Edge &
+  MenuItemConnectionEdge & {
+    __typename?: 'MenuItemToMenuItemConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: MenuItem;
+  };
 
 /** Page Info on the &quot;MenuItemToMenuItemConnection&quot; */
-export type MenuItemToMenuItemConnectionPageInfo = MenuItemConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'MenuItemToMenuItemConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type MenuItemToMenuItemConnectionPageInfo = MenuItemConnectionPageInfo &
+  PageInfo &
+  WpPageInfo & {
+    __typename?: 'MenuItemToMenuItemConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Arguments for filtering the MenuItemToMenuItemConnection connection */
 export type MenuItemToMenuItemConnectionWhereArgs = {
@@ -8987,21 +9402,23 @@ export type MenuItemToMenuItemConnectionWhereArgs = {
   parentId?: InputMaybe<Scalars['ID']['input']>;
 };
 
-/** Connection between the MenuItem type and the MenuItemLinkable type */
-export type MenuItemToMenuItemLinkableConnectionEdge = Edge & MenuItemLinkableConnectionEdge & OneToOneConnection & {
-  __typename?: 'MenuItemToMenuItemLinkableConnectionEdge';
-  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The node of the connection, without the edges */
-  node: MenuItemLinkable;
-};
+/** Connection between the MenuItemProps type and the MenuItemLinkable type */
+export type MenuItemToMenuItemLinkableConnectionEdge = Edge &
+  MenuItemLinkableConnectionEdge &
+  OneToOneConnection & {
+    __typename?: 'MenuItemToMenuItemLinkableConnectionEdge';
+    /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The node of the connection, without the edges */
+    node: MenuItemLinkable;
+  };
 
 /** Registered menu locations */
 export enum MenuLocationEnum {
   /** Put the menu in the footer location */
   Footer = 'FOOTER',
   /** Put the menu in the primary location */
-  Primary = 'PRIMARY'
+  Primary = 'PRIMARY',
 }
 
 /** The Type of Identifier used to fetch a single node. Default is "ID". To be used along with the "id" field. */
@@ -9015,41 +9432,45 @@ export enum MenuNodeIdTypeEnum {
   /** Identify a menu node by its name */
   Name = 'NAME',
   /** Identify a menu node by its slug */
-  Slug = 'SLUG'
+  Slug = 'SLUG',
 }
 
-/** Connection between the Menu type and the MenuItem type */
-export type MenuToMenuItemConnection = Connection & MenuItemConnection & {
-  __typename?: 'MenuToMenuItemConnection';
-  /** Edges for the MenuToMenuItemConnection connection */
-  edges: Array<MenuToMenuItemConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<MenuItem>;
-  /** Information about pagination in a connection. */
-  pageInfo: MenuToMenuItemConnectionPageInfo;
-};
+/** Connection between the Menu type and the MenuItemProps type */
+export type MenuToMenuItemConnection = Connection &
+  MenuItemConnection & {
+    __typename?: 'MenuToMenuItemConnection';
+    /** Edges for the MenuToMenuItemConnection connection */
+    edges: Array<MenuToMenuItemConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<MenuItem>;
+    /** Information about pagination in a connection. */
+    pageInfo: MenuToMenuItemConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type MenuToMenuItemConnectionEdge = Edge & MenuItemConnectionEdge & {
-  __typename?: 'MenuToMenuItemConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: MenuItem;
-};
+export type MenuToMenuItemConnectionEdge = Edge &
+  MenuItemConnectionEdge & {
+    __typename?: 'MenuToMenuItemConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: MenuItem;
+  };
 
 /** Page Info on the &quot;MenuToMenuItemConnection&quot; */
-export type MenuToMenuItemConnectionPageInfo = MenuItemConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'MenuToMenuItemConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type MenuToMenuItemConnectionPageInfo = MenuItemConnectionPageInfo &
+  PageInfo &
+  WpPageInfo & {
+    __typename?: 'MenuToMenuItemConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Arguments for filtering the MenuToMenuItemConnection connection */
 export type MenuToMenuItemConnectionWhereArgs = {
@@ -9244,7 +9665,7 @@ export enum MimeTypeEnum {
   /** video/x-ms-wmv mime type. */
   VideoXMsWmv = 'VIDEO_X_MS_WMV',
   /** video/x-ms-wmx mime type. */
-  VideoXMsWmx = 'VIDEO_X_MS_WMX'
+  VideoXMsWmx = 'VIDEO_X_MS_WMX',
 }
 
 /** An object with an ID */
@@ -9266,13 +9687,15 @@ export type NodeWithAuthor = {
 };
 
 /** Connection between the NodeWithAuthor type and the User type */
-export type NodeWithAuthorToUserConnectionEdge = Edge & OneToOneConnection & UserConnectionEdge & {
-  __typename?: 'NodeWithAuthorToUserConnectionEdge';
-  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The node of the connection, without the edges */
-  node: User;
-};
+export type NodeWithAuthorToUserConnectionEdge = Edge &
+  OneToOneConnection &
+  UserConnectionEdge & {
+    __typename?: 'NodeWithAuthorToUserConnectionEdge';
+    /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The node of the connection, without the edges */
+    node: User;
+  };
 
 /** A node that can have comments associated with it */
 export type NodeWithComments = {
@@ -9292,7 +9715,6 @@ export type NodeWithContentEditor = {
   id: Scalars['ID']['output'];
 };
 
-
 /** A node that supports the content editor */
 export type NodeWithContentEditorContentArgs = {
   format?: InputMaybe<PostObjectFieldFormatEnum>;
@@ -9303,7 +9725,6 @@ export type NodeWithEditorBlocks = {
   /** List of editor blocks */
   editorBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
 };
-
 
 /** Node that has content blocks associated with it */
 export type NodeWithEditorBlocksEditorBlocksArgs = {
@@ -9317,7 +9738,6 @@ export type NodeWithExcerpt = {
   /** The globally unique ID for the object */
   id: Scalars['ID']['output'];
 };
-
 
 /** A node that can have an excerpt */
 export type NodeWithExcerptExcerptArgs = {
@@ -9337,20 +9757,21 @@ export type NodeWithFeaturedImage = {
 };
 
 /** Connection between the NodeWithFeaturedImage type and the MediaItem type */
-export type NodeWithFeaturedImageToMediaItemConnectionEdge = Edge & MediaItemConnectionEdge & OneToOneConnection & {
-  __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge';
-  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The node of the connection, without the edges */
-  node: MediaItem;
-};
+export type NodeWithFeaturedImageToMediaItemConnectionEdge = Edge &
+  MediaItemConnectionEdge &
+  OneToOneConnection & {
+    __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge';
+    /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The node of the connection, without the edges */
+    node: MediaItem;
+  };
 
 /** Node that has Film content blocks associated with it */
 export type NodeWithFilmEditorBlocks = {
   /** List of Film editor blocks */
   editorBlocks?: Maybe<Array<Maybe<FilmEditorBlock>>>;
 };
-
 
 /** Node that has Film content blocks associated with it */
 export type NodeWithFilmEditorBlocksEditorBlocksArgs = {
@@ -9371,7 +9792,6 @@ export type NodeWithPageEditorBlocks = {
   editorBlocks?: Maybe<Array<Maybe<PageEditorBlock>>>;
 };
 
-
 /** Node that has Page content blocks associated with it */
 export type NodeWithPageEditorBlocksEditorBlocksArgs = {
   flat?: InputMaybe<Scalars['Boolean']['input']>;
@@ -9382,7 +9802,6 @@ export type NodeWithPostEditorBlocks = {
   /** List of Post editor blocks */
   editorBlocks?: Maybe<Array<Maybe<PostEditorBlock>>>;
 };
-
 
 /** Node that has Post content blocks associated with it */
 export type NodeWithPostEditorBlocksEditorBlocksArgs = {
@@ -9400,13 +9819,16 @@ export type NodeWithRevisions = {
 };
 
 /** Connection between the NodeWithRevisions type and the ContentNode type */
-export type NodeWithRevisionsToContentNodeConnectionEdge = ContentNodeConnectionEdge & Edge & OneToOneConnection & {
-  __typename?: 'NodeWithRevisionsToContentNodeConnectionEdge';
-  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The node of the connection, without the edges */
-  node: ContentNode;
-};
+export type NodeWithRevisionsToContentNodeConnectionEdge =
+  ContentNodeConnectionEdge &
+    Edge &
+    OneToOneConnection & {
+      __typename?: 'NodeWithRevisionsToContentNodeConnectionEdge';
+      /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+      cursor?: Maybe<Scalars['String']['output']>;
+      /** The node of the connection, without the edges */
+      node: ContentNode;
+    };
 
 /** A node that can have a template associated with it */
 export type NodeWithTemplate = {
@@ -9423,7 +9845,6 @@ export type NodeWithTitle = {
   /** The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made. */
   title?: Maybe<Scalars['String']['output']>;
 };
-
 
 /** A node that NodeWith a title */
 export type NodeWithTitleTitleArgs = {
@@ -9455,124 +9876,140 @@ export enum OrderEnum {
   /** Sort the query result set in an ascending order */
   Asc = 'ASC',
   /** Sort the query result set in a descending order */
-  Desc = 'DESC'
+  Desc = 'DESC',
 }
 
 /** The page type */
-export type Page = ContentNode & DatabaseIdentifier & HierarchicalContentNode & HierarchicalNode & MenuItemLinkable & Node & NodeWithAuthor & NodeWithComments & NodeWithContentEditor & NodeWithEditorBlocks & NodeWithFeaturedImage & NodeWithPageAttributes & NodeWithPageEditorBlocks & NodeWithRevisions & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable & {
-  __typename?: 'Page';
-  /** Returns ancestors of the node. Default ordered as lowest (closest to the child) to highest (closest to the root). */
-  ancestors?: Maybe<HierarchicalContentNodeToContentNodeAncestorsConnection>;
-  /** Connection between the NodeWithAuthor type and the User type */
-  author?: Maybe<NodeWithAuthorToUserConnectionEdge>;
-  /** The database identifier of the author of the node */
-  authorDatabaseId?: Maybe<Scalars['Int']['output']>;
-  /** The globally unique identifier of the author of the node */
-  authorId?: Maybe<Scalars['ID']['output']>;
-  /** Connection between the HierarchicalContentNode type and the ContentNode type */
-  children?: Maybe<HierarchicalContentNodeToContentNodeChildrenConnection>;
-  /** The number of comments. Even though WPGraphQL denotes this field as an integer, in WordPress this field should be saved as a numeric string for compatibility. */
-  commentCount?: Maybe<Scalars['Int']['output']>;
-  /** Whether the comments are open or closed for this particular post. */
-  commentStatus?: Maybe<Scalars['String']['output']>;
-  /** Connection between the Page type and the Comment type */
-  comments?: Maybe<PageToCommentConnection>;
-  /** @deprecated Deprecated in favor of using Next.js pages */
-  conditionalTags?: Maybe<ConditionalTags>;
-  /** The content of the post. */
-  content?: Maybe<Scalars['String']['output']>;
-  /** Connection between the ContentNode type and the ContentType type */
-  contentType?: Maybe<ContentNodeToContentTypeConnectionEdge>;
-  /** The name of the Content Type the node belongs to */
-  contentTypeName: Scalars['String']['output'];
-  /** The unique identifier stored in the database */
-  databaseId: Scalars['Int']['output'];
-  /** Post publishing date. */
-  date?: Maybe<Scalars['String']['output']>;
-  /** The publishing date set in GMT. */
-  dateGmt?: Maybe<Scalars['String']['output']>;
-  /** The desired slug of the post */
-  desiredSlug?: Maybe<Scalars['String']['output']>;
-  /** If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn&#039;t exist or is greater than 15 seconds */
-  editingLockedBy?: Maybe<ContentNodeToEditLockConnectionEdge>;
-  /** List of Page editor blocks */
-  editorBlocks?: Maybe<Array<Maybe<PageEditorBlock>>>;
-  /** The RSS enclosure for the object */
-  enclosure?: Maybe<Scalars['String']['output']>;
-  /** Connection between the ContentNode type and the EnqueuedScript type */
-  enqueuedScripts?: Maybe<ContentNodeToEnqueuedScriptConnection>;
-  /** Connection between the ContentNode type and the EnqueuedStylesheet type */
-  enqueuedStylesheets?: Maybe<ContentNodeToEnqueuedStylesheetConnection>;
-  /** Connection between the NodeWithFeaturedImage type and the MediaItem type */
-  featuredImage?: Maybe<NodeWithFeaturedImageToMediaItemConnectionEdge>;
-  /** The database identifier for the featured image node assigned to the content node */
-  featuredImageDatabaseId?: Maybe<Scalars['Int']['output']>;
-  /** Globally unique ID of the featured image assigned to the node */
-  featuredImageId?: Maybe<Scalars['ID']['output']>;
-  /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
-  guid?: Maybe<Scalars['String']['output']>;
-  /** The globally unique identifier of the page object. */
-  id: Scalars['ID']['output'];
-  /** Whether the node is a Content Node */
-  isContentNode: Scalars['Boolean']['output'];
-  /** Whether this page is set to the static front page. */
-  isFrontPage: Scalars['Boolean']['output'];
-  /** Whether this page is set to the blog posts page. */
-  isPostsPage: Scalars['Boolean']['output'];
-  /** Whether the object is a node in the preview state */
-  isPreview?: Maybe<Scalars['Boolean']['output']>;
-  /** Whether this page is set to the privacy page. */
-  isPrivacyPage: Scalars['Boolean']['output'];
-  /** Whether the object is restricted from the current viewer */
-  isRestricted?: Maybe<Scalars['Boolean']['output']>;
-  /** True if the node is a revision of another node */
-  isRevision?: Maybe<Scalars['Boolean']['output']>;
-  /** Whether the node is a Term */
-  isTermNode: Scalars['Boolean']['output'];
-  /** The user that most recently edited the node */
-  lastEditedBy?: Maybe<ContentNodeToEditLastConnectionEdge>;
-  /** The permalink of the post */
-  link?: Maybe<Scalars['String']['output']>;
-  /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
-  menuOrder?: Maybe<Scalars['Int']['output']>;
-  /** The local modified time for a post. If a post was recently updated the modified field will change to match the corresponding time. */
-  modified?: Maybe<Scalars['String']['output']>;
-  /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
-  modifiedGmt?: Maybe<Scalars['String']['output']>;
-  /**
-   * The id field matches the WP_Post-&gt;ID field.
-   * @deprecated Deprecated in favor of the databaseId field
-   */
-  pageId: Scalars['Int']['output'];
-  /** The parent of the node. The parent object can be of various types */
-  parent?: Maybe<HierarchicalContentNodeToParentContentNodeConnectionEdge>;
-  /** Database id of the parent node */
-  parentDatabaseId?: Maybe<Scalars['Int']['output']>;
-  /** The globally unique identifier of the parent node. */
-  parentId?: Maybe<Scalars['ID']['output']>;
-  /** Connection between the Page type and the page type */
-  preview?: Maybe<PageToPreviewConnectionEdge>;
-  /** The database id of the preview node */
-  previewRevisionDatabaseId?: Maybe<Scalars['Int']['output']>;
-  /** Whether the object is a node in the preview state */
-  previewRevisionId?: Maybe<Scalars['ID']['output']>;
-  /** If the current node is a revision, this field exposes the node this is a revision of. Returns null if the node is not a revision of another node. */
-  revisionOf?: Maybe<NodeWithRevisionsToContentNodeConnectionEdge>;
-  /** Connection between the Page type and the page type */
-  revisions?: Maybe<PageToRevisionConnection>;
-  /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
-  slug?: Maybe<Scalars['String']['output']>;
-  /** The current status of the object */
-  status?: Maybe<Scalars['String']['output']>;
-  /** The template assigned to a node of content */
-  template?: Maybe<ContentTemplate>;
-  templates?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made. */
-  title?: Maybe<Scalars['String']['output']>;
-  /** The unique resource identifier path */
-  uri?: Maybe<Scalars['String']['output']>;
-};
-
+export type Page = ContentNode &
+  DatabaseIdentifier &
+  HierarchicalContentNode &
+  HierarchicalNode &
+  MenuItemLinkable &
+  Node &
+  NodeWithAuthor &
+  NodeWithComments &
+  NodeWithContentEditor &
+  NodeWithEditorBlocks &
+  NodeWithFeaturedImage &
+  NodeWithPageAttributes &
+  NodeWithPageEditorBlocks &
+  NodeWithRevisions &
+  NodeWithTemplate &
+  NodeWithTitle &
+  Previewable &
+  UniformResourceIdentifiable & {
+    __typename?: 'Page';
+    /** Returns ancestors of the node. Default ordered as lowest (closest to the child) to highest (closest to the root). */
+    ancestors?: Maybe<HierarchicalContentNodeToContentNodeAncestorsConnection>;
+    /** Connection between the NodeWithAuthor type and the User type */
+    author?: Maybe<NodeWithAuthorToUserConnectionEdge>;
+    /** The database identifier of the author of the node */
+    authorDatabaseId?: Maybe<Scalars['Int']['output']>;
+    /** The globally unique identifier of the author of the node */
+    authorId?: Maybe<Scalars['ID']['output']>;
+    /** Connection between the HierarchicalContentNode type and the ContentNode type */
+    children?: Maybe<HierarchicalContentNodeToContentNodeChildrenConnection>;
+    /** The number of comments. Even though WPGraphQL denotes this field as an integer, in WordPress this field should be saved as a numeric string for compatibility. */
+    commentCount?: Maybe<Scalars['Int']['output']>;
+    /** Whether the comments are open or closed for this particular post. */
+    commentStatus?: Maybe<Scalars['String']['output']>;
+    /** Connection between the Page type and the Comment type */
+    comments?: Maybe<PageToCommentConnection>;
+    /** @deprecated Deprecated in favor of using Next.js pages */
+    conditionalTags?: Maybe<ConditionalTags>;
+    /** The content of the post. */
+    content?: Maybe<Scalars['String']['output']>;
+    /** Connection between the ContentNode type and the ContentType type */
+    contentType?: Maybe<ContentNodeToContentTypeConnectionEdge>;
+    /** The name of the Content Type the node belongs to */
+    contentTypeName: Scalars['String']['output'];
+    /** The unique identifier stored in the database */
+    databaseId: Scalars['Int']['output'];
+    /** Post publishing date. */
+    date?: Maybe<Scalars['String']['output']>;
+    /** The publishing date set in GMT. */
+    dateGmt?: Maybe<Scalars['String']['output']>;
+    /** The desired slug of the post */
+    desiredSlug?: Maybe<Scalars['String']['output']>;
+    /** If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn&#039;t exist or is greater than 15 seconds */
+    editingLockedBy?: Maybe<ContentNodeToEditLockConnectionEdge>;
+    /** List of Page editor blocks */
+    editorBlocks?: Maybe<Array<Maybe<PageEditorBlock>>>;
+    /** The RSS enclosure for the object */
+    enclosure?: Maybe<Scalars['String']['output']>;
+    /** Connection between the ContentNode type and the EnqueuedScript type */
+    enqueuedScripts?: Maybe<ContentNodeToEnqueuedScriptConnection>;
+    /** Connection between the ContentNode type and the EnqueuedStylesheet type */
+    enqueuedStylesheets?: Maybe<ContentNodeToEnqueuedStylesheetConnection>;
+    /** Connection between the NodeWithFeaturedImage type and the MediaItem type */
+    featuredImage?: Maybe<NodeWithFeaturedImageToMediaItemConnectionEdge>;
+    /** The database identifier for the featured image node assigned to the content node */
+    featuredImageDatabaseId?: Maybe<Scalars['Int']['output']>;
+    /** Globally unique ID of the featured image assigned to the node */
+    featuredImageId?: Maybe<Scalars['ID']['output']>;
+    /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+    guid?: Maybe<Scalars['String']['output']>;
+    /** The globally unique identifier of the page object. */
+    id: Scalars['ID']['output'];
+    /** Whether the node is a Content Node */
+    isContentNode: Scalars['Boolean']['output'];
+    /** Whether this page is set to the static front page. */
+    isFrontPage: Scalars['Boolean']['output'];
+    /** Whether this page is set to the blog posts page. */
+    isPostsPage: Scalars['Boolean']['output'];
+    /** Whether the object is a node in the preview state */
+    isPreview?: Maybe<Scalars['Boolean']['output']>;
+    /** Whether this page is set to the privacy page. */
+    isPrivacyPage: Scalars['Boolean']['output'];
+    /** Whether the object is restricted from the current viewer */
+    isRestricted?: Maybe<Scalars['Boolean']['output']>;
+    /** True if the node is a revision of another node */
+    isRevision?: Maybe<Scalars['Boolean']['output']>;
+    /** Whether the node is a Term */
+    isTermNode: Scalars['Boolean']['output'];
+    /** The user that most recently edited the node */
+    lastEditedBy?: Maybe<ContentNodeToEditLastConnectionEdge>;
+    /** The permalink of the post */
+    link?: Maybe<Scalars['String']['output']>;
+    /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
+    menuOrder?: Maybe<Scalars['Int']['output']>;
+    /** The local modified time for a post. If a post was recently updated the modified field will change to match the corresponding time. */
+    modified?: Maybe<Scalars['String']['output']>;
+    /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
+    modifiedGmt?: Maybe<Scalars['String']['output']>;
+    /**
+     * The id field matches the WP_Post-&gt;ID field.
+     * @deprecated Deprecated in favor of the databaseId field
+     */
+    pageId: Scalars['Int']['output'];
+    /** The parent of the node. The parent object can be of various types */
+    parent?: Maybe<HierarchicalContentNodeToParentContentNodeConnectionEdge>;
+    /** Database id of the parent node */
+    parentDatabaseId?: Maybe<Scalars['Int']['output']>;
+    /** The globally unique identifier of the parent node. */
+    parentId?: Maybe<Scalars['ID']['output']>;
+    /** Connection between the Page type and the page type */
+    preview?: Maybe<PageToPreviewConnectionEdge>;
+    /** The database id of the preview node */
+    previewRevisionDatabaseId?: Maybe<Scalars['Int']['output']>;
+    /** Whether the object is a node in the preview state */
+    previewRevisionId?: Maybe<Scalars['ID']['output']>;
+    /** If the current node is a revision, this field exposes the node this is a revision of. Returns null if the node is not a revision of another node. */
+    revisionOf?: Maybe<NodeWithRevisionsToContentNodeConnectionEdge>;
+    /** Connection between the Page type and the page type */
+    revisions?: Maybe<PageToRevisionConnection>;
+    /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+    slug?: Maybe<Scalars['String']['output']>;
+    /** The current status of the object */
+    status?: Maybe<Scalars['String']['output']>;
+    /** The template assigned to a node of content */
+    template?: Maybe<ContentTemplate>;
+    templates?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made. */
+    title?: Maybe<Scalars['String']['output']>;
+    /** The unique resource identifier path */
+    uri?: Maybe<Scalars['String']['output']>;
+  };
 
 /** The page type */
 export type PageAncestorsArgs = {
@@ -9583,7 +10020,6 @@ export type PageAncestorsArgs = {
   where?: InputMaybe<HierarchicalContentNodeToContentNodeAncestorsConnectionWhereArgs>;
 };
 
-
 /** The page type */
 export type PageChildrenArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -9592,7 +10028,6 @@ export type PageChildrenArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<HierarchicalContentNodeToContentNodeChildrenConnectionWhereArgs>;
 };
-
 
 /** The page type */
 export type PageCommentsArgs = {
@@ -9603,18 +10038,15 @@ export type PageCommentsArgs = {
   where?: InputMaybe<PageToCommentConnectionWhereArgs>;
 };
 
-
 /** The page type */
 export type PageContentArgs = {
   format?: InputMaybe<PostObjectFieldFormatEnum>;
 };
 
-
 /** The page type */
 export type PageEditorBlocksArgs = {
   flat?: InputMaybe<Scalars['Boolean']['input']>;
 };
-
 
 /** The page type */
 export type PageEnqueuedScriptsArgs = {
@@ -9624,7 +10056,6 @@ export type PageEnqueuedScriptsArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
 };
 
-
 /** The page type */
 export type PageEnqueuedStylesheetsArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -9632,7 +10063,6 @@ export type PageEnqueuedStylesheetsArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
 };
-
 
 /** The page type */
 export type PageRevisionsArgs = {
@@ -9642,7 +10072,6 @@ export type PageRevisionsArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<PageToRevisionConnectionWhereArgs>;
 };
-
 
 /** The page type */
 export type PageTitleArgs = {
@@ -9708,7 +10137,7 @@ export enum PageIdType {
   /** Identify a resource by the (hashed) Global ID. */
   Id = 'ID',
   /** Identify a resource by the URI. */
-  Uri = 'URI'
+  Uri = 'URI',
 }
 
 /** Information about pagination in a connection. */
@@ -9724,37 +10153,41 @@ export type PageInfo = {
 };
 
 /** Connection between the Page type and the Comment type */
-export type PageToCommentConnection = CommentConnection & Connection & {
-  __typename?: 'PageToCommentConnection';
-  /** Edges for the PageToCommentConnection connection */
-  edges: Array<PageToCommentConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<Comment>;
-  /** Information about pagination in a connection. */
-  pageInfo: PageToCommentConnectionPageInfo;
-};
+export type PageToCommentConnection = CommentConnection &
+  Connection & {
+    __typename?: 'PageToCommentConnection';
+    /** Edges for the PageToCommentConnection connection */
+    edges: Array<PageToCommentConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<Comment>;
+    /** Information about pagination in a connection. */
+    pageInfo: PageToCommentConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type PageToCommentConnectionEdge = CommentConnectionEdge & Edge & {
-  __typename?: 'PageToCommentConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: Comment;
-};
+export type PageToCommentConnectionEdge = CommentConnectionEdge &
+  Edge & {
+    __typename?: 'PageToCommentConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: Comment;
+  };
 
 /** Page Info on the &quot;PageToCommentConnection&quot; */
-export type PageToCommentConnectionPageInfo = CommentConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'PageToCommentConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type PageToCommentConnectionPageInfo = CommentConnectionPageInfo &
+  PageInfo &
+  WpPageInfo & {
+    __typename?: 'PageToCommentConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Arguments for filtering the PageToCommentConnection connection */
 export type PageToCommentConnectionWhereArgs = {
@@ -9819,46 +10252,52 @@ export type PageToCommentConnectionWhereArgs = {
 };
 
 /** Connection between the Page type and the page type */
-export type PageToPreviewConnectionEdge = Edge & OneToOneConnection & PageConnectionEdge & {
-  __typename?: 'PageToPreviewConnectionEdge';
-  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The node of the connection, without the edges */
-  node: Page;
-};
+export type PageToPreviewConnectionEdge = Edge &
+  OneToOneConnection &
+  PageConnectionEdge & {
+    __typename?: 'PageToPreviewConnectionEdge';
+    /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The node of the connection, without the edges */
+    node: Page;
+  };
 
 /** Connection between the Page type and the page type */
-export type PageToRevisionConnection = Connection & PageConnection & {
-  __typename?: 'PageToRevisionConnection';
-  /** Edges for the PageToRevisionConnection connection */
-  edges: Array<PageToRevisionConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<Page>;
-  /** Information about pagination in a connection. */
-  pageInfo: PageToRevisionConnectionPageInfo;
-};
+export type PageToRevisionConnection = Connection &
+  PageConnection & {
+    __typename?: 'PageToRevisionConnection';
+    /** Edges for the PageToRevisionConnection connection */
+    edges: Array<PageToRevisionConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<Page>;
+    /** Information about pagination in a connection. */
+    pageInfo: PageToRevisionConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type PageToRevisionConnectionEdge = Edge & PageConnectionEdge & {
-  __typename?: 'PageToRevisionConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: Page;
-};
+export type PageToRevisionConnectionEdge = Edge &
+  PageConnectionEdge & {
+    __typename?: 'PageToRevisionConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: Page;
+  };
 
 /** Page Info on the &quot;PageToRevisionConnection&quot; */
-export type PageToRevisionConnectionPageInfo = PageConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'PageToRevisionConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type PageToRevisionConnectionPageInfo = PageConnectionPageInfo &
+  PageInfo &
+  WpPageInfo & {
+    __typename?: 'PageToRevisionConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Arguments for filtering the PageToRevisionConnection connection */
 export type PageToRevisionConnectionWhereArgs = {
@@ -9974,124 +10413,139 @@ export enum PluginStatusEnum {
   /** The plugin was active recently. */
   RecentlyActive = 'RECENTLY_ACTIVE',
   /** The plugin has an upgrade available. */
-  Upgrade = 'UPGRADE'
+  Upgrade = 'UPGRADE',
 }
 
 /** The post type */
-export type Post = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithAuthor & NodeWithComments & NodeWithContentEditor & NodeWithEditorBlocks & NodeWithExcerpt & NodeWithFeaturedImage & NodeWithPostEditorBlocks & NodeWithRevisions & NodeWithTemplate & NodeWithTitle & NodeWithTrackbacks & Previewable & UniformResourceIdentifiable & {
-  __typename?: 'Post';
-  /** Connection between the NodeWithAuthor type and the User type */
-  author?: Maybe<NodeWithAuthorToUserConnectionEdge>;
-  /** The database identifier of the author of the node */
-  authorDatabaseId?: Maybe<Scalars['Int']['output']>;
-  /** The globally unique identifier of the author of the node */
-  authorId?: Maybe<Scalars['ID']['output']>;
-  /** Connection between the Post type and the category type */
-  categories?: Maybe<PostToCategoryConnection>;
-  /** The number of comments. Even though WPGraphQL denotes this field as an integer, in WordPress this field should be saved as a numeric string for compatibility. */
-  commentCount?: Maybe<Scalars['Int']['output']>;
-  /** Whether the comments are open or closed for this particular post. */
-  commentStatus?: Maybe<Scalars['String']['output']>;
-  /** Connection between the Post type and the Comment type */
-  comments?: Maybe<PostToCommentConnection>;
-  /** @deprecated Deprecated in favor of using Next.js pages */
-  conditionalTags?: Maybe<ConditionalTags>;
-  /** The content of the post. */
-  content?: Maybe<Scalars['String']['output']>;
-  /** Connection between the ContentNode type and the ContentType type */
-  contentType?: Maybe<ContentNodeToContentTypeConnectionEdge>;
-  /** The name of the Content Type the node belongs to */
-  contentTypeName: Scalars['String']['output'];
-  /** The unique identifier stored in the database */
-  databaseId: Scalars['Int']['output'];
-  /** Post publishing date. */
-  date?: Maybe<Scalars['String']['output']>;
-  /** The publishing date set in GMT. */
-  dateGmt?: Maybe<Scalars['String']['output']>;
-  /** The desired slug of the post */
-  desiredSlug?: Maybe<Scalars['String']['output']>;
-  /** If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn&#039;t exist or is greater than 15 seconds */
-  editingLockedBy?: Maybe<ContentNodeToEditLockConnectionEdge>;
-  /** List of Post editor blocks */
-  editorBlocks?: Maybe<Array<Maybe<PostEditorBlock>>>;
-  /** The RSS enclosure for the object */
-  enclosure?: Maybe<Scalars['String']['output']>;
-  /** Connection between the ContentNode type and the EnqueuedScript type */
-  enqueuedScripts?: Maybe<ContentNodeToEnqueuedScriptConnection>;
-  /** Connection between the ContentNode type and the EnqueuedStylesheet type */
-  enqueuedStylesheets?: Maybe<ContentNodeToEnqueuedStylesheetConnection>;
-  /** The excerpt of the post. */
-  excerpt?: Maybe<Scalars['String']['output']>;
-  /** Connection between the NodeWithFeaturedImage type and the MediaItem type */
-  featuredImage?: Maybe<NodeWithFeaturedImageToMediaItemConnectionEdge>;
-  /** The database identifier for the featured image node assigned to the content node */
-  featuredImageDatabaseId?: Maybe<Scalars['Int']['output']>;
-  /** Globally unique ID of the featured image assigned to the node */
-  featuredImageId?: Maybe<Scalars['ID']['output']>;
-  /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
-  guid?: Maybe<Scalars['String']['output']>;
-  /** The globally unique identifier of the post object. */
-  id: Scalars['ID']['output'];
-  /** Whether the node is a Content Node */
-  isContentNode: Scalars['Boolean']['output'];
-  /** Whether the object is a node in the preview state */
-  isPreview?: Maybe<Scalars['Boolean']['output']>;
-  /** Whether the object is restricted from the current viewer */
-  isRestricted?: Maybe<Scalars['Boolean']['output']>;
-  /** True if the node is a revision of another node */
-  isRevision?: Maybe<Scalars['Boolean']['output']>;
-  /** Whether this page is sticky */
-  isSticky: Scalars['Boolean']['output'];
-  /** Whether the node is a Term */
-  isTermNode: Scalars['Boolean']['output'];
-  /** The user that most recently edited the node */
-  lastEditedBy?: Maybe<ContentNodeToEditLastConnectionEdge>;
-  /** The permalink of the post */
-  link?: Maybe<Scalars['String']['output']>;
-  /** The local modified time for a post. If a post was recently updated the modified field will change to match the corresponding time. */
-  modified?: Maybe<Scalars['String']['output']>;
-  /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
-  modifiedGmt?: Maybe<Scalars['String']['output']>;
-  /** Whether the pings are open or closed for this particular post. */
-  pingStatus?: Maybe<Scalars['String']['output']>;
-  /** URLs that have been pinged. */
-  pinged?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** Connection between the Post type and the postFormat type */
-  postFormats?: Maybe<PostToPostFormatConnection>;
-  /**
-   * The id field matches the WP_Post-&gt;ID field.
-   * @deprecated Deprecated in favor of the databaseId field
-   */
-  postId: Scalars['Int']['output'];
-  /** Connection between the Post type and the post type */
-  preview?: Maybe<PostToPreviewConnectionEdge>;
-  /** The database id of the preview node */
-  previewRevisionDatabaseId?: Maybe<Scalars['Int']['output']>;
-  /** Whether the object is a node in the preview state */
-  previewRevisionId?: Maybe<Scalars['ID']['output']>;
-  /** If the current node is a revision, this field exposes the node this is a revision of. Returns null if the node is not a revision of another node. */
-  revisionOf?: Maybe<NodeWithRevisionsToContentNodeConnectionEdge>;
-  /** Connection between the Post type and the post type */
-  revisions?: Maybe<PostToRevisionConnection>;
-  /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
-  slug?: Maybe<Scalars['String']['output']>;
-  /** The current status of the object */
-  status?: Maybe<Scalars['String']['output']>;
-  /** Connection between the Post type and the tag type */
-  tags?: Maybe<PostToTagConnection>;
-  /** The template assigned to the node */
-  template?: Maybe<ContentTemplate>;
-  templates?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** Connection between the Post type and the TermNode type */
-  terms?: Maybe<PostToTermNodeConnection>;
-  /** The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made. */
-  title?: Maybe<Scalars['String']['output']>;
-  /** URLs queued to be pinged. */
-  toPing?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The unique resource identifier path */
-  uri?: Maybe<Scalars['String']['output']>;
-};
-
+export type Post = ContentNode &
+  DatabaseIdentifier &
+  MenuItemLinkable &
+  Node &
+  NodeWithAuthor &
+  NodeWithComments &
+  NodeWithContentEditor &
+  NodeWithEditorBlocks &
+  NodeWithExcerpt &
+  NodeWithFeaturedImage &
+  NodeWithPostEditorBlocks &
+  NodeWithRevisions &
+  NodeWithTemplate &
+  NodeWithTitle &
+  NodeWithTrackbacks &
+  Previewable &
+  UniformResourceIdentifiable & {
+    __typename?: 'Post';
+    /** Connection between the NodeWithAuthor type and the User type */
+    author?: Maybe<NodeWithAuthorToUserConnectionEdge>;
+    /** The database identifier of the author of the node */
+    authorDatabaseId?: Maybe<Scalars['Int']['output']>;
+    /** The globally unique identifier of the author of the node */
+    authorId?: Maybe<Scalars['ID']['output']>;
+    /** Connection between the Post type and the category type */
+    categories?: Maybe<PostToCategoryConnection>;
+    /** The number of comments. Even though WPGraphQL denotes this field as an integer, in WordPress this field should be saved as a numeric string for compatibility. */
+    commentCount?: Maybe<Scalars['Int']['output']>;
+    /** Whether the comments are open or closed for this particular post. */
+    commentStatus?: Maybe<Scalars['String']['output']>;
+    /** Connection between the Post type and the Comment type */
+    comments?: Maybe<PostToCommentConnection>;
+    /** @deprecated Deprecated in favor of using Next.js pages */
+    conditionalTags?: Maybe<ConditionalTags>;
+    /** The content of the post. */
+    content?: Maybe<Scalars['String']['output']>;
+    /** Connection between the ContentNode type and the ContentType type */
+    contentType?: Maybe<ContentNodeToContentTypeConnectionEdge>;
+    /** The name of the Content Type the node belongs to */
+    contentTypeName: Scalars['String']['output'];
+    /** The unique identifier stored in the database */
+    databaseId: Scalars['Int']['output'];
+    /** Post publishing date. */
+    date?: Maybe<Scalars['String']['output']>;
+    /** The publishing date set in GMT. */
+    dateGmt?: Maybe<Scalars['String']['output']>;
+    /** The desired slug of the post */
+    desiredSlug?: Maybe<Scalars['String']['output']>;
+    /** If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn&#039;t exist or is greater than 15 seconds */
+    editingLockedBy?: Maybe<ContentNodeToEditLockConnectionEdge>;
+    /** List of Post editor blocks */
+    editorBlocks?: Maybe<Array<Maybe<PostEditorBlock>>>;
+    /** The RSS enclosure for the object */
+    enclosure?: Maybe<Scalars['String']['output']>;
+    /** Connection between the ContentNode type and the EnqueuedScript type */
+    enqueuedScripts?: Maybe<ContentNodeToEnqueuedScriptConnection>;
+    /** Connection between the ContentNode type and the EnqueuedStylesheet type */
+    enqueuedStylesheets?: Maybe<ContentNodeToEnqueuedStylesheetConnection>;
+    /** The excerpt of the post. */
+    excerpt?: Maybe<Scalars['String']['output']>;
+    /** Connection between the NodeWithFeaturedImage type and the MediaItem type */
+    featuredImage?: Maybe<NodeWithFeaturedImageToMediaItemConnectionEdge>;
+    /** The database identifier for the featured image node assigned to the content node */
+    featuredImageDatabaseId?: Maybe<Scalars['Int']['output']>;
+    /** Globally unique ID of the featured image assigned to the node */
+    featuredImageId?: Maybe<Scalars['ID']['output']>;
+    /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+    guid?: Maybe<Scalars['String']['output']>;
+    /** The globally unique identifier of the post object. */
+    id: Scalars['ID']['output'];
+    /** Whether the node is a Content Node */
+    isContentNode: Scalars['Boolean']['output'];
+    /** Whether the object is a node in the preview state */
+    isPreview?: Maybe<Scalars['Boolean']['output']>;
+    /** Whether the object is restricted from the current viewer */
+    isRestricted?: Maybe<Scalars['Boolean']['output']>;
+    /** True if the node is a revision of another node */
+    isRevision?: Maybe<Scalars['Boolean']['output']>;
+    /** Whether this page is sticky */
+    isSticky: Scalars['Boolean']['output'];
+    /** Whether the node is a Term */
+    isTermNode: Scalars['Boolean']['output'];
+    /** The user that most recently edited the node */
+    lastEditedBy?: Maybe<ContentNodeToEditLastConnectionEdge>;
+    /** The permalink of the post */
+    link?: Maybe<Scalars['String']['output']>;
+    /** The local modified time for a post. If a post was recently updated the modified field will change to match the corresponding time. */
+    modified?: Maybe<Scalars['String']['output']>;
+    /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
+    modifiedGmt?: Maybe<Scalars['String']['output']>;
+    /** Whether the pings are open or closed for this particular post. */
+    pingStatus?: Maybe<Scalars['String']['output']>;
+    /** URLs that have been pinged. */
+    pinged?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** Connection between the Post type and the postFormat type */
+    postFormats?: Maybe<PostToPostFormatConnection>;
+    /**
+     * The id field matches the WP_Post-&gt;ID field.
+     * @deprecated Deprecated in favor of the databaseId field
+     */
+    postId: Scalars['Int']['output'];
+    /** Connection between the Post type and the post type */
+    preview?: Maybe<PostToPreviewConnectionEdge>;
+    /** The database id of the preview node */
+    previewRevisionDatabaseId?: Maybe<Scalars['Int']['output']>;
+    /** Whether the object is a node in the preview state */
+    previewRevisionId?: Maybe<Scalars['ID']['output']>;
+    /** If the current node is a revision, this field exposes the node this is a revision of. Returns null if the node is not a revision of another node. */
+    revisionOf?: Maybe<NodeWithRevisionsToContentNodeConnectionEdge>;
+    /** Connection between the Post type and the post type */
+    revisions?: Maybe<PostToRevisionConnection>;
+    /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+    slug?: Maybe<Scalars['String']['output']>;
+    /** The current status of the object */
+    status?: Maybe<Scalars['String']['output']>;
+    /** Connection between the Post type and the tag type */
+    tags?: Maybe<PostToTagConnection>;
+    /** The template assigned to the node */
+    template?: Maybe<ContentTemplate>;
+    templates?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** Connection between the Post type and the TermNode type */
+    terms?: Maybe<PostToTermNodeConnection>;
+    /** The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made. */
+    title?: Maybe<Scalars['String']['output']>;
+    /** URLs queued to be pinged. */
+    toPing?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The unique resource identifier path */
+    uri?: Maybe<Scalars['String']['output']>;
+  };
 
 /** The post type */
 export type PostCategoriesArgs = {
@@ -10102,7 +10556,6 @@ export type PostCategoriesArgs = {
   where?: InputMaybe<PostToCategoryConnectionWhereArgs>;
 };
 
-
 /** The post type */
 export type PostCommentsArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -10112,18 +10565,15 @@ export type PostCommentsArgs = {
   where?: InputMaybe<PostToCommentConnectionWhereArgs>;
 };
 
-
 /** The post type */
 export type PostContentArgs = {
   format?: InputMaybe<PostObjectFieldFormatEnum>;
 };
 
-
 /** The post type */
 export type PostEditorBlocksArgs = {
   flat?: InputMaybe<Scalars['Boolean']['input']>;
 };
-
 
 /** The post type */
 export type PostEnqueuedScriptsArgs = {
@@ -10133,7 +10583,6 @@ export type PostEnqueuedScriptsArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
 };
 
-
 /** The post type */
 export type PostEnqueuedStylesheetsArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -10142,12 +10591,10 @@ export type PostEnqueuedStylesheetsArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
 };
 
-
 /** The post type */
 export type PostExcerptArgs = {
   format?: InputMaybe<PostObjectFieldFormatEnum>;
 };
-
 
 /** The post type */
 export type PostPostFormatsArgs = {
@@ -10158,7 +10605,6 @@ export type PostPostFormatsArgs = {
   where?: InputMaybe<PostToPostFormatConnectionWhereArgs>;
 };
 
-
 /** The post type */
 export type PostRevisionsArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -10167,7 +10613,6 @@ export type PostRevisionsArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<PostToRevisionConnectionWhereArgs>;
 };
-
 
 /** The post type */
 export type PostTagsArgs = {
@@ -10178,7 +10623,6 @@ export type PostTagsArgs = {
   where?: InputMaybe<PostToTagConnectionWhereArgs>;
 };
 
-
 /** The post type */
 export type PostTermsArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -10187,7 +10631,6 @@ export type PostTermsArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<PostToTermNodeConnectionWhereArgs>;
 };
-
 
 /** The post type */
 export type PostTitleArgs = {
@@ -10267,56 +10710,58 @@ export type PostEditorBlock = {
 };
 
 /** The postFormat type */
-export type PostFormat = DatabaseIdentifier & Node & TermNode & UniformResourceIdentifiable & {
-  __typename?: 'PostFormat';
-  /** @deprecated Deprecated in favor of using Next.js pages */
-  conditionalTags?: Maybe<ConditionalTags>;
-  /** Connection between the PostFormat type and the ContentNode type */
-  contentNodes?: Maybe<PostFormatToContentNodeConnection>;
-  /** The number of objects connected to the object */
-  count?: Maybe<Scalars['Int']['output']>;
-  /** The unique identifier stored in the database */
-  databaseId: Scalars['Int']['output'];
-  /** The description of the object */
-  description?: Maybe<Scalars['String']['output']>;
-  /** Connection between the TermNode type and the EnqueuedScript type */
-  enqueuedScripts?: Maybe<TermNodeToEnqueuedScriptConnection>;
-  /** Connection between the TermNode type and the EnqueuedStylesheet type */
-  enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
-  /** The globally unique ID for the object */
-  id: Scalars['ID']['output'];
-  /** Whether the node is a Content Node */
-  isContentNode: Scalars['Boolean']['output'];
-  /** Whether the object is restricted from the current viewer */
-  isRestricted?: Maybe<Scalars['Boolean']['output']>;
-  /** Whether the node is a Term */
-  isTermNode: Scalars['Boolean']['output'];
-  /** The link to the term */
-  link?: Maybe<Scalars['String']['output']>;
-  /** The human friendly name of the object. */
-  name?: Maybe<Scalars['String']['output']>;
-  /**
-   * The id field matches the WP_Post-&gt;ID field.
-   * @deprecated Deprecated in favor of databaseId
-   */
-  postFormatId?: Maybe<Scalars['Int']['output']>;
-  /** Connection between the PostFormat type and the post type */
-  posts?: Maybe<PostFormatToPostConnection>;
-  /** An alphanumeric identifier for the object unique to its type. */
-  slug?: Maybe<Scalars['String']['output']>;
-  /** Connection between the PostFormat type and the Taxonomy type */
-  taxonomy?: Maybe<PostFormatToTaxonomyConnectionEdge>;
-  /** The name of the taxonomy that the object is associated with */
-  taxonomyName?: Maybe<Scalars['String']['output']>;
-  templates?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The ID of the term group that this term object belongs to */
-  termGroupId?: Maybe<Scalars['Int']['output']>;
-  /** The taxonomy ID that the object is associated with */
-  termTaxonomyId?: Maybe<Scalars['Int']['output']>;
-  /** The unique resource identifier path */
-  uri?: Maybe<Scalars['String']['output']>;
-};
-
+export type PostFormat = DatabaseIdentifier &
+  Node &
+  TermNode &
+  UniformResourceIdentifiable & {
+    __typename?: 'PostFormat';
+    /** @deprecated Deprecated in favor of using Next.js pages */
+    conditionalTags?: Maybe<ConditionalTags>;
+    /** Connection between the PostFormat type and the ContentNode type */
+    contentNodes?: Maybe<PostFormatToContentNodeConnection>;
+    /** The number of objects connected to the object */
+    count?: Maybe<Scalars['Int']['output']>;
+    /** The unique identifier stored in the database */
+    databaseId: Scalars['Int']['output'];
+    /** The description of the object */
+    description?: Maybe<Scalars['String']['output']>;
+    /** Connection between the TermNode type and the EnqueuedScript type */
+    enqueuedScripts?: Maybe<TermNodeToEnqueuedScriptConnection>;
+    /** Connection between the TermNode type and the EnqueuedStylesheet type */
+    enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
+    /** The globally unique ID for the object */
+    id: Scalars['ID']['output'];
+    /** Whether the node is a Content Node */
+    isContentNode: Scalars['Boolean']['output'];
+    /** Whether the object is restricted from the current viewer */
+    isRestricted?: Maybe<Scalars['Boolean']['output']>;
+    /** Whether the node is a Term */
+    isTermNode: Scalars['Boolean']['output'];
+    /** The link to the term */
+    link?: Maybe<Scalars['String']['output']>;
+    /** The human friendly name of the object. */
+    name?: Maybe<Scalars['String']['output']>;
+    /**
+     * The id field matches the WP_Post-&gt;ID field.
+     * @deprecated Deprecated in favor of databaseId
+     */
+    postFormatId?: Maybe<Scalars['Int']['output']>;
+    /** Connection between the PostFormat type and the post type */
+    posts?: Maybe<PostFormatToPostConnection>;
+    /** An alphanumeric identifier for the object unique to its type. */
+    slug?: Maybe<Scalars['String']['output']>;
+    /** Connection between the PostFormat type and the Taxonomy type */
+    taxonomy?: Maybe<PostFormatToTaxonomyConnectionEdge>;
+    /** The name of the taxonomy that the object is associated with */
+    taxonomyName?: Maybe<Scalars['String']['output']>;
+    templates?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The ID of the term group that this term object belongs to */
+    termGroupId?: Maybe<Scalars['Int']['output']>;
+    /** The taxonomy ID that the object is associated with */
+    termTaxonomyId?: Maybe<Scalars['Int']['output']>;
+    /** The unique resource identifier path */
+    uri?: Maybe<Scalars['String']['output']>;
+  };
 
 /** The postFormat type */
 export type PostFormatContentNodesArgs = {
@@ -10327,7 +10772,6 @@ export type PostFormatContentNodesArgs = {
   where?: InputMaybe<PostFormatToContentNodeConnectionWhereArgs>;
 };
 
-
 /** The postFormat type */
 export type PostFormatEnqueuedScriptsArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -10336,7 +10780,6 @@ export type PostFormatEnqueuedScriptsArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
 };
 
-
 /** The postFormat type */
 export type PostFormatEnqueuedStylesheetsArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -10344,7 +10787,6 @@ export type PostFormatEnqueuedStylesheetsArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
 };
-
 
 /** The postFormat type */
 export type PostFormatPostsArgs = {
@@ -10396,41 +10838,46 @@ export enum PostFormatIdType {
   /** Url friendly name of the node */
   Slug = 'SLUG',
   /** The URI for the node */
-  Uri = 'URI'
+  Uri = 'URI',
 }
 
 /** Connection between the PostFormat type and the ContentNode type */
-export type PostFormatToContentNodeConnection = Connection & ContentNodeConnection & {
-  __typename?: 'PostFormatToContentNodeConnection';
-  /** Edges for the PostFormatToContentNodeConnection connection */
-  edges: Array<PostFormatToContentNodeConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<ContentNode>;
-  /** Information about pagination in a connection. */
-  pageInfo: PostFormatToContentNodeConnectionPageInfo;
-};
+export type PostFormatToContentNodeConnection = Connection &
+  ContentNodeConnection & {
+    __typename?: 'PostFormatToContentNodeConnection';
+    /** Edges for the PostFormatToContentNodeConnection connection */
+    edges: Array<PostFormatToContentNodeConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<ContentNode>;
+    /** Information about pagination in a connection. */
+    pageInfo: PostFormatToContentNodeConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type PostFormatToContentNodeConnectionEdge = ContentNodeConnectionEdge & Edge & {
-  __typename?: 'PostFormatToContentNodeConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: ContentNode;
-};
+export type PostFormatToContentNodeConnectionEdge = ContentNodeConnectionEdge &
+  Edge & {
+    __typename?: 'PostFormatToContentNodeConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: ContentNode;
+  };
 
 /** Page Info on the &quot;PostFormatToContentNodeConnection&quot; */
-export type PostFormatToContentNodeConnectionPageInfo = ContentNodeConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'PostFormatToContentNodeConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type PostFormatToContentNodeConnectionPageInfo =
+  ContentNodeConnectionPageInfo &
+    PageInfo &
+    WpPageInfo & {
+      __typename?: 'PostFormatToContentNodeConnectionPageInfo';
+      /** When paginating forwards, the cursor to continue. */
+      endCursor?: Maybe<Scalars['String']['output']>;
+      /** When paginating forwards, are there more items? */
+      hasNextPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, are there more items? */
+      hasPreviousPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, the cursor to continue. */
+      startCursor?: Maybe<Scalars['String']['output']>;
+    };
 
 /** Arguments for filtering the PostFormatToContentNodeConnection connection */
 export type PostFormatToContentNodeConnectionWhereArgs = {
@@ -10473,37 +10920,41 @@ export type PostFormatToContentNodeConnectionWhereArgs = {
 };
 
 /** Connection between the PostFormat type and the post type */
-export type PostFormatToPostConnection = Connection & PostConnection & {
-  __typename?: 'PostFormatToPostConnection';
-  /** Edges for the PostFormatToPostConnection connection */
-  edges: Array<PostFormatToPostConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<Post>;
-  /** Information about pagination in a connection. */
-  pageInfo: PostFormatToPostConnectionPageInfo;
-};
+export type PostFormatToPostConnection = Connection &
+  PostConnection & {
+    __typename?: 'PostFormatToPostConnection';
+    /** Edges for the PostFormatToPostConnection connection */
+    edges: Array<PostFormatToPostConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<Post>;
+    /** Information about pagination in a connection. */
+    pageInfo: PostFormatToPostConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type PostFormatToPostConnectionEdge = Edge & PostConnectionEdge & {
-  __typename?: 'PostFormatToPostConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: Post;
-};
+export type PostFormatToPostConnectionEdge = Edge &
+  PostConnectionEdge & {
+    __typename?: 'PostFormatToPostConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: Post;
+  };
 
 /** Page Info on the &quot;PostFormatToPostConnection&quot; */
-export type PostFormatToPostConnectionPageInfo = PageInfo & PostConnectionPageInfo & WpPageInfo & {
-  __typename?: 'PostFormatToPostConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type PostFormatToPostConnectionPageInfo = PageInfo &
+  PostConnectionPageInfo &
+  WpPageInfo & {
+    __typename?: 'PostFormatToPostConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Arguments for filtering the PostFormatToPostConnection connection */
 export type PostFormatToPostConnectionWhereArgs = {
@@ -10572,13 +11023,15 @@ export type PostFormatToPostConnectionWhereArgs = {
 };
 
 /** Connection between the PostFormat type and the Taxonomy type */
-export type PostFormatToTaxonomyConnectionEdge = Edge & OneToOneConnection & TaxonomyConnectionEdge & {
-  __typename?: 'PostFormatToTaxonomyConnectionEdge';
-  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The node of the connection, without the edges */
-  node: Taxonomy;
-};
+export type PostFormatToTaxonomyConnectionEdge = Edge &
+  OneToOneConnection &
+  TaxonomyConnectionEdge & {
+    __typename?: 'PostFormatToTaxonomyConnectionEdge';
+    /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The node of the connection, without the edges */
+    node: Taxonomy;
+  };
 
 /** The Type of Identifier used to fetch a single resource. Default is ID. */
 export enum PostIdType {
@@ -10589,7 +11042,7 @@ export enum PostIdType {
   /** Identify a resource by the slug. Available to non-hierarchcial Types where the slug is a unique identifier. */
   Slug = 'SLUG',
   /** Identify a resource by the URI. */
-  Uri = 'URI'
+  Uri = 'URI',
 }
 
 /** The format of post field data. */
@@ -10597,7 +11050,7 @@ export enum PostObjectFieldFormatEnum {
   /** Provide the field value directly from database. Null on unauthenticated requests. */
   Raw = 'RAW',
   /** Provide the field value as rendered by WordPress. Default. */
-  Rendered = 'RENDERED'
+  Rendered = 'RENDERED',
 }
 
 /** The column to use when filtering by date */
@@ -10605,7 +11058,7 @@ export enum PostObjectsConnectionDateColumnEnum {
   /** The date the comment was created in local time. */
   Date = 'DATE',
   /** The most recent modification date of the comment. */
-  Modified = 'MODIFIED'
+  Modified = 'MODIFIED',
 }
 
 /** Field to order the connection by */
@@ -10629,7 +11082,7 @@ export enum PostObjectsConnectionOrderbyEnum {
   /** Order by slug */
   Slug = 'SLUG',
   /** Order by title */
-  Title = 'TITLE'
+  Title = 'TITLE',
 }
 
 /** Options for ordering the connection */
@@ -10687,7 +11140,7 @@ export enum PostStatusEnum {
   /** Objects with the request-pending status */
   RequestPending = 'REQUEST_PENDING',
   /** Objects with the trash status */
-  Trash = 'TRASH'
+  Trash = 'TRASH',
 }
 
 /** Set relationships between the post to tags */
@@ -10711,37 +11164,41 @@ export type PostTagsNodeInput = {
 };
 
 /** Connection between the Post type and the category type */
-export type PostToCategoryConnection = CategoryConnection & Connection & {
-  __typename?: 'PostToCategoryConnection';
-  /** Edges for the PostToCategoryConnection connection */
-  edges: Array<PostToCategoryConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<Category>;
-  /** Information about pagination in a connection. */
-  pageInfo: PostToCategoryConnectionPageInfo;
-};
+export type PostToCategoryConnection = CategoryConnection &
+  Connection & {
+    __typename?: 'PostToCategoryConnection';
+    /** Edges for the PostToCategoryConnection connection */
+    edges: Array<PostToCategoryConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<Category>;
+    /** Information about pagination in a connection. */
+    pageInfo: PostToCategoryConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type PostToCategoryConnectionEdge = CategoryConnectionEdge & Edge & {
-  __typename?: 'PostToCategoryConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: Category;
-};
+export type PostToCategoryConnectionEdge = CategoryConnectionEdge &
+  Edge & {
+    __typename?: 'PostToCategoryConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: Category;
+  };
 
 /** Page Info on the &quot;PostToCategoryConnection&quot; */
-export type PostToCategoryConnectionPageInfo = CategoryConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'PostToCategoryConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type PostToCategoryConnectionPageInfo = CategoryConnectionPageInfo &
+  PageInfo &
+  WpPageInfo & {
+    __typename?: 'PostToCategoryConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Arguments for filtering the PostToCategoryConnection connection */
 export type PostToCategoryConnectionWhereArgs = {
@@ -10790,37 +11247,41 @@ export type PostToCategoryConnectionWhereArgs = {
 };
 
 /** Connection between the Post type and the Comment type */
-export type PostToCommentConnection = CommentConnection & Connection & {
-  __typename?: 'PostToCommentConnection';
-  /** Edges for the PostToCommentConnection connection */
-  edges: Array<PostToCommentConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<Comment>;
-  /** Information about pagination in a connection. */
-  pageInfo: PostToCommentConnectionPageInfo;
-};
+export type PostToCommentConnection = CommentConnection &
+  Connection & {
+    __typename?: 'PostToCommentConnection';
+    /** Edges for the PostToCommentConnection connection */
+    edges: Array<PostToCommentConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<Comment>;
+    /** Information about pagination in a connection. */
+    pageInfo: PostToCommentConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type PostToCommentConnectionEdge = CommentConnectionEdge & Edge & {
-  __typename?: 'PostToCommentConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: Comment;
-};
+export type PostToCommentConnectionEdge = CommentConnectionEdge &
+  Edge & {
+    __typename?: 'PostToCommentConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: Comment;
+  };
 
 /** Page Info on the &quot;PostToCommentConnection&quot; */
-export type PostToCommentConnectionPageInfo = CommentConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'PostToCommentConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type PostToCommentConnectionPageInfo = CommentConnectionPageInfo &
+  PageInfo &
+  WpPageInfo & {
+    __typename?: 'PostToCommentConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Arguments for filtering the PostToCommentConnection connection */
 export type PostToCommentConnectionWhereArgs = {
@@ -10885,37 +11346,41 @@ export type PostToCommentConnectionWhereArgs = {
 };
 
 /** Connection between the Post type and the postFormat type */
-export type PostToPostFormatConnection = Connection & PostFormatConnection & {
-  __typename?: 'PostToPostFormatConnection';
-  /** Edges for the PostToPostFormatConnection connection */
-  edges: Array<PostToPostFormatConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<PostFormat>;
-  /** Information about pagination in a connection. */
-  pageInfo: PostToPostFormatConnectionPageInfo;
-};
+export type PostToPostFormatConnection = Connection &
+  PostFormatConnection & {
+    __typename?: 'PostToPostFormatConnection';
+    /** Edges for the PostToPostFormatConnection connection */
+    edges: Array<PostToPostFormatConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<PostFormat>;
+    /** Information about pagination in a connection. */
+    pageInfo: PostToPostFormatConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type PostToPostFormatConnectionEdge = Edge & PostFormatConnectionEdge & {
-  __typename?: 'PostToPostFormatConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: PostFormat;
-};
+export type PostToPostFormatConnectionEdge = Edge &
+  PostFormatConnectionEdge & {
+    __typename?: 'PostToPostFormatConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: PostFormat;
+  };
 
 /** Page Info on the &quot;PostToPostFormatConnection&quot; */
-export type PostToPostFormatConnectionPageInfo = PageInfo & PostFormatConnectionPageInfo & WpPageInfo & {
-  __typename?: 'PostToPostFormatConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type PostToPostFormatConnectionPageInfo = PageInfo &
+  PostFormatConnectionPageInfo &
+  WpPageInfo & {
+    __typename?: 'PostToPostFormatConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Arguments for filtering the PostToPostFormatConnection connection */
 export type PostToPostFormatConnectionWhereArgs = {
@@ -10964,46 +11429,52 @@ export type PostToPostFormatConnectionWhereArgs = {
 };
 
 /** Connection between the Post type and the post type */
-export type PostToPreviewConnectionEdge = Edge & OneToOneConnection & PostConnectionEdge & {
-  __typename?: 'PostToPreviewConnectionEdge';
-  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The node of the connection, without the edges */
-  node: Post;
-};
+export type PostToPreviewConnectionEdge = Edge &
+  OneToOneConnection &
+  PostConnectionEdge & {
+    __typename?: 'PostToPreviewConnectionEdge';
+    /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The node of the connection, without the edges */
+    node: Post;
+  };
 
 /** Connection between the Post type and the post type */
-export type PostToRevisionConnection = Connection & PostConnection & {
-  __typename?: 'PostToRevisionConnection';
-  /** Edges for the PostToRevisionConnection connection */
-  edges: Array<PostToRevisionConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<Post>;
-  /** Information about pagination in a connection. */
-  pageInfo: PostToRevisionConnectionPageInfo;
-};
+export type PostToRevisionConnection = Connection &
+  PostConnection & {
+    __typename?: 'PostToRevisionConnection';
+    /** Edges for the PostToRevisionConnection connection */
+    edges: Array<PostToRevisionConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<Post>;
+    /** Information about pagination in a connection. */
+    pageInfo: PostToRevisionConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type PostToRevisionConnectionEdge = Edge & PostConnectionEdge & {
-  __typename?: 'PostToRevisionConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: Post;
-};
+export type PostToRevisionConnectionEdge = Edge &
+  PostConnectionEdge & {
+    __typename?: 'PostToRevisionConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: Post;
+  };
 
 /** Page Info on the &quot;PostToRevisionConnection&quot; */
-export type PostToRevisionConnectionPageInfo = PageInfo & PostConnectionPageInfo & WpPageInfo & {
-  __typename?: 'PostToRevisionConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type PostToRevisionConnectionPageInfo = PageInfo &
+  PostConnectionPageInfo &
+  WpPageInfo & {
+    __typename?: 'PostToRevisionConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Arguments for filtering the PostToRevisionConnection connection */
 export type PostToRevisionConnectionWhereArgs = {
@@ -11072,37 +11543,41 @@ export type PostToRevisionConnectionWhereArgs = {
 };
 
 /** Connection between the Post type and the tag type */
-export type PostToTagConnection = Connection & TagConnection & {
-  __typename?: 'PostToTagConnection';
-  /** Edges for the PostToTagConnection connection */
-  edges: Array<PostToTagConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<Tag>;
-  /** Information about pagination in a connection. */
-  pageInfo: PostToTagConnectionPageInfo;
-};
+export type PostToTagConnection = Connection &
+  TagConnection & {
+    __typename?: 'PostToTagConnection';
+    /** Edges for the PostToTagConnection connection */
+    edges: Array<PostToTagConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<Tag>;
+    /** Information about pagination in a connection. */
+    pageInfo: PostToTagConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type PostToTagConnectionEdge = Edge & TagConnectionEdge & {
-  __typename?: 'PostToTagConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: Tag;
-};
+export type PostToTagConnectionEdge = Edge &
+  TagConnectionEdge & {
+    __typename?: 'PostToTagConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: Tag;
+  };
 
 /** Page Info on the &quot;PostToTagConnection&quot; */
-export type PostToTagConnectionPageInfo = PageInfo & TagConnectionPageInfo & WpPageInfo & {
-  __typename?: 'PostToTagConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type PostToTagConnectionPageInfo = PageInfo &
+  TagConnectionPageInfo &
+  WpPageInfo & {
+    __typename?: 'PostToTagConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Arguments for filtering the PostToTagConnection connection */
 export type PostToTagConnectionWhereArgs = {
@@ -11151,37 +11626,41 @@ export type PostToTagConnectionWhereArgs = {
 };
 
 /** Connection between the Post type and the TermNode type */
-export type PostToTermNodeConnection = Connection & TermNodeConnection & {
-  __typename?: 'PostToTermNodeConnection';
-  /** Edges for the PostToTermNodeConnection connection */
-  edges: Array<PostToTermNodeConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<TermNode>;
-  /** Information about pagination in a connection. */
-  pageInfo: PostToTermNodeConnectionPageInfo;
-};
+export type PostToTermNodeConnection = Connection &
+  TermNodeConnection & {
+    __typename?: 'PostToTermNodeConnection';
+    /** Edges for the PostToTermNodeConnection connection */
+    edges: Array<PostToTermNodeConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<TermNode>;
+    /** Information about pagination in a connection. */
+    pageInfo: PostToTermNodeConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type PostToTermNodeConnectionEdge = Edge & TermNodeConnectionEdge & {
-  __typename?: 'PostToTermNodeConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: TermNode;
-};
+export type PostToTermNodeConnectionEdge = Edge &
+  TermNodeConnectionEdge & {
+    __typename?: 'PostToTermNodeConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: TermNode;
+  };
 
 /** Page Info on the &quot;PostToTermNodeConnection&quot; */
-export type PostToTermNodeConnectionPageInfo = PageInfo & TermNodeConnectionPageInfo & WpPageInfo & {
-  __typename?: 'PostToTermNodeConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type PostToTermNodeConnectionPageInfo = PageInfo &
+  TermNodeConnectionPageInfo &
+  WpPageInfo & {
+    __typename?: 'PostToTermNodeConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Arguments for filtering the PostToTermNodeConnection connection */
 export type PostToTermNodeConnectionWhereArgs = {
@@ -11361,7 +11840,7 @@ export enum RelationEnum {
   /** The logical AND condition returns true if both operands are true, otherwise, it returns false. */
   And = 'AND',
   /** The logical OR condition returns false if both operands are false, otherwise, it returns true. */
-  Or = 'OR'
+  Or = 'OR',
 }
 
 /** Input for the resetUserPassword mutation. */
@@ -11477,204 +11956,170 @@ export type RootMutation = {
   updateUser?: Maybe<UpdateUserPayload>;
 };
 
-
 /** The root mutation */
 export type RootMutationCreateCategoryArgs = {
   input: CreateCategoryInput;
 };
-
 
 /** The root mutation */
 export type RootMutationCreateCommentArgs = {
   input: CreateCommentInput;
 };
 
-
 /** The root mutation */
 export type RootMutationCreateFilmArgs = {
   input: CreateFilmInput;
 };
-
 
 /** The root mutation */
 export type RootMutationCreateMediaItemArgs = {
   input: CreateMediaItemInput;
 };
 
-
 /** The root mutation */
 export type RootMutationCreatePageArgs = {
   input: CreatePageInput;
 };
-
 
 /** The root mutation */
 export type RootMutationCreatePostArgs = {
   input: CreatePostInput;
 };
 
-
 /** The root mutation */
 export type RootMutationCreatePostFormatArgs = {
   input: CreatePostFormatInput;
 };
-
 
 /** The root mutation */
 export type RootMutationCreateTagArgs = {
   input: CreateTagInput;
 };
 
-
 /** The root mutation */
 export type RootMutationCreateUserArgs = {
   input: CreateUserInput;
 };
-
 
 /** The root mutation */
 export type RootMutationDeleteCategoryArgs = {
   input: DeleteCategoryInput;
 };
 
-
 /** The root mutation */
 export type RootMutationDeleteCommentArgs = {
   input: DeleteCommentInput;
 };
-
 
 /** The root mutation */
 export type RootMutationDeleteFilmArgs = {
   input: DeleteFilmInput;
 };
 
-
 /** The root mutation */
 export type RootMutationDeleteMediaItemArgs = {
   input: DeleteMediaItemInput;
 };
-
 
 /** The root mutation */
 export type RootMutationDeletePageArgs = {
   input: DeletePageInput;
 };
 
-
 /** The root mutation */
 export type RootMutationDeletePostArgs = {
   input: DeletePostInput;
 };
-
 
 /** The root mutation */
 export type RootMutationDeletePostFormatArgs = {
   input: DeletePostFormatInput;
 };
 
-
 /** The root mutation */
 export type RootMutationDeleteTagArgs = {
   input: DeleteTagInput;
 };
-
 
 /** The root mutation */
 export type RootMutationDeleteUserArgs = {
   input: DeleteUserInput;
 };
 
-
 /** The root mutation */
 export type RootMutationGenerateAuthorizationCodeArgs = {
   input: GenerateAuthorizationCodeInput;
 };
-
 
 /** The root mutation */
 export type RootMutationIncreaseCountArgs = {
   count?: InputMaybe<Scalars['Int']['input']>;
 };
 
-
 /** The root mutation */
 export type RootMutationRegisterUserArgs = {
   input: RegisterUserInput;
 };
-
 
 /** The root mutation */
 export type RootMutationResetUserPasswordArgs = {
   input: ResetUserPasswordInput;
 };
 
-
 /** The root mutation */
 export type RootMutationRestoreCommentArgs = {
   input: RestoreCommentInput;
 };
-
 
 /** The root mutation */
 export type RootMutationSendPasswordResetEmailArgs = {
   input: SendPasswordResetEmailInput;
 };
 
-
 /** The root mutation */
 export type RootMutationUpdateCategoryArgs = {
   input: UpdateCategoryInput;
 };
-
 
 /** The root mutation */
 export type RootMutationUpdateCommentArgs = {
   input: UpdateCommentInput;
 };
 
-
 /** The root mutation */
 export type RootMutationUpdateFilmArgs = {
   input: UpdateFilmInput;
 };
-
 
 /** The root mutation */
 export type RootMutationUpdateMediaItemArgs = {
   input: UpdateMediaItemInput;
 };
 
-
 /** The root mutation */
 export type RootMutationUpdatePageArgs = {
   input: UpdatePageInput;
 };
-
 
 /** The root mutation */
 export type RootMutationUpdatePostArgs = {
   input: UpdatePostInput;
 };
 
-
 /** The root mutation */
 export type RootMutationUpdatePostFormatArgs = {
   input: UpdatePostFormatInput;
 };
-
 
 /** The root mutation */
 export type RootMutationUpdateSettingsArgs = {
   input: UpdateSettingsInput;
 };
 
-
 /** The root mutation */
 export type RootMutationUpdateTagArgs = {
   input: UpdateTagInput;
 };
-
 
 /** The root mutation */
 export type RootMutationUpdateUserArgs = {
@@ -11730,7 +12175,7 @@ export type RootQuery = {
   menu?: Maybe<Menu>;
   /** A WordPress navigation menu item */
   menuItem?: Maybe<MenuItem>;
-  /** Connection between the RootQuery type and the MenuItem type */
+  /** Connection between the RootQuery type and the MenuItemProps type */
   menuItems?: Maybe<RootQueryToMenuItemConnection>;
   /** Connection between the RootQuery type and the Menu type */
   menus?: Maybe<RootQueryToMenuConnection>;
@@ -11802,7 +12247,6 @@ export type RootQuery = {
   writingSettings?: Maybe<WritingSettings>;
 };
 
-
 /** The root entry point into the Graph */
 export type RootQueryCategoriesArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -11812,20 +12256,17 @@ export type RootQueryCategoriesArgs = {
   where?: InputMaybe<RootQueryToCategoryConnectionWhereArgs>;
 };
 
-
 /** The root entry point into the Graph */
 export type RootQueryCategoryArgs = {
   id: Scalars['ID']['input'];
   idType?: InputMaybe<CategoryIdType>;
 };
 
-
 /** The root entry point into the Graph */
 export type RootQueryCommentArgs = {
   id: Scalars['ID']['input'];
   idType?: InputMaybe<CommentNodeIdTypeEnum>;
 };
-
 
 /** The root entry point into the Graph */
 export type RootQueryCommentsArgs = {
@@ -11836,7 +12277,6 @@ export type RootQueryCommentsArgs = {
   where?: InputMaybe<RootQueryToCommentConnectionWhereArgs>;
 };
 
-
 /** The root entry point into the Graph */
 export type RootQueryContentNodeArgs = {
   asPreview?: InputMaybe<Scalars['Boolean']['input']>;
@@ -11844,7 +12284,6 @@ export type RootQueryContentNodeArgs = {
   id: Scalars['ID']['input'];
   idType?: InputMaybe<ContentNodeIdTypeEnum>;
 };
-
 
 /** The root entry point into the Graph */
 export type RootQueryContentNodesArgs = {
@@ -11855,13 +12294,11 @@ export type RootQueryContentNodesArgs = {
   where?: InputMaybe<RootQueryToContentNodeConnectionWhereArgs>;
 };
 
-
 /** The root entry point into the Graph */
 export type RootQueryContentTypeArgs = {
   id: Scalars['ID']['input'];
   idType?: InputMaybe<ContentTypeIdTypeEnum>;
 };
-
 
 /** The root entry point into the Graph */
 export type RootQueryContentTypesArgs = {
@@ -11871,14 +12308,12 @@ export type RootQueryContentTypesArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
 };
 
-
 /** The root entry point into the Graph */
 export type RootQueryFilmArgs = {
   asPreview?: InputMaybe<Scalars['Boolean']['input']>;
   id: Scalars['ID']['input'];
   idType?: InputMaybe<FilmIdType>;
 };
-
 
 /** The root entry point into the Graph */
 export type RootQueryFilmByArgs = {
@@ -11887,7 +12322,6 @@ export type RootQueryFilmByArgs = {
   slug?: InputMaybe<Scalars['String']['input']>;
   uri?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 /** The root entry point into the Graph */
 export type RootQueryFilmsArgs = {
@@ -11898,12 +12332,10 @@ export type RootQueryFilmsArgs = {
   where?: InputMaybe<RootQueryToFilmConnectionWhereArgs>;
 };
 
-
 /** The root entry point into the Graph */
 export type RootQueryGlobalStylesheetArgs = {
   types?: InputMaybe<Array<InputMaybe<GlobalStylesheetTypesEnum>>>;
 };
-
 
 /** The root entry point into the Graph */
 export type RootQueryMediaItemArgs = {
@@ -11912,7 +12344,6 @@ export type RootQueryMediaItemArgs = {
   idType?: InputMaybe<MediaItemIdType>;
 };
 
-
 /** The root entry point into the Graph */
 export type RootQueryMediaItemByArgs = {
   id?: InputMaybe<Scalars['ID']['input']>;
@@ -11920,7 +12351,6 @@ export type RootQueryMediaItemByArgs = {
   slug?: InputMaybe<Scalars['String']['input']>;
   uri?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 /** The root entry point into the Graph */
 export type RootQueryMediaItemsArgs = {
@@ -11931,20 +12361,17 @@ export type RootQueryMediaItemsArgs = {
   where?: InputMaybe<RootQueryToMediaItemConnectionWhereArgs>;
 };
 
-
 /** The root entry point into the Graph */
 export type RootQueryMenuArgs = {
   id: Scalars['ID']['input'];
   idType?: InputMaybe<MenuNodeIdTypeEnum>;
 };
 
-
 /** The root entry point into the Graph */
 export type RootQueryMenuItemArgs = {
   id: Scalars['ID']['input'];
   idType?: InputMaybe<MenuItemNodeIdTypeEnum>;
 };
-
 
 /** The root entry point into the Graph */
 export type RootQueryMenuItemsArgs = {
@@ -11955,7 +12382,6 @@ export type RootQueryMenuItemsArgs = {
   where?: InputMaybe<RootQueryToMenuItemConnectionWhereArgs>;
 };
 
-
 /** The root entry point into the Graph */
 export type RootQueryMenusArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -11965,18 +12391,15 @@ export type RootQueryMenusArgs = {
   where?: InputMaybe<RootQueryToMenuConnectionWhereArgs>;
 };
 
-
 /** The root entry point into the Graph */
 export type RootQueryNodeArgs = {
   id?: InputMaybe<Scalars['ID']['input']>;
 };
 
-
 /** The root entry point into the Graph */
 export type RootQueryNodeByUriArgs = {
   uri: Scalars['String']['input'];
 };
-
 
 /** The root entry point into the Graph */
 export type RootQueryPageArgs = {
@@ -11985,14 +12408,12 @@ export type RootQueryPageArgs = {
   idType?: InputMaybe<PageIdType>;
 };
 
-
 /** The root entry point into the Graph */
 export type RootQueryPageByArgs = {
   id?: InputMaybe<Scalars['ID']['input']>;
   pageId?: InputMaybe<Scalars['Int']['input']>;
   uri?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 /** The root entry point into the Graph */
 export type RootQueryPagesArgs = {
@@ -12003,12 +12424,10 @@ export type RootQueryPagesArgs = {
   where?: InputMaybe<RootQueryToPageConnectionWhereArgs>;
 };
 
-
 /** The root entry point into the Graph */
 export type RootQueryPluginArgs = {
   id: Scalars['ID']['input'];
 };
-
 
 /** The root entry point into the Graph */
 export type RootQueryPluginsArgs = {
@@ -12019,14 +12438,12 @@ export type RootQueryPluginsArgs = {
   where?: InputMaybe<RootQueryToPluginConnectionWhereArgs>;
 };
 
-
 /** The root entry point into the Graph */
 export type RootQueryPostArgs = {
   asPreview?: InputMaybe<Scalars['Boolean']['input']>;
   id: Scalars['ID']['input'];
   idType?: InputMaybe<PostIdType>;
 };
-
 
 /** The root entry point into the Graph */
 export type RootQueryPostByArgs = {
@@ -12036,13 +12453,11 @@ export type RootQueryPostByArgs = {
   uri?: InputMaybe<Scalars['String']['input']>;
 };
 
-
 /** The root entry point into the Graph */
 export type RootQueryPostFormatArgs = {
   id: Scalars['ID']['input'];
   idType?: InputMaybe<PostFormatIdType>;
 };
-
 
 /** The root entry point into the Graph */
 export type RootQueryPostFormatsArgs = {
@@ -12053,7 +12468,6 @@ export type RootQueryPostFormatsArgs = {
   where?: InputMaybe<RootQueryToPostFormatConnectionWhereArgs>;
 };
 
-
 /** The root entry point into the Graph */
 export type RootQueryPostsArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -12063,7 +12477,6 @@ export type RootQueryPostsArgs = {
   where?: InputMaybe<RootQueryToPostConnectionWhereArgs>;
 };
 
-
 /** The root entry point into the Graph */
 export type RootQueryRegisteredScriptsArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -12072,7 +12485,6 @@ export type RootQueryRegisteredScriptsArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
 };
 
-
 /** The root entry point into the Graph */
 export type RootQueryRegisteredStylesheetsArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -12080,7 +12492,6 @@ export type RootQueryRegisteredStylesheetsArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
 };
-
 
 /** The root entry point into the Graph */
 export type RootQueryRevisionsArgs = {
@@ -12091,13 +12502,11 @@ export type RootQueryRevisionsArgs = {
   where?: InputMaybe<RootQueryToRevisionsConnectionWhereArgs>;
 };
 
-
 /** The root entry point into the Graph */
 export type RootQueryTagArgs = {
   id: Scalars['ID']['input'];
   idType?: InputMaybe<TagIdType>;
 };
-
 
 /** The root entry point into the Graph */
 export type RootQueryTagsArgs = {
@@ -12108,7 +12517,6 @@ export type RootQueryTagsArgs = {
   where?: InputMaybe<RootQueryToTagConnectionWhereArgs>;
 };
 
-
 /** The root entry point into the Graph */
 export type RootQueryTaxonomiesArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -12117,13 +12525,11 @@ export type RootQueryTaxonomiesArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
 };
 
-
 /** The root entry point into the Graph */
 export type RootQueryTaxonomyArgs = {
   id: Scalars['ID']['input'];
   idType?: InputMaybe<TaxonomyIdTypeEnum>;
 };
-
 
 /** The root entry point into the Graph */
 export type RootQueryTermNodeArgs = {
@@ -12131,7 +12537,6 @@ export type RootQueryTermNodeArgs = {
   idType?: InputMaybe<TermNodeIdTypeEnum>;
   taxonomy?: InputMaybe<TaxonomyEnum>;
 };
-
 
 /** The root entry point into the Graph */
 export type RootQueryTermsArgs = {
@@ -12142,12 +12547,10 @@ export type RootQueryTermsArgs = {
   where?: InputMaybe<RootQueryToTermNodeConnectionWhereArgs>;
 };
 
-
 /** The root entry point into the Graph */
 export type RootQueryThemeArgs = {
   id: Scalars['ID']['input'];
 };
-
 
 /** The root entry point into the Graph */
 export type RootQueryThemesArgs = {
@@ -12157,19 +12560,16 @@ export type RootQueryThemesArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
 };
 
-
 /** The root entry point into the Graph */
 export type RootQueryUserArgs = {
   id: Scalars['ID']['input'];
   idType?: InputMaybe<UserNodeIdTypeEnum>;
 };
 
-
 /** The root entry point into the Graph */
 export type RootQueryUserRoleArgs = {
   id: Scalars['ID']['input'];
 };
-
 
 /** The root entry point into the Graph */
 export type RootQueryUserRolesArgs = {
@@ -12178,7 +12578,6 @@ export type RootQueryUserRolesArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
 };
-
 
 /** The root entry point into the Graph */
 export type RootQueryUsersArgs = {
@@ -12190,37 +12589,41 @@ export type RootQueryUsersArgs = {
 };
 
 /** Connection between the RootQuery type and the category type */
-export type RootQueryToCategoryConnection = CategoryConnection & Connection & {
-  __typename?: 'RootQueryToCategoryConnection';
-  /** Edges for the RootQueryToCategoryConnection connection */
-  edges: Array<RootQueryToCategoryConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<Category>;
-  /** Information about pagination in a connection. */
-  pageInfo: RootQueryToCategoryConnectionPageInfo;
-};
+export type RootQueryToCategoryConnection = CategoryConnection &
+  Connection & {
+    __typename?: 'RootQueryToCategoryConnection';
+    /** Edges for the RootQueryToCategoryConnection connection */
+    edges: Array<RootQueryToCategoryConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<Category>;
+    /** Information about pagination in a connection. */
+    pageInfo: RootQueryToCategoryConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type RootQueryToCategoryConnectionEdge = CategoryConnectionEdge & Edge & {
-  __typename?: 'RootQueryToCategoryConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: Category;
-};
+export type RootQueryToCategoryConnectionEdge = CategoryConnectionEdge &
+  Edge & {
+    __typename?: 'RootQueryToCategoryConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: Category;
+  };
 
 /** Page Info on the &quot;RootQueryToCategoryConnection&quot; */
-export type RootQueryToCategoryConnectionPageInfo = CategoryConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'RootQueryToCategoryConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type RootQueryToCategoryConnectionPageInfo = CategoryConnectionPageInfo &
+  PageInfo &
+  WpPageInfo & {
+    __typename?: 'RootQueryToCategoryConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Arguments for filtering the RootQueryToCategoryConnection connection */
 export type RootQueryToCategoryConnectionWhereArgs = {
@@ -12269,37 +12672,41 @@ export type RootQueryToCategoryConnectionWhereArgs = {
 };
 
 /** Connection between the RootQuery type and the Comment type */
-export type RootQueryToCommentConnection = CommentConnection & Connection & {
-  __typename?: 'RootQueryToCommentConnection';
-  /** Edges for the RootQueryToCommentConnection connection */
-  edges: Array<RootQueryToCommentConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<Comment>;
-  /** Information about pagination in a connection. */
-  pageInfo: RootQueryToCommentConnectionPageInfo;
-};
+export type RootQueryToCommentConnection = CommentConnection &
+  Connection & {
+    __typename?: 'RootQueryToCommentConnection';
+    /** Edges for the RootQueryToCommentConnection connection */
+    edges: Array<RootQueryToCommentConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<Comment>;
+    /** Information about pagination in a connection. */
+    pageInfo: RootQueryToCommentConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type RootQueryToCommentConnectionEdge = CommentConnectionEdge & Edge & {
-  __typename?: 'RootQueryToCommentConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: Comment;
-};
+export type RootQueryToCommentConnectionEdge = CommentConnectionEdge &
+  Edge & {
+    __typename?: 'RootQueryToCommentConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: Comment;
+  };
 
 /** Page Info on the &quot;RootQueryToCommentConnection&quot; */
-export type RootQueryToCommentConnectionPageInfo = CommentConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'RootQueryToCommentConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type RootQueryToCommentConnectionPageInfo = CommentConnectionPageInfo &
+  PageInfo &
+  WpPageInfo & {
+    __typename?: 'RootQueryToCommentConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Arguments for filtering the RootQueryToCommentConnection connection */
 export type RootQueryToCommentConnectionWhereArgs = {
@@ -12364,37 +12771,42 @@ export type RootQueryToCommentConnectionWhereArgs = {
 };
 
 /** Connection between the RootQuery type and the ContentNode type */
-export type RootQueryToContentNodeConnection = Connection & ContentNodeConnection & {
-  __typename?: 'RootQueryToContentNodeConnection';
-  /** Edges for the RootQueryToContentNodeConnection connection */
-  edges: Array<RootQueryToContentNodeConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<ContentNode>;
-  /** Information about pagination in a connection. */
-  pageInfo: RootQueryToContentNodeConnectionPageInfo;
-};
+export type RootQueryToContentNodeConnection = Connection &
+  ContentNodeConnection & {
+    __typename?: 'RootQueryToContentNodeConnection';
+    /** Edges for the RootQueryToContentNodeConnection connection */
+    edges: Array<RootQueryToContentNodeConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<ContentNode>;
+    /** Information about pagination in a connection. */
+    pageInfo: RootQueryToContentNodeConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type RootQueryToContentNodeConnectionEdge = ContentNodeConnectionEdge & Edge & {
-  __typename?: 'RootQueryToContentNodeConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: ContentNode;
-};
+export type RootQueryToContentNodeConnectionEdge = ContentNodeConnectionEdge &
+  Edge & {
+    __typename?: 'RootQueryToContentNodeConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: ContentNode;
+  };
 
 /** Page Info on the &quot;RootQueryToContentNodeConnection&quot; */
-export type RootQueryToContentNodeConnectionPageInfo = ContentNodeConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'RootQueryToContentNodeConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type RootQueryToContentNodeConnectionPageInfo =
+  ContentNodeConnectionPageInfo &
+    PageInfo &
+    WpPageInfo & {
+      __typename?: 'RootQueryToContentNodeConnectionPageInfo';
+      /** When paginating forwards, the cursor to continue. */
+      endCursor?: Maybe<Scalars['String']['output']>;
+      /** When paginating forwards, are there more items? */
+      hasNextPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, are there more items? */
+      hasPreviousPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, the cursor to continue. */
+      startCursor?: Maybe<Scalars['String']['output']>;
+    };
 
 /** Arguments for filtering the RootQueryToContentNodeConnection connection */
 export type RootQueryToContentNodeConnectionWhereArgs = {
@@ -12437,136 +12849,155 @@ export type RootQueryToContentNodeConnectionWhereArgs = {
 };
 
 /** Connection between the RootQuery type and the ContentType type */
-export type RootQueryToContentTypeConnection = Connection & ContentTypeConnection & {
-  __typename?: 'RootQueryToContentTypeConnection';
-  /** Edges for the RootQueryToContentTypeConnection connection */
-  edges: Array<RootQueryToContentTypeConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<ContentType>;
-  /** Information about pagination in a connection. */
-  pageInfo: RootQueryToContentTypeConnectionPageInfo;
-};
+export type RootQueryToContentTypeConnection = Connection &
+  ContentTypeConnection & {
+    __typename?: 'RootQueryToContentTypeConnection';
+    /** Edges for the RootQueryToContentTypeConnection connection */
+    edges: Array<RootQueryToContentTypeConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<ContentType>;
+    /** Information about pagination in a connection. */
+    pageInfo: RootQueryToContentTypeConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type RootQueryToContentTypeConnectionEdge = ContentTypeConnectionEdge & Edge & {
-  __typename?: 'RootQueryToContentTypeConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: ContentType;
-};
+export type RootQueryToContentTypeConnectionEdge = ContentTypeConnectionEdge &
+  Edge & {
+    __typename?: 'RootQueryToContentTypeConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: ContentType;
+  };
 
 /** Page Info on the &quot;RootQueryToContentTypeConnection&quot; */
-export type RootQueryToContentTypeConnectionPageInfo = ContentTypeConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'RootQueryToContentTypeConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type RootQueryToContentTypeConnectionPageInfo =
+  ContentTypeConnectionPageInfo &
+    PageInfo &
+    WpPageInfo & {
+      __typename?: 'RootQueryToContentTypeConnectionPageInfo';
+      /** When paginating forwards, the cursor to continue. */
+      endCursor?: Maybe<Scalars['String']['output']>;
+      /** When paginating forwards, are there more items? */
+      hasNextPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, are there more items? */
+      hasPreviousPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, the cursor to continue. */
+      startCursor?: Maybe<Scalars['String']['output']>;
+    };
 
 /** Connection between the RootQuery type and the EnqueuedScript type */
-export type RootQueryToEnqueuedScriptConnection = Connection & EnqueuedScriptConnection & {
-  __typename?: 'RootQueryToEnqueuedScriptConnection';
-  /** Edges for the RootQueryToEnqueuedScriptConnection connection */
-  edges: Array<RootQueryToEnqueuedScriptConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<EnqueuedScript>;
-  /** Information about pagination in a connection. */
-  pageInfo: RootQueryToEnqueuedScriptConnectionPageInfo;
-};
+export type RootQueryToEnqueuedScriptConnection = Connection &
+  EnqueuedScriptConnection & {
+    __typename?: 'RootQueryToEnqueuedScriptConnection';
+    /** Edges for the RootQueryToEnqueuedScriptConnection connection */
+    edges: Array<RootQueryToEnqueuedScriptConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<EnqueuedScript>;
+    /** Information about pagination in a connection. */
+    pageInfo: RootQueryToEnqueuedScriptConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type RootQueryToEnqueuedScriptConnectionEdge = Edge & EnqueuedScriptConnectionEdge & {
-  __typename?: 'RootQueryToEnqueuedScriptConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: EnqueuedScript;
-};
+export type RootQueryToEnqueuedScriptConnectionEdge = Edge &
+  EnqueuedScriptConnectionEdge & {
+    __typename?: 'RootQueryToEnqueuedScriptConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: EnqueuedScript;
+  };
 
 /** Page Info on the &quot;RootQueryToEnqueuedScriptConnection&quot; */
-export type RootQueryToEnqueuedScriptConnectionPageInfo = EnqueuedScriptConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'RootQueryToEnqueuedScriptConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type RootQueryToEnqueuedScriptConnectionPageInfo =
+  EnqueuedScriptConnectionPageInfo &
+    PageInfo &
+    WpPageInfo & {
+      __typename?: 'RootQueryToEnqueuedScriptConnectionPageInfo';
+      /** When paginating forwards, the cursor to continue. */
+      endCursor?: Maybe<Scalars['String']['output']>;
+      /** When paginating forwards, are there more items? */
+      hasNextPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, are there more items? */
+      hasPreviousPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, the cursor to continue. */
+      startCursor?: Maybe<Scalars['String']['output']>;
+    };
 
 /** Connection between the RootQuery type and the EnqueuedStylesheet type */
-export type RootQueryToEnqueuedStylesheetConnection = Connection & EnqueuedStylesheetConnection & {
-  __typename?: 'RootQueryToEnqueuedStylesheetConnection';
-  /** Edges for the RootQueryToEnqueuedStylesheetConnection connection */
-  edges: Array<RootQueryToEnqueuedStylesheetConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<EnqueuedStylesheet>;
-  /** Information about pagination in a connection. */
-  pageInfo: RootQueryToEnqueuedStylesheetConnectionPageInfo;
-};
+export type RootQueryToEnqueuedStylesheetConnection = Connection &
+  EnqueuedStylesheetConnection & {
+    __typename?: 'RootQueryToEnqueuedStylesheetConnection';
+    /** Edges for the RootQueryToEnqueuedStylesheetConnection connection */
+    edges: Array<RootQueryToEnqueuedStylesheetConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<EnqueuedStylesheet>;
+    /** Information about pagination in a connection. */
+    pageInfo: RootQueryToEnqueuedStylesheetConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type RootQueryToEnqueuedStylesheetConnectionEdge = Edge & EnqueuedStylesheetConnectionEdge & {
-  __typename?: 'RootQueryToEnqueuedStylesheetConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: EnqueuedStylesheet;
-};
+export type RootQueryToEnqueuedStylesheetConnectionEdge = Edge &
+  EnqueuedStylesheetConnectionEdge & {
+    __typename?: 'RootQueryToEnqueuedStylesheetConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: EnqueuedStylesheet;
+  };
 
 /** Page Info on the &quot;RootQueryToEnqueuedStylesheetConnection&quot; */
-export type RootQueryToEnqueuedStylesheetConnectionPageInfo = EnqueuedStylesheetConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'RootQueryToEnqueuedStylesheetConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type RootQueryToEnqueuedStylesheetConnectionPageInfo =
+  EnqueuedStylesheetConnectionPageInfo &
+    PageInfo &
+    WpPageInfo & {
+      __typename?: 'RootQueryToEnqueuedStylesheetConnectionPageInfo';
+      /** When paginating forwards, the cursor to continue. */
+      endCursor?: Maybe<Scalars['String']['output']>;
+      /** When paginating forwards, are there more items? */
+      hasNextPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, are there more items? */
+      hasPreviousPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, the cursor to continue. */
+      startCursor?: Maybe<Scalars['String']['output']>;
+    };
 
 /** Connection between the RootQuery type and the film type */
-export type RootQueryToFilmConnection = Connection & FilmConnection & {
-  __typename?: 'RootQueryToFilmConnection';
-  /** Edges for the RootQueryToFilmConnection connection */
-  edges: Array<RootQueryToFilmConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<Film>;
-  /** Information about pagination in a connection. */
-  pageInfo: RootQueryToFilmConnectionPageInfo;
-};
+export type RootQueryToFilmConnection = Connection &
+  FilmConnection & {
+    __typename?: 'RootQueryToFilmConnection';
+    /** Edges for the RootQueryToFilmConnection connection */
+    edges: Array<RootQueryToFilmConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<Film>;
+    /** Information about pagination in a connection. */
+    pageInfo: RootQueryToFilmConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type RootQueryToFilmConnectionEdge = Edge & FilmConnectionEdge & {
-  __typename?: 'RootQueryToFilmConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: Film;
-};
+export type RootQueryToFilmConnectionEdge = Edge &
+  FilmConnectionEdge & {
+    __typename?: 'RootQueryToFilmConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: Film;
+  };
 
 /** Page Info on the &quot;RootQueryToFilmConnection&quot; */
-export type RootQueryToFilmConnectionPageInfo = FilmConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'RootQueryToFilmConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type RootQueryToFilmConnectionPageInfo = FilmConnectionPageInfo &
+  PageInfo &
+  WpPageInfo & {
+    __typename?: 'RootQueryToFilmConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Arguments for filtering the RootQueryToFilmConnection connection */
 export type RootQueryToFilmConnectionWhereArgs = {
@@ -12607,37 +13038,42 @@ export type RootQueryToFilmConnectionWhereArgs = {
 };
 
 /** Connection between the RootQuery type and the mediaItem type */
-export type RootQueryToMediaItemConnection = Connection & MediaItemConnection & {
-  __typename?: 'RootQueryToMediaItemConnection';
-  /** Edges for the RootQueryToMediaItemConnection connection */
-  edges: Array<RootQueryToMediaItemConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<MediaItem>;
-  /** Information about pagination in a connection. */
-  pageInfo: RootQueryToMediaItemConnectionPageInfo;
-};
+export type RootQueryToMediaItemConnection = Connection &
+  MediaItemConnection & {
+    __typename?: 'RootQueryToMediaItemConnection';
+    /** Edges for the RootQueryToMediaItemConnection connection */
+    edges: Array<RootQueryToMediaItemConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<MediaItem>;
+    /** Information about pagination in a connection. */
+    pageInfo: RootQueryToMediaItemConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type RootQueryToMediaItemConnectionEdge = Edge & MediaItemConnectionEdge & {
-  __typename?: 'RootQueryToMediaItemConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: MediaItem;
-};
+export type RootQueryToMediaItemConnectionEdge = Edge &
+  MediaItemConnectionEdge & {
+    __typename?: 'RootQueryToMediaItemConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: MediaItem;
+  };
 
 /** Page Info on the &quot;RootQueryToMediaItemConnection&quot; */
-export type RootQueryToMediaItemConnectionPageInfo = MediaItemConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'RootQueryToMediaItemConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type RootQueryToMediaItemConnectionPageInfo =
+  MediaItemConnectionPageInfo &
+    PageInfo &
+    WpPageInfo & {
+      __typename?: 'RootQueryToMediaItemConnectionPageInfo';
+      /** When paginating forwards, the cursor to continue. */
+      endCursor?: Maybe<Scalars['String']['output']>;
+      /** When paginating forwards, are there more items? */
+      hasNextPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, are there more items? */
+      hasPreviousPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, the cursor to continue. */
+      startCursor?: Maybe<Scalars['String']['output']>;
+    };
 
 /** Arguments for filtering the RootQueryToMediaItemConnection connection */
 export type RootQueryToMediaItemConnectionWhereArgs = {
@@ -12686,37 +13122,41 @@ export type RootQueryToMediaItemConnectionWhereArgs = {
 };
 
 /** Connection between the RootQuery type and the Menu type */
-export type RootQueryToMenuConnection = Connection & MenuConnection & {
-  __typename?: 'RootQueryToMenuConnection';
-  /** Edges for the RootQueryToMenuConnection connection */
-  edges: Array<RootQueryToMenuConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<Menu>;
-  /** Information about pagination in a connection. */
-  pageInfo: RootQueryToMenuConnectionPageInfo;
-};
+export type RootQueryToMenuConnection = Connection &
+  MenuConnection & {
+    __typename?: 'RootQueryToMenuConnection';
+    /** Edges for the RootQueryToMenuConnection connection */
+    edges: Array<RootQueryToMenuConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<Menu>;
+    /** Information about pagination in a connection. */
+    pageInfo: RootQueryToMenuConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type RootQueryToMenuConnectionEdge = Edge & MenuConnectionEdge & {
-  __typename?: 'RootQueryToMenuConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: Menu;
-};
+export type RootQueryToMenuConnectionEdge = Edge &
+  MenuConnectionEdge & {
+    __typename?: 'RootQueryToMenuConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: Menu;
+  };
 
 /** Page Info on the &quot;RootQueryToMenuConnection&quot; */
-export type RootQueryToMenuConnectionPageInfo = MenuConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'RootQueryToMenuConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type RootQueryToMenuConnectionPageInfo = MenuConnectionPageInfo &
+  PageInfo &
+  WpPageInfo & {
+    __typename?: 'RootQueryToMenuConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Arguments for filtering the RootQueryToMenuConnection connection */
 export type RootQueryToMenuConnectionWhereArgs = {
@@ -12728,38 +13168,42 @@ export type RootQueryToMenuConnectionWhereArgs = {
   slug?: InputMaybe<Scalars['String']['input']>;
 };
 
-/** Connection between the RootQuery type and the MenuItem type */
-export type RootQueryToMenuItemConnection = Connection & MenuItemConnection & {
-  __typename?: 'RootQueryToMenuItemConnection';
-  /** Edges for the RootQueryToMenuItemConnection connection */
-  edges: Array<RootQueryToMenuItemConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<MenuItem>;
-  /** Information about pagination in a connection. */
-  pageInfo: RootQueryToMenuItemConnectionPageInfo;
-};
+/** Connection between the RootQuery type and the MenuItemProps type */
+export type RootQueryToMenuItemConnection = Connection &
+  MenuItemConnection & {
+    __typename?: 'RootQueryToMenuItemConnection';
+    /** Edges for the RootQueryToMenuItemConnection connection */
+    edges: Array<RootQueryToMenuItemConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<MenuItem>;
+    /** Information about pagination in a connection. */
+    pageInfo: RootQueryToMenuItemConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type RootQueryToMenuItemConnectionEdge = Edge & MenuItemConnectionEdge & {
-  __typename?: 'RootQueryToMenuItemConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: MenuItem;
-};
+export type RootQueryToMenuItemConnectionEdge = Edge &
+  MenuItemConnectionEdge & {
+    __typename?: 'RootQueryToMenuItemConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: MenuItem;
+  };
 
 /** Page Info on the &quot;RootQueryToMenuItemConnection&quot; */
-export type RootQueryToMenuItemConnectionPageInfo = MenuItemConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'RootQueryToMenuItemConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type RootQueryToMenuItemConnectionPageInfo = MenuItemConnectionPageInfo &
+  PageInfo &
+  WpPageInfo & {
+    __typename?: 'RootQueryToMenuItemConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Arguments for filtering the RootQueryToMenuItemConnection connection */
 export type RootQueryToMenuItemConnectionWhereArgs = {
@@ -12774,37 +13218,41 @@ export type RootQueryToMenuItemConnectionWhereArgs = {
 };
 
 /** Connection between the RootQuery type and the page type */
-export type RootQueryToPageConnection = Connection & PageConnection & {
-  __typename?: 'RootQueryToPageConnection';
-  /** Edges for the RootQueryToPageConnection connection */
-  edges: Array<RootQueryToPageConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<Page>;
-  /** Information about pagination in a connection. */
-  pageInfo: RootQueryToPageConnectionPageInfo;
-};
+export type RootQueryToPageConnection = Connection &
+  PageConnection & {
+    __typename?: 'RootQueryToPageConnection';
+    /** Edges for the RootQueryToPageConnection connection */
+    edges: Array<RootQueryToPageConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<Page>;
+    /** Information about pagination in a connection. */
+    pageInfo: RootQueryToPageConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type RootQueryToPageConnectionEdge = Edge & PageConnectionEdge & {
-  __typename?: 'RootQueryToPageConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: Page;
-};
+export type RootQueryToPageConnectionEdge = Edge &
+  PageConnectionEdge & {
+    __typename?: 'RootQueryToPageConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: Page;
+  };
 
 /** Page Info on the &quot;RootQueryToPageConnection&quot; */
-export type RootQueryToPageConnectionPageInfo = PageConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'RootQueryToPageConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type RootQueryToPageConnectionPageInfo = PageConnectionPageInfo &
+  PageInfo &
+  WpPageInfo & {
+    __typename?: 'RootQueryToPageConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Arguments for filtering the RootQueryToPageConnection connection */
 export type RootQueryToPageConnectionWhereArgs = {
@@ -12853,37 +13301,41 @@ export type RootQueryToPageConnectionWhereArgs = {
 };
 
 /** Connection between the RootQuery type and the Plugin type */
-export type RootQueryToPluginConnection = Connection & PluginConnection & {
-  __typename?: 'RootQueryToPluginConnection';
-  /** Edges for the RootQueryToPluginConnection connection */
-  edges: Array<RootQueryToPluginConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<Plugin>;
-  /** Information about pagination in a connection. */
-  pageInfo: RootQueryToPluginConnectionPageInfo;
-};
+export type RootQueryToPluginConnection = Connection &
+  PluginConnection & {
+    __typename?: 'RootQueryToPluginConnection';
+    /** Edges for the RootQueryToPluginConnection connection */
+    edges: Array<RootQueryToPluginConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<Plugin>;
+    /** Information about pagination in a connection. */
+    pageInfo: RootQueryToPluginConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type RootQueryToPluginConnectionEdge = Edge & PluginConnectionEdge & {
-  __typename?: 'RootQueryToPluginConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: Plugin;
-};
+export type RootQueryToPluginConnectionEdge = Edge &
+  PluginConnectionEdge & {
+    __typename?: 'RootQueryToPluginConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: Plugin;
+  };
 
 /** Page Info on the &quot;RootQueryToPluginConnection&quot; */
-export type RootQueryToPluginConnectionPageInfo = PageInfo & PluginConnectionPageInfo & WpPageInfo & {
-  __typename?: 'RootQueryToPluginConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type RootQueryToPluginConnectionPageInfo = PageInfo &
+  PluginConnectionPageInfo &
+  WpPageInfo & {
+    __typename?: 'RootQueryToPluginConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Arguments for filtering the RootQueryToPluginConnection connection */
 export type RootQueryToPluginConnectionWhereArgs = {
@@ -12896,37 +13348,41 @@ export type RootQueryToPluginConnectionWhereArgs = {
 };
 
 /** Connection between the RootQuery type and the post type */
-export type RootQueryToPostConnection = Connection & PostConnection & {
-  __typename?: 'RootQueryToPostConnection';
-  /** Edges for the RootQueryToPostConnection connection */
-  edges: Array<RootQueryToPostConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<Post>;
-  /** Information about pagination in a connection. */
-  pageInfo: RootQueryToPostConnectionPageInfo;
-};
+export type RootQueryToPostConnection = Connection &
+  PostConnection & {
+    __typename?: 'RootQueryToPostConnection';
+    /** Edges for the RootQueryToPostConnection connection */
+    edges: Array<RootQueryToPostConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<Post>;
+    /** Information about pagination in a connection. */
+    pageInfo: RootQueryToPostConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type RootQueryToPostConnectionEdge = Edge & PostConnectionEdge & {
-  __typename?: 'RootQueryToPostConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: Post;
-};
+export type RootQueryToPostConnectionEdge = Edge &
+  PostConnectionEdge & {
+    __typename?: 'RootQueryToPostConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: Post;
+  };
 
 /** Page Info on the &quot;RootQueryToPostConnection&quot; */
-export type RootQueryToPostConnectionPageInfo = PageInfo & PostConnectionPageInfo & WpPageInfo & {
-  __typename?: 'RootQueryToPostConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type RootQueryToPostConnectionPageInfo = PageInfo &
+  PostConnectionPageInfo &
+  WpPageInfo & {
+    __typename?: 'RootQueryToPostConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Arguments for filtering the RootQueryToPostConnection connection */
 export type RootQueryToPostConnectionWhereArgs = {
@@ -12995,37 +13451,41 @@ export type RootQueryToPostConnectionWhereArgs = {
 };
 
 /** Connection between the RootQuery type and the postFormat type */
-export type RootQueryToPostFormatConnection = Connection & PostFormatConnection & {
-  __typename?: 'RootQueryToPostFormatConnection';
-  /** Edges for the RootQueryToPostFormatConnection connection */
-  edges: Array<RootQueryToPostFormatConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<PostFormat>;
-  /** Information about pagination in a connection. */
-  pageInfo: RootQueryToPostFormatConnectionPageInfo;
-};
+export type RootQueryToPostFormatConnection = Connection &
+  PostFormatConnection & {
+    __typename?: 'RootQueryToPostFormatConnection';
+    /** Edges for the RootQueryToPostFormatConnection connection */
+    edges: Array<RootQueryToPostFormatConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<PostFormat>;
+    /** Information about pagination in a connection. */
+    pageInfo: RootQueryToPostFormatConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type RootQueryToPostFormatConnectionEdge = Edge & PostFormatConnectionEdge & {
-  __typename?: 'RootQueryToPostFormatConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: PostFormat;
-};
+export type RootQueryToPostFormatConnectionEdge = Edge &
+  PostFormatConnectionEdge & {
+    __typename?: 'RootQueryToPostFormatConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: PostFormat;
+  };
 
 /** Page Info on the &quot;RootQueryToPostFormatConnection&quot; */
-export type RootQueryToPostFormatConnectionPageInfo = PageInfo & PostFormatConnectionPageInfo & WpPageInfo & {
-  __typename?: 'RootQueryToPostFormatConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type RootQueryToPostFormatConnectionPageInfo = PageInfo &
+  PostFormatConnectionPageInfo &
+  WpPageInfo & {
+    __typename?: 'RootQueryToPostFormatConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Arguments for filtering the RootQueryToPostFormatConnection connection */
 export type RootQueryToPostFormatConnectionWhereArgs = {
@@ -13074,37 +13534,42 @@ export type RootQueryToPostFormatConnectionWhereArgs = {
 };
 
 /** Connection between the RootQuery type and the ContentNode type */
-export type RootQueryToRevisionsConnection = Connection & ContentNodeConnection & {
-  __typename?: 'RootQueryToRevisionsConnection';
-  /** Edges for the RootQueryToRevisionsConnection connection */
-  edges: Array<RootQueryToRevisionsConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<ContentNode>;
-  /** Information about pagination in a connection. */
-  pageInfo: RootQueryToRevisionsConnectionPageInfo;
-};
+export type RootQueryToRevisionsConnection = Connection &
+  ContentNodeConnection & {
+    __typename?: 'RootQueryToRevisionsConnection';
+    /** Edges for the RootQueryToRevisionsConnection connection */
+    edges: Array<RootQueryToRevisionsConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<ContentNode>;
+    /** Information about pagination in a connection. */
+    pageInfo: RootQueryToRevisionsConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type RootQueryToRevisionsConnectionEdge = ContentNodeConnectionEdge & Edge & {
-  __typename?: 'RootQueryToRevisionsConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: ContentNode;
-};
+export type RootQueryToRevisionsConnectionEdge = ContentNodeConnectionEdge &
+  Edge & {
+    __typename?: 'RootQueryToRevisionsConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: ContentNode;
+  };
 
 /** Page Info on the &quot;RootQueryToRevisionsConnection&quot; */
-export type RootQueryToRevisionsConnectionPageInfo = ContentNodeConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'RootQueryToRevisionsConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type RootQueryToRevisionsConnectionPageInfo =
+  ContentNodeConnectionPageInfo &
+    PageInfo &
+    WpPageInfo & {
+      __typename?: 'RootQueryToRevisionsConnectionPageInfo';
+      /** When paginating forwards, the cursor to continue. */
+      endCursor?: Maybe<Scalars['String']['output']>;
+      /** When paginating forwards, are there more items? */
+      hasNextPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, are there more items? */
+      hasPreviousPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, the cursor to continue. */
+      startCursor?: Maybe<Scalars['String']['output']>;
+    };
 
 /** Arguments for filtering the RootQueryToRevisionsConnection connection */
 export type RootQueryToRevisionsConnectionWhereArgs = {
@@ -13147,37 +13612,41 @@ export type RootQueryToRevisionsConnectionWhereArgs = {
 };
 
 /** Connection between the RootQuery type and the tag type */
-export type RootQueryToTagConnection = Connection & TagConnection & {
-  __typename?: 'RootQueryToTagConnection';
-  /** Edges for the RootQueryToTagConnection connection */
-  edges: Array<RootQueryToTagConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<Tag>;
-  /** Information about pagination in a connection. */
-  pageInfo: RootQueryToTagConnectionPageInfo;
-};
+export type RootQueryToTagConnection = Connection &
+  TagConnection & {
+    __typename?: 'RootQueryToTagConnection';
+    /** Edges for the RootQueryToTagConnection connection */
+    edges: Array<RootQueryToTagConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<Tag>;
+    /** Information about pagination in a connection. */
+    pageInfo: RootQueryToTagConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type RootQueryToTagConnectionEdge = Edge & TagConnectionEdge & {
-  __typename?: 'RootQueryToTagConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: Tag;
-};
+export type RootQueryToTagConnectionEdge = Edge &
+  TagConnectionEdge & {
+    __typename?: 'RootQueryToTagConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: Tag;
+  };
 
 /** Page Info on the &quot;RootQueryToTagConnection&quot; */
-export type RootQueryToTagConnectionPageInfo = PageInfo & TagConnectionPageInfo & WpPageInfo & {
-  __typename?: 'RootQueryToTagConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type RootQueryToTagConnectionPageInfo = PageInfo &
+  TagConnectionPageInfo &
+  WpPageInfo & {
+    __typename?: 'RootQueryToTagConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Arguments for filtering the RootQueryToTagConnection connection */
 export type RootQueryToTagConnectionWhereArgs = {
@@ -13226,70 +13695,78 @@ export type RootQueryToTagConnectionWhereArgs = {
 };
 
 /** Connection between the RootQuery type and the Taxonomy type */
-export type RootQueryToTaxonomyConnection = Connection & TaxonomyConnection & {
-  __typename?: 'RootQueryToTaxonomyConnection';
-  /** Edges for the RootQueryToTaxonomyConnection connection */
-  edges: Array<RootQueryToTaxonomyConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<Taxonomy>;
-  /** Information about pagination in a connection. */
-  pageInfo: RootQueryToTaxonomyConnectionPageInfo;
-};
+export type RootQueryToTaxonomyConnection = Connection &
+  TaxonomyConnection & {
+    __typename?: 'RootQueryToTaxonomyConnection';
+    /** Edges for the RootQueryToTaxonomyConnection connection */
+    edges: Array<RootQueryToTaxonomyConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<Taxonomy>;
+    /** Information about pagination in a connection. */
+    pageInfo: RootQueryToTaxonomyConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type RootQueryToTaxonomyConnectionEdge = Edge & TaxonomyConnectionEdge & {
-  __typename?: 'RootQueryToTaxonomyConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: Taxonomy;
-};
+export type RootQueryToTaxonomyConnectionEdge = Edge &
+  TaxonomyConnectionEdge & {
+    __typename?: 'RootQueryToTaxonomyConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: Taxonomy;
+  };
 
 /** Page Info on the &quot;RootQueryToTaxonomyConnection&quot; */
-export type RootQueryToTaxonomyConnectionPageInfo = PageInfo & TaxonomyConnectionPageInfo & WpPageInfo & {
-  __typename?: 'RootQueryToTaxonomyConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type RootQueryToTaxonomyConnectionPageInfo = PageInfo &
+  TaxonomyConnectionPageInfo &
+  WpPageInfo & {
+    __typename?: 'RootQueryToTaxonomyConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Connection between the RootQuery type and the TermNode type */
-export type RootQueryToTermNodeConnection = Connection & TermNodeConnection & {
-  __typename?: 'RootQueryToTermNodeConnection';
-  /** Edges for the RootQueryToTermNodeConnection connection */
-  edges: Array<RootQueryToTermNodeConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<TermNode>;
-  /** Information about pagination in a connection. */
-  pageInfo: RootQueryToTermNodeConnectionPageInfo;
-};
+export type RootQueryToTermNodeConnection = Connection &
+  TermNodeConnection & {
+    __typename?: 'RootQueryToTermNodeConnection';
+    /** Edges for the RootQueryToTermNodeConnection connection */
+    edges: Array<RootQueryToTermNodeConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<TermNode>;
+    /** Information about pagination in a connection. */
+    pageInfo: RootQueryToTermNodeConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type RootQueryToTermNodeConnectionEdge = Edge & TermNodeConnectionEdge & {
-  __typename?: 'RootQueryToTermNodeConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: TermNode;
-};
+export type RootQueryToTermNodeConnectionEdge = Edge &
+  TermNodeConnectionEdge & {
+    __typename?: 'RootQueryToTermNodeConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: TermNode;
+  };
 
 /** Page Info on the &quot;RootQueryToTermNodeConnection&quot; */
-export type RootQueryToTermNodeConnectionPageInfo = PageInfo & TermNodeConnectionPageInfo & WpPageInfo & {
-  __typename?: 'RootQueryToTermNodeConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type RootQueryToTermNodeConnectionPageInfo = PageInfo &
+  TermNodeConnectionPageInfo &
+  WpPageInfo & {
+    __typename?: 'RootQueryToTermNodeConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Arguments for filtering the RootQueryToTermNodeConnection connection */
 export type RootQueryToTermNodeConnectionWhereArgs = {
@@ -13340,70 +13817,78 @@ export type RootQueryToTermNodeConnectionWhereArgs = {
 };
 
 /** Connection between the RootQuery type and the Theme type */
-export type RootQueryToThemeConnection = Connection & ThemeConnection & {
-  __typename?: 'RootQueryToThemeConnection';
-  /** Edges for the RootQueryToThemeConnection connection */
-  edges: Array<RootQueryToThemeConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<Theme>;
-  /** Information about pagination in a connection. */
-  pageInfo: RootQueryToThemeConnectionPageInfo;
-};
+export type RootQueryToThemeConnection = Connection &
+  ThemeConnection & {
+    __typename?: 'RootQueryToThemeConnection';
+    /** Edges for the RootQueryToThemeConnection connection */
+    edges: Array<RootQueryToThemeConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<Theme>;
+    /** Information about pagination in a connection. */
+    pageInfo: RootQueryToThemeConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type RootQueryToThemeConnectionEdge = Edge & ThemeConnectionEdge & {
-  __typename?: 'RootQueryToThemeConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: Theme;
-};
+export type RootQueryToThemeConnectionEdge = Edge &
+  ThemeConnectionEdge & {
+    __typename?: 'RootQueryToThemeConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: Theme;
+  };
 
 /** Page Info on the &quot;RootQueryToThemeConnection&quot; */
-export type RootQueryToThemeConnectionPageInfo = PageInfo & ThemeConnectionPageInfo & WpPageInfo & {
-  __typename?: 'RootQueryToThemeConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type RootQueryToThemeConnectionPageInfo = PageInfo &
+  ThemeConnectionPageInfo &
+  WpPageInfo & {
+    __typename?: 'RootQueryToThemeConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Connection between the RootQuery type and the User type */
-export type RootQueryToUserConnection = Connection & UserConnection & {
-  __typename?: 'RootQueryToUserConnection';
-  /** Edges for the RootQueryToUserConnection connection */
-  edges: Array<RootQueryToUserConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<User>;
-  /** Information about pagination in a connection. */
-  pageInfo: RootQueryToUserConnectionPageInfo;
-};
+export type RootQueryToUserConnection = Connection &
+  UserConnection & {
+    __typename?: 'RootQueryToUserConnection';
+    /** Edges for the RootQueryToUserConnection connection */
+    edges: Array<RootQueryToUserConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<User>;
+    /** Information about pagination in a connection. */
+    pageInfo: RootQueryToUserConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type RootQueryToUserConnectionEdge = Edge & UserConnectionEdge & {
-  __typename?: 'RootQueryToUserConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: User;
-};
+export type RootQueryToUserConnectionEdge = Edge &
+  UserConnectionEdge & {
+    __typename?: 'RootQueryToUserConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: User;
+  };
 
 /** Page Info on the &quot;RootQueryToUserConnection&quot; */
-export type RootQueryToUserConnectionPageInfo = PageInfo & UserConnectionPageInfo & WpPageInfo & {
-  __typename?: 'RootQueryToUserConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type RootQueryToUserConnectionPageInfo = PageInfo &
+  UserConnectionPageInfo &
+  WpPageInfo & {
+    __typename?: 'RootQueryToUserConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Arguments for filtering the RootQueryToUserConnection connection */
 export type RootQueryToUserConnectionWhereArgs = {
@@ -13436,48 +13921,54 @@ export type RootQueryToUserConnectionWhereArgs = {
   /** Search keyword. Searches for possible string matches on columns. When "searchColumns" is left empty, it tries to determine which column to search in based on search string. */
   search?: InputMaybe<Scalars['String']['input']>;
   /** Array of column names to be searched. Accepts 'ID', 'login', 'nicename', 'email', 'url'. */
-  searchColumns?: InputMaybe<Array<InputMaybe<UsersConnectionSearchColumnEnum>>>;
+  searchColumns?: InputMaybe<
+    Array<InputMaybe<UsersConnectionSearchColumnEnum>>
+  >;
 };
 
 /** Connection between the RootQuery type and the UserRole type */
-export type RootQueryToUserRoleConnection = Connection & UserRoleConnection & {
-  __typename?: 'RootQueryToUserRoleConnection';
-  /** Edges for the RootQueryToUserRoleConnection connection */
-  edges: Array<RootQueryToUserRoleConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<UserRole>;
-  /** Information about pagination in a connection. */
-  pageInfo: RootQueryToUserRoleConnectionPageInfo;
-};
+export type RootQueryToUserRoleConnection = Connection &
+  UserRoleConnection & {
+    __typename?: 'RootQueryToUserRoleConnection';
+    /** Edges for the RootQueryToUserRoleConnection connection */
+    edges: Array<RootQueryToUserRoleConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<UserRole>;
+    /** Information about pagination in a connection. */
+    pageInfo: RootQueryToUserRoleConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type RootQueryToUserRoleConnectionEdge = Edge & UserRoleConnectionEdge & {
-  __typename?: 'RootQueryToUserRoleConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: UserRole;
-};
+export type RootQueryToUserRoleConnectionEdge = Edge &
+  UserRoleConnectionEdge & {
+    __typename?: 'RootQueryToUserRoleConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: UserRole;
+  };
 
 /** Page Info on the &quot;RootQueryToUserRoleConnection&quot; */
-export type RootQueryToUserRoleConnectionPageInfo = PageInfo & UserRoleConnectionPageInfo & WpPageInfo & {
-  __typename?: 'RootQueryToUserRoleConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type RootQueryToUserRoleConnectionPageInfo = PageInfo &
+  UserRoleConnectionPageInfo &
+  WpPageInfo & {
+    __typename?: 'RootQueryToUserRoleConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
+  };
 
 /** The strategy to use when loading the script */
 export enum ScriptLoadingStrategyEnum {
   /** Use the script `async` attribute */
   Async = 'ASYNC',
   /** Use the script `defer` attribute */
-  Defer = 'DEFER'
+  Defer = 'DEFER',
 }
 
 /** Input for the sendPasswordResetEmail mutation. */
@@ -13544,56 +14035,59 @@ export type Settings = {
 };
 
 /** The tag type */
-export type Tag = DatabaseIdentifier & MenuItemLinkable & Node & TermNode & UniformResourceIdentifiable & {
-  __typename?: 'Tag';
-  /** @deprecated Deprecated in favor of using Next.js pages */
-  conditionalTags?: Maybe<ConditionalTags>;
-  /** Connection between the Tag type and the ContentNode type */
-  contentNodes?: Maybe<TagToContentNodeConnection>;
-  /** The number of objects connected to the object */
-  count?: Maybe<Scalars['Int']['output']>;
-  /** The unique identifier stored in the database */
-  databaseId: Scalars['Int']['output'];
-  /** The description of the object */
-  description?: Maybe<Scalars['String']['output']>;
-  /** Connection between the TermNode type and the EnqueuedScript type */
-  enqueuedScripts?: Maybe<TermNodeToEnqueuedScriptConnection>;
-  /** Connection between the TermNode type and the EnqueuedStylesheet type */
-  enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
-  /** The globally unique ID for the object */
-  id: Scalars['ID']['output'];
-  /** Whether the node is a Content Node */
-  isContentNode: Scalars['Boolean']['output'];
-  /** Whether the object is restricted from the current viewer */
-  isRestricted?: Maybe<Scalars['Boolean']['output']>;
-  /** Whether the node is a Term */
-  isTermNode: Scalars['Boolean']['output'];
-  /** The link to the term */
-  link?: Maybe<Scalars['String']['output']>;
-  /** The human friendly name of the object. */
-  name?: Maybe<Scalars['String']['output']>;
-  /** Connection between the Tag type and the post type */
-  posts?: Maybe<TagToPostConnection>;
-  /** An alphanumeric identifier for the object unique to its type. */
-  slug?: Maybe<Scalars['String']['output']>;
-  /**
-   * The id field matches the WP_Post-&gt;ID field.
-   * @deprecated Deprecated in favor of databaseId
-   */
-  tagId?: Maybe<Scalars['Int']['output']>;
-  /** Connection between the Tag type and the Taxonomy type */
-  taxonomy?: Maybe<TagToTaxonomyConnectionEdge>;
-  /** The name of the taxonomy that the object is associated with */
-  taxonomyName?: Maybe<Scalars['String']['output']>;
-  templates?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The ID of the term group that this term object belongs to */
-  termGroupId?: Maybe<Scalars['Int']['output']>;
-  /** The taxonomy ID that the object is associated with */
-  termTaxonomyId?: Maybe<Scalars['Int']['output']>;
-  /** The unique resource identifier path */
-  uri?: Maybe<Scalars['String']['output']>;
-};
-
+export type Tag = DatabaseIdentifier &
+  MenuItemLinkable &
+  Node &
+  TermNode &
+  UniformResourceIdentifiable & {
+    __typename?: 'Tag';
+    /** @deprecated Deprecated in favor of using Next.js pages */
+    conditionalTags?: Maybe<ConditionalTags>;
+    /** Connection between the Tag type and the ContentNode type */
+    contentNodes?: Maybe<TagToContentNodeConnection>;
+    /** The number of objects connected to the object */
+    count?: Maybe<Scalars['Int']['output']>;
+    /** The unique identifier stored in the database */
+    databaseId: Scalars['Int']['output'];
+    /** The description of the object */
+    description?: Maybe<Scalars['String']['output']>;
+    /** Connection between the TermNode type and the EnqueuedScript type */
+    enqueuedScripts?: Maybe<TermNodeToEnqueuedScriptConnection>;
+    /** Connection between the TermNode type and the EnqueuedStylesheet type */
+    enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
+    /** The globally unique ID for the object */
+    id: Scalars['ID']['output'];
+    /** Whether the node is a Content Node */
+    isContentNode: Scalars['Boolean']['output'];
+    /** Whether the object is restricted from the current viewer */
+    isRestricted?: Maybe<Scalars['Boolean']['output']>;
+    /** Whether the node is a Term */
+    isTermNode: Scalars['Boolean']['output'];
+    /** The link to the term */
+    link?: Maybe<Scalars['String']['output']>;
+    /** The human friendly name of the object. */
+    name?: Maybe<Scalars['String']['output']>;
+    /** Connection between the Tag type and the post type */
+    posts?: Maybe<TagToPostConnection>;
+    /** An alphanumeric identifier for the object unique to its type. */
+    slug?: Maybe<Scalars['String']['output']>;
+    /**
+     * The id field matches the WP_Post-&gt;ID field.
+     * @deprecated Deprecated in favor of databaseId
+     */
+    tagId?: Maybe<Scalars['Int']['output']>;
+    /** Connection between the Tag type and the Taxonomy type */
+    taxonomy?: Maybe<TagToTaxonomyConnectionEdge>;
+    /** The name of the taxonomy that the object is associated with */
+    taxonomyName?: Maybe<Scalars['String']['output']>;
+    templates?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The ID of the term group that this term object belongs to */
+    termGroupId?: Maybe<Scalars['Int']['output']>;
+    /** The taxonomy ID that the object is associated with */
+    termTaxonomyId?: Maybe<Scalars['Int']['output']>;
+    /** The unique resource identifier path */
+    uri?: Maybe<Scalars['String']['output']>;
+  };
 
 /** The tag type */
 export type TagContentNodesArgs = {
@@ -13604,7 +14098,6 @@ export type TagContentNodesArgs = {
   where?: InputMaybe<TagToContentNodeConnectionWhereArgs>;
 };
 
-
 /** The tag type */
 export type TagEnqueuedScriptsArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -13613,7 +14106,6 @@ export type TagEnqueuedScriptsArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
 };
 
-
 /** The tag type */
 export type TagEnqueuedStylesheetsArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -13621,7 +14113,6 @@ export type TagEnqueuedStylesheetsArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
 };
-
 
 /** The tag type */
 export type TagPostsArgs = {
@@ -13673,41 +14164,45 @@ export enum TagIdType {
   /** Url friendly name of the node */
   Slug = 'SLUG',
   /** The URI for the node */
-  Uri = 'URI'
+  Uri = 'URI',
 }
 
 /** Connection between the Tag type and the ContentNode type */
-export type TagToContentNodeConnection = Connection & ContentNodeConnection & {
-  __typename?: 'TagToContentNodeConnection';
-  /** Edges for the TagToContentNodeConnection connection */
-  edges: Array<TagToContentNodeConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<ContentNode>;
-  /** Information about pagination in a connection. */
-  pageInfo: TagToContentNodeConnectionPageInfo;
-};
+export type TagToContentNodeConnection = Connection &
+  ContentNodeConnection & {
+    __typename?: 'TagToContentNodeConnection';
+    /** Edges for the TagToContentNodeConnection connection */
+    edges: Array<TagToContentNodeConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<ContentNode>;
+    /** Information about pagination in a connection. */
+    pageInfo: TagToContentNodeConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type TagToContentNodeConnectionEdge = ContentNodeConnectionEdge & Edge & {
-  __typename?: 'TagToContentNodeConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: ContentNode;
-};
+export type TagToContentNodeConnectionEdge = ContentNodeConnectionEdge &
+  Edge & {
+    __typename?: 'TagToContentNodeConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: ContentNode;
+  };
 
 /** Page Info on the &quot;TagToContentNodeConnection&quot; */
-export type TagToContentNodeConnectionPageInfo = ContentNodeConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'TagToContentNodeConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type TagToContentNodeConnectionPageInfo = ContentNodeConnectionPageInfo &
+  PageInfo &
+  WpPageInfo & {
+    __typename?: 'TagToContentNodeConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Arguments for filtering the TagToContentNodeConnection connection */
 export type TagToContentNodeConnectionWhereArgs = {
@@ -13750,37 +14245,41 @@ export type TagToContentNodeConnectionWhereArgs = {
 };
 
 /** Connection between the Tag type and the post type */
-export type TagToPostConnection = Connection & PostConnection & {
-  __typename?: 'TagToPostConnection';
-  /** Edges for the TagToPostConnection connection */
-  edges: Array<TagToPostConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<Post>;
-  /** Information about pagination in a connection. */
-  pageInfo: TagToPostConnectionPageInfo;
-};
+export type TagToPostConnection = Connection &
+  PostConnection & {
+    __typename?: 'TagToPostConnection';
+    /** Edges for the TagToPostConnection connection */
+    edges: Array<TagToPostConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<Post>;
+    /** Information about pagination in a connection. */
+    pageInfo: TagToPostConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type TagToPostConnectionEdge = Edge & PostConnectionEdge & {
-  __typename?: 'TagToPostConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: Post;
-};
+export type TagToPostConnectionEdge = Edge &
+  PostConnectionEdge & {
+    __typename?: 'TagToPostConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: Post;
+  };
 
 /** Page Info on the &quot;TagToPostConnection&quot; */
-export type TagToPostConnectionPageInfo = PageInfo & PostConnectionPageInfo & WpPageInfo & {
-  __typename?: 'TagToPostConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type TagToPostConnectionPageInfo = PageInfo &
+  PostConnectionPageInfo &
+  WpPageInfo & {
+    __typename?: 'TagToPostConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Arguments for filtering the TagToPostConnection connection */
 export type TagToPostConnectionWhereArgs = {
@@ -13849,13 +14348,15 @@ export type TagToPostConnectionWhereArgs = {
 };
 
 /** Connection between the Tag type and the Taxonomy type */
-export type TagToTaxonomyConnectionEdge = Edge & OneToOneConnection & TaxonomyConnectionEdge & {
-  __typename?: 'TagToTaxonomyConnectionEdge';
-  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The node of the connection, without the edges */
-  node: Taxonomy;
-};
+export type TagToTaxonomyConnectionEdge = Edge &
+  OneToOneConnection &
+  TaxonomyConnectionEdge & {
+    __typename?: 'TagToTaxonomyConnectionEdge';
+    /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The node of the connection, without the edges */
+    node: Taxonomy;
+  };
 
 /** A taxonomy object */
 export type Taxonomy = Node & {
@@ -13904,7 +14405,6 @@ export type Taxonomy = Node & {
   showUi?: Maybe<Scalars['Boolean']['output']>;
 };
 
-
 /** A taxonomy object */
 export type TaxonomyConnectedContentTypesArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -13912,7 +14412,6 @@ export type TaxonomyConnectedContentTypesArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
 };
-
 
 /** A taxonomy object */
 export type TaxonomyConnectedTermsArgs = {
@@ -13959,7 +14458,7 @@ export enum TaxonomyEnum {
   /** Taxonomy enum post_format */
   Postformat = 'POSTFORMAT',
   /** Taxonomy enum post_tag */
-  Tag = 'TAG'
+  Tag = 'TAG',
 }
 
 /** The Type of Identifier used to fetch a single Taxonomy node. To be used along with the "id" field. Default is "ID". */
@@ -13967,74 +14466,83 @@ export enum TaxonomyIdTypeEnum {
   /** The globally unique ID */
   Id = 'ID',
   /** The name of the taxonomy */
-  Name = 'NAME'
+  Name = 'NAME',
 }
 
 /** Connection between the Taxonomy type and the ContentType type */
-export type TaxonomyToContentTypeConnection = Connection & ContentTypeConnection & {
-  __typename?: 'TaxonomyToContentTypeConnection';
-  /** Edges for the TaxonomyToContentTypeConnection connection */
-  edges: Array<TaxonomyToContentTypeConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<ContentType>;
-  /** Information about pagination in a connection. */
-  pageInfo: TaxonomyToContentTypeConnectionPageInfo;
-};
+export type TaxonomyToContentTypeConnection = Connection &
+  ContentTypeConnection & {
+    __typename?: 'TaxonomyToContentTypeConnection';
+    /** Edges for the TaxonomyToContentTypeConnection connection */
+    edges: Array<TaxonomyToContentTypeConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<ContentType>;
+    /** Information about pagination in a connection. */
+    pageInfo: TaxonomyToContentTypeConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type TaxonomyToContentTypeConnectionEdge = ContentTypeConnectionEdge & Edge & {
-  __typename?: 'TaxonomyToContentTypeConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: ContentType;
-};
+export type TaxonomyToContentTypeConnectionEdge = ContentTypeConnectionEdge &
+  Edge & {
+    __typename?: 'TaxonomyToContentTypeConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: ContentType;
+  };
 
 /** Page Info on the &quot;TaxonomyToContentTypeConnection&quot; */
-export type TaxonomyToContentTypeConnectionPageInfo = ContentTypeConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'TaxonomyToContentTypeConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type TaxonomyToContentTypeConnectionPageInfo =
+  ContentTypeConnectionPageInfo &
+    PageInfo &
+    WpPageInfo & {
+      __typename?: 'TaxonomyToContentTypeConnectionPageInfo';
+      /** When paginating forwards, the cursor to continue. */
+      endCursor?: Maybe<Scalars['String']['output']>;
+      /** When paginating forwards, are there more items? */
+      hasNextPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, are there more items? */
+      hasPreviousPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, the cursor to continue. */
+      startCursor?: Maybe<Scalars['String']['output']>;
+    };
 
 /** Connection between the Taxonomy type and the TermNode type */
-export type TaxonomyToTermNodeConnection = Connection & TermNodeConnection & {
-  __typename?: 'TaxonomyToTermNodeConnection';
-  /** Edges for the TaxonomyToTermNodeConnection connection */
-  edges: Array<TaxonomyToTermNodeConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<TermNode>;
-  /** Information about pagination in a connection. */
-  pageInfo: TaxonomyToTermNodeConnectionPageInfo;
-};
+export type TaxonomyToTermNodeConnection = Connection &
+  TermNodeConnection & {
+    __typename?: 'TaxonomyToTermNodeConnection';
+    /** Edges for the TaxonomyToTermNodeConnection connection */
+    edges: Array<TaxonomyToTermNodeConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<TermNode>;
+    /** Information about pagination in a connection. */
+    pageInfo: TaxonomyToTermNodeConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type TaxonomyToTermNodeConnectionEdge = Edge & TermNodeConnectionEdge & {
-  __typename?: 'TaxonomyToTermNodeConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: TermNode;
-};
+export type TaxonomyToTermNodeConnectionEdge = Edge &
+  TermNodeConnectionEdge & {
+    __typename?: 'TaxonomyToTermNodeConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: TermNode;
+  };
 
 /** Page Info on the &quot;TaxonomyToTermNodeConnection&quot; */
-export type TaxonomyToTermNodeConnectionPageInfo = PageInfo & TermNodeConnectionPageInfo & WpPageInfo & {
-  __typename?: 'TaxonomyToTermNodeConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type TaxonomyToTermNodeConnectionPageInfo = PageInfo &
+  TermNodeConnectionPageInfo &
+  WpPageInfo & {
+    __typename?: 'TaxonomyToTermNodeConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Terms are nodes within a Taxonomy, used to group and relate other nodes. */
 export type TermNode = {
@@ -14075,7 +14583,6 @@ export type TermNode = {
   uri?: Maybe<Scalars['String']['output']>;
 };
 
-
 /** Terms are nodes within a Taxonomy, used to group and relate other nodes. */
 export type TermNodeEnqueuedScriptsArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -14083,7 +14590,6 @@ export type TermNodeEnqueuedScriptsArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
 };
-
 
 /** Terms are nodes within a Taxonomy, used to group and relate other nodes. */
 export type TermNodeEnqueuedStylesheetsArgs = {
@@ -14134,74 +14640,84 @@ export enum TermNodeIdTypeEnum {
   /** Url friendly name of the node */
   Slug = 'SLUG',
   /** The URI for the node */
-  Uri = 'URI'
+  Uri = 'URI',
 }
 
 /** Connection between the TermNode type and the EnqueuedScript type */
-export type TermNodeToEnqueuedScriptConnection = Connection & EnqueuedScriptConnection & {
-  __typename?: 'TermNodeToEnqueuedScriptConnection';
-  /** Edges for the TermNodeToEnqueuedScriptConnection connection */
-  edges: Array<TermNodeToEnqueuedScriptConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<EnqueuedScript>;
-  /** Information about pagination in a connection. */
-  pageInfo: TermNodeToEnqueuedScriptConnectionPageInfo;
-};
+export type TermNodeToEnqueuedScriptConnection = Connection &
+  EnqueuedScriptConnection & {
+    __typename?: 'TermNodeToEnqueuedScriptConnection';
+    /** Edges for the TermNodeToEnqueuedScriptConnection connection */
+    edges: Array<TermNodeToEnqueuedScriptConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<EnqueuedScript>;
+    /** Information about pagination in a connection. */
+    pageInfo: TermNodeToEnqueuedScriptConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type TermNodeToEnqueuedScriptConnectionEdge = Edge & EnqueuedScriptConnectionEdge & {
-  __typename?: 'TermNodeToEnqueuedScriptConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: EnqueuedScript;
-};
+export type TermNodeToEnqueuedScriptConnectionEdge = Edge &
+  EnqueuedScriptConnectionEdge & {
+    __typename?: 'TermNodeToEnqueuedScriptConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: EnqueuedScript;
+  };
 
 /** Page Info on the &quot;TermNodeToEnqueuedScriptConnection&quot; */
-export type TermNodeToEnqueuedScriptConnectionPageInfo = EnqueuedScriptConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'TermNodeToEnqueuedScriptConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type TermNodeToEnqueuedScriptConnectionPageInfo =
+  EnqueuedScriptConnectionPageInfo &
+    PageInfo &
+    WpPageInfo & {
+      __typename?: 'TermNodeToEnqueuedScriptConnectionPageInfo';
+      /** When paginating forwards, the cursor to continue. */
+      endCursor?: Maybe<Scalars['String']['output']>;
+      /** When paginating forwards, are there more items? */
+      hasNextPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, are there more items? */
+      hasPreviousPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, the cursor to continue. */
+      startCursor?: Maybe<Scalars['String']['output']>;
+    };
 
 /** Connection between the TermNode type and the EnqueuedStylesheet type */
-export type TermNodeToEnqueuedStylesheetConnection = Connection & EnqueuedStylesheetConnection & {
-  __typename?: 'TermNodeToEnqueuedStylesheetConnection';
-  /** Edges for the TermNodeToEnqueuedStylesheetConnection connection */
-  edges: Array<TermNodeToEnqueuedStylesheetConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<EnqueuedStylesheet>;
-  /** Information about pagination in a connection. */
-  pageInfo: TermNodeToEnqueuedStylesheetConnectionPageInfo;
-};
+export type TermNodeToEnqueuedStylesheetConnection = Connection &
+  EnqueuedStylesheetConnection & {
+    __typename?: 'TermNodeToEnqueuedStylesheetConnection';
+    /** Edges for the TermNodeToEnqueuedStylesheetConnection connection */
+    edges: Array<TermNodeToEnqueuedStylesheetConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<EnqueuedStylesheet>;
+    /** Information about pagination in a connection. */
+    pageInfo: TermNodeToEnqueuedStylesheetConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type TermNodeToEnqueuedStylesheetConnectionEdge = Edge & EnqueuedStylesheetConnectionEdge & {
-  __typename?: 'TermNodeToEnqueuedStylesheetConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: EnqueuedStylesheet;
-};
+export type TermNodeToEnqueuedStylesheetConnectionEdge = Edge &
+  EnqueuedStylesheetConnectionEdge & {
+    __typename?: 'TermNodeToEnqueuedStylesheetConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: EnqueuedStylesheet;
+  };
 
 /** Page Info on the &quot;TermNodeToEnqueuedStylesheetConnection&quot; */
-export type TermNodeToEnqueuedStylesheetConnectionPageInfo = EnqueuedStylesheetConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'TermNodeToEnqueuedStylesheetConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type TermNodeToEnqueuedStylesheetConnectionPageInfo =
+  EnqueuedStylesheetConnectionPageInfo &
+    PageInfo &
+    WpPageInfo & {
+      __typename?: 'TermNodeToEnqueuedStylesheetConnectionPageInfo';
+      /** When paginating forwards, the cursor to continue. */
+      endCursor?: Maybe<Scalars['String']['output']>;
+      /** When paginating forwards, are there more items? */
+      hasNextPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, are there more items? */
+      hasPreviousPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, the cursor to continue. */
+      startCursor?: Maybe<Scalars['String']['output']>;
+    };
 
 /** Options for ordering the connection by */
 export enum TermObjectsConnectionOrderbyEnum {
@@ -14218,7 +14734,7 @@ export enum TermObjectsConnectionOrderbyEnum {
   /** Order the connection by term id. */
   TermId = 'TERM_ID',
   /** Order the connection by term order. */
-  TermOrder = 'TERM_ORDER'
+  TermOrder = 'TERM_ORDER',
 }
 
 /** A theme object */
@@ -14559,7 +15075,9 @@ export type UpdateSettingsInput = {
   /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
   clientMutationId?: InputMaybe<Scalars['String']['input']>;
   /** Allow people to submit comments on new posts. */
-  discussionSettingsDefaultCommentStatus?: InputMaybe<Scalars['String']['input']>;
+  discussionSettingsDefaultCommentStatus?: InputMaybe<
+    Scalars['String']['input']
+  >;
   /** Allow link notifications from other blogs (pingbacks and trackbacks) on new articles. */
   discussionSettingsDefaultPingStatus?: InputMaybe<Scalars['String']['input']>;
   /** A date format for all date strings. */
@@ -14688,81 +15206,83 @@ export type UpdateUserPayload = {
 };
 
 /** A User object */
-export type User = Commenter & DatabaseIdentifier & Node & UniformResourceIdentifiable & {
-  __typename?: 'User';
-  /** Avatar object for user. The avatar object can be retrieved in different sizes by specifying the size argument. */
-  avatar?: Maybe<Avatar>;
-  /** User metadata option name. Usually it will be &quot;wp_capabilities&quot;. */
-  capKey?: Maybe<Scalars['String']['output']>;
-  /** A list of capabilities (permissions) granted to the user */
-  capabilities?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** Connection between the User type and the Comment type */
-  comments?: Maybe<UserToCommentConnection>;
-  /** @deprecated Deprecated in favor of using Next.js pages */
-  conditionalTags?: Maybe<ConditionalTags>;
-  /** Identifies the primary key from the database. */
-  databaseId: Scalars['Int']['output'];
-  /** Description of the user. */
-  description?: Maybe<Scalars['String']['output']>;
-  /** Email address of the user. This is equivalent to the WP_User-&gt;user_email property. */
-  email?: Maybe<Scalars['String']['output']>;
-  /** Connection between the User type and the EnqueuedScript type */
-  enqueuedScripts?: Maybe<UserToEnqueuedScriptConnection>;
-  /** Connection between the User type and the EnqueuedStylesheet type */
-  enqueuedStylesheets?: Maybe<UserToEnqueuedStylesheetConnection>;
-  /** A complete list of capabilities including capabilities inherited from a role. This is equivalent to the array keys of WP_User-&gt;allcaps. */
-  extraCapabilities?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** First name of the user. This is equivalent to the WP_User-&gt;user_first_name property. */
-  firstName?: Maybe<Scalars['String']['output']>;
-  /** The globally unique identifier for the user object. */
-  id: Scalars['ID']['output'];
-  /** Whether the node is a Content Node */
-  isContentNode: Scalars['Boolean']['output'];
-  /** Whether the object is restricted from the current viewer */
-  isRestricted?: Maybe<Scalars['Boolean']['output']>;
-  /** Whether the node is a Term */
-  isTermNode: Scalars['Boolean']['output'];
-  /** Last name of the user. This is equivalent to the WP_User-&gt;user_last_name property. */
-  lastName?: Maybe<Scalars['String']['output']>;
-  /** The preferred language locale set for the user. Value derived from get_user_locale(). */
-  locale?: Maybe<Scalars['String']['output']>;
-  /** Connection between the User type and the mediaItem type */
-  mediaItems?: Maybe<UserToMediaItemConnection>;
-  /** Display name of the user. This is equivalent to the WP_User-&gt;display_name property. */
-  name?: Maybe<Scalars['String']['output']>;
-  /** The nicename for the user. This field is equivalent to WP_User-&gt;user_nicename */
-  nicename?: Maybe<Scalars['String']['output']>;
-  /** Nickname of the user. */
-  nickname?: Maybe<Scalars['String']['output']>;
-  /** Connection between the User type and the page type */
-  pages?: Maybe<UserToPageConnection>;
-  /** Connection between the User type and the post type */
-  posts?: Maybe<UserToPostConnection>;
-  /** The date the user registered or was created. The field follows a full ISO8601 date string format. */
-  registeredDate?: Maybe<Scalars['String']['output']>;
-  /** Connection between the User and Revisions authored by the user */
-  revisions?: Maybe<UserToRevisionsConnection>;
-  /** Connection between the User type and the UserRole type */
-  roles?: Maybe<UserToUserRoleConnection>;
-  /** Whether the Toolbar should be displayed when the user is viewing the site. */
-  shouldShowAdminToolbar?: Maybe<Scalars['Boolean']['output']>;
-  shouldShowFaustToolbar?: Maybe<Scalars['Boolean']['output']>;
-  /** The slug for the user. This field is equivalent to WP_User-&gt;user_nicename */
-  slug?: Maybe<Scalars['String']['output']>;
-  templates?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** The unique resource identifier path */
-  uri?: Maybe<Scalars['String']['output']>;
-  /** A website url that is associated with the user. */
-  url?: Maybe<Scalars['String']['output']>;
-  /**
-   * The Id of the user. Equivalent to WP_User-&gt;ID
-   * @deprecated Deprecated in favor of the databaseId field
-   */
-  userId?: Maybe<Scalars['Int']['output']>;
-  /** Username for the user. This field is equivalent to WP_User-&gt;user_login. */
-  username?: Maybe<Scalars['String']['output']>;
-};
-
+export type User = Commenter &
+  DatabaseIdentifier &
+  Node &
+  UniformResourceIdentifiable & {
+    __typename?: 'User';
+    /** Avatar object for user. The avatar object can be retrieved in different sizes by specifying the size argument. */
+    avatar?: Maybe<Avatar>;
+    /** User metadata option name. Usually it will be &quot;wp_capabilities&quot;. */
+    capKey?: Maybe<Scalars['String']['output']>;
+    /** A list of capabilities (permissions) granted to the user */
+    capabilities?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** Connection between the User type and the Comment type */
+    comments?: Maybe<UserToCommentConnection>;
+    /** @deprecated Deprecated in favor of using Next.js pages */
+    conditionalTags?: Maybe<ConditionalTags>;
+    /** Identifies the primary key from the database. */
+    databaseId: Scalars['Int']['output'];
+    /** Description of the user. */
+    description?: Maybe<Scalars['String']['output']>;
+    /** Email address of the user. This is equivalent to the WP_User-&gt;user_email property. */
+    email?: Maybe<Scalars['String']['output']>;
+    /** Connection between the User type and the EnqueuedScript type */
+    enqueuedScripts?: Maybe<UserToEnqueuedScriptConnection>;
+    /** Connection between the User type and the EnqueuedStylesheet type */
+    enqueuedStylesheets?: Maybe<UserToEnqueuedStylesheetConnection>;
+    /** A complete list of capabilities including capabilities inherited from a role. This is equivalent to the array keys of WP_User-&gt;allcaps. */
+    extraCapabilities?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** First name of the user. This is equivalent to the WP_User-&gt;user_first_name property. */
+    firstName?: Maybe<Scalars['String']['output']>;
+    /** The globally unique identifier for the user object. */
+    id: Scalars['ID']['output'];
+    /** Whether the node is a Content Node */
+    isContentNode: Scalars['Boolean']['output'];
+    /** Whether the object is restricted from the current viewer */
+    isRestricted?: Maybe<Scalars['Boolean']['output']>;
+    /** Whether the node is a Term */
+    isTermNode: Scalars['Boolean']['output'];
+    /** Last name of the user. This is equivalent to the WP_User-&gt;user_last_name property. */
+    lastName?: Maybe<Scalars['String']['output']>;
+    /** The preferred language locale set for the user. Value derived from get_user_locale(). */
+    locale?: Maybe<Scalars['String']['output']>;
+    /** Connection between the User type and the mediaItem type */
+    mediaItems?: Maybe<UserToMediaItemConnection>;
+    /** Display name of the user. This is equivalent to the WP_User-&gt;display_name property. */
+    name?: Maybe<Scalars['String']['output']>;
+    /** The nicename for the user. This field is equivalent to WP_User-&gt;user_nicename */
+    nicename?: Maybe<Scalars['String']['output']>;
+    /** Nickname of the user. */
+    nickname?: Maybe<Scalars['String']['output']>;
+    /** Connection between the User type and the page type */
+    pages?: Maybe<UserToPageConnection>;
+    /** Connection between the User type and the post type */
+    posts?: Maybe<UserToPostConnection>;
+    /** The date the user registered or was created. The field follows a full ISO8601 date string format. */
+    registeredDate?: Maybe<Scalars['String']['output']>;
+    /** Connection between the User and Revisions authored by the user */
+    revisions?: Maybe<UserToRevisionsConnection>;
+    /** Connection between the User type and the UserRole type */
+    roles?: Maybe<UserToUserRoleConnection>;
+    /** Whether the Toolbar should be displayed when the user is viewing the site. */
+    shouldShowAdminToolbar?: Maybe<Scalars['Boolean']['output']>;
+    shouldShowFaustToolbar?: Maybe<Scalars['Boolean']['output']>;
+    /** The slug for the user. This field is equivalent to WP_User-&gt;user_nicename */
+    slug?: Maybe<Scalars['String']['output']>;
+    templates?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The unique resource identifier path */
+    uri?: Maybe<Scalars['String']['output']>;
+    /** A website url that is associated with the user. */
+    url?: Maybe<Scalars['String']['output']>;
+    /**
+     * The Id of the user. Equivalent to WP_User-&gt;ID
+     * @deprecated Deprecated in favor of the databaseId field
+     */
+    userId?: Maybe<Scalars['Int']['output']>;
+    /** Username for the user. This field is equivalent to WP_User-&gt;user_login. */
+    username?: Maybe<Scalars['String']['output']>;
+  };
 
 /** A User object */
 export type UserAvatarArgs = {
@@ -14770,7 +15290,6 @@ export type UserAvatarArgs = {
   rating?: InputMaybe<AvatarRatingEnum>;
   size?: InputMaybe<Scalars['Int']['input']>;
 };
-
 
 /** A User object */
 export type UserCommentsArgs = {
@@ -14781,7 +15300,6 @@ export type UserCommentsArgs = {
   where?: InputMaybe<UserToCommentConnectionWhereArgs>;
 };
 
-
 /** A User object */
 export type UserEnqueuedScriptsArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -14790,7 +15308,6 @@ export type UserEnqueuedScriptsArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
 };
 
-
 /** A User object */
 export type UserEnqueuedStylesheetsArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -14798,7 +15315,6 @@ export type UserEnqueuedStylesheetsArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
 };
-
 
 /** A User object */
 export type UserMediaItemsArgs = {
@@ -14809,7 +15325,6 @@ export type UserMediaItemsArgs = {
   where?: InputMaybe<UserToMediaItemConnectionWhereArgs>;
 };
 
-
 /** A User object */
 export type UserPagesArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -14818,7 +15333,6 @@ export type UserPagesArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<UserToPageConnectionWhereArgs>;
 };
-
 
 /** A User object */
 export type UserPostsArgs = {
@@ -14829,7 +15343,6 @@ export type UserPostsArgs = {
   where?: InputMaybe<UserToPostConnectionWhereArgs>;
 };
 
-
 /** A User object */
 export type UserRevisionsArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -14838,7 +15351,6 @@ export type UserRevisionsArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<UserToRevisionsConnectionWhereArgs>;
 };
-
 
 /** A User object */
 export type UserRolesArgs = {
@@ -14891,7 +15403,7 @@ export enum UserNodeIdTypeEnum {
   /** The URI for the node */
   Uri = 'URI',
   /** The username the User uses to login with */
-  Username = 'USERNAME'
+  Username = 'USERNAME',
 }
 
 /** A user role object */
@@ -14950,41 +15462,45 @@ export enum UserRoleEnum {
   /** User role with specific capabilities */
   Editor = 'EDITOR',
   /** User role with specific capabilities */
-  Subscriber = 'SUBSCRIBER'
+  Subscriber = 'SUBSCRIBER',
 }
 
 /** Connection between the User type and the Comment type */
-export type UserToCommentConnection = CommentConnection & Connection & {
-  __typename?: 'UserToCommentConnection';
-  /** Edges for the UserToCommentConnection connection */
-  edges: Array<UserToCommentConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<Comment>;
-  /** Information about pagination in a connection. */
-  pageInfo: UserToCommentConnectionPageInfo;
-};
+export type UserToCommentConnection = CommentConnection &
+  Connection & {
+    __typename?: 'UserToCommentConnection';
+    /** Edges for the UserToCommentConnection connection */
+    edges: Array<UserToCommentConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<Comment>;
+    /** Information about pagination in a connection. */
+    pageInfo: UserToCommentConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type UserToCommentConnectionEdge = CommentConnectionEdge & Edge & {
-  __typename?: 'UserToCommentConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: Comment;
-};
+export type UserToCommentConnectionEdge = CommentConnectionEdge &
+  Edge & {
+    __typename?: 'UserToCommentConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: Comment;
+  };
 
 /** Page Info on the &quot;UserToCommentConnection&quot; */
-export type UserToCommentConnectionPageInfo = CommentConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'UserToCommentConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type UserToCommentConnectionPageInfo = CommentConnectionPageInfo &
+  PageInfo &
+  WpPageInfo & {
+    __typename?: 'UserToCommentConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Arguments for filtering the UserToCommentConnection connection */
 export type UserToCommentConnectionWhereArgs = {
@@ -15049,103 +15565,117 @@ export type UserToCommentConnectionWhereArgs = {
 };
 
 /** Connection between the User type and the EnqueuedScript type */
-export type UserToEnqueuedScriptConnection = Connection & EnqueuedScriptConnection & {
-  __typename?: 'UserToEnqueuedScriptConnection';
-  /** Edges for the UserToEnqueuedScriptConnection connection */
-  edges: Array<UserToEnqueuedScriptConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<EnqueuedScript>;
-  /** Information about pagination in a connection. */
-  pageInfo: UserToEnqueuedScriptConnectionPageInfo;
-};
+export type UserToEnqueuedScriptConnection = Connection &
+  EnqueuedScriptConnection & {
+    __typename?: 'UserToEnqueuedScriptConnection';
+    /** Edges for the UserToEnqueuedScriptConnection connection */
+    edges: Array<UserToEnqueuedScriptConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<EnqueuedScript>;
+    /** Information about pagination in a connection. */
+    pageInfo: UserToEnqueuedScriptConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type UserToEnqueuedScriptConnectionEdge = Edge & EnqueuedScriptConnectionEdge & {
-  __typename?: 'UserToEnqueuedScriptConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: EnqueuedScript;
-};
+export type UserToEnqueuedScriptConnectionEdge = Edge &
+  EnqueuedScriptConnectionEdge & {
+    __typename?: 'UserToEnqueuedScriptConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: EnqueuedScript;
+  };
 
 /** Page Info on the &quot;UserToEnqueuedScriptConnection&quot; */
-export type UserToEnqueuedScriptConnectionPageInfo = EnqueuedScriptConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'UserToEnqueuedScriptConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type UserToEnqueuedScriptConnectionPageInfo =
+  EnqueuedScriptConnectionPageInfo &
+    PageInfo &
+    WpPageInfo & {
+      __typename?: 'UserToEnqueuedScriptConnectionPageInfo';
+      /** When paginating forwards, the cursor to continue. */
+      endCursor?: Maybe<Scalars['String']['output']>;
+      /** When paginating forwards, are there more items? */
+      hasNextPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, are there more items? */
+      hasPreviousPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, the cursor to continue. */
+      startCursor?: Maybe<Scalars['String']['output']>;
+    };
 
 /** Connection between the User type and the EnqueuedStylesheet type */
-export type UserToEnqueuedStylesheetConnection = Connection & EnqueuedStylesheetConnection & {
-  __typename?: 'UserToEnqueuedStylesheetConnection';
-  /** Edges for the UserToEnqueuedStylesheetConnection connection */
-  edges: Array<UserToEnqueuedStylesheetConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<EnqueuedStylesheet>;
-  /** Information about pagination in a connection. */
-  pageInfo: UserToEnqueuedStylesheetConnectionPageInfo;
-};
+export type UserToEnqueuedStylesheetConnection = Connection &
+  EnqueuedStylesheetConnection & {
+    __typename?: 'UserToEnqueuedStylesheetConnection';
+    /** Edges for the UserToEnqueuedStylesheetConnection connection */
+    edges: Array<UserToEnqueuedStylesheetConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<EnqueuedStylesheet>;
+    /** Information about pagination in a connection. */
+    pageInfo: UserToEnqueuedStylesheetConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type UserToEnqueuedStylesheetConnectionEdge = Edge & EnqueuedStylesheetConnectionEdge & {
-  __typename?: 'UserToEnqueuedStylesheetConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: EnqueuedStylesheet;
-};
+export type UserToEnqueuedStylesheetConnectionEdge = Edge &
+  EnqueuedStylesheetConnectionEdge & {
+    __typename?: 'UserToEnqueuedStylesheetConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: EnqueuedStylesheet;
+  };
 
 /** Page Info on the &quot;UserToEnqueuedStylesheetConnection&quot; */
-export type UserToEnqueuedStylesheetConnectionPageInfo = EnqueuedStylesheetConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'UserToEnqueuedStylesheetConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type UserToEnqueuedStylesheetConnectionPageInfo =
+  EnqueuedStylesheetConnectionPageInfo &
+    PageInfo &
+    WpPageInfo & {
+      __typename?: 'UserToEnqueuedStylesheetConnectionPageInfo';
+      /** When paginating forwards, the cursor to continue. */
+      endCursor?: Maybe<Scalars['String']['output']>;
+      /** When paginating forwards, are there more items? */
+      hasNextPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, are there more items? */
+      hasPreviousPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, the cursor to continue. */
+      startCursor?: Maybe<Scalars['String']['output']>;
+    };
 
 /** Connection between the User type and the mediaItem type */
-export type UserToMediaItemConnection = Connection & MediaItemConnection & {
-  __typename?: 'UserToMediaItemConnection';
-  /** Edges for the UserToMediaItemConnection connection */
-  edges: Array<UserToMediaItemConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<MediaItem>;
-  /** Information about pagination in a connection. */
-  pageInfo: UserToMediaItemConnectionPageInfo;
-};
+export type UserToMediaItemConnection = Connection &
+  MediaItemConnection & {
+    __typename?: 'UserToMediaItemConnection';
+    /** Edges for the UserToMediaItemConnection connection */
+    edges: Array<UserToMediaItemConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<MediaItem>;
+    /** Information about pagination in a connection. */
+    pageInfo: UserToMediaItemConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type UserToMediaItemConnectionEdge = Edge & MediaItemConnectionEdge & {
-  __typename?: 'UserToMediaItemConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: MediaItem;
-};
+export type UserToMediaItemConnectionEdge = Edge &
+  MediaItemConnectionEdge & {
+    __typename?: 'UserToMediaItemConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: MediaItem;
+  };
 
 /** Page Info on the &quot;UserToMediaItemConnection&quot; */
-export type UserToMediaItemConnectionPageInfo = MediaItemConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'UserToMediaItemConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type UserToMediaItemConnectionPageInfo = MediaItemConnectionPageInfo &
+  PageInfo &
+  WpPageInfo & {
+    __typename?: 'UserToMediaItemConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Arguments for filtering the UserToMediaItemConnection connection */
 export type UserToMediaItemConnectionWhereArgs = {
@@ -15194,37 +15724,41 @@ export type UserToMediaItemConnectionWhereArgs = {
 };
 
 /** Connection between the User type and the page type */
-export type UserToPageConnection = Connection & PageConnection & {
-  __typename?: 'UserToPageConnection';
-  /** Edges for the UserToPageConnection connection */
-  edges: Array<UserToPageConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<Page>;
-  /** Information about pagination in a connection. */
-  pageInfo: UserToPageConnectionPageInfo;
-};
+export type UserToPageConnection = Connection &
+  PageConnection & {
+    __typename?: 'UserToPageConnection';
+    /** Edges for the UserToPageConnection connection */
+    edges: Array<UserToPageConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<Page>;
+    /** Information about pagination in a connection. */
+    pageInfo: UserToPageConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type UserToPageConnectionEdge = Edge & PageConnectionEdge & {
-  __typename?: 'UserToPageConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: Page;
-};
+export type UserToPageConnectionEdge = Edge &
+  PageConnectionEdge & {
+    __typename?: 'UserToPageConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: Page;
+  };
 
 /** Page Info on the &quot;UserToPageConnection&quot; */
-export type UserToPageConnectionPageInfo = PageConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'UserToPageConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type UserToPageConnectionPageInfo = PageConnectionPageInfo &
+  PageInfo &
+  WpPageInfo & {
+    __typename?: 'UserToPageConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Arguments for filtering the UserToPageConnection connection */
 export type UserToPageConnectionWhereArgs = {
@@ -15273,37 +15807,41 @@ export type UserToPageConnectionWhereArgs = {
 };
 
 /** Connection between the User type and the post type */
-export type UserToPostConnection = Connection & PostConnection & {
-  __typename?: 'UserToPostConnection';
-  /** Edges for the UserToPostConnection connection */
-  edges: Array<UserToPostConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<Post>;
-  /** Information about pagination in a connection. */
-  pageInfo: UserToPostConnectionPageInfo;
-};
+export type UserToPostConnection = Connection &
+  PostConnection & {
+    __typename?: 'UserToPostConnection';
+    /** Edges for the UserToPostConnection connection */
+    edges: Array<UserToPostConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<Post>;
+    /** Information about pagination in a connection. */
+    pageInfo: UserToPostConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type UserToPostConnectionEdge = Edge & PostConnectionEdge & {
-  __typename?: 'UserToPostConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: Post;
-};
+export type UserToPostConnectionEdge = Edge &
+  PostConnectionEdge & {
+    __typename?: 'UserToPostConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: Post;
+  };
 
 /** Page Info on the &quot;UserToPostConnection&quot; */
-export type UserToPostConnectionPageInfo = PageInfo & PostConnectionPageInfo & WpPageInfo & {
-  __typename?: 'UserToPostConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type UserToPostConnectionPageInfo = PageInfo &
+  PostConnectionPageInfo &
+  WpPageInfo & {
+    __typename?: 'UserToPostConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Arguments for filtering the UserToPostConnection connection */
 export type UserToPostConnectionWhereArgs = {
@@ -15372,37 +15910,41 @@ export type UserToPostConnectionWhereArgs = {
 };
 
 /** Connection between the User type and the ContentNode type */
-export type UserToRevisionsConnection = Connection & ContentNodeConnection & {
-  __typename?: 'UserToRevisionsConnection';
-  /** Edges for the UserToRevisionsConnection connection */
-  edges: Array<UserToRevisionsConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<ContentNode>;
-  /** Information about pagination in a connection. */
-  pageInfo: UserToRevisionsConnectionPageInfo;
-};
+export type UserToRevisionsConnection = Connection &
+  ContentNodeConnection & {
+    __typename?: 'UserToRevisionsConnection';
+    /** Edges for the UserToRevisionsConnection connection */
+    edges: Array<UserToRevisionsConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<ContentNode>;
+    /** Information about pagination in a connection. */
+    pageInfo: UserToRevisionsConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type UserToRevisionsConnectionEdge = ContentNodeConnectionEdge & Edge & {
-  __typename?: 'UserToRevisionsConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: ContentNode;
-};
+export type UserToRevisionsConnectionEdge = ContentNodeConnectionEdge &
+  Edge & {
+    __typename?: 'UserToRevisionsConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: ContentNode;
+  };
 
 /** Page Info on the &quot;UserToRevisionsConnection&quot; */
-export type UserToRevisionsConnectionPageInfo = ContentNodeConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'UserToRevisionsConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type UserToRevisionsConnectionPageInfo = ContentNodeConnectionPageInfo &
+  PageInfo &
+  WpPageInfo & {
+    __typename?: 'UserToRevisionsConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Arguments for filtering the UserToRevisionsConnection connection */
 export type UserToRevisionsConnectionWhereArgs = {
@@ -15445,37 +15987,41 @@ export type UserToRevisionsConnectionWhereArgs = {
 };
 
 /** Connection between the User type and the UserRole type */
-export type UserToUserRoleConnection = Connection & UserRoleConnection & {
-  __typename?: 'UserToUserRoleConnection';
-  /** Edges for the UserToUserRoleConnection connection */
-  edges: Array<UserToUserRoleConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<UserRole>;
-  /** Information about pagination in a connection. */
-  pageInfo: UserToUserRoleConnectionPageInfo;
-};
+export type UserToUserRoleConnection = Connection &
+  UserRoleConnection & {
+    __typename?: 'UserToUserRoleConnection';
+    /** Edges for the UserToUserRoleConnection connection */
+    edges: Array<UserToUserRoleConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<UserRole>;
+    /** Information about pagination in a connection. */
+    pageInfo: UserToUserRoleConnectionPageInfo;
+  };
 
 /** An edge in a connection */
-export type UserToUserRoleConnectionEdge = Edge & UserRoleConnectionEdge & {
-  __typename?: 'UserToUserRoleConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']['output']>;
-  /** The item at the end of the edge */
-  node: UserRole;
-};
+export type UserToUserRoleConnectionEdge = Edge &
+  UserRoleConnectionEdge & {
+    __typename?: 'UserToUserRoleConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: UserRole;
+  };
 
 /** Page Info on the &quot;UserToUserRoleConnection&quot; */
-export type UserToUserRoleConnectionPageInfo = PageInfo & UserRoleConnectionPageInfo & WpPageInfo & {
-  __typename?: 'UserToUserRoleConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
+export type UserToUserRoleConnectionPageInfo = PageInfo &
+  UserRoleConnectionPageInfo &
+  WpPageInfo & {
+    __typename?: 'UserToUserRoleConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
+  };
 
 /** Field to order the connection by */
 export enum UsersConnectionOrderbyEnum {
@@ -15494,7 +16040,7 @@ export enum UsersConnectionOrderbyEnum {
   /** Order by registration date */
   Registered = 'REGISTERED',
   /** Order by URL */
-  Url = 'URL'
+  Url = 'URL',
 }
 
 /** Options for ordering the connection */
@@ -15516,7 +16062,7 @@ export enum UsersConnectionSearchColumnEnum {
   /** A URL-friendly name for the user. The default is the user's username. */
   Nicename = 'NICENAME',
   /** The URL of the user's website. */
-  Url = 'URL'
+  Url = 'URL',
 }
 
 /** Information about pagination in a connection. */
@@ -15548,507 +16094,1608 @@ export type GetPageQueryVariables = Exact<{
   asPreview: Scalars['Boolean']['input'];
 }>;
 
-
-export type GetPageQuery = { __typename?: 'RootQuery', page?: { __typename: 'Page', title?: string | null, date?: string | null, status?: string | null, isRestricted?: boolean | null, editorBlocks?: Array<(
-      { __typename?: 'CoreArchives' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreArchives_Fragment': WpBlocksFragment_CoreArchives_Fragment } }
-    ) | (
-      { __typename?: 'CoreAudio' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreAudio_Fragment': WpBlocksFragment_CoreAudio_Fragment } }
-    ) | (
-      { __typename?: 'CoreAvatar' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreAvatar_Fragment': WpBlocksFragment_CoreAvatar_Fragment } }
-    ) | (
-      { __typename?: 'CoreBlock' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreBlock_Fragment': WpBlocksFragment_CoreBlock_Fragment } }
-    ) | (
-      { __typename?: 'CoreButton' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreButton_Fragment': WpBlocksFragment_CoreButton_Fragment } }
-    ) | (
-      { __typename?: 'CoreButtons' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreButtons_Fragment': WpBlocksFragment_CoreButtons_Fragment } }
-    ) | (
-      { __typename?: 'CoreCalendar' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreCalendar_Fragment': WpBlocksFragment_CoreCalendar_Fragment } }
-    ) | (
-      { __typename?: 'CoreCategories' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreCategories_Fragment': WpBlocksFragment_CoreCategories_Fragment } }
-    ) | (
-      { __typename?: 'CoreCode' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreCode_Fragment': WpBlocksFragment_CoreCode_Fragment } }
-    ) | (
-      { __typename?: 'CoreColumn' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreColumn_Fragment': WpBlocksFragment_CoreColumn_Fragment } }
-    ) | (
-      { __typename?: 'CoreColumns' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreColumns_Fragment': WpBlocksFragment_CoreColumns_Fragment } }
-    ) | (
-      { __typename?: 'CoreCommentAuthorName' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreCommentAuthorName_Fragment': WpBlocksFragment_CoreCommentAuthorName_Fragment } }
-    ) | (
-      { __typename?: 'CoreCommentContent' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreCommentContent_Fragment': WpBlocksFragment_CoreCommentContent_Fragment } }
-    ) | (
-      { __typename?: 'CoreCommentDate' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreCommentDate_Fragment': WpBlocksFragment_CoreCommentDate_Fragment } }
-    ) | (
-      { __typename?: 'CoreCommentEditLink' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreCommentEditLink_Fragment': WpBlocksFragment_CoreCommentEditLink_Fragment } }
-    ) | (
-      { __typename?: 'CoreCommentReplyLink' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreCommentReplyLink_Fragment': WpBlocksFragment_CoreCommentReplyLink_Fragment } }
-    ) | (
-      { __typename?: 'CoreCommentTemplate' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreCommentTemplate_Fragment': WpBlocksFragment_CoreCommentTemplate_Fragment } }
-    ) | (
-      { __typename?: 'CoreComments' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreComments_Fragment': WpBlocksFragment_CoreComments_Fragment } }
-    ) | (
-      { __typename?: 'CoreCommentsPagination' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreCommentsPagination_Fragment': WpBlocksFragment_CoreCommentsPagination_Fragment } }
-    ) | (
-      { __typename?: 'CoreCommentsPaginationNext' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreCommentsPaginationNext_Fragment': WpBlocksFragment_CoreCommentsPaginationNext_Fragment } }
-    ) | (
-      { __typename?: 'CoreCommentsPaginationNumbers' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreCommentsPaginationNumbers_Fragment': WpBlocksFragment_CoreCommentsPaginationNumbers_Fragment } }
-    ) | (
-      { __typename?: 'CoreCommentsPaginationPrevious' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreCommentsPaginationPrevious_Fragment': WpBlocksFragment_CoreCommentsPaginationPrevious_Fragment } }
-    ) | (
-      { __typename?: 'CoreCommentsTitle' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreCommentsTitle_Fragment': WpBlocksFragment_CoreCommentsTitle_Fragment } }
-    ) | (
-      { __typename?: 'CoreCover' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreCover_Fragment': WpBlocksFragment_CoreCover_Fragment } }
-    ) | (
-      { __typename?: 'CoreDetails' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreDetails_Fragment': WpBlocksFragment_CoreDetails_Fragment } }
-    ) | (
-      { __typename?: 'CoreEmbed' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreEmbed_Fragment': WpBlocksFragment_CoreEmbed_Fragment } }
-    ) | (
-      { __typename?: 'CoreFile' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreFile_Fragment': WpBlocksFragment_CoreFile_Fragment } }
-    ) | (
-      { __typename?: 'CoreFootnotes' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreFootnotes_Fragment': WpBlocksFragment_CoreFootnotes_Fragment } }
-    ) | (
-      { __typename?: 'CoreFreeform' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreFreeform_Fragment': WpBlocksFragment_CoreFreeform_Fragment } }
-    ) | (
-      { __typename?: 'CoreGallery' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreGallery_Fragment': WpBlocksFragment_CoreGallery_Fragment } }
-    ) | (
-      { __typename?: 'CoreGroup' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreGroup_Fragment': WpBlocksFragment_CoreGroup_Fragment } }
-    ) | (
-      { __typename?: 'CoreHeading' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreHeading_Fragment': WpBlocksFragment_CoreHeading_Fragment } }
-    ) | (
-      { __typename?: 'CoreHomeLink' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreHomeLink_Fragment': WpBlocksFragment_CoreHomeLink_Fragment } }
-    ) | (
-      { __typename?: 'CoreHtml' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreHtml_Fragment': WpBlocksFragment_CoreHtml_Fragment } }
-    ) | (
-      { __typename?: 'CoreImage' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreImage_Fragment': WpBlocksFragment_CoreImage_Fragment } }
-    ) | (
-      { __typename?: 'CoreLatestComments' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreLatestComments_Fragment': WpBlocksFragment_CoreLatestComments_Fragment } }
-    ) | (
-      { __typename?: 'CoreLatestPosts' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreLatestPosts_Fragment': WpBlocksFragment_CoreLatestPosts_Fragment } }
-    ) | (
-      { __typename?: 'CoreLegacyWidget' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreLegacyWidget_Fragment': WpBlocksFragment_CoreLegacyWidget_Fragment } }
-    ) | (
-      { __typename?: 'CoreList' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreList_Fragment': WpBlocksFragment_CoreList_Fragment } }
-    ) | (
-      { __typename?: 'CoreListItem' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreListItem_Fragment': WpBlocksFragment_CoreListItem_Fragment } }
-    ) | (
-      { __typename?: 'CoreLoginout' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreLoginout_Fragment': WpBlocksFragment_CoreLoginout_Fragment } }
-    ) | (
-      { __typename?: 'CoreMediaText' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreMediaText_Fragment': WpBlocksFragment_CoreMediaText_Fragment } }
-    ) | (
-      { __typename?: 'CoreMissing' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreMissing_Fragment': WpBlocksFragment_CoreMissing_Fragment } }
-    ) | (
-      { __typename?: 'CoreMore' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreMore_Fragment': WpBlocksFragment_CoreMore_Fragment } }
-    ) | (
-      { __typename?: 'CoreNavigation' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreNavigation_Fragment': WpBlocksFragment_CoreNavigation_Fragment } }
-    ) | (
-      { __typename?: 'CoreNavigationLink' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreNavigationLink_Fragment': WpBlocksFragment_CoreNavigationLink_Fragment } }
-    ) | (
-      { __typename?: 'CoreNavigationSubmenu' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreNavigationSubmenu_Fragment': WpBlocksFragment_CoreNavigationSubmenu_Fragment } }
-    ) | (
-      { __typename?: 'CoreNextpage' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreNextpage_Fragment': WpBlocksFragment_CoreNextpage_Fragment } }
-    ) | (
-      { __typename?: 'CorePageList' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CorePageList_Fragment': WpBlocksFragment_CorePageList_Fragment } }
-    ) | (
-      { __typename?: 'CorePageListItem' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CorePageListItem_Fragment': WpBlocksFragment_CorePageListItem_Fragment } }
-    ) | (
-      { __typename?: 'CoreParagraph' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreParagraph_Fragment': WpBlocksFragment_CoreParagraph_Fragment } }
-    ) | (
-      { __typename?: 'CorePattern' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CorePattern_Fragment': WpBlocksFragment_CorePattern_Fragment } }
-    ) | (
-      { __typename?: 'CorePostAuthor' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CorePostAuthor_Fragment': WpBlocksFragment_CorePostAuthor_Fragment } }
-    ) | (
-      { __typename?: 'CorePostAuthorBiography' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CorePostAuthorBiography_Fragment': WpBlocksFragment_CorePostAuthorBiography_Fragment } }
-    ) | (
-      { __typename?: 'CorePostAuthorName' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CorePostAuthorName_Fragment': WpBlocksFragment_CorePostAuthorName_Fragment } }
-    ) | (
-      { __typename?: 'CorePostComments' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CorePostComments_Fragment': WpBlocksFragment_CorePostComments_Fragment } }
-    ) | (
-      { __typename?: 'CorePostCommentsForm' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CorePostCommentsForm_Fragment': WpBlocksFragment_CorePostCommentsForm_Fragment } }
-    ) | (
-      { __typename?: 'CorePostContent' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CorePostContent_Fragment': WpBlocksFragment_CorePostContent_Fragment } }
-    ) | (
-      { __typename?: 'CorePostDate' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CorePostDate_Fragment': WpBlocksFragment_CorePostDate_Fragment } }
-    ) | (
-      { __typename?: 'CorePostExcerpt' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CorePostExcerpt_Fragment': WpBlocksFragment_CorePostExcerpt_Fragment } }
-    ) | (
-      { __typename?: 'CorePostFeaturedImage' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CorePostFeaturedImage_Fragment': WpBlocksFragment_CorePostFeaturedImage_Fragment } }
-    ) | (
-      { __typename?: 'CorePostNavigationLink' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CorePostNavigationLink_Fragment': WpBlocksFragment_CorePostNavigationLink_Fragment } }
-    ) | (
-      { __typename?: 'CorePostTemplate' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CorePostTemplate_Fragment': WpBlocksFragment_CorePostTemplate_Fragment } }
-    ) | (
-      { __typename?: 'CorePostTerms' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CorePostTerms_Fragment': WpBlocksFragment_CorePostTerms_Fragment } }
-    ) | (
-      { __typename?: 'CorePostTitle' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CorePostTitle_Fragment': WpBlocksFragment_CorePostTitle_Fragment } }
-    ) | (
-      { __typename?: 'CorePreformatted' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CorePreformatted_Fragment': WpBlocksFragment_CorePreformatted_Fragment } }
-    ) | (
-      { __typename?: 'CorePullquote' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CorePullquote_Fragment': WpBlocksFragment_CorePullquote_Fragment } }
-    ) | (
-      { __typename?: 'CoreQuery' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreQuery_Fragment': WpBlocksFragment_CoreQuery_Fragment } }
-    ) | (
-      { __typename?: 'CoreQueryNoResults' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreQueryNoResults_Fragment': WpBlocksFragment_CoreQueryNoResults_Fragment } }
-    ) | (
-      { __typename?: 'CoreQueryPagination' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreQueryPagination_Fragment': WpBlocksFragment_CoreQueryPagination_Fragment } }
-    ) | (
-      { __typename?: 'CoreQueryPaginationNext' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreQueryPaginationNext_Fragment': WpBlocksFragment_CoreQueryPaginationNext_Fragment } }
-    ) | (
-      { __typename?: 'CoreQueryPaginationNumbers' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreQueryPaginationNumbers_Fragment': WpBlocksFragment_CoreQueryPaginationNumbers_Fragment } }
-    ) | (
-      { __typename?: 'CoreQueryPaginationPrevious' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreQueryPaginationPrevious_Fragment': WpBlocksFragment_CoreQueryPaginationPrevious_Fragment } }
-    ) | (
-      { __typename?: 'CoreQueryTitle' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreQueryTitle_Fragment': WpBlocksFragment_CoreQueryTitle_Fragment } }
-    ) | (
-      { __typename?: 'CoreQuote' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreQuote_Fragment': WpBlocksFragment_CoreQuote_Fragment } }
-    ) | (
-      { __typename?: 'CoreReadMore' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreReadMore_Fragment': WpBlocksFragment_CoreReadMore_Fragment } }
-    ) | (
-      { __typename?: 'CoreRss' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreRss_Fragment': WpBlocksFragment_CoreRss_Fragment } }
-    ) | (
-      { __typename?: 'CoreSearch' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreSearch_Fragment': WpBlocksFragment_CoreSearch_Fragment } }
-    ) | (
-      { __typename?: 'CoreSeparator' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreSeparator_Fragment': WpBlocksFragment_CoreSeparator_Fragment } }
-    ) | (
-      { __typename?: 'CoreShortcode' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreShortcode_Fragment': WpBlocksFragment_CoreShortcode_Fragment } }
-    ) | (
-      { __typename?: 'CoreSiteLogo' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreSiteLogo_Fragment': WpBlocksFragment_CoreSiteLogo_Fragment } }
-    ) | (
-      { __typename?: 'CoreSiteTagline' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreSiteTagline_Fragment': WpBlocksFragment_CoreSiteTagline_Fragment } }
-    ) | (
-      { __typename?: 'CoreSiteTitle' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreSiteTitle_Fragment': WpBlocksFragment_CoreSiteTitle_Fragment } }
-    ) | (
-      { __typename?: 'CoreSocialLink' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreSocialLink_Fragment': WpBlocksFragment_CoreSocialLink_Fragment } }
-    ) | (
-      { __typename?: 'CoreSocialLinks' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreSocialLinks_Fragment': WpBlocksFragment_CoreSocialLinks_Fragment } }
-    ) | (
-      { __typename?: 'CoreSpacer' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreSpacer_Fragment': WpBlocksFragment_CoreSpacer_Fragment } }
-    ) | (
-      { __typename?: 'CoreTable' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreTable_Fragment': WpBlocksFragment_CoreTable_Fragment } }
-    ) | (
-      { __typename?: 'CoreTagCloud' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreTagCloud_Fragment': WpBlocksFragment_CoreTagCloud_Fragment } }
-    ) | (
-      { __typename?: 'CoreTemplatePart' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreTemplatePart_Fragment': WpBlocksFragment_CoreTemplatePart_Fragment } }
-    ) | (
-      { __typename?: 'CoreTermDescription' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreTermDescription_Fragment': WpBlocksFragment_CoreTermDescription_Fragment } }
-    ) | (
-      { __typename?: 'CoreTextColumns' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreTextColumns_Fragment': WpBlocksFragment_CoreTextColumns_Fragment } }
-    ) | (
-      { __typename?: 'CoreVerse' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreVerse_Fragment': WpBlocksFragment_CoreVerse_Fragment } }
-    ) | (
-      { __typename?: 'CoreVideo' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreVideo_Fragment': WpBlocksFragment_CoreVideo_Fragment } }
-    ) | (
-      { __typename?: 'CoreWidgetGroup' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreWidgetGroup_Fragment': WpBlocksFragment_CoreWidgetGroup_Fragment } }
-    ) | (
-      { __typename?: 'CustomBlockLibraryAwardWinner' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CustomBlockLibraryAwardWinner_Fragment': WpBlocksFragment_CustomBlockLibraryAwardWinner_Fragment } }
-    ) | (
-      { __typename?: 'CustomBlockLibraryFeaturedFilms' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CustomBlockLibraryFeaturedFilms_Fragment': WpBlocksFragment_CustomBlockLibraryFeaturedFilms_Fragment } }
-    ) | (
-      { __typename?: 'CustomBlockLibraryFeaturedTextList' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CustomBlockLibraryFeaturedTextList_Fragment': WpBlocksFragment_CustomBlockLibraryFeaturedTextList_Fragment } }
-    ) | (
-      { __typename?: 'CustomBlockLibraryFilmSelector' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CustomBlockLibraryFilmSelector_Fragment': WpBlocksFragment_CustomBlockLibraryFilmSelector_Fragment } }
-    ) | (
-      { __typename?: 'CustomBlockLibraryPostSelector' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CustomBlockLibraryPostSelector_Fragment': WpBlocksFragment_CustomBlockLibraryPostSelector_Fragment } }
-    ) | null> | null, author?: { __typename?: 'NodeWithAuthorToUserConnectionEdge', node: { __typename?: 'User', nicename?: string | null } } | null } | null };
-
-export type CustomBlockLibraryPostSelectorFragmentFragment = { __typename?: 'CustomBlockLibraryPostSelector', post?: { __typename?: 'Post', title?: string | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node: { __typename?: 'MediaItem', sourceUrl?: string | null } } | null } | null } & { ' $fragmentName'?: 'CustomBlockLibraryPostSelectorFragmentFragment' };
-
-type WpBlocksFragment_CoreArchives_Fragment = { __typename: 'CoreArchives', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreArchives_Fragment' };
-
-type WpBlocksFragment_CoreAudio_Fragment = { __typename: 'CoreAudio', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreAudio_Fragment' };
-
-type WpBlocksFragment_CoreAvatar_Fragment = { __typename: 'CoreAvatar', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreAvatar_Fragment' };
-
-type WpBlocksFragment_CoreBlock_Fragment = { __typename: 'CoreBlock', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreBlock_Fragment' };
-
-type WpBlocksFragment_CoreButton_Fragment = { __typename: 'CoreButton', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null, attributes?: { __typename?: 'CoreButtonAttributes', anchor?: string | null, gradient?: string | null, textAlign?: string | null, textColor?: string | null, style?: any | null, fontSize?: string | null, fontFamily?: string | null, linkTarget?: string | null, rel?: string | null, url?: string | null, backgroundColor?: string | null, cssClassName?: string | null, linkClassName?: string | null } | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreButton_Fragment' };
-
-type WpBlocksFragment_CoreButtons_Fragment = { __typename: 'CoreButtons', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null, attributes?: { __typename?: 'CoreButtonsAttributes', cssClassName?: string | null, align?: string | null, anchor?: string | null, fontFamily?: string | null, fontSize?: string | null, layout?: any | null, style?: any | null } | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreButtons_Fragment' };
-
-type WpBlocksFragment_CoreCalendar_Fragment = { __typename: 'CoreCalendar', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreCalendar_Fragment' };
-
-type WpBlocksFragment_CoreCategories_Fragment = { __typename: 'CoreCategories', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreCategories_Fragment' };
-
-type WpBlocksFragment_CoreCode_Fragment = { __typename: 'CoreCode', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null, attributes?: { __typename?: 'CoreCodeAttributes', anchor?: string | null, backgroundColor?: string | null, borderColor?: string | null, className?: string | null, content: string, cssClassName?: string | null, fontFamily?: string | null, fontSize?: string | null, gradient?: string | null, lock?: any | null, style?: any | null, textColor?: string | null } | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreCode_Fragment' };
-
-type WpBlocksFragment_CoreColumn_Fragment = { __typename: 'CoreColumn', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null, attributes?: { __typename?: 'CoreColumnAttributes', anchor?: string | null, borderColor?: string | null, backgroundColor?: string | null, cssClassName?: string | null, fontSize?: string | null, fontFamily?: string | null, gradient?: string | null, layout?: any | null, style?: any | null, textColor?: string | null, verticalAlignment?: string | null, width?: string | null } | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreColumn_Fragment' };
-
-type WpBlocksFragment_CoreColumns_Fragment = { __typename: 'CoreColumns', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null, attributes?: { __typename?: 'CoreColumnsAttributes', align?: string | null, anchor?: string | null, layout?: any | null, cssClassName?: string | null, isStackedOnMobile: boolean, verticalAlignment?: string | null, borderColor?: string | null, backgroundColor?: string | null, fontSize?: string | null, fontFamily?: string | null, style?: any | null, textColor?: string | null, gradient?: string | null } | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreColumns_Fragment' };
-
-type WpBlocksFragment_CoreCommentAuthorName_Fragment = { __typename: 'CoreCommentAuthorName', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreCommentAuthorName_Fragment' };
-
-type WpBlocksFragment_CoreCommentContent_Fragment = { __typename: 'CoreCommentContent', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreCommentContent_Fragment' };
-
-type WpBlocksFragment_CoreCommentDate_Fragment = { __typename: 'CoreCommentDate', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreCommentDate_Fragment' };
-
-type WpBlocksFragment_CoreCommentEditLink_Fragment = { __typename: 'CoreCommentEditLink', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreCommentEditLink_Fragment' };
-
-type WpBlocksFragment_CoreCommentReplyLink_Fragment = { __typename: 'CoreCommentReplyLink', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreCommentReplyLink_Fragment' };
-
-type WpBlocksFragment_CoreCommentTemplate_Fragment = { __typename: 'CoreCommentTemplate', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreCommentTemplate_Fragment' };
-
-type WpBlocksFragment_CoreComments_Fragment = { __typename: 'CoreComments', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreComments_Fragment' };
-
-type WpBlocksFragment_CoreCommentsPagination_Fragment = { __typename: 'CoreCommentsPagination', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreCommentsPagination_Fragment' };
-
-type WpBlocksFragment_CoreCommentsPaginationNext_Fragment = { __typename: 'CoreCommentsPaginationNext', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreCommentsPaginationNext_Fragment' };
-
-type WpBlocksFragment_CoreCommentsPaginationNumbers_Fragment = { __typename: 'CoreCommentsPaginationNumbers', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreCommentsPaginationNumbers_Fragment' };
-
-type WpBlocksFragment_CoreCommentsPaginationPrevious_Fragment = { __typename: 'CoreCommentsPaginationPrevious', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreCommentsPaginationPrevious_Fragment' };
-
-type WpBlocksFragment_CoreCommentsTitle_Fragment = { __typename: 'CoreCommentsTitle', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreCommentsTitle_Fragment' };
-
-type WpBlocksFragment_CoreCover_Fragment = { __typename: 'CoreCover', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreCover_Fragment' };
-
-type WpBlocksFragment_CoreDetails_Fragment = { __typename: 'CoreDetails', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreDetails_Fragment' };
-
-type WpBlocksFragment_CoreEmbed_Fragment = { __typename: 'CoreEmbed', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreEmbed_Fragment' };
-
-type WpBlocksFragment_CoreFile_Fragment = { __typename: 'CoreFile', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreFile_Fragment' };
-
-type WpBlocksFragment_CoreFootnotes_Fragment = { __typename: 'CoreFootnotes', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreFootnotes_Fragment' };
-
-type WpBlocksFragment_CoreFreeform_Fragment = { __typename: 'CoreFreeform', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreFreeform_Fragment' };
-
-type WpBlocksFragment_CoreGallery_Fragment = { __typename: 'CoreGallery', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreGallery_Fragment' };
-
-type WpBlocksFragment_CoreGroup_Fragment = { __typename: 'CoreGroup', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreGroup_Fragment' };
-
-type WpBlocksFragment_CoreHeading_Fragment = { __typename: 'CoreHeading', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null, attributes?: { __typename?: 'CoreHeadingAttributes', align?: string | null, anchor?: string | null, backgroundColor?: string | null, fontFamily?: string | null, fontSize?: string | null, gradient?: string | null, level: number, style?: any | null, textAlign?: string | null, textColor?: string | null, cssClassName?: string | null } | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreHeading_Fragment' };
-
-type WpBlocksFragment_CoreHomeLink_Fragment = { __typename: 'CoreHomeLink', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreHomeLink_Fragment' };
-
-type WpBlocksFragment_CoreHtml_Fragment = { __typename: 'CoreHtml', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreHtml_Fragment' };
-
-type WpBlocksFragment_CoreImage_Fragment = { __typename: 'CoreImage', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null, attributes?: { __typename?: 'CoreImageAttributes', align?: string | null, alt: string, anchor?: string | null, borderColor?: string | null, className?: string | null, width?: string | null, url?: string | null, title?: string | null, style?: any | null, src?: string | null, sizeSlug?: string | null, rel?: string | null, lock?: any | null, linkTarget?: string | null, linkDestination?: string | null, linkClass?: string | null, href?: string | null, height?: string | null, cssClassName?: string | null } | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreImage_Fragment' };
-
-type WpBlocksFragment_CoreLatestComments_Fragment = { __typename: 'CoreLatestComments', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreLatestComments_Fragment' };
-
-type WpBlocksFragment_CoreLatestPosts_Fragment = { __typename: 'CoreLatestPosts', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreLatestPosts_Fragment' };
-
-type WpBlocksFragment_CoreLegacyWidget_Fragment = { __typename: 'CoreLegacyWidget', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreLegacyWidget_Fragment' };
-
-type WpBlocksFragment_CoreList_Fragment = { __typename: 'CoreList', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null, attributes?: { __typename?: 'CoreListAttributes', anchor?: string | null, backgroundColor?: string | null, className?: string | null, fontFamily?: string | null, fontSize?: string | null, gradient?: string | null, lock?: any | null, ordered: boolean, reversed?: boolean | null, start?: number | null, style?: any | null, textColor?: string | null, type?: string | null, values: string, cssClassName?: string | null } | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreList_Fragment' };
-
-type WpBlocksFragment_CoreListItem_Fragment = { __typename: 'CoreListItem', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreListItem_Fragment' };
-
-type WpBlocksFragment_CoreLoginout_Fragment = { __typename: 'CoreLoginout', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreLoginout_Fragment' };
-
-type WpBlocksFragment_CoreMediaText_Fragment = { __typename: 'CoreMediaText', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreMediaText_Fragment' };
-
-type WpBlocksFragment_CoreMissing_Fragment = { __typename: 'CoreMissing', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreMissing_Fragment' };
-
-type WpBlocksFragment_CoreMore_Fragment = { __typename: 'CoreMore', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreMore_Fragment' };
-
-type WpBlocksFragment_CoreNavigation_Fragment = { __typename: 'CoreNavigation', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreNavigation_Fragment' };
-
-type WpBlocksFragment_CoreNavigationLink_Fragment = { __typename: 'CoreNavigationLink', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreNavigationLink_Fragment' };
-
-type WpBlocksFragment_CoreNavigationSubmenu_Fragment = { __typename: 'CoreNavigationSubmenu', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreNavigationSubmenu_Fragment' };
-
-type WpBlocksFragment_CoreNextpage_Fragment = { __typename: 'CoreNextpage', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreNextpage_Fragment' };
-
-type WpBlocksFragment_CorePageList_Fragment = { __typename: 'CorePageList', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CorePageList_Fragment' };
-
-type WpBlocksFragment_CorePageListItem_Fragment = { __typename: 'CorePageListItem', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CorePageListItem_Fragment' };
-
-type WpBlocksFragment_CoreParagraph_Fragment = { __typename: 'CoreParagraph', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null, attributes?: { __typename?: 'CoreParagraphAttributes', cssClassName?: string | null, backgroundColor?: string | null, content: string, style?: any | null, textColor?: string | null, fontSize?: string | null, fontFamily?: string | null, direction?: string | null, dropCap: boolean, gradient?: string | null, align?: string | null } | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreParagraph_Fragment' };
-
-type WpBlocksFragment_CorePattern_Fragment = { __typename: 'CorePattern', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CorePattern_Fragment' };
-
-type WpBlocksFragment_CorePostAuthor_Fragment = { __typename: 'CorePostAuthor', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CorePostAuthor_Fragment' };
-
-type WpBlocksFragment_CorePostAuthorBiography_Fragment = { __typename: 'CorePostAuthorBiography', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CorePostAuthorBiography_Fragment' };
-
-type WpBlocksFragment_CorePostAuthorName_Fragment = { __typename: 'CorePostAuthorName', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CorePostAuthorName_Fragment' };
-
-type WpBlocksFragment_CorePostComments_Fragment = { __typename: 'CorePostComments', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CorePostComments_Fragment' };
-
-type WpBlocksFragment_CorePostCommentsForm_Fragment = { __typename: 'CorePostCommentsForm', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CorePostCommentsForm_Fragment' };
-
-type WpBlocksFragment_CorePostContent_Fragment = { __typename: 'CorePostContent', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CorePostContent_Fragment' };
-
-type WpBlocksFragment_CorePostDate_Fragment = { __typename: 'CorePostDate', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CorePostDate_Fragment' };
-
-type WpBlocksFragment_CorePostExcerpt_Fragment = { __typename: 'CorePostExcerpt', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CorePostExcerpt_Fragment' };
-
-type WpBlocksFragment_CorePostFeaturedImage_Fragment = { __typename: 'CorePostFeaturedImage', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CorePostFeaturedImage_Fragment' };
-
-type WpBlocksFragment_CorePostNavigationLink_Fragment = { __typename: 'CorePostNavigationLink', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CorePostNavigationLink_Fragment' };
-
-type WpBlocksFragment_CorePostTemplate_Fragment = { __typename: 'CorePostTemplate', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CorePostTemplate_Fragment' };
-
-type WpBlocksFragment_CorePostTerms_Fragment = { __typename: 'CorePostTerms', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CorePostTerms_Fragment' };
-
-type WpBlocksFragment_CorePostTitle_Fragment = { __typename: 'CorePostTitle', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CorePostTitle_Fragment' };
-
-type WpBlocksFragment_CorePreformatted_Fragment = { __typename: 'CorePreformatted', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CorePreformatted_Fragment' };
-
-type WpBlocksFragment_CorePullquote_Fragment = { __typename: 'CorePullquote', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CorePullquote_Fragment' };
-
-type WpBlocksFragment_CoreQuery_Fragment = { __typename: 'CoreQuery', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreQuery_Fragment' };
-
-type WpBlocksFragment_CoreQueryNoResults_Fragment = { __typename: 'CoreQueryNoResults', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreQueryNoResults_Fragment' };
-
-type WpBlocksFragment_CoreQueryPagination_Fragment = { __typename: 'CoreQueryPagination', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreQueryPagination_Fragment' };
-
-type WpBlocksFragment_CoreQueryPaginationNext_Fragment = { __typename: 'CoreQueryPaginationNext', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreQueryPaginationNext_Fragment' };
-
-type WpBlocksFragment_CoreQueryPaginationNumbers_Fragment = { __typename: 'CoreQueryPaginationNumbers', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreQueryPaginationNumbers_Fragment' };
-
-type WpBlocksFragment_CoreQueryPaginationPrevious_Fragment = { __typename: 'CoreQueryPaginationPrevious', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreQueryPaginationPrevious_Fragment' };
-
-type WpBlocksFragment_CoreQueryTitle_Fragment = { __typename: 'CoreQueryTitle', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreQueryTitle_Fragment' };
-
-type WpBlocksFragment_CoreQuote_Fragment = { __typename: 'CoreQuote', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null, attributes?: { __typename?: 'CoreQuoteAttributes', textAlign?: string | null, anchor?: string | null, backgroundColor?: string | null, className?: string | null, fontFamily?: string | null, fontSize?: string | null, gradient?: string | null, lock?: any | null, style?: any | null, textColor?: string | null, value: string, cssClassName?: string | null } | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreQuote_Fragment' };
-
-type WpBlocksFragment_CoreReadMore_Fragment = { __typename: 'CoreReadMore', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreReadMore_Fragment' };
-
-type WpBlocksFragment_CoreRss_Fragment = { __typename: 'CoreRss', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreRss_Fragment' };
-
-type WpBlocksFragment_CoreSearch_Fragment = { __typename: 'CoreSearch', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreSearch_Fragment' };
-
-type WpBlocksFragment_CoreSeparator_Fragment = { __typename: 'CoreSeparator', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null, attributes?: { __typename?: 'CoreSeparatorAttributes', align?: string | null, anchor?: string | null, opacity: string, gradient?: string | null, backgroundColor?: string | null, style?: any | null, cssClassName?: string | null } | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreSeparator_Fragment' };
-
-type WpBlocksFragment_CoreShortcode_Fragment = { __typename: 'CoreShortcode', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreShortcode_Fragment' };
-
-type WpBlocksFragment_CoreSiteLogo_Fragment = { __typename: 'CoreSiteLogo', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreSiteLogo_Fragment' };
-
-type WpBlocksFragment_CoreSiteTagline_Fragment = { __typename: 'CoreSiteTagline', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreSiteTagline_Fragment' };
-
-type WpBlocksFragment_CoreSiteTitle_Fragment = { __typename: 'CoreSiteTitle', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreSiteTitle_Fragment' };
-
-type WpBlocksFragment_CoreSocialLink_Fragment = { __typename: 'CoreSocialLink', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreSocialLink_Fragment' };
-
-type WpBlocksFragment_CoreSocialLinks_Fragment = { __typename: 'CoreSocialLinks', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreSocialLinks_Fragment' };
-
-type WpBlocksFragment_CoreSpacer_Fragment = { __typename: 'CoreSpacer', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreSpacer_Fragment' };
-
-type WpBlocksFragment_CoreTable_Fragment = { __typename: 'CoreTable', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreTable_Fragment' };
-
-type WpBlocksFragment_CoreTagCloud_Fragment = { __typename: 'CoreTagCloud', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreTagCloud_Fragment' };
-
-type WpBlocksFragment_CoreTemplatePart_Fragment = { __typename: 'CoreTemplatePart', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreTemplatePart_Fragment' };
-
-type WpBlocksFragment_CoreTermDescription_Fragment = { __typename: 'CoreTermDescription', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreTermDescription_Fragment' };
-
-type WpBlocksFragment_CoreTextColumns_Fragment = { __typename: 'CoreTextColumns', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreTextColumns_Fragment' };
-
-type WpBlocksFragment_CoreVerse_Fragment = { __typename: 'CoreVerse', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreVerse_Fragment' };
-
-type WpBlocksFragment_CoreVideo_Fragment = { __typename: 'CoreVideo', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreVideo_Fragment' };
-
-type WpBlocksFragment_CoreWidgetGroup_Fragment = { __typename: 'CoreWidgetGroup', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CoreWidgetGroup_Fragment' };
-
-type WpBlocksFragment_CustomBlockLibraryAwardWinner_Fragment = { __typename: 'CustomBlockLibraryAwardWinner', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CustomBlockLibraryAwardWinner_Fragment' };
-
-type WpBlocksFragment_CustomBlockLibraryFeaturedFilms_Fragment = { __typename: 'CustomBlockLibraryFeaturedFilms', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CustomBlockLibraryFeaturedFilms_Fragment' };
-
-type WpBlocksFragment_CustomBlockLibraryFeaturedTextList_Fragment = { __typename: 'CustomBlockLibraryFeaturedTextList', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CustomBlockLibraryFeaturedTextList_Fragment' };
-
-type WpBlocksFragment_CustomBlockLibraryFilmSelector_Fragment = { __typename: 'CustomBlockLibraryFilmSelector', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CustomBlockLibraryFilmSelector_Fragment' };
-
-type WpBlocksFragment_CustomBlockLibraryPostSelector_Fragment = { __typename: 'CustomBlockLibraryPostSelector', clientId?: string | null, name?: string | null, renderedHtml?: string | null, parentClientId?: string | null } & { ' $fragmentName'?: 'WpBlocksFragment_CustomBlockLibraryPostSelector_Fragment' };
-
-export type WpBlocksFragmentFragment = WpBlocksFragment_CoreArchives_Fragment | WpBlocksFragment_CoreAudio_Fragment | WpBlocksFragment_CoreAvatar_Fragment | WpBlocksFragment_CoreBlock_Fragment | WpBlocksFragment_CoreButton_Fragment | WpBlocksFragment_CoreButtons_Fragment | WpBlocksFragment_CoreCalendar_Fragment | WpBlocksFragment_CoreCategories_Fragment | WpBlocksFragment_CoreCode_Fragment | WpBlocksFragment_CoreColumn_Fragment | WpBlocksFragment_CoreColumns_Fragment | WpBlocksFragment_CoreCommentAuthorName_Fragment | WpBlocksFragment_CoreCommentContent_Fragment | WpBlocksFragment_CoreCommentDate_Fragment | WpBlocksFragment_CoreCommentEditLink_Fragment | WpBlocksFragment_CoreCommentReplyLink_Fragment | WpBlocksFragment_CoreCommentTemplate_Fragment | WpBlocksFragment_CoreComments_Fragment | WpBlocksFragment_CoreCommentsPagination_Fragment | WpBlocksFragment_CoreCommentsPaginationNext_Fragment | WpBlocksFragment_CoreCommentsPaginationNumbers_Fragment | WpBlocksFragment_CoreCommentsPaginationPrevious_Fragment | WpBlocksFragment_CoreCommentsTitle_Fragment | WpBlocksFragment_CoreCover_Fragment | WpBlocksFragment_CoreDetails_Fragment | WpBlocksFragment_CoreEmbed_Fragment | WpBlocksFragment_CoreFile_Fragment | WpBlocksFragment_CoreFootnotes_Fragment | WpBlocksFragment_CoreFreeform_Fragment | WpBlocksFragment_CoreGallery_Fragment | WpBlocksFragment_CoreGroup_Fragment | WpBlocksFragment_CoreHeading_Fragment | WpBlocksFragment_CoreHomeLink_Fragment | WpBlocksFragment_CoreHtml_Fragment | WpBlocksFragment_CoreImage_Fragment | WpBlocksFragment_CoreLatestComments_Fragment | WpBlocksFragment_CoreLatestPosts_Fragment | WpBlocksFragment_CoreLegacyWidget_Fragment | WpBlocksFragment_CoreList_Fragment | WpBlocksFragment_CoreListItem_Fragment | WpBlocksFragment_CoreLoginout_Fragment | WpBlocksFragment_CoreMediaText_Fragment | WpBlocksFragment_CoreMissing_Fragment | WpBlocksFragment_CoreMore_Fragment | WpBlocksFragment_CoreNavigation_Fragment | WpBlocksFragment_CoreNavigationLink_Fragment | WpBlocksFragment_CoreNavigationSubmenu_Fragment | WpBlocksFragment_CoreNextpage_Fragment | WpBlocksFragment_CorePageList_Fragment | WpBlocksFragment_CorePageListItem_Fragment | WpBlocksFragment_CoreParagraph_Fragment | WpBlocksFragment_CorePattern_Fragment | WpBlocksFragment_CorePostAuthor_Fragment | WpBlocksFragment_CorePostAuthorBiography_Fragment | WpBlocksFragment_CorePostAuthorName_Fragment | WpBlocksFragment_CorePostComments_Fragment | WpBlocksFragment_CorePostCommentsForm_Fragment | WpBlocksFragment_CorePostContent_Fragment | WpBlocksFragment_CorePostDate_Fragment | WpBlocksFragment_CorePostExcerpt_Fragment | WpBlocksFragment_CorePostFeaturedImage_Fragment | WpBlocksFragment_CorePostNavigationLink_Fragment | WpBlocksFragment_CorePostTemplate_Fragment | WpBlocksFragment_CorePostTerms_Fragment | WpBlocksFragment_CorePostTitle_Fragment | WpBlocksFragment_CorePreformatted_Fragment | WpBlocksFragment_CorePullquote_Fragment | WpBlocksFragment_CoreQuery_Fragment | WpBlocksFragment_CoreQueryNoResults_Fragment | WpBlocksFragment_CoreQueryPagination_Fragment | WpBlocksFragment_CoreQueryPaginationNext_Fragment | WpBlocksFragment_CoreQueryPaginationNumbers_Fragment | WpBlocksFragment_CoreQueryPaginationPrevious_Fragment | WpBlocksFragment_CoreQueryTitle_Fragment | WpBlocksFragment_CoreQuote_Fragment | WpBlocksFragment_CoreReadMore_Fragment | WpBlocksFragment_CoreRss_Fragment | WpBlocksFragment_CoreSearch_Fragment | WpBlocksFragment_CoreSeparator_Fragment | WpBlocksFragment_CoreShortcode_Fragment | WpBlocksFragment_CoreSiteLogo_Fragment | WpBlocksFragment_CoreSiteTagline_Fragment | WpBlocksFragment_CoreSiteTitle_Fragment | WpBlocksFragment_CoreSocialLink_Fragment | WpBlocksFragment_CoreSocialLinks_Fragment | WpBlocksFragment_CoreSpacer_Fragment | WpBlocksFragment_CoreTable_Fragment | WpBlocksFragment_CoreTagCloud_Fragment | WpBlocksFragment_CoreTemplatePart_Fragment | WpBlocksFragment_CoreTermDescription_Fragment | WpBlocksFragment_CoreTextColumns_Fragment | WpBlocksFragment_CoreVerse_Fragment | WpBlocksFragment_CoreVideo_Fragment | WpBlocksFragment_CoreWidgetGroup_Fragment | WpBlocksFragment_CustomBlockLibraryAwardWinner_Fragment | WpBlocksFragment_CustomBlockLibraryFeaturedFilms_Fragment | WpBlocksFragment_CustomBlockLibraryFeaturedTextList_Fragment | WpBlocksFragment_CustomBlockLibraryFilmSelector_Fragment | WpBlocksFragment_CustomBlockLibraryPostSelector_Fragment;
+export type GetPageQuery = {
+  __typename?: 'RootQuery';
+  page?: {
+    __typename: 'Page';
+    title?: string | null;
+    date?: string | null;
+    status?: string | null;
+    isRestricted?: boolean | null;
+    editorBlocks?: Array<
+      | ({ __typename?: 'CoreArchives' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreArchives_Fragment: WpBlocksFragment_CoreArchives_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreAudio' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreAudio_Fragment: WpBlocksFragment_CoreAudio_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreAvatar' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreAvatar_Fragment: WpBlocksFragment_CoreAvatar_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreBlock' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreBlock_Fragment: WpBlocksFragment_CoreBlock_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreButton' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreButton_Fragment: WpBlocksFragment_CoreButton_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreButtons' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreButtons_Fragment: WpBlocksFragment_CoreButtons_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreCalendar' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreCalendar_Fragment: WpBlocksFragment_CoreCalendar_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreCategories' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreCategories_Fragment: WpBlocksFragment_CoreCategories_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreCode' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreCode_Fragment: WpBlocksFragment_CoreCode_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreColumn' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreColumn_Fragment: WpBlocksFragment_CoreColumn_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreColumns' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreColumns_Fragment: WpBlocksFragment_CoreColumns_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreCommentAuthorName' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreCommentAuthorName_Fragment: WpBlocksFragment_CoreCommentAuthorName_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreCommentContent' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreCommentContent_Fragment: WpBlocksFragment_CoreCommentContent_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreCommentDate' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreCommentDate_Fragment: WpBlocksFragment_CoreCommentDate_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreCommentEditLink' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreCommentEditLink_Fragment: WpBlocksFragment_CoreCommentEditLink_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreCommentReplyLink' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreCommentReplyLink_Fragment: WpBlocksFragment_CoreCommentReplyLink_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreCommentTemplate' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreCommentTemplate_Fragment: WpBlocksFragment_CoreCommentTemplate_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreComments' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreComments_Fragment: WpBlocksFragment_CoreComments_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreCommentsPagination' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreCommentsPagination_Fragment: WpBlocksFragment_CoreCommentsPagination_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreCommentsPaginationNext' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreCommentsPaginationNext_Fragment: WpBlocksFragment_CoreCommentsPaginationNext_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreCommentsPaginationNumbers' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreCommentsPaginationNumbers_Fragment: WpBlocksFragment_CoreCommentsPaginationNumbers_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreCommentsPaginationPrevious' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreCommentsPaginationPrevious_Fragment: WpBlocksFragment_CoreCommentsPaginationPrevious_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreCommentsTitle' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreCommentsTitle_Fragment: WpBlocksFragment_CoreCommentsTitle_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreCover' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreCover_Fragment: WpBlocksFragment_CoreCover_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreDetails' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreDetails_Fragment: WpBlocksFragment_CoreDetails_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreEmbed' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreEmbed_Fragment: WpBlocksFragment_CoreEmbed_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreFile' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreFile_Fragment: WpBlocksFragment_CoreFile_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreFootnotes' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreFootnotes_Fragment: WpBlocksFragment_CoreFootnotes_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreFreeform' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreFreeform_Fragment: WpBlocksFragment_CoreFreeform_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreGallery' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreGallery_Fragment: WpBlocksFragment_CoreGallery_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreGroup' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreGroup_Fragment: WpBlocksFragment_CoreGroup_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreHeading' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreHeading_Fragment: WpBlocksFragment_CoreHeading_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreHomeLink' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreHomeLink_Fragment: WpBlocksFragment_CoreHomeLink_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreHtml' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreHtml_Fragment: WpBlocksFragment_CoreHtml_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreImage' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreImage_Fragment: WpBlocksFragment_CoreImage_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreLatestComments' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreLatestComments_Fragment: WpBlocksFragment_CoreLatestComments_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreLatestPosts' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreLatestPosts_Fragment: WpBlocksFragment_CoreLatestPosts_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreLegacyWidget' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreLegacyWidget_Fragment: WpBlocksFragment_CoreLegacyWidget_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreList' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreList_Fragment: WpBlocksFragment_CoreList_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreListItem' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreListItem_Fragment: WpBlocksFragment_CoreListItem_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreLoginout' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreLoginout_Fragment: WpBlocksFragment_CoreLoginout_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreMediaText' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreMediaText_Fragment: WpBlocksFragment_CoreMediaText_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreMissing' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreMissing_Fragment: WpBlocksFragment_CoreMissing_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreMore' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreMore_Fragment: WpBlocksFragment_CoreMore_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreNavigation' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreNavigation_Fragment: WpBlocksFragment_CoreNavigation_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreNavigationLink' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreNavigationLink_Fragment: WpBlocksFragment_CoreNavigationLink_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreNavigationSubmenu' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreNavigationSubmenu_Fragment: WpBlocksFragment_CoreNavigationSubmenu_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreNextpage' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreNextpage_Fragment: WpBlocksFragment_CoreNextpage_Fragment;
+          };
+        })
+      | ({ __typename?: 'CorePageList' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CorePageList_Fragment: WpBlocksFragment_CorePageList_Fragment;
+          };
+        })
+      | ({ __typename?: 'CorePageListItem' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CorePageListItem_Fragment: WpBlocksFragment_CorePageListItem_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreParagraph' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreParagraph_Fragment: WpBlocksFragment_CoreParagraph_Fragment;
+          };
+        })
+      | ({ __typename?: 'CorePattern' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CorePattern_Fragment: WpBlocksFragment_CorePattern_Fragment;
+          };
+        })
+      | ({ __typename?: 'CorePostAuthor' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CorePostAuthor_Fragment: WpBlocksFragment_CorePostAuthor_Fragment;
+          };
+        })
+      | ({ __typename?: 'CorePostAuthorBiography' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CorePostAuthorBiography_Fragment: WpBlocksFragment_CorePostAuthorBiography_Fragment;
+          };
+        })
+      | ({ __typename?: 'CorePostAuthorName' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CorePostAuthorName_Fragment: WpBlocksFragment_CorePostAuthorName_Fragment;
+          };
+        })
+      | ({ __typename?: 'CorePostComments' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CorePostComments_Fragment: WpBlocksFragment_CorePostComments_Fragment;
+          };
+        })
+      | ({ __typename?: 'CorePostCommentsForm' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CorePostCommentsForm_Fragment: WpBlocksFragment_CorePostCommentsForm_Fragment;
+          };
+        })
+      | ({ __typename?: 'CorePostContent' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CorePostContent_Fragment: WpBlocksFragment_CorePostContent_Fragment;
+          };
+        })
+      | ({ __typename?: 'CorePostDate' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CorePostDate_Fragment: WpBlocksFragment_CorePostDate_Fragment;
+          };
+        })
+      | ({ __typename?: 'CorePostExcerpt' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CorePostExcerpt_Fragment: WpBlocksFragment_CorePostExcerpt_Fragment;
+          };
+        })
+      | ({ __typename?: 'CorePostFeaturedImage' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CorePostFeaturedImage_Fragment: WpBlocksFragment_CorePostFeaturedImage_Fragment;
+          };
+        })
+      | ({ __typename?: 'CorePostNavigationLink' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CorePostNavigationLink_Fragment: WpBlocksFragment_CorePostNavigationLink_Fragment;
+          };
+        })
+      | ({ __typename?: 'CorePostTemplate' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CorePostTemplate_Fragment: WpBlocksFragment_CorePostTemplate_Fragment;
+          };
+        })
+      | ({ __typename?: 'CorePostTerms' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CorePostTerms_Fragment: WpBlocksFragment_CorePostTerms_Fragment;
+          };
+        })
+      | ({ __typename?: 'CorePostTitle' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CorePostTitle_Fragment: WpBlocksFragment_CorePostTitle_Fragment;
+          };
+        })
+      | ({ __typename?: 'CorePreformatted' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CorePreformatted_Fragment: WpBlocksFragment_CorePreformatted_Fragment;
+          };
+        })
+      | ({ __typename?: 'CorePullquote' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CorePullquote_Fragment: WpBlocksFragment_CorePullquote_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreQuery' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreQuery_Fragment: WpBlocksFragment_CoreQuery_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreQueryNoResults' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreQueryNoResults_Fragment: WpBlocksFragment_CoreQueryNoResults_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreQueryPagination' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreQueryPagination_Fragment: WpBlocksFragment_CoreQueryPagination_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreQueryPaginationNext' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreQueryPaginationNext_Fragment: WpBlocksFragment_CoreQueryPaginationNext_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreQueryPaginationNumbers' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreQueryPaginationNumbers_Fragment: WpBlocksFragment_CoreQueryPaginationNumbers_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreQueryPaginationPrevious' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreQueryPaginationPrevious_Fragment: WpBlocksFragment_CoreQueryPaginationPrevious_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreQueryTitle' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreQueryTitle_Fragment: WpBlocksFragment_CoreQueryTitle_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreQuote' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreQuote_Fragment: WpBlocksFragment_CoreQuote_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreReadMore' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreReadMore_Fragment: WpBlocksFragment_CoreReadMore_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreRss' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreRss_Fragment: WpBlocksFragment_CoreRss_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreSearch' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreSearch_Fragment: WpBlocksFragment_CoreSearch_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreSeparator' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreSeparator_Fragment: WpBlocksFragment_CoreSeparator_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreShortcode' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreShortcode_Fragment: WpBlocksFragment_CoreShortcode_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreSiteLogo' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreSiteLogo_Fragment: WpBlocksFragment_CoreSiteLogo_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreSiteTagline' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreSiteTagline_Fragment: WpBlocksFragment_CoreSiteTagline_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreSiteTitle' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreSiteTitle_Fragment: WpBlocksFragment_CoreSiteTitle_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreSocialLink' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreSocialLink_Fragment: WpBlocksFragment_CoreSocialLink_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreSocialLinks' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreSocialLinks_Fragment: WpBlocksFragment_CoreSocialLinks_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreSpacer' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreSpacer_Fragment: WpBlocksFragment_CoreSpacer_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreTable' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreTable_Fragment: WpBlocksFragment_CoreTable_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreTagCloud' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreTagCloud_Fragment: WpBlocksFragment_CoreTagCloud_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreTemplatePart' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreTemplatePart_Fragment: WpBlocksFragment_CoreTemplatePart_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreTermDescription' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreTermDescription_Fragment: WpBlocksFragment_CoreTermDescription_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreTextColumns' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreTextColumns_Fragment: WpBlocksFragment_CoreTextColumns_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreVerse' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreVerse_Fragment: WpBlocksFragment_CoreVerse_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreVideo' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreVideo_Fragment: WpBlocksFragment_CoreVideo_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreWidgetGroup' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreWidgetGroup_Fragment: WpBlocksFragment_CoreWidgetGroup_Fragment;
+          };
+        })
+      | ({ __typename?: 'CustomBlockLibraryAwardWinner' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CustomBlockLibraryAwardWinner_Fragment: WpBlocksFragment_CustomBlockLibraryAwardWinner_Fragment;
+          };
+        })
+      | ({ __typename?: 'CustomBlockLibraryFeaturedFilms' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CustomBlockLibraryFeaturedFilms_Fragment: WpBlocksFragment_CustomBlockLibraryFeaturedFilms_Fragment;
+          };
+        })
+      | ({ __typename?: 'CustomBlockLibraryFeaturedTextList' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CustomBlockLibraryFeaturedTextList_Fragment: WpBlocksFragment_CustomBlockLibraryFeaturedTextList_Fragment;
+          };
+        })
+      | ({ __typename?: 'CustomBlockLibraryFilmSelector' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CustomBlockLibraryFilmSelector_Fragment: WpBlocksFragment_CustomBlockLibraryFilmSelector_Fragment;
+          };
+        })
+      | ({ __typename?: 'CustomBlockLibraryPostSelector' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CustomBlockLibraryPostSelector_Fragment: WpBlocksFragment_CustomBlockLibraryPostSelector_Fragment;
+          };
+        })
+      | null
+    > | null;
+    author?: {
+      __typename?: 'NodeWithAuthorToUserConnectionEdge';
+      node: { __typename?: 'User'; nicename?: string | null };
+    } | null;
+  } | null;
+};
+
+export type CustomBlockLibraryPostSelectorFragmentFragment = {
+  __typename?: 'CustomBlockLibraryPostSelector';
+  post?: {
+    __typename?: 'Post';
+    title?: string | null;
+    featuredImage?: {
+      __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge';
+      node: { __typename?: 'MediaItem'; sourceUrl?: string | null };
+    } | null;
+  } | null;
+} & { ' $fragmentName'?: 'CustomBlockLibraryPostSelectorFragmentFragment' };
+
+type WpBlocksFragment_CoreArchives_Fragment = {
+  __typename: 'CoreArchives';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreArchives_Fragment' };
+
+type WpBlocksFragment_CoreAudio_Fragment = {
+  __typename: 'CoreAudio';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreAudio_Fragment' };
+
+type WpBlocksFragment_CoreAvatar_Fragment = {
+  __typename: 'CoreAvatar';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreAvatar_Fragment' };
+
+type WpBlocksFragment_CoreBlock_Fragment = {
+  __typename: 'CoreBlock';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreBlock_Fragment' };
+
+type WpBlocksFragment_CoreButton_Fragment = {
+  __typename: 'CoreButton';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+  attributes?: {
+    __typename?: 'CoreButtonAttributes';
+    anchor?: string | null;
+    gradient?: string | null;
+    textAlign?: string | null;
+    textColor?: string | null;
+    style?: any | null;
+    fontSize?: string | null;
+    fontFamily?: string | null;
+    linkTarget?: string | null;
+    rel?: string | null;
+    url?: string | null;
+    backgroundColor?: string | null;
+    cssClassName?: string | null;
+    linkClassName?: string | null;
+  } | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreButton_Fragment' };
+
+type WpBlocksFragment_CoreButtons_Fragment = {
+  __typename: 'CoreButtons';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+  attributes?: {
+    __typename?: 'CoreButtonsAttributes';
+    cssClassName?: string | null;
+    align?: string | null;
+    anchor?: string | null;
+    fontFamily?: string | null;
+    fontSize?: string | null;
+    layout?: any | null;
+    style?: any | null;
+  } | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreButtons_Fragment' };
+
+type WpBlocksFragment_CoreCalendar_Fragment = {
+  __typename: 'CoreCalendar';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreCalendar_Fragment' };
+
+type WpBlocksFragment_CoreCategories_Fragment = {
+  __typename: 'CoreCategories';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreCategories_Fragment' };
+
+type WpBlocksFragment_CoreCode_Fragment = {
+  __typename: 'CoreCode';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+  attributes?: {
+    __typename?: 'CoreCodeAttributes';
+    anchor?: string | null;
+    backgroundColor?: string | null;
+    borderColor?: string | null;
+    className?: string | null;
+    content: string;
+    cssClassName?: string | null;
+    fontFamily?: string | null;
+    fontSize?: string | null;
+    gradient?: string | null;
+    lock?: any | null;
+    style?: any | null;
+    textColor?: string | null;
+  } | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreCode_Fragment' };
+
+type WpBlocksFragment_CoreColumn_Fragment = {
+  __typename: 'CoreColumn';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+  attributes?: {
+    __typename?: 'CoreColumnAttributes';
+    anchor?: string | null;
+    borderColor?: string | null;
+    backgroundColor?: string | null;
+    cssClassName?: string | null;
+    fontSize?: string | null;
+    fontFamily?: string | null;
+    gradient?: string | null;
+    layout?: any | null;
+    style?: any | null;
+    textColor?: string | null;
+    verticalAlignment?: string | null;
+    width?: string | null;
+  } | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreColumn_Fragment' };
+
+type WpBlocksFragment_CoreColumns_Fragment = {
+  __typename: 'CoreColumns';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+  attributes?: {
+    __typename?: 'CoreColumnsAttributes';
+    align?: string | null;
+    anchor?: string | null;
+    layout?: any | null;
+    cssClassName?: string | null;
+    isStackedOnMobile: boolean;
+    verticalAlignment?: string | null;
+    borderColor?: string | null;
+    backgroundColor?: string | null;
+    fontSize?: string | null;
+    fontFamily?: string | null;
+    style?: any | null;
+    textColor?: string | null;
+    gradient?: string | null;
+  } | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreColumns_Fragment' };
+
+type WpBlocksFragment_CoreCommentAuthorName_Fragment = {
+  __typename: 'CoreCommentAuthorName';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreCommentAuthorName_Fragment' };
+
+type WpBlocksFragment_CoreCommentContent_Fragment = {
+  __typename: 'CoreCommentContent';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreCommentContent_Fragment' };
+
+type WpBlocksFragment_CoreCommentDate_Fragment = {
+  __typename: 'CoreCommentDate';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreCommentDate_Fragment' };
+
+type WpBlocksFragment_CoreCommentEditLink_Fragment = {
+  __typename: 'CoreCommentEditLink';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreCommentEditLink_Fragment' };
+
+type WpBlocksFragment_CoreCommentReplyLink_Fragment = {
+  __typename: 'CoreCommentReplyLink';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreCommentReplyLink_Fragment' };
+
+type WpBlocksFragment_CoreCommentTemplate_Fragment = {
+  __typename: 'CoreCommentTemplate';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreCommentTemplate_Fragment' };
+
+type WpBlocksFragment_CoreComments_Fragment = {
+  __typename: 'CoreComments';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreComments_Fragment' };
+
+type WpBlocksFragment_CoreCommentsPagination_Fragment = {
+  __typename: 'CoreCommentsPagination';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreCommentsPagination_Fragment' };
+
+type WpBlocksFragment_CoreCommentsPaginationNext_Fragment = {
+  __typename: 'CoreCommentsPaginationNext';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & {
+  ' $fragmentName'?: 'WpBlocksFragment_CoreCommentsPaginationNext_Fragment';
+};
+
+type WpBlocksFragment_CoreCommentsPaginationNumbers_Fragment = {
+  __typename: 'CoreCommentsPaginationNumbers';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & {
+  ' $fragmentName'?: 'WpBlocksFragment_CoreCommentsPaginationNumbers_Fragment';
+};
+
+type WpBlocksFragment_CoreCommentsPaginationPrevious_Fragment = {
+  __typename: 'CoreCommentsPaginationPrevious';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & {
+  ' $fragmentName'?: 'WpBlocksFragment_CoreCommentsPaginationPrevious_Fragment';
+};
+
+type WpBlocksFragment_CoreCommentsTitle_Fragment = {
+  __typename: 'CoreCommentsTitle';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreCommentsTitle_Fragment' };
+
+type WpBlocksFragment_CoreCover_Fragment = {
+  __typename: 'CoreCover';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreCover_Fragment' };
+
+type WpBlocksFragment_CoreDetails_Fragment = {
+  __typename: 'CoreDetails';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreDetails_Fragment' };
+
+type WpBlocksFragment_CoreEmbed_Fragment = {
+  __typename: 'CoreEmbed';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreEmbed_Fragment' };
+
+type WpBlocksFragment_CoreFile_Fragment = {
+  __typename: 'CoreFile';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreFile_Fragment' };
+
+type WpBlocksFragment_CoreFootnotes_Fragment = {
+  __typename: 'CoreFootnotes';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreFootnotes_Fragment' };
+
+type WpBlocksFragment_CoreFreeform_Fragment = {
+  __typename: 'CoreFreeform';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreFreeform_Fragment' };
+
+type WpBlocksFragment_CoreGallery_Fragment = {
+  __typename: 'CoreGallery';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreGallery_Fragment' };
+
+type WpBlocksFragment_CoreGroup_Fragment = {
+  __typename: 'CoreGroup';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreGroup_Fragment' };
+
+type WpBlocksFragment_CoreHeading_Fragment = {
+  __typename: 'CoreHeading';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+  attributes?: {
+    __typename?: 'CoreHeadingAttributes';
+    align?: string | null;
+    anchor?: string | null;
+    backgroundColor?: string | null;
+    fontFamily?: string | null;
+    fontSize?: string | null;
+    gradient?: string | null;
+    level: number;
+    style?: any | null;
+    textAlign?: string | null;
+    textColor?: string | null;
+    cssClassName?: string | null;
+  } | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreHeading_Fragment' };
+
+type WpBlocksFragment_CoreHomeLink_Fragment = {
+  __typename: 'CoreHomeLink';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreHomeLink_Fragment' };
+
+type WpBlocksFragment_CoreHtml_Fragment = {
+  __typename: 'CoreHtml';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreHtml_Fragment' };
+
+type WpBlocksFragment_CoreImage_Fragment = {
+  __typename: 'CoreImage';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+  attributes?: {
+    __typename?: 'CoreImageAttributes';
+    align?: string | null;
+    alt: string;
+    anchor?: string | null;
+    borderColor?: string | null;
+    className?: string | null;
+    width?: string | null;
+    url?: string | null;
+    title?: string | null;
+    style?: any | null;
+    src?: string | null;
+    sizeSlug?: string | null;
+    rel?: string | null;
+    lock?: any | null;
+    linkTarget?: string | null;
+    linkDestination?: string | null;
+    linkClass?: string | null;
+    href?: string | null;
+    height?: string | null;
+    cssClassName?: string | null;
+  } | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreImage_Fragment' };
+
+type WpBlocksFragment_CoreLatestComments_Fragment = {
+  __typename: 'CoreLatestComments';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreLatestComments_Fragment' };
+
+type WpBlocksFragment_CoreLatestPosts_Fragment = {
+  __typename: 'CoreLatestPosts';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreLatestPosts_Fragment' };
+
+type WpBlocksFragment_CoreLegacyWidget_Fragment = {
+  __typename: 'CoreLegacyWidget';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreLegacyWidget_Fragment' };
+
+type WpBlocksFragment_CoreList_Fragment = {
+  __typename: 'CoreList';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+  attributes?: {
+    __typename?: 'CoreListAttributes';
+    anchor?: string | null;
+    backgroundColor?: string | null;
+    className?: string | null;
+    fontFamily?: string | null;
+    fontSize?: string | null;
+    gradient?: string | null;
+    lock?: any | null;
+    ordered: boolean;
+    reversed?: boolean | null;
+    start?: number | null;
+    style?: any | null;
+    textColor?: string | null;
+    type?: string | null;
+    values: string;
+    cssClassName?: string | null;
+  } | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreList_Fragment' };
+
+type WpBlocksFragment_CoreListItem_Fragment = {
+  __typename: 'CoreListItem';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreListItem_Fragment' };
+
+type WpBlocksFragment_CoreLoginout_Fragment = {
+  __typename: 'CoreLoginout';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreLoginout_Fragment' };
+
+type WpBlocksFragment_CoreMediaText_Fragment = {
+  __typename: 'CoreMediaText';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreMediaText_Fragment' };
+
+type WpBlocksFragment_CoreMissing_Fragment = {
+  __typename: 'CoreMissing';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreMissing_Fragment' };
+
+type WpBlocksFragment_CoreMore_Fragment = {
+  __typename: 'CoreMore';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreMore_Fragment' };
+
+type WpBlocksFragment_CoreNavigation_Fragment = {
+  __typename: 'CoreNavigation';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreNavigation_Fragment' };
+
+type WpBlocksFragment_CoreNavigationLink_Fragment = {
+  __typename: 'CoreNavigationLink';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreNavigationLink_Fragment' };
+
+type WpBlocksFragment_CoreNavigationSubmenu_Fragment = {
+  __typename: 'CoreNavigationSubmenu';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreNavigationSubmenu_Fragment' };
+
+type WpBlocksFragment_CoreNextpage_Fragment = {
+  __typename: 'CoreNextpage';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreNextpage_Fragment' };
+
+type WpBlocksFragment_CorePageList_Fragment = {
+  __typename: 'CorePageList';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CorePageList_Fragment' };
+
+type WpBlocksFragment_CorePageListItem_Fragment = {
+  __typename: 'CorePageListItem';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CorePageListItem_Fragment' };
+
+type WpBlocksFragment_CoreParagraph_Fragment = {
+  __typename: 'CoreParagraph';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+  attributes?: {
+    __typename?: 'CoreParagraphAttributes';
+    cssClassName?: string | null;
+    backgroundColor?: string | null;
+    content: string;
+    style?: any | null;
+    textColor?: string | null;
+    fontSize?: string | null;
+    fontFamily?: string | null;
+    direction?: string | null;
+    dropCap: boolean;
+    gradient?: string | null;
+    align?: string | null;
+  } | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreParagraph_Fragment' };
+
+type WpBlocksFragment_CorePattern_Fragment = {
+  __typename: 'CorePattern';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CorePattern_Fragment' };
+
+type WpBlocksFragment_CorePostAuthor_Fragment = {
+  __typename: 'CorePostAuthor';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CorePostAuthor_Fragment' };
+
+type WpBlocksFragment_CorePostAuthorBiography_Fragment = {
+  __typename: 'CorePostAuthorBiography';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CorePostAuthorBiography_Fragment' };
+
+type WpBlocksFragment_CorePostAuthorName_Fragment = {
+  __typename: 'CorePostAuthorName';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CorePostAuthorName_Fragment' };
+
+type WpBlocksFragment_CorePostComments_Fragment = {
+  __typename: 'CorePostComments';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CorePostComments_Fragment' };
+
+type WpBlocksFragment_CorePostCommentsForm_Fragment = {
+  __typename: 'CorePostCommentsForm';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CorePostCommentsForm_Fragment' };
+
+type WpBlocksFragment_CorePostContent_Fragment = {
+  __typename: 'CorePostContent';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CorePostContent_Fragment' };
+
+type WpBlocksFragment_CorePostDate_Fragment = {
+  __typename: 'CorePostDate';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CorePostDate_Fragment' };
+
+type WpBlocksFragment_CorePostExcerpt_Fragment = {
+  __typename: 'CorePostExcerpt';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CorePostExcerpt_Fragment' };
+
+type WpBlocksFragment_CorePostFeaturedImage_Fragment = {
+  __typename: 'CorePostFeaturedImage';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CorePostFeaturedImage_Fragment' };
+
+type WpBlocksFragment_CorePostNavigationLink_Fragment = {
+  __typename: 'CorePostNavigationLink';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CorePostNavigationLink_Fragment' };
+
+type WpBlocksFragment_CorePostTemplate_Fragment = {
+  __typename: 'CorePostTemplate';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CorePostTemplate_Fragment' };
+
+type WpBlocksFragment_CorePostTerms_Fragment = {
+  __typename: 'CorePostTerms';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CorePostTerms_Fragment' };
+
+type WpBlocksFragment_CorePostTitle_Fragment = {
+  __typename: 'CorePostTitle';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CorePostTitle_Fragment' };
+
+type WpBlocksFragment_CorePreformatted_Fragment = {
+  __typename: 'CorePreformatted';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CorePreformatted_Fragment' };
+
+type WpBlocksFragment_CorePullquote_Fragment = {
+  __typename: 'CorePullquote';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CorePullquote_Fragment' };
+
+type WpBlocksFragment_CoreQuery_Fragment = {
+  __typename: 'CoreQuery';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreQuery_Fragment' };
+
+type WpBlocksFragment_CoreQueryNoResults_Fragment = {
+  __typename: 'CoreQueryNoResults';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreQueryNoResults_Fragment' };
+
+type WpBlocksFragment_CoreQueryPagination_Fragment = {
+  __typename: 'CoreQueryPagination';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreQueryPagination_Fragment' };
+
+type WpBlocksFragment_CoreQueryPaginationNext_Fragment = {
+  __typename: 'CoreQueryPaginationNext';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreQueryPaginationNext_Fragment' };
+
+type WpBlocksFragment_CoreQueryPaginationNumbers_Fragment = {
+  __typename: 'CoreQueryPaginationNumbers';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & {
+  ' $fragmentName'?: 'WpBlocksFragment_CoreQueryPaginationNumbers_Fragment';
+};
+
+type WpBlocksFragment_CoreQueryPaginationPrevious_Fragment = {
+  __typename: 'CoreQueryPaginationPrevious';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & {
+  ' $fragmentName'?: 'WpBlocksFragment_CoreQueryPaginationPrevious_Fragment';
+};
+
+type WpBlocksFragment_CoreQueryTitle_Fragment = {
+  __typename: 'CoreQueryTitle';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreQueryTitle_Fragment' };
+
+type WpBlocksFragment_CoreQuote_Fragment = {
+  __typename: 'CoreQuote';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+  attributes?: {
+    __typename?: 'CoreQuoteAttributes';
+    textAlign?: string | null;
+    anchor?: string | null;
+    backgroundColor?: string | null;
+    className?: string | null;
+    fontFamily?: string | null;
+    fontSize?: string | null;
+    gradient?: string | null;
+    lock?: any | null;
+    style?: any | null;
+    textColor?: string | null;
+    value: string;
+    cssClassName?: string | null;
+  } | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreQuote_Fragment' };
+
+type WpBlocksFragment_CoreReadMore_Fragment = {
+  __typename: 'CoreReadMore';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreReadMore_Fragment' };
+
+type WpBlocksFragment_CoreRss_Fragment = {
+  __typename: 'CoreRss';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreRss_Fragment' };
+
+type WpBlocksFragment_CoreSearch_Fragment = {
+  __typename: 'CoreSearch';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreSearch_Fragment' };
+
+type WpBlocksFragment_CoreSeparator_Fragment = {
+  __typename: 'CoreSeparator';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+  attributes?: {
+    __typename?: 'CoreSeparatorAttributes';
+    align?: string | null;
+    anchor?: string | null;
+    opacity: string;
+    gradient?: string | null;
+    backgroundColor?: string | null;
+    style?: any | null;
+    cssClassName?: string | null;
+  } | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreSeparator_Fragment' };
+
+type WpBlocksFragment_CoreShortcode_Fragment = {
+  __typename: 'CoreShortcode';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreShortcode_Fragment' };
+
+type WpBlocksFragment_CoreSiteLogo_Fragment = {
+  __typename: 'CoreSiteLogo';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreSiteLogo_Fragment' };
+
+type WpBlocksFragment_CoreSiteTagline_Fragment = {
+  __typename: 'CoreSiteTagline';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreSiteTagline_Fragment' };
+
+type WpBlocksFragment_CoreSiteTitle_Fragment = {
+  __typename: 'CoreSiteTitle';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreSiteTitle_Fragment' };
+
+type WpBlocksFragment_CoreSocialLink_Fragment = {
+  __typename: 'CoreSocialLink';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreSocialLink_Fragment' };
+
+type WpBlocksFragment_CoreSocialLinks_Fragment = {
+  __typename: 'CoreSocialLinks';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreSocialLinks_Fragment' };
+
+type WpBlocksFragment_CoreSpacer_Fragment = {
+  __typename: 'CoreSpacer';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreSpacer_Fragment' };
+
+type WpBlocksFragment_CoreTable_Fragment = {
+  __typename: 'CoreTable';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreTable_Fragment' };
+
+type WpBlocksFragment_CoreTagCloud_Fragment = {
+  __typename: 'CoreTagCloud';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreTagCloud_Fragment' };
+
+type WpBlocksFragment_CoreTemplatePart_Fragment = {
+  __typename: 'CoreTemplatePart';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreTemplatePart_Fragment' };
+
+type WpBlocksFragment_CoreTermDescription_Fragment = {
+  __typename: 'CoreTermDescription';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreTermDescription_Fragment' };
+
+type WpBlocksFragment_CoreTextColumns_Fragment = {
+  __typename: 'CoreTextColumns';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreTextColumns_Fragment' };
+
+type WpBlocksFragment_CoreVerse_Fragment = {
+  __typename: 'CoreVerse';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreVerse_Fragment' };
+
+type WpBlocksFragment_CoreVideo_Fragment = {
+  __typename: 'CoreVideo';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreVideo_Fragment' };
+
+type WpBlocksFragment_CoreWidgetGroup_Fragment = {
+  __typename: 'CoreWidgetGroup';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & { ' $fragmentName'?: 'WpBlocksFragment_CoreWidgetGroup_Fragment' };
+
+type WpBlocksFragment_CustomBlockLibraryAwardWinner_Fragment = {
+  __typename: 'CustomBlockLibraryAwardWinner';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & {
+  ' $fragmentName'?: 'WpBlocksFragment_CustomBlockLibraryAwardWinner_Fragment';
+};
+
+type WpBlocksFragment_CustomBlockLibraryFeaturedFilms_Fragment = {
+  __typename: 'CustomBlockLibraryFeaturedFilms';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & {
+  ' $fragmentName'?: 'WpBlocksFragment_CustomBlockLibraryFeaturedFilms_Fragment';
+};
+
+type WpBlocksFragment_CustomBlockLibraryFeaturedTextList_Fragment = {
+  __typename: 'CustomBlockLibraryFeaturedTextList';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & {
+  ' $fragmentName'?: 'WpBlocksFragment_CustomBlockLibraryFeaturedTextList_Fragment';
+};
+
+type WpBlocksFragment_CustomBlockLibraryFilmSelector_Fragment = {
+  __typename: 'CustomBlockLibraryFilmSelector';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & {
+  ' $fragmentName'?: 'WpBlocksFragment_CustomBlockLibraryFilmSelector_Fragment';
+};
+
+type WpBlocksFragment_CustomBlockLibraryPostSelector_Fragment = {
+  __typename: 'CustomBlockLibraryPostSelector';
+  clientId?: string | null;
+  name?: string | null;
+  renderedHtml?: string | null;
+  parentClientId?: string | null;
+} & {
+  ' $fragmentName'?: 'WpBlocksFragment_CustomBlockLibraryPostSelector_Fragment';
+};
+
+export type WpBlocksFragmentFragment =
+  | WpBlocksFragment_CoreArchives_Fragment
+  | WpBlocksFragment_CoreAudio_Fragment
+  | WpBlocksFragment_CoreAvatar_Fragment
+  | WpBlocksFragment_CoreBlock_Fragment
+  | WpBlocksFragment_CoreButton_Fragment
+  | WpBlocksFragment_CoreButtons_Fragment
+  | WpBlocksFragment_CoreCalendar_Fragment
+  | WpBlocksFragment_CoreCategories_Fragment
+  | WpBlocksFragment_CoreCode_Fragment
+  | WpBlocksFragment_CoreColumn_Fragment
+  | WpBlocksFragment_CoreColumns_Fragment
+  | WpBlocksFragment_CoreCommentAuthorName_Fragment
+  | WpBlocksFragment_CoreCommentContent_Fragment
+  | WpBlocksFragment_CoreCommentDate_Fragment
+  | WpBlocksFragment_CoreCommentEditLink_Fragment
+  | WpBlocksFragment_CoreCommentReplyLink_Fragment
+  | WpBlocksFragment_CoreCommentTemplate_Fragment
+  | WpBlocksFragment_CoreComments_Fragment
+  | WpBlocksFragment_CoreCommentsPagination_Fragment
+  | WpBlocksFragment_CoreCommentsPaginationNext_Fragment
+  | WpBlocksFragment_CoreCommentsPaginationNumbers_Fragment
+  | WpBlocksFragment_CoreCommentsPaginationPrevious_Fragment
+  | WpBlocksFragment_CoreCommentsTitle_Fragment
+  | WpBlocksFragment_CoreCover_Fragment
+  | WpBlocksFragment_CoreDetails_Fragment
+  | WpBlocksFragment_CoreEmbed_Fragment
+  | WpBlocksFragment_CoreFile_Fragment
+  | WpBlocksFragment_CoreFootnotes_Fragment
+  | WpBlocksFragment_CoreFreeform_Fragment
+  | WpBlocksFragment_CoreGallery_Fragment
+  | WpBlocksFragment_CoreGroup_Fragment
+  | WpBlocksFragment_CoreHeading_Fragment
+  | WpBlocksFragment_CoreHomeLink_Fragment
+  | WpBlocksFragment_CoreHtml_Fragment
+  | WpBlocksFragment_CoreImage_Fragment
+  | WpBlocksFragment_CoreLatestComments_Fragment
+  | WpBlocksFragment_CoreLatestPosts_Fragment
+  | WpBlocksFragment_CoreLegacyWidget_Fragment
+  | WpBlocksFragment_CoreList_Fragment
+  | WpBlocksFragment_CoreListItem_Fragment
+  | WpBlocksFragment_CoreLoginout_Fragment
+  | WpBlocksFragment_CoreMediaText_Fragment
+  | WpBlocksFragment_CoreMissing_Fragment
+  | WpBlocksFragment_CoreMore_Fragment
+  | WpBlocksFragment_CoreNavigation_Fragment
+  | WpBlocksFragment_CoreNavigationLink_Fragment
+  | WpBlocksFragment_CoreNavigationSubmenu_Fragment
+  | WpBlocksFragment_CoreNextpage_Fragment
+  | WpBlocksFragment_CorePageList_Fragment
+  | WpBlocksFragment_CorePageListItem_Fragment
+  | WpBlocksFragment_CoreParagraph_Fragment
+  | WpBlocksFragment_CorePattern_Fragment
+  | WpBlocksFragment_CorePostAuthor_Fragment
+  | WpBlocksFragment_CorePostAuthorBiography_Fragment
+  | WpBlocksFragment_CorePostAuthorName_Fragment
+  | WpBlocksFragment_CorePostComments_Fragment
+  | WpBlocksFragment_CorePostCommentsForm_Fragment
+  | WpBlocksFragment_CorePostContent_Fragment
+  | WpBlocksFragment_CorePostDate_Fragment
+  | WpBlocksFragment_CorePostExcerpt_Fragment
+  | WpBlocksFragment_CorePostFeaturedImage_Fragment
+  | WpBlocksFragment_CorePostNavigationLink_Fragment
+  | WpBlocksFragment_CorePostTemplate_Fragment
+  | WpBlocksFragment_CorePostTerms_Fragment
+  | WpBlocksFragment_CorePostTitle_Fragment
+  | WpBlocksFragment_CorePreformatted_Fragment
+  | WpBlocksFragment_CorePullquote_Fragment
+  | WpBlocksFragment_CoreQuery_Fragment
+  | WpBlocksFragment_CoreQueryNoResults_Fragment
+  | WpBlocksFragment_CoreQueryPagination_Fragment
+  | WpBlocksFragment_CoreQueryPaginationNext_Fragment
+  | WpBlocksFragment_CoreQueryPaginationNumbers_Fragment
+  | WpBlocksFragment_CoreQueryPaginationPrevious_Fragment
+  | WpBlocksFragment_CoreQueryTitle_Fragment
+  | WpBlocksFragment_CoreQuote_Fragment
+  | WpBlocksFragment_CoreReadMore_Fragment
+  | WpBlocksFragment_CoreRss_Fragment
+  | WpBlocksFragment_CoreSearch_Fragment
+  | WpBlocksFragment_CoreSeparator_Fragment
+  | WpBlocksFragment_CoreShortcode_Fragment
+  | WpBlocksFragment_CoreSiteLogo_Fragment
+  | WpBlocksFragment_CoreSiteTagline_Fragment
+  | WpBlocksFragment_CoreSiteTitle_Fragment
+  | WpBlocksFragment_CoreSocialLink_Fragment
+  | WpBlocksFragment_CoreSocialLinks_Fragment
+  | WpBlocksFragment_CoreSpacer_Fragment
+  | WpBlocksFragment_CoreTable_Fragment
+  | WpBlocksFragment_CoreTagCloud_Fragment
+  | WpBlocksFragment_CoreTemplatePart_Fragment
+  | WpBlocksFragment_CoreTermDescription_Fragment
+  | WpBlocksFragment_CoreTextColumns_Fragment
+  | WpBlocksFragment_CoreVerse_Fragment
+  | WpBlocksFragment_CoreVideo_Fragment
+  | WpBlocksFragment_CoreWidgetGroup_Fragment
+  | WpBlocksFragment_CustomBlockLibraryAwardWinner_Fragment
+  | WpBlocksFragment_CustomBlockLibraryFeaturedFilms_Fragment
+  | WpBlocksFragment_CustomBlockLibraryFeaturedTextList_Fragment
+  | WpBlocksFragment_CustomBlockLibraryFilmSelector_Fragment
+  | WpBlocksFragment_CustomBlockLibraryPostSelector_Fragment;
 
 export type GetPostQueryVariables = Exact<{
   id: Scalars['ID']['input'];
@@ -16056,305 +17703,518 @@ export type GetPostQueryVariables = Exact<{
   asPreview: Scalars['Boolean']['input'];
 }>;
 
-
-export type GetPostQuery = { __typename?: 'RootQuery', post?: { __typename: 'Post', title?: string | null, date?: string | null, status?: string | null, isRestricted?: boolean | null, editorBlocks?: Array<(
-      { __typename?: 'CoreArchives' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreArchives_Fragment': WpBlocksFragment_CoreArchives_Fragment } }
-    ) | (
-      { __typename?: 'CoreAudio' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreAudio_Fragment': WpBlocksFragment_CoreAudio_Fragment } }
-    ) | (
-      { __typename?: 'CoreAvatar' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreAvatar_Fragment': WpBlocksFragment_CoreAvatar_Fragment } }
-    ) | (
-      { __typename?: 'CoreBlock' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreBlock_Fragment': WpBlocksFragment_CoreBlock_Fragment } }
-    ) | (
-      { __typename?: 'CoreButton' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreButton_Fragment': WpBlocksFragment_CoreButton_Fragment } }
-    ) | (
-      { __typename?: 'CoreButtons' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreButtons_Fragment': WpBlocksFragment_CoreButtons_Fragment } }
-    ) | (
-      { __typename?: 'CoreCalendar' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreCalendar_Fragment': WpBlocksFragment_CoreCalendar_Fragment } }
-    ) | (
-      { __typename?: 'CoreCategories' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreCategories_Fragment': WpBlocksFragment_CoreCategories_Fragment } }
-    ) | (
-      { __typename?: 'CoreCode' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreCode_Fragment': WpBlocksFragment_CoreCode_Fragment } }
-    ) | (
-      { __typename?: 'CoreColumn' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreColumn_Fragment': WpBlocksFragment_CoreColumn_Fragment } }
-    ) | (
-      { __typename?: 'CoreColumns' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreColumns_Fragment': WpBlocksFragment_CoreColumns_Fragment } }
-    ) | (
-      { __typename?: 'CoreCommentAuthorName' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreCommentAuthorName_Fragment': WpBlocksFragment_CoreCommentAuthorName_Fragment } }
-    ) | (
-      { __typename?: 'CoreCommentContent' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreCommentContent_Fragment': WpBlocksFragment_CoreCommentContent_Fragment } }
-    ) | (
-      { __typename?: 'CoreCommentDate' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreCommentDate_Fragment': WpBlocksFragment_CoreCommentDate_Fragment } }
-    ) | (
-      { __typename?: 'CoreCommentEditLink' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreCommentEditLink_Fragment': WpBlocksFragment_CoreCommentEditLink_Fragment } }
-    ) | (
-      { __typename?: 'CoreCommentReplyLink' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreCommentReplyLink_Fragment': WpBlocksFragment_CoreCommentReplyLink_Fragment } }
-    ) | (
-      { __typename?: 'CoreCommentTemplate' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreCommentTemplate_Fragment': WpBlocksFragment_CoreCommentTemplate_Fragment } }
-    ) | (
-      { __typename?: 'CoreComments' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreComments_Fragment': WpBlocksFragment_CoreComments_Fragment } }
-    ) | (
-      { __typename?: 'CoreCommentsPagination' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreCommentsPagination_Fragment': WpBlocksFragment_CoreCommentsPagination_Fragment } }
-    ) | (
-      { __typename?: 'CoreCommentsPaginationNext' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreCommentsPaginationNext_Fragment': WpBlocksFragment_CoreCommentsPaginationNext_Fragment } }
-    ) | (
-      { __typename?: 'CoreCommentsPaginationNumbers' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreCommentsPaginationNumbers_Fragment': WpBlocksFragment_CoreCommentsPaginationNumbers_Fragment } }
-    ) | (
-      { __typename?: 'CoreCommentsPaginationPrevious' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreCommentsPaginationPrevious_Fragment': WpBlocksFragment_CoreCommentsPaginationPrevious_Fragment } }
-    ) | (
-      { __typename?: 'CoreCommentsTitle' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreCommentsTitle_Fragment': WpBlocksFragment_CoreCommentsTitle_Fragment } }
-    ) | (
-      { __typename?: 'CoreCover' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreCover_Fragment': WpBlocksFragment_CoreCover_Fragment } }
-    ) | (
-      { __typename?: 'CoreDetails' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreDetails_Fragment': WpBlocksFragment_CoreDetails_Fragment } }
-    ) | (
-      { __typename?: 'CoreEmbed' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreEmbed_Fragment': WpBlocksFragment_CoreEmbed_Fragment } }
-    ) | (
-      { __typename?: 'CoreFile' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreFile_Fragment': WpBlocksFragment_CoreFile_Fragment } }
-    ) | (
-      { __typename?: 'CoreFootnotes' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreFootnotes_Fragment': WpBlocksFragment_CoreFootnotes_Fragment } }
-    ) | (
-      { __typename?: 'CoreFreeform' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreFreeform_Fragment': WpBlocksFragment_CoreFreeform_Fragment } }
-    ) | (
-      { __typename?: 'CoreGallery' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreGallery_Fragment': WpBlocksFragment_CoreGallery_Fragment } }
-    ) | (
-      { __typename?: 'CoreGroup' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreGroup_Fragment': WpBlocksFragment_CoreGroup_Fragment } }
-    ) | (
-      { __typename?: 'CoreHeading' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreHeading_Fragment': WpBlocksFragment_CoreHeading_Fragment } }
-    ) | (
-      { __typename?: 'CoreHomeLink' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreHomeLink_Fragment': WpBlocksFragment_CoreHomeLink_Fragment } }
-    ) | (
-      { __typename?: 'CoreHtml' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreHtml_Fragment': WpBlocksFragment_CoreHtml_Fragment } }
-    ) | (
-      { __typename?: 'CoreImage' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreImage_Fragment': WpBlocksFragment_CoreImage_Fragment } }
-    ) | (
-      { __typename?: 'CoreLatestComments' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreLatestComments_Fragment': WpBlocksFragment_CoreLatestComments_Fragment } }
-    ) | (
-      { __typename?: 'CoreLatestPosts' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreLatestPosts_Fragment': WpBlocksFragment_CoreLatestPosts_Fragment } }
-    ) | (
-      { __typename?: 'CoreLegacyWidget' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreLegacyWidget_Fragment': WpBlocksFragment_CoreLegacyWidget_Fragment } }
-    ) | (
-      { __typename?: 'CoreList' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreList_Fragment': WpBlocksFragment_CoreList_Fragment } }
-    ) | (
-      { __typename?: 'CoreListItem' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreListItem_Fragment': WpBlocksFragment_CoreListItem_Fragment } }
-    ) | (
-      { __typename?: 'CoreLoginout' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreLoginout_Fragment': WpBlocksFragment_CoreLoginout_Fragment } }
-    ) | (
-      { __typename?: 'CoreMediaText' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreMediaText_Fragment': WpBlocksFragment_CoreMediaText_Fragment } }
-    ) | (
-      { __typename?: 'CoreMissing' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreMissing_Fragment': WpBlocksFragment_CoreMissing_Fragment } }
-    ) | (
-      { __typename?: 'CoreMore' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreMore_Fragment': WpBlocksFragment_CoreMore_Fragment } }
-    ) | (
-      { __typename?: 'CoreNavigation' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreNavigation_Fragment': WpBlocksFragment_CoreNavigation_Fragment } }
-    ) | (
-      { __typename?: 'CoreNavigationLink' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreNavigationLink_Fragment': WpBlocksFragment_CoreNavigationLink_Fragment } }
-    ) | (
-      { __typename?: 'CoreNavigationSubmenu' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreNavigationSubmenu_Fragment': WpBlocksFragment_CoreNavigationSubmenu_Fragment } }
-    ) | (
-      { __typename?: 'CoreNextpage' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreNextpage_Fragment': WpBlocksFragment_CoreNextpage_Fragment } }
-    ) | (
-      { __typename?: 'CorePageList' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CorePageList_Fragment': WpBlocksFragment_CorePageList_Fragment } }
-    ) | (
-      { __typename?: 'CorePageListItem' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CorePageListItem_Fragment': WpBlocksFragment_CorePageListItem_Fragment } }
-    ) | (
-      { __typename?: 'CoreParagraph' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreParagraph_Fragment': WpBlocksFragment_CoreParagraph_Fragment } }
-    ) | (
-      { __typename?: 'CorePattern' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CorePattern_Fragment': WpBlocksFragment_CorePattern_Fragment } }
-    ) | (
-      { __typename?: 'CorePostAuthor' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CorePostAuthor_Fragment': WpBlocksFragment_CorePostAuthor_Fragment } }
-    ) | (
-      { __typename?: 'CorePostAuthorBiography' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CorePostAuthorBiography_Fragment': WpBlocksFragment_CorePostAuthorBiography_Fragment } }
-    ) | (
-      { __typename?: 'CorePostAuthorName' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CorePostAuthorName_Fragment': WpBlocksFragment_CorePostAuthorName_Fragment } }
-    ) | (
-      { __typename?: 'CorePostComments' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CorePostComments_Fragment': WpBlocksFragment_CorePostComments_Fragment } }
-    ) | (
-      { __typename?: 'CorePostCommentsForm' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CorePostCommentsForm_Fragment': WpBlocksFragment_CorePostCommentsForm_Fragment } }
-    ) | (
-      { __typename?: 'CorePostContent' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CorePostContent_Fragment': WpBlocksFragment_CorePostContent_Fragment } }
-    ) | (
-      { __typename?: 'CorePostDate' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CorePostDate_Fragment': WpBlocksFragment_CorePostDate_Fragment } }
-    ) | (
-      { __typename?: 'CorePostExcerpt' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CorePostExcerpt_Fragment': WpBlocksFragment_CorePostExcerpt_Fragment } }
-    ) | (
-      { __typename?: 'CorePostFeaturedImage' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CorePostFeaturedImage_Fragment': WpBlocksFragment_CorePostFeaturedImage_Fragment } }
-    ) | (
-      { __typename?: 'CorePostNavigationLink' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CorePostNavigationLink_Fragment': WpBlocksFragment_CorePostNavigationLink_Fragment } }
-    ) | (
-      { __typename?: 'CorePostTemplate' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CorePostTemplate_Fragment': WpBlocksFragment_CorePostTemplate_Fragment } }
-    ) | (
-      { __typename?: 'CorePostTerms' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CorePostTerms_Fragment': WpBlocksFragment_CorePostTerms_Fragment } }
-    ) | (
-      { __typename?: 'CorePostTitle' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CorePostTitle_Fragment': WpBlocksFragment_CorePostTitle_Fragment } }
-    ) | (
-      { __typename?: 'CorePreformatted' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CorePreformatted_Fragment': WpBlocksFragment_CorePreformatted_Fragment } }
-    ) | (
-      { __typename?: 'CorePullquote' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CorePullquote_Fragment': WpBlocksFragment_CorePullquote_Fragment } }
-    ) | (
-      { __typename?: 'CoreQuery' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreQuery_Fragment': WpBlocksFragment_CoreQuery_Fragment } }
-    ) | (
-      { __typename?: 'CoreQueryNoResults' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreQueryNoResults_Fragment': WpBlocksFragment_CoreQueryNoResults_Fragment } }
-    ) | (
-      { __typename?: 'CoreQueryPagination' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreQueryPagination_Fragment': WpBlocksFragment_CoreQueryPagination_Fragment } }
-    ) | (
-      { __typename?: 'CoreQueryPaginationNext' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreQueryPaginationNext_Fragment': WpBlocksFragment_CoreQueryPaginationNext_Fragment } }
-    ) | (
-      { __typename?: 'CoreQueryPaginationNumbers' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreQueryPaginationNumbers_Fragment': WpBlocksFragment_CoreQueryPaginationNumbers_Fragment } }
-    ) | (
-      { __typename?: 'CoreQueryPaginationPrevious' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreQueryPaginationPrevious_Fragment': WpBlocksFragment_CoreQueryPaginationPrevious_Fragment } }
-    ) | (
-      { __typename?: 'CoreQueryTitle' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreQueryTitle_Fragment': WpBlocksFragment_CoreQueryTitle_Fragment } }
-    ) | (
-      { __typename?: 'CoreQuote' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreQuote_Fragment': WpBlocksFragment_CoreQuote_Fragment } }
-    ) | (
-      { __typename?: 'CoreReadMore' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreReadMore_Fragment': WpBlocksFragment_CoreReadMore_Fragment } }
-    ) | (
-      { __typename?: 'CoreRss' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreRss_Fragment': WpBlocksFragment_CoreRss_Fragment } }
-    ) | (
-      { __typename?: 'CoreSearch' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreSearch_Fragment': WpBlocksFragment_CoreSearch_Fragment } }
-    ) | (
-      { __typename?: 'CoreSeparator' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreSeparator_Fragment': WpBlocksFragment_CoreSeparator_Fragment } }
-    ) | (
-      { __typename?: 'CoreShortcode' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreShortcode_Fragment': WpBlocksFragment_CoreShortcode_Fragment } }
-    ) | (
-      { __typename?: 'CoreSiteLogo' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreSiteLogo_Fragment': WpBlocksFragment_CoreSiteLogo_Fragment } }
-    ) | (
-      { __typename?: 'CoreSiteTagline' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreSiteTagline_Fragment': WpBlocksFragment_CoreSiteTagline_Fragment } }
-    ) | (
-      { __typename?: 'CoreSiteTitle' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreSiteTitle_Fragment': WpBlocksFragment_CoreSiteTitle_Fragment } }
-    ) | (
-      { __typename?: 'CoreSocialLink' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreSocialLink_Fragment': WpBlocksFragment_CoreSocialLink_Fragment } }
-    ) | (
-      { __typename?: 'CoreSocialLinks' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreSocialLinks_Fragment': WpBlocksFragment_CoreSocialLinks_Fragment } }
-    ) | (
-      { __typename?: 'CoreSpacer' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreSpacer_Fragment': WpBlocksFragment_CoreSpacer_Fragment } }
-    ) | (
-      { __typename?: 'CoreTable' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreTable_Fragment': WpBlocksFragment_CoreTable_Fragment } }
-    ) | (
-      { __typename?: 'CoreTagCloud' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreTagCloud_Fragment': WpBlocksFragment_CoreTagCloud_Fragment } }
-    ) | (
-      { __typename?: 'CoreTemplatePart' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreTemplatePart_Fragment': WpBlocksFragment_CoreTemplatePart_Fragment } }
-    ) | (
-      { __typename?: 'CoreTermDescription' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreTermDescription_Fragment': WpBlocksFragment_CoreTermDescription_Fragment } }
-    ) | (
-      { __typename?: 'CoreTextColumns' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreTextColumns_Fragment': WpBlocksFragment_CoreTextColumns_Fragment } }
-    ) | (
-      { __typename?: 'CoreVerse' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreVerse_Fragment': WpBlocksFragment_CoreVerse_Fragment } }
-    ) | (
-      { __typename?: 'CoreVideo' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreVideo_Fragment': WpBlocksFragment_CoreVideo_Fragment } }
-    ) | (
-      { __typename?: 'CoreWidgetGroup' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CoreWidgetGroup_Fragment': WpBlocksFragment_CoreWidgetGroup_Fragment } }
-    ) | (
-      { __typename?: 'CustomBlockLibraryAwardWinner' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CustomBlockLibraryAwardWinner_Fragment': WpBlocksFragment_CustomBlockLibraryAwardWinner_Fragment } }
-    ) | (
-      { __typename?: 'CustomBlockLibraryFeaturedFilms' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CustomBlockLibraryFeaturedFilms_Fragment': WpBlocksFragment_CustomBlockLibraryFeaturedFilms_Fragment } }
-    ) | (
-      { __typename?: 'CustomBlockLibraryFeaturedTextList' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CustomBlockLibraryFeaturedTextList_Fragment': WpBlocksFragment_CustomBlockLibraryFeaturedTextList_Fragment } }
-    ) | (
-      { __typename?: 'CustomBlockLibraryFilmSelector' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CustomBlockLibraryFilmSelector_Fragment': WpBlocksFragment_CustomBlockLibraryFilmSelector_Fragment } }
-    ) | (
-      { __typename?: 'CustomBlockLibraryPostSelector' }
-      & { ' $fragmentRefs'?: { 'WpBlocksFragment_CustomBlockLibraryPostSelector_Fragment': WpBlocksFragment_CustomBlockLibraryPostSelector_Fragment } }
-    ) | null> | null, author?: { __typename?: 'NodeWithAuthorToUserConnectionEdge', node: { __typename?: 'User', name?: string | null } } | null } | null };
+export type GetPostQuery = {
+  __typename?: 'RootQuery';
+  post?: {
+    __typename: 'Post';
+    title?: string | null;
+    date?: string | null;
+    status?: string | null;
+    isRestricted?: boolean | null;
+    editorBlocks?: Array<
+      | ({ __typename?: 'CoreArchives' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreArchives_Fragment: WpBlocksFragment_CoreArchives_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreAudio' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreAudio_Fragment: WpBlocksFragment_CoreAudio_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreAvatar' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreAvatar_Fragment: WpBlocksFragment_CoreAvatar_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreBlock' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreBlock_Fragment: WpBlocksFragment_CoreBlock_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreButton' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreButton_Fragment: WpBlocksFragment_CoreButton_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreButtons' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreButtons_Fragment: WpBlocksFragment_CoreButtons_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreCalendar' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreCalendar_Fragment: WpBlocksFragment_CoreCalendar_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreCategories' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreCategories_Fragment: WpBlocksFragment_CoreCategories_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreCode' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreCode_Fragment: WpBlocksFragment_CoreCode_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreColumn' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreColumn_Fragment: WpBlocksFragment_CoreColumn_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreColumns' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreColumns_Fragment: WpBlocksFragment_CoreColumns_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreCommentAuthorName' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreCommentAuthorName_Fragment: WpBlocksFragment_CoreCommentAuthorName_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreCommentContent' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreCommentContent_Fragment: WpBlocksFragment_CoreCommentContent_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreCommentDate' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreCommentDate_Fragment: WpBlocksFragment_CoreCommentDate_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreCommentEditLink' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreCommentEditLink_Fragment: WpBlocksFragment_CoreCommentEditLink_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreCommentReplyLink' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreCommentReplyLink_Fragment: WpBlocksFragment_CoreCommentReplyLink_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreCommentTemplate' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreCommentTemplate_Fragment: WpBlocksFragment_CoreCommentTemplate_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreComments' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreComments_Fragment: WpBlocksFragment_CoreComments_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreCommentsPagination' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreCommentsPagination_Fragment: WpBlocksFragment_CoreCommentsPagination_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreCommentsPaginationNext' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreCommentsPaginationNext_Fragment: WpBlocksFragment_CoreCommentsPaginationNext_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreCommentsPaginationNumbers' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreCommentsPaginationNumbers_Fragment: WpBlocksFragment_CoreCommentsPaginationNumbers_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreCommentsPaginationPrevious' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreCommentsPaginationPrevious_Fragment: WpBlocksFragment_CoreCommentsPaginationPrevious_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreCommentsTitle' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreCommentsTitle_Fragment: WpBlocksFragment_CoreCommentsTitle_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreCover' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreCover_Fragment: WpBlocksFragment_CoreCover_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreDetails' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreDetails_Fragment: WpBlocksFragment_CoreDetails_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreEmbed' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreEmbed_Fragment: WpBlocksFragment_CoreEmbed_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreFile' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreFile_Fragment: WpBlocksFragment_CoreFile_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreFootnotes' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreFootnotes_Fragment: WpBlocksFragment_CoreFootnotes_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreFreeform' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreFreeform_Fragment: WpBlocksFragment_CoreFreeform_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreGallery' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreGallery_Fragment: WpBlocksFragment_CoreGallery_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreGroup' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreGroup_Fragment: WpBlocksFragment_CoreGroup_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreHeading' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreHeading_Fragment: WpBlocksFragment_CoreHeading_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreHomeLink' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreHomeLink_Fragment: WpBlocksFragment_CoreHomeLink_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreHtml' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreHtml_Fragment: WpBlocksFragment_CoreHtml_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreImage' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreImage_Fragment: WpBlocksFragment_CoreImage_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreLatestComments' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreLatestComments_Fragment: WpBlocksFragment_CoreLatestComments_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreLatestPosts' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreLatestPosts_Fragment: WpBlocksFragment_CoreLatestPosts_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreLegacyWidget' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreLegacyWidget_Fragment: WpBlocksFragment_CoreLegacyWidget_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreList' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreList_Fragment: WpBlocksFragment_CoreList_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreListItem' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreListItem_Fragment: WpBlocksFragment_CoreListItem_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreLoginout' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreLoginout_Fragment: WpBlocksFragment_CoreLoginout_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreMediaText' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreMediaText_Fragment: WpBlocksFragment_CoreMediaText_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreMissing' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreMissing_Fragment: WpBlocksFragment_CoreMissing_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreMore' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreMore_Fragment: WpBlocksFragment_CoreMore_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreNavigation' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreNavigation_Fragment: WpBlocksFragment_CoreNavigation_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreNavigationLink' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreNavigationLink_Fragment: WpBlocksFragment_CoreNavigationLink_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreNavigationSubmenu' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreNavigationSubmenu_Fragment: WpBlocksFragment_CoreNavigationSubmenu_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreNextpage' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreNextpage_Fragment: WpBlocksFragment_CoreNextpage_Fragment;
+          };
+        })
+      | ({ __typename?: 'CorePageList' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CorePageList_Fragment: WpBlocksFragment_CorePageList_Fragment;
+          };
+        })
+      | ({ __typename?: 'CorePageListItem' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CorePageListItem_Fragment: WpBlocksFragment_CorePageListItem_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreParagraph' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreParagraph_Fragment: WpBlocksFragment_CoreParagraph_Fragment;
+          };
+        })
+      | ({ __typename?: 'CorePattern' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CorePattern_Fragment: WpBlocksFragment_CorePattern_Fragment;
+          };
+        })
+      | ({ __typename?: 'CorePostAuthor' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CorePostAuthor_Fragment: WpBlocksFragment_CorePostAuthor_Fragment;
+          };
+        })
+      | ({ __typename?: 'CorePostAuthorBiography' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CorePostAuthorBiography_Fragment: WpBlocksFragment_CorePostAuthorBiography_Fragment;
+          };
+        })
+      | ({ __typename?: 'CorePostAuthorName' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CorePostAuthorName_Fragment: WpBlocksFragment_CorePostAuthorName_Fragment;
+          };
+        })
+      | ({ __typename?: 'CorePostComments' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CorePostComments_Fragment: WpBlocksFragment_CorePostComments_Fragment;
+          };
+        })
+      | ({ __typename?: 'CorePostCommentsForm' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CorePostCommentsForm_Fragment: WpBlocksFragment_CorePostCommentsForm_Fragment;
+          };
+        })
+      | ({ __typename?: 'CorePostContent' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CorePostContent_Fragment: WpBlocksFragment_CorePostContent_Fragment;
+          };
+        })
+      | ({ __typename?: 'CorePostDate' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CorePostDate_Fragment: WpBlocksFragment_CorePostDate_Fragment;
+          };
+        })
+      | ({ __typename?: 'CorePostExcerpt' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CorePostExcerpt_Fragment: WpBlocksFragment_CorePostExcerpt_Fragment;
+          };
+        })
+      | ({ __typename?: 'CorePostFeaturedImage' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CorePostFeaturedImage_Fragment: WpBlocksFragment_CorePostFeaturedImage_Fragment;
+          };
+        })
+      | ({ __typename?: 'CorePostNavigationLink' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CorePostNavigationLink_Fragment: WpBlocksFragment_CorePostNavigationLink_Fragment;
+          };
+        })
+      | ({ __typename?: 'CorePostTemplate' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CorePostTemplate_Fragment: WpBlocksFragment_CorePostTemplate_Fragment;
+          };
+        })
+      | ({ __typename?: 'CorePostTerms' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CorePostTerms_Fragment: WpBlocksFragment_CorePostTerms_Fragment;
+          };
+        })
+      | ({ __typename?: 'CorePostTitle' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CorePostTitle_Fragment: WpBlocksFragment_CorePostTitle_Fragment;
+          };
+        })
+      | ({ __typename?: 'CorePreformatted' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CorePreformatted_Fragment: WpBlocksFragment_CorePreformatted_Fragment;
+          };
+        })
+      | ({ __typename?: 'CorePullquote' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CorePullquote_Fragment: WpBlocksFragment_CorePullquote_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreQuery' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreQuery_Fragment: WpBlocksFragment_CoreQuery_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreQueryNoResults' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreQueryNoResults_Fragment: WpBlocksFragment_CoreQueryNoResults_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreQueryPagination' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreQueryPagination_Fragment: WpBlocksFragment_CoreQueryPagination_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreQueryPaginationNext' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreQueryPaginationNext_Fragment: WpBlocksFragment_CoreQueryPaginationNext_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreQueryPaginationNumbers' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreQueryPaginationNumbers_Fragment: WpBlocksFragment_CoreQueryPaginationNumbers_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreQueryPaginationPrevious' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreQueryPaginationPrevious_Fragment: WpBlocksFragment_CoreQueryPaginationPrevious_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreQueryTitle' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreQueryTitle_Fragment: WpBlocksFragment_CoreQueryTitle_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreQuote' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreQuote_Fragment: WpBlocksFragment_CoreQuote_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreReadMore' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreReadMore_Fragment: WpBlocksFragment_CoreReadMore_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreRss' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreRss_Fragment: WpBlocksFragment_CoreRss_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreSearch' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreSearch_Fragment: WpBlocksFragment_CoreSearch_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreSeparator' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreSeparator_Fragment: WpBlocksFragment_CoreSeparator_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreShortcode' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreShortcode_Fragment: WpBlocksFragment_CoreShortcode_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreSiteLogo' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreSiteLogo_Fragment: WpBlocksFragment_CoreSiteLogo_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreSiteTagline' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreSiteTagline_Fragment: WpBlocksFragment_CoreSiteTagline_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreSiteTitle' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreSiteTitle_Fragment: WpBlocksFragment_CoreSiteTitle_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreSocialLink' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreSocialLink_Fragment: WpBlocksFragment_CoreSocialLink_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreSocialLinks' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreSocialLinks_Fragment: WpBlocksFragment_CoreSocialLinks_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreSpacer' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreSpacer_Fragment: WpBlocksFragment_CoreSpacer_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreTable' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreTable_Fragment: WpBlocksFragment_CoreTable_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreTagCloud' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreTagCloud_Fragment: WpBlocksFragment_CoreTagCloud_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreTemplatePart' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreTemplatePart_Fragment: WpBlocksFragment_CoreTemplatePart_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreTermDescription' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreTermDescription_Fragment: WpBlocksFragment_CoreTermDescription_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreTextColumns' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreTextColumns_Fragment: WpBlocksFragment_CoreTextColumns_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreVerse' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreVerse_Fragment: WpBlocksFragment_CoreVerse_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreVideo' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreVideo_Fragment: WpBlocksFragment_CoreVideo_Fragment;
+          };
+        })
+      | ({ __typename?: 'CoreWidgetGroup' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CoreWidgetGroup_Fragment: WpBlocksFragment_CoreWidgetGroup_Fragment;
+          };
+        })
+      | ({ __typename?: 'CustomBlockLibraryAwardWinner' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CustomBlockLibraryAwardWinner_Fragment: WpBlocksFragment_CustomBlockLibraryAwardWinner_Fragment;
+          };
+        })
+      | ({ __typename?: 'CustomBlockLibraryFeaturedFilms' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CustomBlockLibraryFeaturedFilms_Fragment: WpBlocksFragment_CustomBlockLibraryFeaturedFilms_Fragment;
+          };
+        })
+      | ({ __typename?: 'CustomBlockLibraryFeaturedTextList' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CustomBlockLibraryFeaturedTextList_Fragment: WpBlocksFragment_CustomBlockLibraryFeaturedTextList_Fragment;
+          };
+        })
+      | ({ __typename?: 'CustomBlockLibraryFilmSelector' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CustomBlockLibraryFilmSelector_Fragment: WpBlocksFragment_CustomBlockLibraryFilmSelector_Fragment;
+          };
+        })
+      | ({ __typename?: 'CustomBlockLibraryPostSelector' } & {
+          ' $fragmentRefs'?: {
+            WpBlocksFragment_CustomBlockLibraryPostSelector_Fragment: WpBlocksFragment_CustomBlockLibraryPostSelector_Fragment;
+          };
+        })
+      | null
+    > | null;
+    author?: {
+      __typename?: 'NodeWithAuthorToUserConnectionEdge';
+      node: { __typename?: 'User'; name?: string | null };
+    } | null;
+  } | null;
+};
 
 export type BlogArchiveQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -16363,28 +18223,91 @@ export type BlogArchiveQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
 }>;
 
+export type BlogArchiveQuery = {
+  __typename?: 'RootQuery';
+  posts?: {
+    __typename?: 'RootQueryToPostConnection';
+    edges: Array<{
+      __typename?: 'RootQueryToPostConnectionEdge';
+      cursor?: string | null;
+      node: {
+        __typename?: 'Post';
+        slug?: string | null;
+        uri?: string | null;
+        title?: string | null;
+        id: string;
+        featuredImage?: {
+          __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge';
+          node: {
+            __typename?: 'MediaItem';
+            altText?: string | null;
+            uri?: string | null;
+            sourceUrl?: string | null;
+            srcSet?: string | null;
+          };
+        } | null;
+      };
+    }>;
+    pageInfo: {
+      __typename?: 'RootQueryToPostConnectionPageInfo';
+      hasNextPage: boolean;
+      startCursor?: string | null;
+      endCursor?: string | null;
+      hasPreviousPage: boolean;
+    };
+  } | null;
+};
 
-export type BlogArchiveQuery = { __typename?: 'RootQuery', posts?: { __typename?: 'RootQueryToPostConnection', edges: Array<{ __typename?: 'RootQueryToPostConnectionEdge', cursor?: string | null, node: { __typename?: 'Post', slug?: string | null, uri?: string | null, title?: string | null, id: string, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node: { __typename?: 'MediaItem', altText?: string | null, uri?: string | null, sourceUrl?: string | null, srcSet?: string | null } } | null } }>, pageInfo: { __typename?: 'RootQueryToPostConnectionPageInfo', hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null, hasPreviousPage: boolean } } | null };
+export type HomeMetadataQueryVariables = Exact<{ [key: string]: never }>;
 
-export type HomeMetadataQueryVariables = Exact<{ [key: string]: never; }>;
+export type HomeMetadataQuery = {
+  __typename?: 'RootQuery';
+  generalSettings?: {
+    __typename?: 'GeneralSettings';
+    title?: string | null;
+    description?: string | null;
+  } | null;
+};
 
+export type GetLayoutQueryVariables = Exact<{ [key: string]: never }>;
 
-export type HomeMetadataQuery = { __typename?: 'RootQuery', generalSettings?: { __typename?: 'GeneralSettings', title?: string | null, description?: string | null } | null };
+export type GetLayoutQuery = {
+  __typename?: 'RootQuery';
+  primaryMenuItems?: {
+    __typename?: 'RootQueryToMenuItemConnection';
+    nodes: Array<{
+      __typename?: 'MenuItem';
+      id: string;
+      label?: string | null;
+      uri?: string | null;
+    }>;
+  } | null;
+};
 
-export type GetLayoutQueryVariables = Exact<{ [key: string]: never; }>;
+export type LayoutMetadataQueryVariables = Exact<{ [key: string]: never }>;
 
+export type LayoutMetadataQuery = {
+  __typename?: 'RootQuery';
+  generalSettings?: {
+    __typename?: 'GeneralSettings';
+    title?: string | null;
+  } | null;
+};
 
-export type GetLayoutQuery = { __typename?: 'RootQuery', primaryMenuItems?: { __typename?: 'RootQueryToMenuItemConnection', nodes: Array<{ __typename?: 'MenuItem', id: string, label?: string | null, uri?: string | null }> } | null };
+export type GetReadingSettingsQueryVariables = Exact<{ [key: string]: never }>;
 
-export type LayoutMetadataQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type LayoutMetadataQuery = { __typename?: 'RootQuery', generalSettings?: { __typename?: 'GeneralSettings', title?: string | null } | null };
-
-export type GetReadingSettingsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetReadingSettingsQuery = { __typename?: 'RootQuery', readingSettings?: { __typename?: 'ReadingSettings', pageOnFront?: number | null, showOnFront?: string | null } | null, generalSettings?: { __typename?: 'GeneralSettings', title?: string | null } | null };
+export type GetReadingSettingsQuery = {
+  __typename?: 'RootQuery';
+  readingSettings?: {
+    __typename?: 'ReadingSettings';
+    pageOnFront?: number | null;
+    showOnFront?: string | null;
+  } | null;
+  generalSettings?: {
+    __typename?: 'GeneralSettings';
+    title?: string | null;
+  } | null;
+};
 
 export type SearchQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -16394,16 +18317,3020 @@ export type SearchQueryVariables = Exact<{
   search?: InputMaybe<Scalars['String']['input']>;
 }>;
 
+export type SearchQuery = {
+  __typename?: 'RootQuery';
+  contentNodes?: {
+    __typename?: 'RootQueryToContentNodeConnection';
+    pageInfo: {
+      __typename?: 'RootQueryToContentNodeConnectionPageInfo';
+      endCursor?: string | null;
+      hasNextPage: boolean;
+      hasPreviousPage: boolean;
+      startCursor?: string | null;
+    };
+    edges: Array<{
+      __typename?: 'RootQueryToContentNodeConnectionEdge';
+      cursor?: string | null;
+      node:
+        | {
+            __typename: 'Film';
+            title?: string | null;
+            excerpt?: string | null;
+            id: string;
+          }
+        | { __typename: 'MediaItem'; title?: string | null; id: string }
+        | {
+            __typename: 'Page';
+            title?: string | null;
+            slug?: string | null;
+            id: string;
+          }
+        | {
+            __typename: 'Post';
+            title?: string | null;
+            excerpt?: string | null;
+            slug?: string | null;
+            id: string;
+          };
+    }>;
+  } | null;
+};
 
-export type SearchQuery = { __typename?: 'RootQuery', contentNodes?: { __typename?: 'RootQueryToContentNodeConnection', pageInfo: { __typename?: 'RootQueryToContentNodeConnectionPageInfo', endCursor?: string | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null }, edges: Array<{ __typename?: 'RootQueryToContentNodeConnectionEdge', cursor?: string | null, node: { __typename: 'Film', title?: string | null, excerpt?: string | null, id: string } | { __typename: 'MediaItem', title?: string | null, id: string } | { __typename: 'Page', title?: string | null, slug?: string | null, id: string } | { __typename: 'Post', title?: string | null, excerpt?: string | null, slug?: string | null, id: string } }> } | null };
-
-export const CustomBlockLibraryPostSelectorFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"CustomBlockLibraryPostSelectorFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CustomBlockLibraryPostSelector"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"post"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"featuredImage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"sourceUrl"}}]}}]}}]}}]}}]} as unknown as DocumentNode<CustomBlockLibraryPostSelectorFragmentFragment, unknown>;
-export const WpBlocksFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"WpBlocksFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"EditorBlock"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"clientId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"renderedHtml"}},{"kind":"Field","name":{"kind":"Name","value":"parentClientId"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CoreParagraph"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cssClassName"}},{"kind":"Field","name":{"kind":"Name","value":"backgroundColor"}},{"kind":"Field","name":{"kind":"Name","value":"content"}},{"kind":"Field","name":{"kind":"Name","value":"style"}},{"kind":"Field","name":{"kind":"Name","value":"textColor"}},{"kind":"Field","name":{"kind":"Name","value":"fontSize"}},{"kind":"Field","name":{"kind":"Name","value":"fontFamily"}},{"kind":"Field","name":{"kind":"Name","value":"direction"}},{"kind":"Field","name":{"kind":"Name","value":"dropCap"}},{"kind":"Field","name":{"kind":"Name","value":"gradient"}},{"kind":"Field","name":{"kind":"Name","value":"align"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CoreColumns"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"align"}},{"kind":"Field","name":{"kind":"Name","value":"anchor"}},{"kind":"Field","name":{"kind":"Name","value":"layout"}},{"kind":"Field","name":{"kind":"Name","value":"cssClassName"}},{"kind":"Field","name":{"kind":"Name","value":"isStackedOnMobile"}},{"kind":"Field","name":{"kind":"Name","value":"verticalAlignment"}},{"kind":"Field","name":{"kind":"Name","value":"borderColor"}},{"kind":"Field","name":{"kind":"Name","value":"backgroundColor"}},{"kind":"Field","name":{"kind":"Name","value":"fontSize"}},{"kind":"Field","name":{"kind":"Name","value":"fontFamily"}},{"kind":"Field","name":{"kind":"Name","value":"style"}},{"kind":"Field","name":{"kind":"Name","value":"textColor"}},{"kind":"Field","name":{"kind":"Name","value":"gradient"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CoreColumn"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"anchor"}},{"kind":"Field","name":{"kind":"Name","value":"borderColor"}},{"kind":"Field","name":{"kind":"Name","value":"backgroundColor"}},{"kind":"Field","name":{"kind":"Name","value":"cssClassName"}},{"kind":"Field","name":{"kind":"Name","value":"fontSize"}},{"kind":"Field","name":{"kind":"Name","value":"fontFamily"}},{"kind":"Field","name":{"kind":"Name","value":"gradient"}},{"kind":"Field","name":{"kind":"Name","value":"layout"}},{"kind":"Field","name":{"kind":"Name","value":"style"}},{"kind":"Field","name":{"kind":"Name","value":"textColor"}},{"kind":"Field","name":{"kind":"Name","value":"verticalAlignment"}},{"kind":"Field","name":{"kind":"Name","value":"width"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CoreCode"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"anchor"}},{"kind":"Field","name":{"kind":"Name","value":"backgroundColor"}},{"kind":"Field","name":{"kind":"Name","value":"borderColor"}},{"kind":"Field","name":{"kind":"Name","value":"className"}},{"kind":"Field","name":{"kind":"Name","value":"content"}},{"kind":"Field","name":{"kind":"Name","value":"cssClassName"}},{"kind":"Field","name":{"kind":"Name","value":"fontFamily"}},{"kind":"Field","name":{"kind":"Name","value":"fontSize"}},{"kind":"Field","name":{"kind":"Name","value":"gradient"}},{"kind":"Field","name":{"kind":"Name","value":"lock"}},{"kind":"Field","name":{"kind":"Name","value":"style"}},{"kind":"Field","name":{"kind":"Name","value":"textColor"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CoreQuote"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"textAlign"}},{"kind":"Field","name":{"kind":"Name","value":"anchor"}},{"kind":"Field","name":{"kind":"Name","value":"backgroundColor"}},{"kind":"Field","name":{"kind":"Name","value":"textAlign"}},{"kind":"Field","name":{"kind":"Name","value":"className"}},{"kind":"Field","name":{"kind":"Name","value":"fontFamily"}},{"kind":"Field","name":{"kind":"Name","value":"fontSize"}},{"kind":"Field","name":{"kind":"Name","value":"gradient"}},{"kind":"Field","name":{"kind":"Name","value":"lock"}},{"kind":"Field","name":{"kind":"Name","value":"style"}},{"kind":"Field","name":{"kind":"Name","value":"textColor"}},{"kind":"Field","name":{"kind":"Name","value":"value"}},{"kind":"Field","name":{"kind":"Name","value":"cssClassName"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CoreImage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"align"}},{"kind":"Field","name":{"kind":"Name","value":"alt"}},{"kind":"Field","name":{"kind":"Name","value":"anchor"}},{"kind":"Field","name":{"kind":"Name","value":"borderColor"}},{"kind":"Field","name":{"kind":"Name","value":"className"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"style"}},{"kind":"Field","name":{"kind":"Name","value":"src"}},{"kind":"Field","name":{"kind":"Name","value":"sizeSlug"}},{"kind":"Field","name":{"kind":"Name","value":"rel"}},{"kind":"Field","name":{"kind":"Name","value":"lock"}},{"kind":"Field","name":{"kind":"Name","value":"linkTarget"}},{"kind":"Field","name":{"kind":"Name","value":"linkDestination"}},{"kind":"Field","name":{"kind":"Name","value":"linkClass"}},{"kind":"Field","name":{"kind":"Name","value":"href"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"cssClassName"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CoreSeparator"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"align"}},{"kind":"Field","name":{"kind":"Name","value":"anchor"}},{"kind":"Field","name":{"kind":"Name","value":"opacity"}},{"kind":"Field","name":{"kind":"Name","value":"gradient"}},{"kind":"Field","name":{"kind":"Name","value":"backgroundColor"}},{"kind":"Field","name":{"kind":"Name","value":"style"}},{"kind":"Field","name":{"kind":"Name","value":"cssClassName"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CoreList"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"anchor"}},{"kind":"Field","name":{"kind":"Name","value":"backgroundColor"}},{"kind":"Field","name":{"kind":"Name","value":"className"}},{"kind":"Field","name":{"kind":"Name","value":"fontFamily"}},{"kind":"Field","name":{"kind":"Name","value":"fontSize"}},{"kind":"Field","name":{"kind":"Name","value":"gradient"}},{"kind":"Field","name":{"kind":"Name","value":"lock"}},{"kind":"Field","name":{"kind":"Name","value":"ordered"}},{"kind":"Field","name":{"kind":"Name","value":"reversed"}},{"kind":"Field","name":{"kind":"Name","value":"start"}},{"kind":"Field","name":{"kind":"Name","value":"style"}},{"kind":"Field","name":{"kind":"Name","value":"textColor"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"values"}},{"kind":"Field","name":{"kind":"Name","value":"cssClassName"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CoreButton"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"anchor"}},{"kind":"Field","name":{"kind":"Name","value":"gradient"}},{"kind":"Field","name":{"kind":"Name","value":"textAlign"}},{"kind":"Field","name":{"kind":"Name","value":"textAlign"}},{"kind":"Field","name":{"kind":"Name","value":"textColor"}},{"kind":"Field","name":{"kind":"Name","value":"style"}},{"kind":"Field","name":{"kind":"Name","value":"fontSize"}},{"kind":"Field","name":{"kind":"Name","value":"fontFamily"}},{"kind":"Field","name":{"kind":"Name","value":"linkTarget"}},{"kind":"Field","name":{"kind":"Name","value":"rel"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"backgroundColor"}},{"kind":"Field","name":{"kind":"Name","value":"cssClassName"}},{"kind":"Field","name":{"kind":"Name","value":"linkClassName"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CoreButtons"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cssClassName"}},{"kind":"Field","name":{"kind":"Name","value":"align"}},{"kind":"Field","name":{"kind":"Name","value":"anchor"}},{"kind":"Field","name":{"kind":"Name","value":"fontFamily"}},{"kind":"Field","name":{"kind":"Name","value":"fontSize"}},{"kind":"Field","name":{"kind":"Name","value":"layout"}},{"kind":"Field","name":{"kind":"Name","value":"style"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CoreHeading"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"align"}},{"kind":"Field","name":{"kind":"Name","value":"anchor"}},{"kind":"Field","name":{"kind":"Name","value":"backgroundColor"}},{"kind":"Field","name":{"kind":"Name","value":"fontFamily"}},{"kind":"Field","name":{"kind":"Name","value":"fontSize"}},{"kind":"Field","name":{"kind":"Name","value":"gradient"}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"style"}},{"kind":"Field","name":{"kind":"Name","value":"textAlign"}},{"kind":"Field","name":{"kind":"Name","value":"textColor"}},{"kind":"Field","name":{"kind":"Name","value":"cssClassName"}}]}}]}}]}}]} as unknown as DocumentNode<WpBlocksFragmentFragment, unknown>;
-export const GetPageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetPage"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"idType"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PageIdType"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"asPreview"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Boolean"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}},{"kind":"Argument","name":{"kind":"Name","value":"idType"},"value":{"kind":"Variable","name":{"kind":"Name","value":"idType"}}},{"kind":"Argument","name":{"kind":"Name","value":"asPreview"},"value":{"kind":"Variable","name":{"kind":"Name","value":"asPreview"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"editorBlocks"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"flat"},"value":{"kind":"BooleanValue","value":true}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"WpBlocksFragment"}}]}},{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nicename"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"date"}},{"kind":"Field","name":{"kind":"Name","value":"status"}},{"kind":"Field","name":{"kind":"Name","value":"isRestricted"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"WpBlocksFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"EditorBlock"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"clientId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"renderedHtml"}},{"kind":"Field","name":{"kind":"Name","value":"parentClientId"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CoreParagraph"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cssClassName"}},{"kind":"Field","name":{"kind":"Name","value":"backgroundColor"}},{"kind":"Field","name":{"kind":"Name","value":"content"}},{"kind":"Field","name":{"kind":"Name","value":"style"}},{"kind":"Field","name":{"kind":"Name","value":"textColor"}},{"kind":"Field","name":{"kind":"Name","value":"fontSize"}},{"kind":"Field","name":{"kind":"Name","value":"fontFamily"}},{"kind":"Field","name":{"kind":"Name","value":"direction"}},{"kind":"Field","name":{"kind":"Name","value":"dropCap"}},{"kind":"Field","name":{"kind":"Name","value":"gradient"}},{"kind":"Field","name":{"kind":"Name","value":"align"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CoreColumns"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"align"}},{"kind":"Field","name":{"kind":"Name","value":"anchor"}},{"kind":"Field","name":{"kind":"Name","value":"layout"}},{"kind":"Field","name":{"kind":"Name","value":"cssClassName"}},{"kind":"Field","name":{"kind":"Name","value":"isStackedOnMobile"}},{"kind":"Field","name":{"kind":"Name","value":"verticalAlignment"}},{"kind":"Field","name":{"kind":"Name","value":"borderColor"}},{"kind":"Field","name":{"kind":"Name","value":"backgroundColor"}},{"kind":"Field","name":{"kind":"Name","value":"fontSize"}},{"kind":"Field","name":{"kind":"Name","value":"fontFamily"}},{"kind":"Field","name":{"kind":"Name","value":"style"}},{"kind":"Field","name":{"kind":"Name","value":"textColor"}},{"kind":"Field","name":{"kind":"Name","value":"gradient"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CoreColumn"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"anchor"}},{"kind":"Field","name":{"kind":"Name","value":"borderColor"}},{"kind":"Field","name":{"kind":"Name","value":"backgroundColor"}},{"kind":"Field","name":{"kind":"Name","value":"cssClassName"}},{"kind":"Field","name":{"kind":"Name","value":"fontSize"}},{"kind":"Field","name":{"kind":"Name","value":"fontFamily"}},{"kind":"Field","name":{"kind":"Name","value":"gradient"}},{"kind":"Field","name":{"kind":"Name","value":"layout"}},{"kind":"Field","name":{"kind":"Name","value":"style"}},{"kind":"Field","name":{"kind":"Name","value":"textColor"}},{"kind":"Field","name":{"kind":"Name","value":"verticalAlignment"}},{"kind":"Field","name":{"kind":"Name","value":"width"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CoreCode"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"anchor"}},{"kind":"Field","name":{"kind":"Name","value":"backgroundColor"}},{"kind":"Field","name":{"kind":"Name","value":"borderColor"}},{"kind":"Field","name":{"kind":"Name","value":"className"}},{"kind":"Field","name":{"kind":"Name","value":"content"}},{"kind":"Field","name":{"kind":"Name","value":"cssClassName"}},{"kind":"Field","name":{"kind":"Name","value":"fontFamily"}},{"kind":"Field","name":{"kind":"Name","value":"fontSize"}},{"kind":"Field","name":{"kind":"Name","value":"gradient"}},{"kind":"Field","name":{"kind":"Name","value":"lock"}},{"kind":"Field","name":{"kind":"Name","value":"style"}},{"kind":"Field","name":{"kind":"Name","value":"textColor"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CoreQuote"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"textAlign"}},{"kind":"Field","name":{"kind":"Name","value":"anchor"}},{"kind":"Field","name":{"kind":"Name","value":"backgroundColor"}},{"kind":"Field","name":{"kind":"Name","value":"textAlign"}},{"kind":"Field","name":{"kind":"Name","value":"className"}},{"kind":"Field","name":{"kind":"Name","value":"fontFamily"}},{"kind":"Field","name":{"kind":"Name","value":"fontSize"}},{"kind":"Field","name":{"kind":"Name","value":"gradient"}},{"kind":"Field","name":{"kind":"Name","value":"lock"}},{"kind":"Field","name":{"kind":"Name","value":"style"}},{"kind":"Field","name":{"kind":"Name","value":"textColor"}},{"kind":"Field","name":{"kind":"Name","value":"value"}},{"kind":"Field","name":{"kind":"Name","value":"cssClassName"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CoreImage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"align"}},{"kind":"Field","name":{"kind":"Name","value":"alt"}},{"kind":"Field","name":{"kind":"Name","value":"anchor"}},{"kind":"Field","name":{"kind":"Name","value":"borderColor"}},{"kind":"Field","name":{"kind":"Name","value":"className"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"style"}},{"kind":"Field","name":{"kind":"Name","value":"src"}},{"kind":"Field","name":{"kind":"Name","value":"sizeSlug"}},{"kind":"Field","name":{"kind":"Name","value":"rel"}},{"kind":"Field","name":{"kind":"Name","value":"lock"}},{"kind":"Field","name":{"kind":"Name","value":"linkTarget"}},{"kind":"Field","name":{"kind":"Name","value":"linkDestination"}},{"kind":"Field","name":{"kind":"Name","value":"linkClass"}},{"kind":"Field","name":{"kind":"Name","value":"href"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"cssClassName"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CoreSeparator"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"align"}},{"kind":"Field","name":{"kind":"Name","value":"anchor"}},{"kind":"Field","name":{"kind":"Name","value":"opacity"}},{"kind":"Field","name":{"kind":"Name","value":"gradient"}},{"kind":"Field","name":{"kind":"Name","value":"backgroundColor"}},{"kind":"Field","name":{"kind":"Name","value":"style"}},{"kind":"Field","name":{"kind":"Name","value":"cssClassName"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CoreList"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"anchor"}},{"kind":"Field","name":{"kind":"Name","value":"backgroundColor"}},{"kind":"Field","name":{"kind":"Name","value":"className"}},{"kind":"Field","name":{"kind":"Name","value":"fontFamily"}},{"kind":"Field","name":{"kind":"Name","value":"fontSize"}},{"kind":"Field","name":{"kind":"Name","value":"gradient"}},{"kind":"Field","name":{"kind":"Name","value":"lock"}},{"kind":"Field","name":{"kind":"Name","value":"ordered"}},{"kind":"Field","name":{"kind":"Name","value":"reversed"}},{"kind":"Field","name":{"kind":"Name","value":"start"}},{"kind":"Field","name":{"kind":"Name","value":"style"}},{"kind":"Field","name":{"kind":"Name","value":"textColor"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"values"}},{"kind":"Field","name":{"kind":"Name","value":"cssClassName"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CoreButton"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"anchor"}},{"kind":"Field","name":{"kind":"Name","value":"gradient"}},{"kind":"Field","name":{"kind":"Name","value":"textAlign"}},{"kind":"Field","name":{"kind":"Name","value":"textAlign"}},{"kind":"Field","name":{"kind":"Name","value":"textColor"}},{"kind":"Field","name":{"kind":"Name","value":"style"}},{"kind":"Field","name":{"kind":"Name","value":"fontSize"}},{"kind":"Field","name":{"kind":"Name","value":"fontFamily"}},{"kind":"Field","name":{"kind":"Name","value":"linkTarget"}},{"kind":"Field","name":{"kind":"Name","value":"rel"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"backgroundColor"}},{"kind":"Field","name":{"kind":"Name","value":"cssClassName"}},{"kind":"Field","name":{"kind":"Name","value":"linkClassName"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CoreButtons"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cssClassName"}},{"kind":"Field","name":{"kind":"Name","value":"align"}},{"kind":"Field","name":{"kind":"Name","value":"anchor"}},{"kind":"Field","name":{"kind":"Name","value":"fontFamily"}},{"kind":"Field","name":{"kind":"Name","value":"fontSize"}},{"kind":"Field","name":{"kind":"Name","value":"layout"}},{"kind":"Field","name":{"kind":"Name","value":"style"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CoreHeading"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"align"}},{"kind":"Field","name":{"kind":"Name","value":"anchor"}},{"kind":"Field","name":{"kind":"Name","value":"backgroundColor"}},{"kind":"Field","name":{"kind":"Name","value":"fontFamily"}},{"kind":"Field","name":{"kind":"Name","value":"fontSize"}},{"kind":"Field","name":{"kind":"Name","value":"gradient"}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"style"}},{"kind":"Field","name":{"kind":"Name","value":"textAlign"}},{"kind":"Field","name":{"kind":"Name","value":"textColor"}},{"kind":"Field","name":{"kind":"Name","value":"cssClassName"}}]}}]}}]}}]} as unknown as DocumentNode<GetPageQuery, GetPageQueryVariables>;
-export const GetPostDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetPost"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"idType"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PostIdType"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"asPreview"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Boolean"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"post"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}},{"kind":"Argument","name":{"kind":"Name","value":"idType"},"value":{"kind":"Variable","name":{"kind":"Name","value":"idType"}}},{"kind":"Argument","name":{"kind":"Name","value":"asPreview"},"value":{"kind":"Variable","name":{"kind":"Name","value":"asPreview"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"editorBlocks"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"flat"},"value":{"kind":"BooleanValue","value":true}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"WpBlocksFragment"}}]}},{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"date"}},{"kind":"Field","name":{"kind":"Name","value":"status"}},{"kind":"Field","name":{"kind":"Name","value":"isRestricted"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"WpBlocksFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"EditorBlock"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"clientId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"renderedHtml"}},{"kind":"Field","name":{"kind":"Name","value":"parentClientId"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CoreParagraph"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cssClassName"}},{"kind":"Field","name":{"kind":"Name","value":"backgroundColor"}},{"kind":"Field","name":{"kind":"Name","value":"content"}},{"kind":"Field","name":{"kind":"Name","value":"style"}},{"kind":"Field","name":{"kind":"Name","value":"textColor"}},{"kind":"Field","name":{"kind":"Name","value":"fontSize"}},{"kind":"Field","name":{"kind":"Name","value":"fontFamily"}},{"kind":"Field","name":{"kind":"Name","value":"direction"}},{"kind":"Field","name":{"kind":"Name","value":"dropCap"}},{"kind":"Field","name":{"kind":"Name","value":"gradient"}},{"kind":"Field","name":{"kind":"Name","value":"align"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CoreColumns"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"align"}},{"kind":"Field","name":{"kind":"Name","value":"anchor"}},{"kind":"Field","name":{"kind":"Name","value":"layout"}},{"kind":"Field","name":{"kind":"Name","value":"cssClassName"}},{"kind":"Field","name":{"kind":"Name","value":"isStackedOnMobile"}},{"kind":"Field","name":{"kind":"Name","value":"verticalAlignment"}},{"kind":"Field","name":{"kind":"Name","value":"borderColor"}},{"kind":"Field","name":{"kind":"Name","value":"backgroundColor"}},{"kind":"Field","name":{"kind":"Name","value":"fontSize"}},{"kind":"Field","name":{"kind":"Name","value":"fontFamily"}},{"kind":"Field","name":{"kind":"Name","value":"style"}},{"kind":"Field","name":{"kind":"Name","value":"textColor"}},{"kind":"Field","name":{"kind":"Name","value":"gradient"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CoreColumn"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"anchor"}},{"kind":"Field","name":{"kind":"Name","value":"borderColor"}},{"kind":"Field","name":{"kind":"Name","value":"backgroundColor"}},{"kind":"Field","name":{"kind":"Name","value":"cssClassName"}},{"kind":"Field","name":{"kind":"Name","value":"fontSize"}},{"kind":"Field","name":{"kind":"Name","value":"fontFamily"}},{"kind":"Field","name":{"kind":"Name","value":"gradient"}},{"kind":"Field","name":{"kind":"Name","value":"layout"}},{"kind":"Field","name":{"kind":"Name","value":"style"}},{"kind":"Field","name":{"kind":"Name","value":"textColor"}},{"kind":"Field","name":{"kind":"Name","value":"verticalAlignment"}},{"kind":"Field","name":{"kind":"Name","value":"width"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CoreCode"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"anchor"}},{"kind":"Field","name":{"kind":"Name","value":"backgroundColor"}},{"kind":"Field","name":{"kind":"Name","value":"borderColor"}},{"kind":"Field","name":{"kind":"Name","value":"className"}},{"kind":"Field","name":{"kind":"Name","value":"content"}},{"kind":"Field","name":{"kind":"Name","value":"cssClassName"}},{"kind":"Field","name":{"kind":"Name","value":"fontFamily"}},{"kind":"Field","name":{"kind":"Name","value":"fontSize"}},{"kind":"Field","name":{"kind":"Name","value":"gradient"}},{"kind":"Field","name":{"kind":"Name","value":"lock"}},{"kind":"Field","name":{"kind":"Name","value":"style"}},{"kind":"Field","name":{"kind":"Name","value":"textColor"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CoreQuote"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"textAlign"}},{"kind":"Field","name":{"kind":"Name","value":"anchor"}},{"kind":"Field","name":{"kind":"Name","value":"backgroundColor"}},{"kind":"Field","name":{"kind":"Name","value":"textAlign"}},{"kind":"Field","name":{"kind":"Name","value":"className"}},{"kind":"Field","name":{"kind":"Name","value":"fontFamily"}},{"kind":"Field","name":{"kind":"Name","value":"fontSize"}},{"kind":"Field","name":{"kind":"Name","value":"gradient"}},{"kind":"Field","name":{"kind":"Name","value":"lock"}},{"kind":"Field","name":{"kind":"Name","value":"style"}},{"kind":"Field","name":{"kind":"Name","value":"textColor"}},{"kind":"Field","name":{"kind":"Name","value":"value"}},{"kind":"Field","name":{"kind":"Name","value":"cssClassName"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CoreImage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"align"}},{"kind":"Field","name":{"kind":"Name","value":"alt"}},{"kind":"Field","name":{"kind":"Name","value":"anchor"}},{"kind":"Field","name":{"kind":"Name","value":"borderColor"}},{"kind":"Field","name":{"kind":"Name","value":"className"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"style"}},{"kind":"Field","name":{"kind":"Name","value":"src"}},{"kind":"Field","name":{"kind":"Name","value":"sizeSlug"}},{"kind":"Field","name":{"kind":"Name","value":"rel"}},{"kind":"Field","name":{"kind":"Name","value":"lock"}},{"kind":"Field","name":{"kind":"Name","value":"linkTarget"}},{"kind":"Field","name":{"kind":"Name","value":"linkDestination"}},{"kind":"Field","name":{"kind":"Name","value":"linkClass"}},{"kind":"Field","name":{"kind":"Name","value":"href"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"cssClassName"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CoreSeparator"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"align"}},{"kind":"Field","name":{"kind":"Name","value":"anchor"}},{"kind":"Field","name":{"kind":"Name","value":"opacity"}},{"kind":"Field","name":{"kind":"Name","value":"gradient"}},{"kind":"Field","name":{"kind":"Name","value":"backgroundColor"}},{"kind":"Field","name":{"kind":"Name","value":"style"}},{"kind":"Field","name":{"kind":"Name","value":"cssClassName"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CoreList"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"anchor"}},{"kind":"Field","name":{"kind":"Name","value":"backgroundColor"}},{"kind":"Field","name":{"kind":"Name","value":"className"}},{"kind":"Field","name":{"kind":"Name","value":"fontFamily"}},{"kind":"Field","name":{"kind":"Name","value":"fontSize"}},{"kind":"Field","name":{"kind":"Name","value":"gradient"}},{"kind":"Field","name":{"kind":"Name","value":"lock"}},{"kind":"Field","name":{"kind":"Name","value":"ordered"}},{"kind":"Field","name":{"kind":"Name","value":"reversed"}},{"kind":"Field","name":{"kind":"Name","value":"start"}},{"kind":"Field","name":{"kind":"Name","value":"style"}},{"kind":"Field","name":{"kind":"Name","value":"textColor"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"values"}},{"kind":"Field","name":{"kind":"Name","value":"cssClassName"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CoreButton"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"anchor"}},{"kind":"Field","name":{"kind":"Name","value":"gradient"}},{"kind":"Field","name":{"kind":"Name","value":"textAlign"}},{"kind":"Field","name":{"kind":"Name","value":"textAlign"}},{"kind":"Field","name":{"kind":"Name","value":"textColor"}},{"kind":"Field","name":{"kind":"Name","value":"style"}},{"kind":"Field","name":{"kind":"Name","value":"fontSize"}},{"kind":"Field","name":{"kind":"Name","value":"fontFamily"}},{"kind":"Field","name":{"kind":"Name","value":"linkTarget"}},{"kind":"Field","name":{"kind":"Name","value":"rel"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"backgroundColor"}},{"kind":"Field","name":{"kind":"Name","value":"cssClassName"}},{"kind":"Field","name":{"kind":"Name","value":"linkClassName"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CoreButtons"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cssClassName"}},{"kind":"Field","name":{"kind":"Name","value":"align"}},{"kind":"Field","name":{"kind":"Name","value":"anchor"}},{"kind":"Field","name":{"kind":"Name","value":"fontFamily"}},{"kind":"Field","name":{"kind":"Name","value":"fontSize"}},{"kind":"Field","name":{"kind":"Name","value":"layout"}},{"kind":"Field","name":{"kind":"Name","value":"style"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CoreHeading"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"align"}},{"kind":"Field","name":{"kind":"Name","value":"anchor"}},{"kind":"Field","name":{"kind":"Name","value":"backgroundColor"}},{"kind":"Field","name":{"kind":"Name","value":"fontFamily"}},{"kind":"Field","name":{"kind":"Name","value":"fontSize"}},{"kind":"Field","name":{"kind":"Name","value":"gradient"}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"style"}},{"kind":"Field","name":{"kind":"Name","value":"textAlign"}},{"kind":"Field","name":{"kind":"Name","value":"textColor"}},{"kind":"Field","name":{"kind":"Name","value":"cssClassName"}}]}}]}}]}}]} as unknown as DocumentNode<GetPostQuery, GetPostQueryVariables>;
-export const BlogArchiveDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"BlogArchive"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"first"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"last"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"after"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"before"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"posts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"Variable","name":{"kind":"Name","value":"first"}}},{"kind":"Argument","name":{"kind":"Name","value":"last"},"value":{"kind":"Variable","name":{"kind":"Name","value":"last"}}},{"kind":"Argument","name":{"kind":"Name","value":"after"},"value":{"kind":"Variable","name":{"kind":"Name","value":"after"}}},{"kind":"Argument","name":{"kind":"Name","value":"before"},"value":{"kind":"Variable","name":{"kind":"Name","value":"before"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cursor"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"uri"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"featuredImage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"altText"}},{"kind":"Field","name":{"kind":"Name","value":"uri"}},{"kind":"Field","name":{"kind":"Name","value":"sourceUrl"}},{"kind":"Field","name":{"kind":"Name","value":"srcSet"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"size"},"value":{"kind":"EnumValue","value":"MEDIUM"}}]}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"pageInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hasNextPage"}},{"kind":"Field","name":{"kind":"Name","value":"startCursor"}},{"kind":"Field","name":{"kind":"Name","value":"endCursor"}},{"kind":"Field","name":{"kind":"Name","value":"hasPreviousPage"}}]}}]}}]}}]} as unknown as DocumentNode<BlogArchiveQuery, BlogArchiveQueryVariables>;
-export const HomeMetadataDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"HomeMetadata"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"generalSettings"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]} as unknown as DocumentNode<HomeMetadataQuery, HomeMetadataQueryVariables>;
-export const GetLayoutDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetLayout"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"primaryMenuItems"},"name":{"kind":"Name","value":"menuItems"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"location"},"value":{"kind":"EnumValue","value":"PRIMARY"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"uri"}}]}}]}}]}}]} as unknown as DocumentNode<GetLayoutQuery, GetLayoutQueryVariables>;
-export const LayoutMetadataDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"LayoutMetadata"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"generalSettings"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]} as unknown as DocumentNode<LayoutMetadataQuery, LayoutMetadataQueryVariables>;
-export const GetReadingSettingsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetReadingSettings"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"readingSettings"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pageOnFront"}},{"kind":"Field","name":{"kind":"Name","value":"showOnFront"}}]}},{"kind":"Field","name":{"kind":"Name","value":"generalSettings"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]} as unknown as DocumentNode<GetReadingSettingsQuery, GetReadingSettingsQueryVariables>;
-export const SearchDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Search"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"first"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"last"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"after"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"before"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"search"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"contentNodes"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"Variable","name":{"kind":"Name","value":"first"}}},{"kind":"Argument","name":{"kind":"Name","value":"last"},"value":{"kind":"Variable","name":{"kind":"Name","value":"last"}}},{"kind":"Argument","name":{"kind":"Name","value":"after"},"value":{"kind":"Variable","name":{"kind":"Name","value":"after"}}},{"kind":"Argument","name":{"kind":"Name","value":"before"},"value":{"kind":"Variable","name":{"kind":"Name","value":"before"}}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"contentTypes"},"value":{"kind":"ListValue","values":[{"kind":"EnumValue","value":"FILM"},{"kind":"EnumValue","value":"PAGE"},{"kind":"EnumValue","value":"POST"}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"search"},"value":{"kind":"Variable","name":{"kind":"Name","value":"search"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"status"},"value":{"kind":"EnumValue","value":"PUBLISH"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pageInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"endCursor"}},{"kind":"Field","name":{"kind":"Name","value":"hasNextPage"}},{"kind":"Field","name":{"kind":"Name","value":"hasPreviousPage"}},{"kind":"Field","name":{"kind":"Name","value":"startCursor"}}]}},{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cursor"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"NodeWithTitle"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"NodeWithExcerpt"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"excerpt"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Page"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Post"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<SearchQuery, SearchQueryVariables>;
+export const CustomBlockLibraryPostSelectorFragmentFragmentDoc = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'CustomBlockLibraryPostSelectorFragment' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'CustomBlockLibraryPostSelector' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'post' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'featuredImage' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'node' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'sourceUrl' },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  CustomBlockLibraryPostSelectorFragmentFragment,
+  unknown
+>;
+export const WpBlocksFragmentFragmentDoc = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'WpBlocksFragment' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'EditorBlock' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'clientId' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'renderedHtml' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'parentClientId' } },
+          {
+            kind: 'InlineFragment',
+            typeCondition: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'CoreParagraph' },
+            },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'attributes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'cssClassName' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'backgroundColor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'content' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'style' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'textColor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontSize' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontFamily' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'direction' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'dropCap' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'gradient' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'align' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'InlineFragment',
+            typeCondition: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'CoreColumns' },
+            },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'attributes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'align' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'anchor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'layout' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'cssClassName' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'isStackedOnMobile' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'verticalAlignment' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'borderColor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'backgroundColor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontSize' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontFamily' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'style' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'textColor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'gradient' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'InlineFragment',
+            typeCondition: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'CoreColumn' },
+            },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'attributes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'anchor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'borderColor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'backgroundColor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'cssClassName' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontSize' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontFamily' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'gradient' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'layout' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'style' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'textColor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'verticalAlignment' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'width' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'InlineFragment',
+            typeCondition: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'CoreCode' },
+            },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'attributes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'anchor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'backgroundColor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'borderColor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'className' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'content' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'cssClassName' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontFamily' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontSize' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'gradient' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'lock' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'style' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'textColor' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'InlineFragment',
+            typeCondition: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'CoreQuote' },
+            },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'attributes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'textAlign' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'anchor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'backgroundColor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'textAlign' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'className' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontFamily' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontSize' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'gradient' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'lock' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'style' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'textColor' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'value' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'cssClassName' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'InlineFragment',
+            typeCondition: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'CoreImage' },
+            },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'attributes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'align' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'alt' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'anchor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'borderColor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'className' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'width' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'url' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'style' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'src' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'sizeSlug' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'rel' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'lock' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'linkTarget' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'linkDestination' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'linkClass' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'href' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'height' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'cssClassName' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'InlineFragment',
+            typeCondition: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'CoreSeparator' },
+            },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'attributes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'align' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'anchor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'opacity' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'gradient' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'backgroundColor' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'style' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'cssClassName' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'InlineFragment',
+            typeCondition: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'CoreList' },
+            },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'attributes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'anchor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'backgroundColor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'className' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontFamily' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontSize' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'gradient' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'lock' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'ordered' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'reversed' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'start' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'style' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'textColor' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'type' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'values' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'cssClassName' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'InlineFragment',
+            typeCondition: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'CoreButton' },
+            },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'attributes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'anchor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'gradient' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'textAlign' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'textAlign' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'textColor' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'style' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontSize' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontFamily' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'linkTarget' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'rel' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'url' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'backgroundColor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'cssClassName' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'linkClassName' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'InlineFragment',
+            typeCondition: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'CoreButtons' },
+            },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'attributes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'cssClassName' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'align' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'anchor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontFamily' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontSize' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'layout' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'style' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'InlineFragment',
+            typeCondition: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'CoreHeading' },
+            },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'attributes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'align' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'anchor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'backgroundColor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontFamily' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontSize' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'gradient' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'level' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'style' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'textAlign' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'textColor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'cssClassName' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<WpBlocksFragmentFragment, unknown>;
+export const GetPageDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'GetPage' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
+          type: {
+            kind: 'NonNullType',
+            type: { kind: 'NamedType', name: { kind: 'Name', value: 'ID' } },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'idType' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'PageIdType' },
+            },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'asPreview' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'Boolean' },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'page' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'id' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'id' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'idType' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'idType' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'asPreview' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'asPreview' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'editorBlocks' },
+                  arguments: [
+                    {
+                      kind: 'Argument',
+                      name: { kind: 'Name', value: 'flat' },
+                      value: { kind: 'BooleanValue', value: true },
+                    },
+                  ],
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'FragmentSpread',
+                        name: { kind: 'Name', value: 'WpBlocksFragment' },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'author' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'node' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'nicename' },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                { kind: 'Field', name: { kind: 'Name', value: 'date' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'status' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'isRestricted' },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'WpBlocksFragment' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'EditorBlock' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'clientId' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'renderedHtml' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'parentClientId' } },
+          {
+            kind: 'InlineFragment',
+            typeCondition: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'CoreParagraph' },
+            },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'attributes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'cssClassName' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'backgroundColor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'content' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'style' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'textColor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontSize' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontFamily' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'direction' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'dropCap' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'gradient' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'align' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'InlineFragment',
+            typeCondition: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'CoreColumns' },
+            },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'attributes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'align' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'anchor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'layout' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'cssClassName' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'isStackedOnMobile' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'verticalAlignment' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'borderColor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'backgroundColor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontSize' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontFamily' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'style' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'textColor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'gradient' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'InlineFragment',
+            typeCondition: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'CoreColumn' },
+            },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'attributes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'anchor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'borderColor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'backgroundColor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'cssClassName' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontSize' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontFamily' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'gradient' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'layout' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'style' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'textColor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'verticalAlignment' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'width' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'InlineFragment',
+            typeCondition: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'CoreCode' },
+            },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'attributes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'anchor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'backgroundColor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'borderColor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'className' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'content' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'cssClassName' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontFamily' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontSize' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'gradient' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'lock' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'style' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'textColor' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'InlineFragment',
+            typeCondition: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'CoreQuote' },
+            },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'attributes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'textAlign' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'anchor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'backgroundColor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'textAlign' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'className' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontFamily' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontSize' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'gradient' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'lock' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'style' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'textColor' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'value' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'cssClassName' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'InlineFragment',
+            typeCondition: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'CoreImage' },
+            },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'attributes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'align' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'alt' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'anchor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'borderColor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'className' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'width' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'url' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'style' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'src' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'sizeSlug' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'rel' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'lock' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'linkTarget' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'linkDestination' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'linkClass' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'href' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'height' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'cssClassName' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'InlineFragment',
+            typeCondition: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'CoreSeparator' },
+            },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'attributes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'align' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'anchor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'opacity' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'gradient' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'backgroundColor' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'style' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'cssClassName' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'InlineFragment',
+            typeCondition: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'CoreList' },
+            },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'attributes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'anchor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'backgroundColor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'className' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontFamily' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontSize' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'gradient' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'lock' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'ordered' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'reversed' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'start' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'style' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'textColor' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'type' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'values' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'cssClassName' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'InlineFragment',
+            typeCondition: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'CoreButton' },
+            },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'attributes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'anchor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'gradient' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'textAlign' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'textAlign' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'textColor' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'style' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontSize' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontFamily' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'linkTarget' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'rel' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'url' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'backgroundColor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'cssClassName' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'linkClassName' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'InlineFragment',
+            typeCondition: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'CoreButtons' },
+            },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'attributes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'cssClassName' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'align' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'anchor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontFamily' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontSize' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'layout' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'style' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'InlineFragment',
+            typeCondition: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'CoreHeading' },
+            },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'attributes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'align' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'anchor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'backgroundColor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontFamily' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontSize' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'gradient' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'level' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'style' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'textAlign' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'textColor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'cssClassName' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<GetPageQuery, GetPageQueryVariables>;
+export const GetPostDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'GetPost' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
+          type: {
+            kind: 'NonNullType',
+            type: { kind: 'NamedType', name: { kind: 'Name', value: 'ID' } },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'idType' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'PostIdType' },
+            },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'asPreview' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'Boolean' },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'post' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'id' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'id' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'idType' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'idType' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'asPreview' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'asPreview' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'editorBlocks' },
+                  arguments: [
+                    {
+                      kind: 'Argument',
+                      name: { kind: 'Name', value: 'flat' },
+                      value: { kind: 'BooleanValue', value: true },
+                    },
+                  ],
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'FragmentSpread',
+                        name: { kind: 'Name', value: 'WpBlocksFragment' },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'author' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'node' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'name' },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                { kind: 'Field', name: { kind: 'Name', value: 'date' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'status' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'isRestricted' },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'WpBlocksFragment' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'EditorBlock' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'clientId' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'renderedHtml' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'parentClientId' } },
+          {
+            kind: 'InlineFragment',
+            typeCondition: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'CoreParagraph' },
+            },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'attributes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'cssClassName' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'backgroundColor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'content' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'style' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'textColor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontSize' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontFamily' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'direction' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'dropCap' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'gradient' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'align' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'InlineFragment',
+            typeCondition: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'CoreColumns' },
+            },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'attributes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'align' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'anchor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'layout' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'cssClassName' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'isStackedOnMobile' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'verticalAlignment' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'borderColor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'backgroundColor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontSize' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontFamily' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'style' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'textColor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'gradient' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'InlineFragment',
+            typeCondition: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'CoreColumn' },
+            },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'attributes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'anchor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'borderColor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'backgroundColor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'cssClassName' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontSize' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontFamily' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'gradient' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'layout' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'style' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'textColor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'verticalAlignment' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'width' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'InlineFragment',
+            typeCondition: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'CoreCode' },
+            },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'attributes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'anchor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'backgroundColor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'borderColor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'className' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'content' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'cssClassName' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontFamily' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontSize' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'gradient' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'lock' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'style' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'textColor' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'InlineFragment',
+            typeCondition: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'CoreQuote' },
+            },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'attributes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'textAlign' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'anchor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'backgroundColor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'textAlign' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'className' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontFamily' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontSize' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'gradient' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'lock' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'style' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'textColor' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'value' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'cssClassName' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'InlineFragment',
+            typeCondition: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'CoreImage' },
+            },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'attributes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'align' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'alt' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'anchor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'borderColor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'className' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'width' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'url' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'style' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'src' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'sizeSlug' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'rel' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'lock' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'linkTarget' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'linkDestination' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'linkClass' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'href' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'height' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'cssClassName' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'InlineFragment',
+            typeCondition: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'CoreSeparator' },
+            },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'attributes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'align' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'anchor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'opacity' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'gradient' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'backgroundColor' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'style' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'cssClassName' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'InlineFragment',
+            typeCondition: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'CoreList' },
+            },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'attributes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'anchor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'backgroundColor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'className' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontFamily' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontSize' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'gradient' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'lock' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'ordered' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'reversed' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'start' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'style' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'textColor' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'type' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'values' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'cssClassName' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'InlineFragment',
+            typeCondition: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'CoreButton' },
+            },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'attributes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'anchor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'gradient' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'textAlign' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'textAlign' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'textColor' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'style' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontSize' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontFamily' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'linkTarget' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'rel' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'url' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'backgroundColor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'cssClassName' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'linkClassName' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'InlineFragment',
+            typeCondition: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'CoreButtons' },
+            },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'attributes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'cssClassName' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'align' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'anchor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontFamily' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontSize' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'layout' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'style' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'InlineFragment',
+            typeCondition: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'CoreHeading' },
+            },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'attributes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'align' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'anchor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'backgroundColor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontFamily' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fontSize' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'gradient' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'level' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'style' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'textAlign' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'textColor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'cssClassName' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<GetPostQuery, GetPostQueryVariables>;
+export const BlogArchiveDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'BlogArchive' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'first' },
+          },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'last' } },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'after' },
+          },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'before' },
+          },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'posts' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'first' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'first' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'last' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'last' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'after' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'after' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'before' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'before' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'edges' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'cursor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'node' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'slug' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'uri' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'title' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'id' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'featuredImage' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'node' },
+                                    selectionSet: {
+                                      kind: 'SelectionSet',
+                                      selections: [
+                                        {
+                                          kind: 'Field',
+                                          name: {
+                                            kind: 'Name',
+                                            value: 'altText',
+                                          },
+                                        },
+                                        {
+                                          kind: 'Field',
+                                          name: { kind: 'Name', value: 'uri' },
+                                        },
+                                        {
+                                          kind: 'Field',
+                                          name: {
+                                            kind: 'Name',
+                                            value: 'sourceUrl',
+                                          },
+                                        },
+                                        {
+                                          kind: 'Field',
+                                          name: {
+                                            kind: 'Name',
+                                            value: 'srcSet',
+                                          },
+                                          arguments: [
+                                            {
+                                              kind: 'Argument',
+                                              name: {
+                                                kind: 'Name',
+                                                value: 'size',
+                                              },
+                                              value: {
+                                                kind: 'EnumValue',
+                                                value: 'MEDIUM',
+                                              },
+                                            },
+                                          ],
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'pageInfo' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'hasNextPage' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'startCursor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'endCursor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'hasPreviousPage' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<BlogArchiveQuery, BlogArchiveQueryVariables>;
+export const HomeMetadataDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'HomeMetadata' },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'generalSettings' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'description' } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<HomeMetadataQuery, HomeMetadataQueryVariables>;
+export const GetLayoutDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'GetLayout' },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            alias: { kind: 'Name', value: 'primaryMenuItems' },
+            name: { kind: 'Name', value: 'menuItems' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'where' },
+                value: {
+                  kind: 'ObjectValue',
+                  fields: [
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'location' },
+                      value: { kind: 'EnumValue', value: 'PRIMARY' },
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'nodes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'label' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'uri' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<GetLayoutQuery, GetLayoutQueryVariables>;
+export const LayoutMetadataDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'LayoutMetadata' },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'generalSettings' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<LayoutMetadataQuery, LayoutMetadataQueryVariables>;
+export const GetReadingSettingsDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'GetReadingSettings' },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'readingSettings' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'pageOnFront' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'showOnFront' } },
+              ],
+            },
+          },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'generalSettings' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  GetReadingSettingsQuery,
+  GetReadingSettingsQueryVariables
+>;
+export const SearchDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'Search' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'first' },
+          },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'last' } },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'after' },
+          },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'before' },
+          },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'search' },
+          },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'contentNodes' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'first' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'first' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'last' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'last' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'after' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'after' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'before' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'before' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'where' },
+                value: {
+                  kind: 'ObjectValue',
+                  fields: [
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'contentTypes' },
+                      value: {
+                        kind: 'ListValue',
+                        values: [
+                          { kind: 'EnumValue', value: 'FILM' },
+                          { kind: 'EnumValue', value: 'PAGE' },
+                          { kind: 'EnumValue', value: 'POST' },
+                        ],
+                      },
+                    },
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'search' },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'search' },
+                      },
+                    },
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'status' },
+                      value: { kind: 'EnumValue', value: 'PUBLISH' },
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'pageInfo' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'endCursor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'hasNextPage' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'hasPreviousPage' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'startCursor' },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'edges' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'cursor' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'node' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: '__typename' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'id' },
+                            },
+                            {
+                              kind: 'InlineFragment',
+                              typeCondition: {
+                                kind: 'NamedType',
+                                name: { kind: 'Name', value: 'NodeWithTitle' },
+                              },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'title' },
+                                  },
+                                ],
+                              },
+                            },
+                            {
+                              kind: 'InlineFragment',
+                              typeCondition: {
+                                kind: 'NamedType',
+                                name: {
+                                  kind: 'Name',
+                                  value: 'NodeWithExcerpt',
+                                },
+                              },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'excerpt' },
+                                  },
+                                ],
+                              },
+                            },
+                            {
+                              kind: 'InlineFragment',
+                              typeCondition: {
+                                kind: 'NamedType',
+                                name: { kind: 'Name', value: 'Page' },
+                              },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'slug' },
+                                  },
+                                ],
+                              },
+                            },
+                            {
+                              kind: 'InlineFragment',
+                              typeCondition: {
+                                kind: 'NamedType',
+                                name: { kind: 'Name', value: 'Post' },
+                              },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'slug' },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<SearchQuery, SearchQueryVariables>;

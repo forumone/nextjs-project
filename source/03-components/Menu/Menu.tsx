@@ -1,82 +1,58 @@
-import clsx from 'clsx';
 import { GessoComponent } from 'gesso';
 import Link from 'next/link';
-import { ReactNode } from 'react';
-import styles from './menu.module.css';
+import {
+  ForwardedRef,
+  forwardRef,
+  HTMLAttributes,
+  JSX,
+  ReactNode,
+} from 'react';
+import MenuLinks, { MenuLinksProps } from './MenuLinks';
 
-interface MenuItem {
+interface MenuItemProps {
   title: ReactNode;
   url: string;
   inActiveTrail?: boolean;
-  below?: MenuItem[];
+  isButton?: boolean;
+  below?: MenuItemProps[];
 }
 
 interface BaseMenuProps extends GessoComponent {
-  items: MenuItem[];
+  items: MenuItemProps[];
 }
 
 interface MenuProps extends BaseMenuProps {
   itemClasses?: string | string[];
   linkClasses?: string | string[];
+  subnavClasses?: string | string[];
+  showSubmenuOnHover?: boolean;
+  showSubmenuOnClick?: boolean;
+  showSubmenuOnKeyUp?: boolean;
+  useArrowKeys?: boolean;
 }
 
-interface MenuLinksProps extends MenuProps {
-  menuLevel: number;
-}
-
-function MenuLinks({
-  items,
-  menuLevel,
-  modifierClasses,
-  itemClasses,
-  linkClasses,
-}: MenuLinksProps) {
+const MenuLink = forwardRef<
+  HTMLButtonElement | HTMLAnchorElement,
+  MenuItemProps & Omit<HTMLAttributes<HTMLElement>, 'title'>
+>(function MenuLink({ title, url, isButton, ...props }, ref): JSX.Element {
+  if (url === '<button>' || isButton) {
+    return (
+      <button ref={ref as ForwardedRef<HTMLButtonElement>} {...props}>
+        {title}
+      </button>
+    );
+  }
   return (
-    <ul
-      className={clsx(
-        styles.menu,
-        menuLevel === 0 ? modifierClasses : styles.subnav,
-      )}
-    >
-      {items.map((item, i) => (
-        <li
-          key={i}
-          className={clsx(
-            styles.item,
-            item.below && 'has-subnav',
-            item.inActiveTrail && 'in-active-trail',
-            itemClasses,
-          )}
-        >
-          <Link href={item.url} className={clsx(styles.link, linkClasses)}>
-            {item.title}
-          </Link>
-          {item.below && (
-            <MenuLinks menuLevel={menuLevel + 1} items={item.below} />
-          )}
-        </li>
-      ))}
-    </ul>
+    <Link href={url} ref={ref as ForwardedRef<HTMLAnchorElement>} {...props}>
+      {title}
+    </Link>
   );
-}
+});
 
-function Menu({
-  items,
-  modifierClasses,
-  itemClasses,
-  linkClasses,
-}: MenuProps): JSX.Element {
-  return (
-    <MenuLinks
-      menuLevel={0}
-      items={items}
-      modifierClasses={modifierClasses}
-      itemClasses={itemClasses}
-      linkClasses={linkClasses}
-    />
-  );
+function Menu(props: MenuProps): JSX.Element {
+  return <MenuLinks menuLevel={0} {...props} />;
 }
 
 export default Menu;
-export { MenuLinks };
-export type { BaseMenuProps, MenuItem, MenuLinksProps, MenuProps };
+export { MenuLink, MenuLinks };
+export type { BaseMenuProps, MenuItemProps, MenuLinksProps, MenuProps };

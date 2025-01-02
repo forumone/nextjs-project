@@ -1,28 +1,22 @@
 'use client';
 
-import { GessoComponent } from 'gesso';
-import { useEffect, useState } from 'react';
-import Menu, { MenuItem } from '../Menu';
-import OverlayMenu from '../OverlayMenu/OverlayMenu';
-import styles from './responsive-menu.module.css';
+import { JSX, useEffect, useState } from 'react';
+import DropdownMenu, { DropdownMenuProps } from '../DropdownMenu/DropdownMenu';
+import OverlayMenu, { OverlayMenuProps } from '../OverlayMenu/OverlayMenu';
 
-interface ResponsiveMenuProps extends GessoComponent {
-  items: MenuItem[];
-}
+const MENU_BREAKPOINT = '700px';
+
+type ResponsiveMenuProps = DropdownMenuProps & OverlayMenuProps;
 
 function ResponsiveMenu({
-  items,
-  modifierClasses,
+  showOnHover,
+  useArrowKeys,
+  ...props
 }: ResponsiveMenuProps): JSX.Element {
   const [mobile, setMobile] = useState(true);
-  const modifierClassesArr = modifierClasses
-    ? Array.isArray(modifierClasses)
-      ? [...modifierClasses]
-      : [modifierClasses]
-    : [];
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(min-width: 700px)');
+    const mediaQuery = window.matchMedia(`(width >= ${MENU_BREAKPOINT})`);
     const handleChange = (e: MediaQueryListEvent | MediaQueryList) => {
       if (e.matches) {
         setMobile(false);
@@ -37,19 +31,14 @@ function ResponsiveMenu({
     };
   }, []);
 
-  return (
-    <>
-      {mobile ? (
-        <OverlayMenu items={items} />
-      ) : (
-        <Menu
-          items={items}
-          modifierClasses={[styles.menu, ...modifierClassesArr]}
-          itemClasses={styles.item}
-          linkClasses={styles.link}
-        />
-      )}
-    </>
+  return mobile ? (
+    <OverlayMenu {...props} />
+  ) : (
+    <DropdownMenu
+      {...props}
+      showOnHover={showOnHover}
+      useArrowKeys={useArrowKeys}
+    />
   );
 }
 

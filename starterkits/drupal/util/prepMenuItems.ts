@@ -1,5 +1,5 @@
 import MenuItemFragment from '@/app/_components/navigation/MenuItemFragment';
-import { MenuItem as GessoMenuItem } from '@/source/03-components/Menu/Menu';
+import { MenuItemProps as GessoMenuItem } from '@/source/03-components/Menu/Menu';
 import { FragmentType, getFragmentData } from '@/types/__generated__';
 import { MenuItemFragmentFragment } from '@/types/__generated__/graphql';
 

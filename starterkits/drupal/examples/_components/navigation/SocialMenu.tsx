@@ -7,7 +7,7 @@
  */
 
 import Icons from '@/source/01-global/icon/icons';
-import Menu, { MenuItem } from '@/source/03-components/Menu/Menu';
+import Menu, { MenuItemProps } from '@/source/03-components/Menu/Menu';
 import styles from '@/source/03-components/Menu/menu-social.module.css';
 import { FragmentType, getFragmentData, graphql } from '@/types/__generated__';
 
@@ -52,7 +52,7 @@ function SocialMenu(props: { data: FragmentType<typeof SocialMenuFragment> }) {
      * somehow don't exist. Otherwise, TypeScript will complain.
      */
     data?.socialMenu?.items
-      .map((menuItem): MenuItem | null => {
+      .map((menuItem): MenuItemProps | null => {
         if (!menuItem || typeof menuItem.url !== 'string') {
           return null;
         }
@@ -82,7 +82,7 @@ function SocialMenu(props: { data: FragmentType<typeof SocialMenuFragment> }) {
           url: menuItem.url,
         };
       })
-      .filter((item): item is MenuItem => item !== null) || [];
+      .filter((item): item is MenuItemProps => item !== null) || [];
   return (
     <Menu
       items={menuItems}
