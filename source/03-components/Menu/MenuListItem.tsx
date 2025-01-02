@@ -1,7 +1,8 @@
 'use client';
 
+import { MenuLinksRef } from '@/source/03-components/Menu/MenuLinks';
 import clsx from 'clsx';
-import { forwardRef, JSX, useState } from 'react';
+import { forwardRef, JSX, KeyboardEventHandler, useRef, useState } from 'react';
 import { MenuItemProps, MenuLink, MenuLinks, MenuProps } from './Menu';
 import styles from './menu.module.css';
 
@@ -33,6 +34,7 @@ const MenuListItem = forwardRef<
   const [hideSubnav, setHideSubnav] = useState(
     !!showSubmenuOnHover || !!showSubmenuOnKeyUp || !!showSubmenuOnClick,
   );
+  const menuLinkRef = useRef<MenuLinksRef>(null);
 
   if (!item.below) {
     return (
@@ -56,6 +58,18 @@ const MenuListItem = forwardRef<
     );
   }
 
+  const handleKeyup: KeyboardEventHandler = e => {
+    const { key } = e;
+    if (key === ' ' || key === 'Spacebar' || key === 'Enter') {
+      setHideSubnav(false);
+      menuLinkRef.current?.setFocusToFirstItem();
+      e.stopPropagation();
+      e.preventDefault();
+    } else if (key === 'Escape' || key === 'Tab') {
+      setHideSubnav(true);
+    }
+  };
+
   return (
     <li
       className={clsx(
@@ -66,6 +80,7 @@ const MenuListItem = forwardRef<
       )}
     >
       <MenuLink
+        ref={ref}
         title={item.title}
         url={item.url}
         isButton={item.isButton}
@@ -77,20 +92,7 @@ const MenuListItem = forwardRef<
         onClick={
           showSubmenuOnClick ? () => setHideSubnav(prev => !prev) : undefined
         }
-        onKeyUp={
-          showSubmenuOnKeyUp
-            ? e => {
-                const { key } = e;
-                if (key === ' ' || key === 'Spacebar' || key === 'Enter') {
-                  setHideSubnav(false);
-                  e.stopPropagation();
-                  e.preventDefault();
-                } else if (key === 'Escape' || key === 'Tab') {
-                  setHideSubnav(true);
-                }
-              }
-            : undefined
-        }
+        onKeyUp={showSubmenuOnKeyUp ? handleKeyup : undefined}
       />
       <MenuLinks
         menuLevel={menuLevel + 1}
@@ -102,6 +104,7 @@ const MenuListItem = forwardRef<
         showSubmenuOnClick={showSubmenuOnClick}
         showSubmenuOnHover={showSubmenuOnHover}
         showSubmenuOnKeyUp={showSubmenuOnKeyUp}
+        ref={menuLinkRef}
       />
     </li>
   );

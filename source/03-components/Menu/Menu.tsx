@@ -52,12 +52,18 @@ const MenuLink = forwardRef<
   }
   if (onClick) {
     return (
-      <Link href={url} ref={ref as ForwardedRef<HTMLAnchorElement>} {...props}>
-        {title}
+      <>
+        <Link
+          href={url}
+          ref={ref as ForwardedRef<HTMLAnchorElement>}
+          {...props}
+        >
+          {title}
+        </Link>
         <button onClick={onClick} className={styles.toggle}>
           <span className="u-visually-hidden">Toggle Subnav</span>
         </button>
-      </Link>
+      </>
     );
   }
   return (

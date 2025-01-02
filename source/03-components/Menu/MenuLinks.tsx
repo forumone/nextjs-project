@@ -1,7 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
-import { useRef } from 'react';
+import { forwardRef, useImperativeHandle, useRef } from 'react';
 import { MenuProps } from './Menu';
 import styles from './menu.module.css';
 import MenuListItem from './MenuListItem';
@@ -11,20 +11,41 @@ interface MenuLinksProps extends MenuProps {
   isVisible?: boolean;
 }
 
-function MenuLinks({
-  items,
-  menuLevel,
-  modifierClasses,
-  itemClasses,
-  linkClasses,
-  subnavClasses,
-  showSubmenuOnHover,
-  showSubmenuOnClick,
-  showSubmenuOnKeyUp,
-  isVisible = true,
-}: MenuLinksProps) {
+interface MenuLinksRef {
+  setFocusToFirstItem: () => void;
+  setFocusToLastItem: () => void;
+}
+
+const MenuLinks = forwardRef(function MenuLinks(
+  {
+    items,
+    menuLevel,
+    modifierClasses,
+    itemClasses,
+    linkClasses,
+    subnavClasses,
+    showSubmenuOnHover,
+    showSubmenuOnClick,
+    showSubmenuOnKeyUp,
+    isVisible = true,
+  }: MenuLinksProps,
+  ref,
+) {
   const firstItem = useRef<HTMLButtonElement | HTMLAnchorElement>(null);
   const lastItem = useRef<HTMLButtonElement | HTMLAnchorElement>(null);
+
+  useImperativeHandle(
+    ref,
+    (): MenuLinksRef => ({
+      setFocusToFirstItem() {
+        firstItem.current?.focus();
+      },
+      setFocusToLastItem() {
+        lastItem.current?.focus();
+      },
+    }),
+    [],
+  );
 
   return (
     <ul
@@ -55,7 +76,7 @@ function MenuLinks({
       ))}
     </ul>
   );
-}
+});
 
 export default MenuLinks;
-export type { MenuLinksProps };
+export type { MenuLinksProps, MenuLinksRef };
