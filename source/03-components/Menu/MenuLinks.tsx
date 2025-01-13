@@ -65,12 +65,8 @@ const MenuLinks = forwardRef(function MenuLinks(
         if (isVisible) {
           const items = getItems();
           if (items.size) {
-            let lastItem = items.values().next();
-            let node = lastItem.value;
-            while (!lastItem.done) {
-              node = lastItem.value;
-              lastItem = items.values().next();
-            }
+            const itemIds = Array.from(items.keys());
+            const node = items.get(itemIds[itemIds.length - 1]);
             if (node) {
               node.focus();
             }
