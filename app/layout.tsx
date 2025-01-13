@@ -25,10 +25,12 @@ function RootLayout({ children }: PropsWithChildren): JSX.Element {
             <ResponsiveMenu
               items={[
                 {
+                  id: 'home',
                   title: 'Home',
                   url: '/',
                 },
                 {
+                  id: 'about',
                   title: 'About',
                   url: '/about',
                 },
@@ -41,10 +43,12 @@ function RootLayout({ children }: PropsWithChildren): JSX.Element {
             <Menu
               items={[
                 {
+                  id: 'footer-home',
                   title: 'Home',
                   url: '/',
                 },
                 {
+                  id: 'footer-about',
                   title: 'About',
                   url: '/about',
                 },

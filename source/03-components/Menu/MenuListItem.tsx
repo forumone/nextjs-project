@@ -3,6 +3,7 @@
 import { MenuLinksRef } from '@/source/03-components/Menu/MenuLinks';
 import clsx from 'clsx';
 import { forwardRef, JSX, KeyboardEventHandler, useRef, useState } from 'react';
+import { flushSync } from 'react-dom';
 import { MenuItemProps, MenuLink, MenuLinks, MenuProps } from './Menu';
 import styles from './menu.module.css';
 
@@ -13,6 +14,9 @@ interface MenuListItemProps
   showSubmenuOnHover?: boolean;
   showSubmenuOnClick?: boolean;
   showSubmenuOnKeyUp?: boolean;
+  useArrowKeys?: boolean;
+  setFocusToNextItem?: (currentItem: MenuItemProps['id']) => void;
+  setFocusToPreviousItem?: (currentItem: MenuItemProps['id']) => void;
 }
 
 const MenuListItem = forwardRef<
@@ -28,6 +32,9 @@ const MenuListItem = forwardRef<
     showSubmenuOnKeyUp,
     showSubmenuOnClick,
     showSubmenuOnHover,
+    useArrowKeys,
+    setFocusToNextItem,
+    setFocusToPreviousItem,
   },
   ref,
 ): JSX.Element {
@@ -36,7 +43,67 @@ const MenuListItem = forwardRef<
   );
   const menuLinkRef = useRef<MenuLinksRef>(null);
 
+  const handleKeyDown: KeyboardEventHandler = e => {
+    const { key } = e;
+    let flag = false;
+    if (
+      !useArrowKeys &&
+      key !== ' ' &&
+      key !== 'Spacebar' &&
+      key !== 'Enter' &&
+      key !== 'Escape'
+    )
+      return;
+    switch (key) {
+      case ' ':
+      case 'Spacebar':
+      case 'ArrowDown':
+        if (menuLinkRef.current) {
+          flushSync(() => {
+            setHideSubnav(false);
+          });
+          menuLinkRef.current.setFocusToFirstItem();
+          flag = true;
+        }
+        break;
+      case 'Escape':
+      case 'Tab':
+        if (item.below) {
+          setHideSubnav(true);
+        }
+        break;
+      case 'ArrowRight':
+        if (setFocusToNextItem) {
+          setFocusToNextItem(item.id);
+        }
+        flag = true;
+        break;
+      case 'ArrowLeft':
+        if (setFocusToPreviousItem) {
+          setFocusToPreviousItem(item.id);
+        }
+        flag = true;
+        break;
+      case 'ArrowUp':
+        if (menuLinkRef.current) {
+          flushSync(() => {
+            setHideSubnav(false);
+          });
+          menuLinkRef.current.setFocusToLastItem();
+          flag = true;
+        }
+        break;
+      default:
+        break;
+    }
+    if (flag) {
+      e.stopPropagation();
+      e.preventDefault();
+    }
+  };
+
   if (!item.below) {
+    const { id, ...itemProps } = item;
     return (
       <li
         className={clsx(
@@ -46,8 +113,9 @@ const MenuListItem = forwardRef<
         )}
       >
         <MenuLink
-          {...item}
+          {...itemProps}
           ref={ref}
+          onKeyDown={useArrowKeys ? handleKeyDown : undefined}
           className={clsx(
             styles.link,
             linkClasses,
@@ -57,18 +125,6 @@ const MenuListItem = forwardRef<
       </li>
     );
   }
-
-  const handleKeyup: KeyboardEventHandler = e => {
-    const { key } = e;
-    if (key === ' ' || key === 'Spacebar' || key === 'Enter') {
-      setHideSubnav(false);
-      menuLinkRef.current?.setFocusToFirstItem();
-      e.stopPropagation();
-      e.preventDefault();
-    } else if (key === 'Escape' || key === 'Tab') {
-      setHideSubnav(true);
-    }
-  };
 
   return (
     <li
@@ -92,7 +148,9 @@ const MenuListItem = forwardRef<
         onClick={
           showSubmenuOnClick ? () => setHideSubnav(prev => !prev) : undefined
         }
-        onKeyUp={showSubmenuOnKeyUp ? handleKeyup : undefined}
+        onKeyDown={
+          showSubmenuOnKeyUp || useArrowKeys ? handleKeyDown : undefined
+        }
       />
       <MenuLinks
         menuLevel={menuLevel + 1}
@@ -105,6 +163,7 @@ const MenuListItem = forwardRef<
         showSubmenuOnHover={showSubmenuOnHover}
         showSubmenuOnKeyUp={showSubmenuOnKeyUp}
         ref={menuLinkRef}
+        useArrowKeys={useArrowKeys}
       />
     </li>
   );

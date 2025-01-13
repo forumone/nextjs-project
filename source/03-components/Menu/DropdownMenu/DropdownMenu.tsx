@@ -11,6 +11,7 @@ interface DropdownMenuProps extends MenuProps {
 function DropdownMenu({
   modifierClasses,
   showOnHover = true,
+  useArrowKeys = true,
   ...props
 }: DropdownMenuProps): JSX.Element {
   return (
@@ -23,6 +24,7 @@ function DropdownMenu({
       showSubmenuOnKeyUp={true}
       showSubmenuOnHover={showOnHover}
       showSubmenuOnClick={!showOnHover}
+      useArrowKeys={useArrowKeys}
     />
   );
 }

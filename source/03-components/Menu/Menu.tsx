@@ -11,6 +11,7 @@ import MenuLinks, { MenuLinksProps } from './MenuLinks';
 import styles from './menu.module.css';
 
 interface MenuItemProps {
+  id: string | number;
   title: ReactNode;
   url: string;
   inActiveTrail?: boolean;
@@ -34,7 +35,7 @@ interface MenuProps extends BaseMenuProps {
 
 const MenuLink = forwardRef<
   HTMLButtonElement | HTMLAnchorElement,
-  MenuItemProps & Omit<HTMLAttributes<HTMLElement>, 'title'>
+  Omit<MenuItemProps, 'id'> & Omit<HTMLAttributes<HTMLElement>, 'title'>
 >(function MenuLink(
   { title, url, isButton, onClick, ...props },
   ref,
