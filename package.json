@@ -1,6 +1,6 @@
 {
   "name": "nextjs-project",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -15,7 +15,7 @@
     "test": "npm run lint && npm run tsc",
     "component": "plop",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
+    "build-storybook": "storybook build -o storybook",
     "build-icons": "svgr --out-dir source/01-global/icon/icons -- source/01-global/icon/svgs"
   },
   "browserslist": [
