@@ -28,11 +28,6 @@ async function go() {
         case 'CoreButtonBlockFragment':
           body = body.replace(/\btext\b/, 'textAlign');
           break;
-        case 'CoreQuoteBlockFragment':
-          body = body
-            .replace(/\balign\b/, 'textAlign')
-            .replace(/\bcitation\b/, 'textAlign');
-          break;
         case 'CoreImageBlockFragment':
           body = body.replace(/\bcaption\b/, '');
           // TODO citation is now on block.mediaDetails.meta.caption
