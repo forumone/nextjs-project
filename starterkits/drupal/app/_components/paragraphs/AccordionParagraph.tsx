@@ -5,8 +5,8 @@ import entityIsType from '@/util/entityIsType';
 const AccordionItemParagraphFragment = graphql(`
   fragment AccordionItemParagraphFragment on ParagraphAccordionItem {
     id
-    accordionHeading
-    accordionBody {
+    accordionHeading: title
+    accordionBody: wysiwyg {
       processed
     }
   }
@@ -15,7 +15,7 @@ const AccordionItemParagraphFragment = graphql(`
 const AccordionParagraphFragment = graphql(`
   fragment AccordionParagraphFragment on ParagraphAccordion {
     id
-    accordionItems {
+    accordionItems: paragraphs {
       __typename
       ...AccordionItemParagraphFragment
     }
