@@ -12,6 +12,7 @@ const AllParagraphsFragment = graphql(`
     }
     ...AccordionParagraphFragment
     ...BlockEmbedParagraphFragment
+    ...CallToActionParagraphFragment
     ...CardParagraphFragment
     ...CardsParagraphFragment
     ...HeroParagraphFragment
