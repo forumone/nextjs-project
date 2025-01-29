@@ -39,11 +39,15 @@
   --ui-accent-light: var(--brand-blue-light);
   --ui-background: var(--grayscale-gray-3);
   --ui-background-dark: var(--grayscale-gray-6);
+  --ui-background-darker: var(--grayscale-gray-7);
   --ui-background-light: var(--grayscale-gray-1);
+  --ui-background-lighter: var(--grayscale-gray-1);
   --ui-border: var(--grayscale-gray-3);
   --ui-border-dark: var(--grayscale-gray-6);
   --ui-border-light: var(--grayscale-gray-1);
   --ui-focus: var(--brand-blue-light);
   --ui-text-dark: var(--grayscale-gray-5);
+  --ui-text-darker: var(--grayscale-gray-7);
   --ui-text-light: var(--grayscale-gray-3);
+  --ui-text-lighter: var(--grayscale-white);
 }

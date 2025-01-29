@@ -1,0 +1,140 @@
+@import 'mixins';
+
+@layer components.menu {
+  .menu,
+  .subnav {
+    @include list-clean;
+  }
+
+  .menu {
+    display: flex;
+    gap: var(--spacing-5);
+  }
+
+  .subnav {
+    background-color: var(--ui-background-dark);
+    color: var(--ui-text-lighter);
+    inset-block-start: 100%;
+    inset-inline-start: 0;
+    margin-block: 0;
+    margin-inline: 0;
+    padding: 0;
+    position: absolute;
+
+    &:global(.is-hidden) {
+      display: none;
+    }
+
+    .subnav {
+      inset-block-start: 0;
+      inset-inline-start: 100%;
+    }
+  }
+
+  .item {
+    margin-block-end: 0;
+    position: relative;
+  }
+
+  .link {
+    padding: 0;
+    position: relative;
+    text-decoration: none;
+
+    .subnav & {
+      color: currentColor;
+      display: block;
+      inline-size: rem-convert(200px);
+      line-height: var(--line-height-short);
+      padding-block: var(--spacing-2);
+      padding-inline: calc(var(--spacing-3) + 7px) var(--spacing-3);
+
+      &:hover,
+      &:focus {
+        background: var(--ui-background-darker);
+      }
+    }
+  }
+
+  button.link {
+    @include text-button;
+    @include link;
+  }
+
+  .toggle {
+    @include text-button;
+
+    background-image: url('/images/menu-arrow-right.svg');
+    background-size: var(--spacing-3) var(--spacing-3);
+    block-size: calc(var(--spacing-3) + 2px);
+    border: 1px solid currentColor;
+    color: inherit;
+    display: block;
+    inline-size: calc(var(--spacing-3) + 2px);
+    inset-block-start: 50%;
+    inset-inline-end: 5px;
+    position: absolute;
+    transform: translateY(-50%);
+
+    &:hover,
+    &:focus-visible {
+      background-color: var(--ui-background-darker);
+    }
+  }
+
+  @scope (.menu) to (.subnav) {
+    .link {
+      display: inline-block;
+      font-weight: var(--font-weight-semibold);
+      text-transform: uppercase;
+
+      &:global(.has-subnav) {
+        padding-inline-end: var(--spacing-3);
+
+        &::after {
+          background-image: url('/images/menu-arrow-down.svg');
+          background-size: var(--spacing-2) var(--spacing-2);
+          content: '';
+          display: block;
+          height: var(--spacing-2);
+          inset-block-start: 50%;
+          inset-inline-end: var(--spacing-0-5);
+          overflow: hidden;
+          position: absolute;
+          transform: translateY(-40%);
+          width: var(--spacing-2);
+        }
+      }
+    }
+  }
+
+  /**
+   * For browsers that don't support @scope.
+   * This can be removed once Firefox catches up.
+   */
+  .menu > .item > .link {
+    display: inline-block;
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+
+    &:global(.has-subnav) {
+      padding-inline-end: var(--spacing-3);
+
+      &::after {
+        background-image: url('/images/menu-arrow-down.svg');
+        background-size: var(--spacing-2) var(--spacing-2);
+        content: '';
+        display: block;
+        height: var(--spacing-2);
+        inset-block-start: 50%;
+        inset-inline-end: var(--spacing-0-5);
+        overflow: hidden;
+        position: absolute;
+        transform: translateY(-40%);
+        width: var(--spacing-2);
+      }
+    }
+  }
+
+  /* End Firefox workaround */
+}
