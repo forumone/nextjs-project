@@ -75,7 +75,7 @@
     "stylelint-config-standard": "^36.0.1",
     "stylelint-order": "^6.0.4",
     "stylelint-webpack-plugin": "^5.0.1",
-    "typescript": "^5.7.2",
+    "typescript": "~5.7",
     "yaml": "^2.7.0"
   },
   "overrides": {
