@@ -1,7 +1,7 @@
 type NextSearchParams = { [key: string]: string | string[] | undefined };
 
 interface NextSearchParamsProp {
-  searchParams: NextSearchParams;
+  searchParams: Promise<NextSearchParams>;
 }
 
 export type { NextSearchParamsProp };

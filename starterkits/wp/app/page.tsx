@@ -138,8 +138,7 @@ async function renderFrontPage(
 }
 
 export default async function Home(props: HomeProps) {
-  const isPreview = hasPreviewProps(/* @next-codemod-error 'props' is passed as an argument. Any asynchronous properties of 'props' must be awaited when accessed. */
-  props);
+  const isPreview = await hasPreviewProps(props);
 
   const client = isPreview ? await getAuthClient() : await getClient();
   if (!client) {
@@ -168,7 +167,7 @@ export default async function Home(props: HomeProps) {
 
   return renderBlogPosts(
     frontData.generalSettings.title || '',
-    stringParamsFromSearch((await props.searchParams)),
+    stringParamsFromSearch(await props.searchParams),
     client,
   );
 }

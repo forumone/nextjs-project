@@ -45,12 +45,12 @@ interface BasicPageProps extends NextSearchParamsProp {
   params: Promise<{ slug: string }>;
 }
 
-export async function generateMetadata(props: BasicPageProps): Promise<Metadata> {
+export async function generateMetadata(
+  props: BasicPageProps,
+): Promise<Metadata> {
   const params = await props.params;
 
-  const {
-    slug
-  } = params;
+  const { slug } = params;
 
   // We do not care about using preview data for metadata,
   // so use the regular client.
@@ -67,9 +67,10 @@ export async function generateMetadata(props: BasicPageProps): Promise<Metadata>
 }
 
 export default async function Page(props: BasicPageProps) {
-  const isPreview = hasPreviewProps(/* @next-codemod-error 'props' is passed as an argument. Any asynchronous properties of 'props' must be awaited when accessed. */
-  props);
-  const id = isPreview ? (await props.searchParams).p : (await props.params).slug;
+  const isPreview = await hasPreviewProps(props);
+  const id = isPreview
+    ? (await props.searchParams).p
+    : (await props.params).slug;
 
   const client = isPreview ? await getAuthClient() : await getClient();
   if (!client) {
