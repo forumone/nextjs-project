@@ -1,11 +1,14 @@
-import { ReactNode } from 'react';
+import siteNameArgs from '@/source/03-components/SiteName/siteNameArgs';
+import { ReactNode, type JSX } from 'react';
 import Footer from '../../02-layouts/Footer/Footer';
 import Header from '../../02-layouts/Header/Header';
 import SiteContainer from '../../02-layouts/SiteContainer/SiteContainer';
 import BackToTop from '../../03-components/BackToTop/BackToTop';
-import { FooterMenu } from '../../03-components/Menu/Menu.stories';
-import { ResponsiveMenu } from '../../03-components/Menu/ResponsiveMenu/ResponsiveMenu.stories';
-import { SiteName } from '../../03-components/SiteName/SiteName.stories';
+import Menu from '../../03-components/Menu/Menu';
+import footerMenuArgs from '../../03-components/Menu/menuFooterArgs';
+import ResponsiveMenu from '../../03-components/Menu/ResponsiveMenu/ResponsiveMenu';
+import responsiveMenuArgs from '../../03-components/Menu/ResponsiveMenu/responsiveMenuArgs';
+import SiteName from '../../03-components/SiteName/SiteName';
 import Skiplink from '../../03-components/Skiplink/Skiplink';
 
 interface PageWrapperProps {
@@ -18,25 +21,11 @@ function PageWrapper({ children }: PageWrapperProps): JSX.Element {
       <Skiplink />
       <SiteContainer>
         <Header>
-          {SiteName.render && (
-            <SiteName.render
-              siteName={SiteName.args?.siteName || 'Site Name'}
-              {...SiteName.args}
-            />
-          )}
-          {ResponsiveMenu.render && (
-            <ResponsiveMenu.render items={ResponsiveMenu.args?.items || []} />
-          )}
+          {SiteName && <SiteName {...siteNameArgs} />}
+          {ResponsiveMenu && <ResponsiveMenu {...responsiveMenuArgs} />}
         </Header>
         {children}
-        <Footer>
-          {FooterMenu.render && (
-            <FooterMenu.render
-              items={FooterMenu.args?.items || []}
-              {...FooterMenu.args}
-            />
-          )}
-        </Footer>
+        <Footer>{Menu && <Menu {...footerMenuArgs} />}</Footer>
       </SiteContainer>
       <BackToTop text="Back to Top" topElement="top" />
     </>

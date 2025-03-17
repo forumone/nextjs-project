@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { GessoComponent } from 'gesso';
-import { ReactNode } from 'react';
+import { ReactNode, type JSX } from 'react';
 import styles from './menu.module.css';
 
 interface MenuWrapperProps extends GessoComponent {

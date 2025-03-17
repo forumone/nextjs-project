@@ -6,6 +6,8 @@
 import { AuthorBlockFragmentFragment } from '@/types/__generated__/graphql';
 import fragments from './fragments';
 
+import type { JSX } from 'react';
+
 function AuthorBlock({ author }: AuthorBlockFragmentFragment): JSX.Element {
   return (
     <dl>

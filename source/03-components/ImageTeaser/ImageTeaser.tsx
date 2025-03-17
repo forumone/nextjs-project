@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { GessoComponent } from 'gesso';
 import Link from 'next/link';
-import { ElementType, ReactNode } from 'react';
+import { ElementType, ReactNode, type JSX } from 'react';
 import Media from '../../02-layouts/Media/Media';
 import styles from './image-teaser.module.css';
 

@@ -35,8 +35,9 @@ const getNodeByPath = graphql(`
   }
 `);
 
-async function NodeFull({ params }: { params: { slug: string[] } }) {
-  const { isEnabled } = draftMode();
+async function NodeFull(props: { params: Promise<{ slug: string[] }> }) {
+  const params = await props.params;
+  const { isEnabled } = await draftMode();
   const data = await query<GetNodeByPathQuery, GetNodeByPathQueryVariables>(
     getNodeByPath,
     {

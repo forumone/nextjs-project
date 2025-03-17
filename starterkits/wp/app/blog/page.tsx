@@ -21,7 +21,8 @@ export const metadata: Metadata = {
 
 type BlogArchiveProps = NextSearchParamsProp;
 
-async function BlogArchive({ searchParams }: BlogArchiveProps) {
+async function BlogArchive(props: BlogArchiveProps) {
+  const searchParams = await props.searchParams;
   const stringParams = stringParamsFromSearch(searchParams);
 
   // Use cursor based pagination. Prioritize "after" over "before".

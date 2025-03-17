@@ -3,6 +3,8 @@ import { withGlobalWrapper } from '../../../.storybook/decorators';
 import getCssVariables from '../../06-utility/storybook/getCssVariables';
 import styles from './color.module.css';
 
+import type { JSX } from 'react';
+
 interface ColorItem {
   name: string;
   value: string;
