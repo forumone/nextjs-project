@@ -17,9 +17,6 @@ const meta: Meta<typeof WysiwygComponent> = {
 
 type Story = StoryObj<typeof WysiwygComponent>;
 const WYSIWYG: Story = {
-  // Workaround to allow story to be imported elsewhere.
-  // See https://github.com/storybookjs/storybook/issues/22278
-  render: args => <WysiwygComponent {...args} />,
   args: wysiwygArgs,
 };
 

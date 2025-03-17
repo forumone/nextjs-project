@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { withGlobalWrapper } from '../../../.storybook/decorators';
 import Video from '../Video/Video';
-import videoArgs from '../Video/videoArgs';
+import { Video as VideoStory } from '../Video/Video.stories';
 import FigureComponent from './Figure';
 import styles from './figure.module.css';
 import figureArgs from './figureArgs';
@@ -42,7 +42,7 @@ const FigureRightAligned: Story = {
 
 const FigureWithVideo: Story = {
   args: {
-    media: <Video {...videoArgs} />,
+    media: <Video {...VideoStory.args} />,
     caption:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla semper vel metus at cursus.',
     modifierClasses: styles['figure--iframe'],
