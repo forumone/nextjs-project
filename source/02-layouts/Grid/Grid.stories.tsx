@@ -3,6 +3,8 @@ import SampleContent from '../../06-utility/storybook/SampleContent';
 import GridLayout from './Grid';
 import gridArgs from './gridArgs';
 
+import type { JSX } from 'react';
+
 function GridDemo(): JSX.Element {
   const arr = Array.from(Array(6).keys());
   return (

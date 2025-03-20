@@ -1,8 +1,8 @@
 import { draftMode } from 'next/headers';
 import { redirect } from 'next/navigation';
 
-function GET() {
-  draftMode().disable();
+async function GET() {
+  (await draftMode()).disable();
   redirect('/');
 }
 

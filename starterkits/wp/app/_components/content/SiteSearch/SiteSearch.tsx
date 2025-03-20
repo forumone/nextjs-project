@@ -13,7 +13,7 @@ import styles from './site-search.module.css';
 
 interface SiteSearchFormProps extends ConstrainComponent {
   placeholder: string;
-  onSubmit?: (e: FormEvent<Element>) => void;
+  onSubmit?: (e: FormEvent) => void;
 }
 
 interface SiteSearchProps extends Omit<SiteSearchFormProps, 'onSubmit'> {

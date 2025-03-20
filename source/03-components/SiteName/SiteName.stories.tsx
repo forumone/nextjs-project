@@ -12,9 +12,6 @@ const meta: Meta<typeof SiteNameComponent> = {
 
 type Story = StoryObj<typeof SiteNameComponent>;
 const SiteName: Story = {
-  // Workaround to allow story to be imported elsewhere.
-  // See https://github.com/storybookjs/storybook/issues/22278
-  render: args => <SiteNameComponent {...args} />,
   args: siteNameArgs,
 };
 

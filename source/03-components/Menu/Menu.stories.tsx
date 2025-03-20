@@ -15,9 +15,6 @@ const Default: Story = {
   args: menuArgs,
 };
 const FooterMenu: Story = {
-  // Workaround to allow story to be imported elsewhere.
-  // See https://github.com/storybookjs/storybook/issues/22278
-  render: args => <Menu {...args} />,
   args: {
     ...footerMenuArgs,
     modifierClasses: footerStyles.menu,

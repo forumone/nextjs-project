@@ -16,9 +16,6 @@ const meta: Meta<typeof BreadcrumbComponent> = {
 type Story = StoryObj<typeof BreadcrumbComponent>;
 
 const Breadcrumb: Story = {
-  // Workaround to allow story to be imported elsewhere.
-  // See https://github.com/storybookjs/storybook/issues/22278
-  render: args => <BreadcrumbComponent {...args} />,
   args: breadcrumbArgs,
 };
 

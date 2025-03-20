@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, type JSX } from 'react';
 import styles from './form-item.module.css';
 
 interface FormItemWrapperProps {

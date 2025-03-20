@@ -138,7 +138,7 @@ async function renderFrontPage(
 }
 
 export default async function Home(props: HomeProps) {
-  const isPreview = hasPreviewProps(props);
+  const isPreview = await hasPreviewProps(props);
 
   const client = isPreview ? await getAuthClient() : await getClient();
   if (!client) {
@@ -167,7 +167,7 @@ export default async function Home(props: HomeProps) {
 
   return renderBlogPosts(
     frontData.generalSettings.title || '',
-    stringParamsFromSearch(props.searchParams),
+    stringParamsFromSearch(await props.searchParams),
     client,
   );
 }
