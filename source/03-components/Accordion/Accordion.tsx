@@ -127,7 +127,7 @@ function Accordion({
       } else if (event.key === 'End') {
         // End navigates to the last accordion item
         const lastToggle = toggles[toggles.length - 1];
-        if (lastToggle != null) {
+        if (lastToggle !== null) {
           lastToggle.focus();
           event.preventDefault();
         }
