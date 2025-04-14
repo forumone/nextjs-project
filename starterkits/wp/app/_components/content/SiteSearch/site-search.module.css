@@ -39,7 +39,7 @@
     .form-item {
       --form-font-size: var(--responsive-font-size-2);
 
-      flex-basis: rem(220px);
+      flex-basis: rem-convert(220px);
       flex-grow: 0;
     }
   }
