@@ -1,16 +1,17 @@
-$shadow-swatch: rem-convert(200px);
 
 .box-shadow {
+  --shadow-swatch: rem-convert(200px);
+
   display: flex;
   flex-wrap: wrap;
 }
 
 .item {
   display: flex;
-  flex: 0 0 $shadow-swatch;
-  height: $shadow-swatch;
+  flex: 0 0 var(--shadow-swatch);
+  height: var(--shadow-swatch);
   margin: 0 rem-convert(25px) rem-convert(50px);
-  width: $shadow-swatch;
+  width: var(--shadow-swatch);
 }
 
 .label {

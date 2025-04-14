@@ -23,6 +23,10 @@ rules:
     - ignore:
         - 'inside-function'
   custom-property-empty-line-before: null
+  declaration-property-value-no-unknown:
+    - true
+    - ignoreProperties:
+        '/.+/': '/rem-convert/'
   function-no-unknown:
     - true
     - ignoreFunctions:
@@ -31,6 +35,7 @@ rules:
         - 'responsive-font-size'
         - 'rem-convert'
   import-notation: string
+  layer-name-pattern: null
   max-nesting-depth: 4
   number-max-precision: null
   order/order:

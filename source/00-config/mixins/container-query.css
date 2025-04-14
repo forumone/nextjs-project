@@ -1,3 +1,5 @@
+/* stylelint-disable container-name-pattern, at-rule-prelude-no-invalid -- Disable stylelint rules that don't work correctly with mixin variables */
+
 /**
  * Create a min-width container query.
  * @param {Number} $breakpoint - width value.
@@ -84,3 +86,5 @@
     }
   }
 }
+
+/* stylelint-enable */
