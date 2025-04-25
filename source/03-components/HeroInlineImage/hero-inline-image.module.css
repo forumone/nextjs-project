@@ -9,7 +9,7 @@
 
       &.has-overlay {
         &::after {
-          background: rgba(0 0 0 / 50%);
+          background: rgb(0 0 0 / 50%);
           content: '';
           inset: 0;
           position: absolute;

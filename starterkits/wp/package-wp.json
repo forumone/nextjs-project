@@ -21,28 +21,26 @@
     "editor-styles": "./editor-styles/dist/editor-styles.css"
   },
   "dependencies": {
-    "@apollo/client": "^3.12.4",
-    "@apollo/experimental-nextjs-app-support": "^0.11.7",
+    "@apollo/client": "^3.13.7",
+    "@apollo/experimental-nextjs-app-support": "^0.12.1",
     "@faustwp/blocks": "^5.0.0",
     "@faustwp/cli": "^3.1.1",
     "@faustwp/core": "^3.1.0",
     "@faustwp/experimental-app-router": "^0.5.0",
-    "clsx": "^2.1.1",
     "graphql": "^16.10.0",
-    "html-entities": "^2.5.2"
+    "html-entities": "^2.6.0"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "^5.0.3",
-    "@graphql-codegen/client-preset": "^4.5.1",
+    "@graphql-codegen/cli": "^5.0.5",
+    "@graphql-codegen/client-preset": "^4.8.0",
     "banner-webpack-plugin": "^0.2.3",
     "cssnano": "^7.0.6",
     "cssnano-preset-lite": "^4.0.3",
     "dotenv": "^16.4.7",
-    "esbuild": "^0.24.2",
-    "glob": "^11.0.0",
+    "esbuild": "^0.25.2",
+    "glob": "^11.0.1",
     "next-secure-headers": "^2.2.0",
-    "postcss-cli": "^11.0.0",
-    "postcss-import": "^16.1.0",
+    "postcss-cli": "^11.0.1",
     "ts-node": "^10.9.2"
   },
   "overrides": {

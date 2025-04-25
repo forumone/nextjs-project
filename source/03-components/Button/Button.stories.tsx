@@ -7,6 +7,8 @@ import {
 } from './Button';
 import buttonArgs from './buttonArgs';
 
+import type { JSX } from 'react';
+
 function DemoButtons({ label, ...props }: SharedButtonProps): JSX.Element {
   return (
     <>

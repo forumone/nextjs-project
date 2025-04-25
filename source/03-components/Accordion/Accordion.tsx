@@ -2,7 +2,14 @@
 
 import clsx from 'clsx';
 import { GessoComponent } from 'gesso';
-import { JSX, KeyboardEvent, createRef, useId, useMemo, useState } from 'react';
+import React, {
+  JSX,
+  KeyboardEvent,
+  createRef,
+  useId,
+  useMemo,
+  useState,
+} from 'react';
 import getCssVar from '../../06-utility/getCssVar';
 import AccordionItem, { AccordionItemProps } from './AccordionItem';
 import styles from './accordion.module.css';
@@ -38,7 +45,8 @@ function Accordion({
     })),
   );
   const accordionItemRefs = useMemo(() => {
-    const refs: { [key: string]: React.RefObject<HTMLButtonElement> } = {};
+    const refs: { [key: string]: React.RefObject<HTMLButtonElement | null> } =
+      {};
     accordionItemsStatus.forEach(item => (refs[item.id] = createRef()));
     return refs;
   }, [accordionItemsStatus]);
@@ -119,7 +127,7 @@ function Accordion({
       } else if (event.key === 'End') {
         // End navigates to the last accordion item
         const lastToggle = toggles[toggles.length - 1];
-        if (lastToggle != null) {
+        if (lastToggle !== null) {
           lastToggle.focus();
           event.preventDefault();
         }

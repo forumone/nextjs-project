@@ -42,12 +42,16 @@ async function getWpPageData(
 }
 
 interface BasicPageProps extends NextSearchParamsProp {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
-export async function generateMetadata({
-  params: { slug },
-}: BasicPageProps): Promise<Metadata> {
+export async function generateMetadata(
+  props: BasicPageProps,
+): Promise<Metadata> {
+  const params = await props.params;
+
+  const { slug } = params;
+
   // We do not care about using preview data for metadata,
   // so use the regular client.
   const client = await getClient();
@@ -63,8 +67,10 @@ export async function generateMetadata({
 }
 
 export default async function Page(props: BasicPageProps) {
-  const isPreview = hasPreviewProps(props);
-  const id = isPreview ? props.searchParams.p : props.params.slug;
+  const isPreview = await hasPreviewProps(props);
+  const id = isPreview
+    ? (await props.searchParams).p
+    : (await props.params).slug;
 
   const client = isPreview ? await getAuthClient() : await getClient();
   if (!client) {

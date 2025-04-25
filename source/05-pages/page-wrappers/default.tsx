@@ -1,11 +1,14 @@
-import { ReactNode } from 'react';
+import { FooterMenu as FooterMenuStory } from '@/source/03-components/Menu/Menu.stories';
+import { ReactNode, type JSX } from 'react';
 import Footer from '../../02-layouts/Footer/Footer';
 import Header from '../../02-layouts/Header/Header';
 import SiteContainer from '../../02-layouts/SiteContainer/SiteContainer';
 import BackToTop from '../../03-components/BackToTop/BackToTop';
-import { FooterMenu } from '../../03-components/Menu/Menu.stories';
-import { ResponsiveMenu } from '../../03-components/Menu/ResponsiveMenu/ResponsiveMenu.stories';
-import { SiteName } from '../../03-components/SiteName/SiteName.stories';
+import Menu from '../../03-components/Menu/Menu';
+import ResponsiveMenu from '../../03-components/Menu/ResponsiveMenu/ResponsiveMenu';
+import { ResponsiveMenu as ResponsiveMenuStory } from '../../03-components/Menu/ResponsiveMenu/ResponsiveMenu.stories';
+import SiteName from '../../03-components/SiteName/SiteName';
+import { SiteName as SiteNameStory } from '../../03-components/SiteName/SiteName.stories';
 import Skiplink from '../../03-components/Skiplink/Skiplink';
 
 interface PageWrapperProps {
@@ -18,24 +21,21 @@ function PageWrapper({ children }: PageWrapperProps): JSX.Element {
       <Skiplink />
       <SiteContainer>
         <Header>
-          {SiteName.render && (
-            <SiteName.render
-              siteName={SiteName.args?.siteName || 'Site Name'}
-              {...SiteName.args}
-            />
-          )}
-          {ResponsiveMenu.render && (
-            <ResponsiveMenu.render items={ResponsiveMenu.args?.items || []} />
-          )}
+          <SiteName
+            siteName={SiteNameStory.args?.siteName || ''}
+            {...SiteNameStory.args}
+          />
+          <ResponsiveMenu
+            items={ResponsiveMenuStory.args?.items || []}
+            {...ResponsiveMenuStory.args}
+          />
         </Header>
         {children}
         <Footer>
-          {FooterMenu.render && (
-            <FooterMenu.render
-              items={FooterMenu.args?.items || []}
-              {...FooterMenu.args}
-            />
-          )}
+          <Menu
+            items={FooterMenuStory.args?.items || []}
+            {...FooterMenuStory.args}
+          />
         </Footer>
       </SiteContainer>
       <BackToTop text="Back to Top" topElement="top" />

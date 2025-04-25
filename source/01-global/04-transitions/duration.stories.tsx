@@ -9,8 +9,8 @@ interface DurationOptions {
 }
 
 const allVars = getCssVariables();
-const duration = allVars.reduce((allDurations, [key, value]) => {
-  if (key.indexOf('--duration') === 0) {
+const durationOptions = allVars.reduce((allDurations, [key, value]) => {
+  if (key.indexOf('--durationOptions') === 0) {
     const duration = key.substring(11);
     allDurations[duration] = value;
   }
@@ -22,20 +22,25 @@ const DurationComponent = ({ duration }: { duration: DurationOptions }) => {
     <div className={styles.duration}>
       <div className={styles.helptext}>(Hover to demo duration)</div>
       <div className={styles.group}>
-        {Object.entries(duration).map(([duration, transitionDuration]) => (
-          <div className={styles.item} key={`duration-${duration}`}>
+        {Object.entries(duration).map(
+          ([transitionDurationName, transitionDuration]) => (
             <div
-              className={styles.indicator}
-              style={{
-                transitionDuration,
-              }}
-            ></div>
-            <div className={styles.label}>
-              <div>{duration}</div>
-              <div>{transitionDuration}</div>
+              className={styles.item}
+              key={`duration-${transitionDurationName}`}
+            >
+              <div
+                className={styles.indicator}
+                style={{
+                  transitionDuration,
+                }}
+              ></div>
+              <div className={styles.label}>
+                <div>{transitionDurationName}</div>
+                <div>{transitionDuration}</div>
+              </div>
             </div>
-          </div>
-        ))}
+          ),
+        )}
       </div>
     </div>
   );
@@ -57,7 +62,7 @@ const meta: Meta<typeof DurationComponent> = {
 type Story = StoryObj<typeof DurationComponent>;
 const Duration: Story = {
   args: {
-    duration,
+    duration: durationOptions,
   },
 };
 export default meta;

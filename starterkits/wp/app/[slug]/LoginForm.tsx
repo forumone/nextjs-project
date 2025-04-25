@@ -1,7 +1,9 @@
 'use client';
 
+import { useActionState } from 'react';
+
 import { usePathname, useSearchParams } from 'next/navigation';
-import { useFormState, useFormStatus } from 'react-dom';
+import { useFormStatus } from 'react-dom';
 import { loginAction } from './action';
 
 function SubmitButton() {
@@ -20,7 +22,7 @@ interface FormState {
 function LoginForm() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const [state, formAction] = useFormState<FormState, FormData>(
+  const [state, formAction] = useActionState<FormState, FormData>(
     loginAction,
     {},
   );

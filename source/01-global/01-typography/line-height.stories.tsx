@@ -28,7 +28,7 @@ const LineHeight: StoryObj = {
     useEffect(() => {
       const allVars = getCssVariables();
 
-      const fonts = allVars.reduce((allFonts, [key, value]) => {
+      const fontOptions = allVars.reduce((allFonts, [key, value]) => {
         if (key.indexOf('--font-family') === 0) {
           const name =
             key.substring(14).charAt(0).toUpperCase() +
@@ -37,16 +37,19 @@ const LineHeight: StoryObj = {
         }
         return allFonts;
       }, {} as FontOptions);
-      setFonts(fonts);
+      setFonts(fontOptions);
 
-      const lineHeights = allVars.reduce((allLineHeights, [key, value]) => {
-        if (key.indexOf('--line-height') === 0) {
-          const name = key.substring(14);
-          allLineHeights[name] = value;
-        }
-        return allLineHeights;
-      }, {} as LineHeightOptions);
-      setLineHeights(lineHeights);
+      const lineHeightOptions = allVars.reduce(
+        (allLineHeights, [key, value]) => {
+          if (key.indexOf('--line-height') === 0) {
+            const name = key.substring(14);
+            allLineHeights[name] = value;
+          }
+          return allLineHeights;
+        },
+        {} as LineHeightOptions,
+      );
+      setLineHeights(lineHeightOptions);
     }, []);
 
     return (
@@ -73,21 +76,26 @@ const LineHeight: StoryObj = {
                 <h2 className={styles.heading}>{name}</h2>
                 <div style={{ fontFamily }}>
                   {lineHeights &&
-                    Object.entries(lineHeights).map(([name, lineHeight]) => (
-                      <div className={styles.row} key={name}>
-                        <div className={styles.label}>{name}</div>
-                        <div className={styles.preview} style={{ lineHeight }}>
-                          The line-height for this text is{' '}
-                          <strong>{lineHeight}</strong> times the font-size.
-                          It’s worth remembering that line height is affected by
-                          the x-height. Much like how different typefaces can
-                          appear to be different heights despite being set at
-                          the same font size, so too can line height appear to
-                          be more open or tighter, depending on each individual
-                          font.
+                    Object.entries(lineHeights).map(
+                      ([lineHeightName, lineHeight]) => (
+                        <div className={styles.row} key={lineHeightName}>
+                          <div className={styles.label}>{lineHeightName}</div>
+                          <div
+                            className={styles.preview}
+                            style={{ lineHeight }}
+                          >
+                            The line-height for this text is{' '}
+                            <strong>{lineHeight}</strong> times the font-size.
+                            It’s worth remembering that line height is affected
+                            by the x-height. Much like how different typefaces
+                            can appear to be different heights despite being set
+                            at the same font size, so too can line height appear
+                            to be more open or tighter, depending on each
+                            individual font.
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      ),
+                    )}
                 </div>
               </div>
             ))}

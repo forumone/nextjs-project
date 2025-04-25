@@ -22,7 +22,8 @@ export const metadata: Metadata = {
 
 type SearchPageProps = NextSearchParamsProp;
 
-async function SearchPage({ searchParams }: SearchPageProps) {
+async function SearchPage(props: SearchPageProps) {
+  const searchParams = await props.searchParams;
   const stringParams = stringParamsFromSearch(searchParams);
   const searchString = stringParams[SearchParams.SEARCH];
 

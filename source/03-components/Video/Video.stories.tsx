@@ -12,9 +12,6 @@ const meta: Meta<typeof VideoComponent> = {
 
 type Story = StoryObj<typeof VideoComponent>;
 const Video: Story = {
-  // Workaround to allow story to be imported elsewhere.
-  // See https://github.com/storybookjs/storybook/issues/22278
-  render: args => <VideoComponent {...args} />,
   args: videoArgs,
 };
 

@@ -28,7 +28,7 @@ const Fonts: StoryObj = {
     useEffect(() => {
       const allVars = getCssVariables();
 
-      const fonts = allVars.reduce((allFonts, [key, value]) => {
+      const fontOptions = allVars.reduce((allFonts, [key, value]) => {
         if (key.indexOf('--font-family') === 0) {
           const name =
             key.substring(14).charAt(0).toUpperCase() +
@@ -37,16 +37,16 @@ const Fonts: StoryObj = {
         }
         return allFonts;
       }, {} as FontOptions);
-      setFonts(fonts);
+      setFonts(fontOptions);
 
-      const weights = allVars.reduce((allWeights, [key, value]) => {
+      const weightOptions = allVars.reduce((allWeights, [key, value]) => {
         if (key.indexOf('--font-weight') === 0) {
           const name = key.substring(14);
           allWeights[name] = value;
         }
         return allWeights;
       }, {} as WeightOptions);
-      setWeights(weights);
+      setWeights(weightOptions);
     }, []);
 
     return (
@@ -81,45 +81,47 @@ const Fonts: StoryObj = {
                   {name}
                 </h3>
                 {weights &&
-                  Object.entries(weights).map(([name, fontWeight]) => (
-                    <div className={styles.item} key={name}>
-                      <div
-                        className={styles['preview-character']}
-                        style={{
-                          fontStyle: 'normal',
-                          fontFamily,
-                          fontWeight,
-                        }}
-                      >
-                        AaBbCc
-                      </div>
-                      <div
-                        className={styles.preview}
-                        style={{
-                          fontStyle: 'normal',
-                          fontFamily,
-                          fontWeight,
-                        }}
-                      >
-                        ABCDEFGHIJKLMNOPQRSTUVWXYZ
-                        <br />
-                        abcdefghijklmnopqrstuvwxyz
-                        <br />
-                        1234567890(,.;:?!$&*)
-                      </div>
-                      <div className={styles['preview-meta']}>
-                        <div className={styles.name}>{name}</div>
-                        <div className={styles.weight}>
-                          <span className={styles.label}>Weight:</span>
-                          {fontWeight}
+                  Object.entries(weights).map(
+                    ([fontWeightName, fontWeight]) => (
+                      <div className={styles.item} key={fontWeightName}>
+                        <div
+                          className={styles['preview-character']}
+                          style={{
+                            fontStyle: 'normal',
+                            fontFamily,
+                            fontWeight,
+                          }}
+                        >
+                          AaBbCc
                         </div>
-                        <div className={styles.style}>
-                          <span className={styles.label}>Style:</span>
-                          {fontFamily}
+                        <div
+                          className={styles.preview}
+                          style={{
+                            fontStyle: 'normal',
+                            fontFamily,
+                            fontWeight,
+                          }}
+                        >
+                          ABCDEFGHIJKLMNOPQRSTUVWXYZ
+                          <br />
+                          abcdefghijklmnopqrstuvwxyz
+                          <br />
+                          1234567890(,.;:?!$&*)
+                        </div>
+                        <div className={styles['preview-meta']}>
+                          <div className={styles.name}>{fontWeightName}</div>
+                          <div className={styles.weight}>
+                            <span className={styles.label}>Weight:</span>
+                            {fontWeight}
+                          </div>
+                          <div className={styles.style}>
+                            <span className={styles.label}>Style:</span>
+                            {fontFamily}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    ),
+                  )}
               </div>
             ))}
       </>

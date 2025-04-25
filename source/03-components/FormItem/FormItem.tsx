@@ -6,6 +6,7 @@ import {
   ReactNode,
   SelectHTMLAttributes,
   TextareaHTMLAttributes,
+  type JSX,
 } from 'react';
 import FormItemLabel from './FormItemLabel';
 import FormItemWrapper from './FormItemWrapper';

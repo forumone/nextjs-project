@@ -28,7 +28,7 @@ const Letterspacing: StoryObj = {
     useEffect(() => {
       const allVars = getCssVariables();
 
-      const fonts = allVars.reduce((allFonts, [key, value]) => {
+      const fontOptions = allVars.reduce((allFonts, [key, value]) => {
         if (key.indexOf('--font-family') === 0) {
           const name =
             key.substring(14).charAt(0).toUpperCase() +
@@ -37,9 +37,9 @@ const Letterspacing: StoryObj = {
         }
         return allFonts;
       }, {} as FontOptions);
-      setFonts(fonts);
+      setFonts(fontOptions);
 
-      const letterSpacings = allVars.reduce(
+      const letterspacingOptions = allVars.reduce(
         (allLetterSpacings, [key, value]) => {
           if (key.indexOf('--letterspacing') === 0) {
             const name = key.substring(16);
@@ -49,7 +49,7 @@ const Letterspacing: StoryObj = {
         },
         {} as LetterspacingOptions,
       );
-      setLetterSpacings(letterSpacings);
+      setLetterSpacings(letterspacingOptions);
     }, []);
 
     return (
@@ -77,12 +77,14 @@ const Letterspacing: StoryObj = {
                 <div style={{ fontFamily }}>
                   {letterSpacings &&
                     Object.entries(letterSpacings).map(
-                      ([name, letterSpacing]) => (
-                        <div className={styles.row} key={name}>
-                          <div className={styles.label}>{name}</div>
+                      ([letterSpacingName, letterSpacing]) => (
+                        <div className={styles.row} key={letterSpacingName}>
+                          <div className={styles.label}>
+                            {letterSpacingName}
+                          </div>
                           <div
                             className={styles.preview}
-                            style={{ letterSpacing: letterSpacing }}
+                            style={{ letterSpacing }}
                           >
                             The letterspacing for this text is{' '}
                             <strong>{letterSpacing}</strong>.

@@ -4,6 +4,8 @@ import { withGlobalWrapper } from '../../../.storybook/decorators';
 import getCssVariables from '../../06-utility/storybook/getCssVariables';
 import styles from './shadows.module.css';
 
+import type { JSX } from 'react';
+
 interface BoxShadowOptions {
   [elevation: number]: Property.BoxShadow;
 }
