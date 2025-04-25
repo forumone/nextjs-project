@@ -24,7 +24,11 @@ const spacing = allVars.reduce((allSpacing, [key, value]) => {
   return allSpacing;
 }, {} as SpacingOptions);
 
-const SpacingComponent = ({ spacing }: { spacing: SpacingOptions }) => {
+const SpacingComponent = ({
+  spacing: spacingOptions,
+}: {
+  spacing: SpacingOptions;
+}) => {
   return (
     <table>
       <thead>
@@ -36,7 +40,7 @@ const SpacingComponent = ({ spacing }: { spacing: SpacingOptions }) => {
         </tr>
       </thead>
       <tbody>
-        {Object.entries(spacing)
+        {Object.entries(spacingOptions)
           .sort(([keyA], [keyB]) => Number(keyA) - Number(keyB))
           .map(([name, unit]) => (
             <tr key={`spacing-${name}`}>
