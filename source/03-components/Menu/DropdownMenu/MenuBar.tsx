@@ -24,6 +24,7 @@ function MenuBar({
   const [expandedItem, setExpandedItem] = useState<
     DropdownMenuItem['id'] | null
   >(null);
+
   const itemsRef = useRef<Map<DropdownMenuItem['id'], MenuBarItemRef> | null>(
     null,
   );

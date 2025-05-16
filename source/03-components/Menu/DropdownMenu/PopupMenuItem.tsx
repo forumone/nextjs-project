@@ -109,7 +109,9 @@ const PopupMenuItem = forwardRef<PopupMenuItemRef, PopupMenuItemProps>(
       }
     };
 
-    const handleKeydown: KeyboardEventHandler<HTMLAnchorElement> = e => {
+    const handleKeydown: KeyboardEventHandler<
+      HTMLAnchorElement | HTMLButtonElement
+    > = e => {
       const { currentTarget, key } = e;
       let flag = false;
       let clickEvent;
@@ -198,10 +200,12 @@ const PopupMenuItem = forwardRef<PopupMenuItemRef, PopupMenuItemProps>(
       }
     };
 
-    const handleToggleKeydown: KeyboardEventHandler = e => {
+    const handleToggleKeydown: KeyboardEventHandler<HTMLButtonElement> = e => {
       const { key } = e;
       if (key === 'ArrowLeft' || key === 'ArrowRight') {
         handleClick();
+      } else if (key === 'Escape') {
+        handleKeydown(e);
       }
     };
 
