@@ -4,6 +4,7 @@ import { DropdownMenuItem } from '@/source/03-components/Menu/DropdownMenu/MenuB
 import PopupMenu, {
   PopupMenuRef,
 } from '@/source/03-components/Menu/DropdownMenu/PopupMenu';
+import { MenuProps } from '@/source/03-components/Menu/Menu';
 import clsx from 'clsx';
 import Link from 'next/link';
 import {
@@ -33,6 +34,7 @@ interface PopupMenuItemProps extends DropdownMenuItem {
   setHover: (hasHover: boolean) => void;
   menuLevel: number;
   closeParent: (force?: boolean) => void;
+  itemClasses?: MenuProps['itemClasses'];
 }
 
 interface PopupMenuItemRef {
@@ -59,6 +61,7 @@ const PopupMenuItem = forwardRef<PopupMenuItemRef, PopupMenuItemProps>(
       setHover,
       menuLevel,
       closeParent,
+      itemClasses,
     },
     popupMenuItemRef,
   ): JSX.Element {
@@ -234,15 +237,17 @@ const PopupMenuItem = forwardRef<PopupMenuItemRef, PopupMenuItemProps>(
     };
 
     return (
-      <>
+      <li
+        className={clsx(styles.item, itemClasses)}
+        onMouseEnter={handleMouseover}
+        onMouseLeave={handleMouseout}
+      >
         <Link
           className={clsx(styles.link)}
           href={url}
           ref={ref}
           onKeyDown={handleKeydown}
           onBlur={handleBlur}
-          onMouseOver={handleMouseover}
-          onMouseOut={handleMouseout}
         >
           {title}
         </Link>
@@ -274,7 +279,7 @@ const PopupMenuItem = forwardRef<PopupMenuItemRef, PopupMenuItemProps>(
             />
           </>
         ) : null}
-      </>
+      </li>
     );
   },
 );

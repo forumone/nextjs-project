@@ -17,7 +17,7 @@ interface MenuBarProps extends MenuProps {
 }
 
 function MenuBar({
-  items,
+  items: menuItems,
   modifierClasses,
   itemClasses,
 }: MenuBarProps): JSX.Element {
@@ -99,7 +99,7 @@ function MenuBar({
 
   return (
     <ul className={clsx(styles.menu, modifierClasses)}>
-      {items.map(({ ...item }) => (
+      {menuItems.map(({ ...item }) => (
         <li key={item.id} className={clsx(styles.item, itemClasses)}>
           <MenuBarItem
             {...item}
@@ -111,12 +111,12 @@ function MenuBar({
             setFocusToFirstItem={setFocusToFirstItem}
             ref={node => {
               if (node) {
-                const menuItems = getItems();
-                menuItems.set(item.id, node);
+                const items = getItems();
+                items.set(item.id, node);
               }
               return () => {
-                const menuItems = getItems();
-                menuItems?.delete(item.id);
+                const items = getItems();
+                items?.delete(item.id);
               };
             }}
           />

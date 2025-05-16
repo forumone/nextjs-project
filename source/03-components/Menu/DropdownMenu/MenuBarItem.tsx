@@ -164,6 +164,10 @@ const MenuBarItem = forwardRef<MenuBarItemRef, MenuBarItemProps>(
       }
     };
 
+    const handleMouseout: MouseEventHandler = () => {
+      setHasHover(false);
+    };
+
     return (
       <>
         {isButton ? (
@@ -178,6 +182,7 @@ const MenuBarItem = forwardRef<MenuBarItemRef, MenuBarItemProps>(
             onClick={handleClick}
             onKeyDown={handleKeydown}
             onMouseOver={handleMouseover}
+            onMouseOut={handleMouseout}
           >
             {title}
           </button>
@@ -188,6 +193,7 @@ const MenuBarItem = forwardRef<MenuBarItemRef, MenuBarItemProps>(
             ref={ref as RefObject<HTMLAnchorElement>}
             onKeyDown={handleKeydown}
             onMouseOver={handleMouseover}
+            onMouseOut={handleMouseout}
           >
             {title}
           </Link>

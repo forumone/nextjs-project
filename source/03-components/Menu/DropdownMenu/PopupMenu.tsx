@@ -43,7 +43,7 @@ interface PopupMenuRef {
 
 const PopupMenu = forwardRef<PopupMenuRef, PopupMenuProps>(function PopupMenu(
   {
-    items,
+    items: menuItems,
     itemClasses,
     isHidden,
     modifierClasses,
@@ -178,33 +178,32 @@ const PopupMenu = forwardRef<PopupMenuRef, PopupMenuProps>(function PopupMenu(
       onMouseOver={showMenusOnHover ? handleMouseover : undefined}
       onMouseOut={showMenusOnHover ? handleMouseout : undefined}
     >
-      {items.map(item => (
-        <li key={item.id} className={clsx(styles.item, itemClasses)}>
-          <PopupMenuItem
-            {...item}
-            {...props}
-            isExpanded={expandedItem === item.id}
-            setParentExpanded={setExpandedItem}
-            setFocusToFirstItem={setFocusToFirstItem}
-            setFocusToLastItem={setFocusToLastItem}
-            setFocusToPreviousItem={setFocusToPreviousItem}
-            setFocusToNextItem={setFocusToNextItem}
-            setFocus={setHasFocus}
-            setHover={setHasHover}
-            ref={node => {
-              if (node) {
-                const menuItems = getItems();
-                menuItems.set(item.id, node);
-              }
-              return () => {
-                const menuItems = getItems();
-                menuItems?.delete(item.id);
-              };
-            }}
-            menuLevel={menuLevel}
-            closeParent={close}
-          />
-        </li>
+      {menuItems.map(item => (
+        <PopupMenuItem
+          {...item}
+          {...props}
+          isExpanded={expandedItem === item.id}
+          setParentExpanded={setExpandedItem}
+          setFocusToFirstItem={setFocusToFirstItem}
+          setFocusToLastItem={setFocusToLastItem}
+          setFocusToPreviousItem={setFocusToPreviousItem}
+          setFocusToNextItem={setFocusToNextItem}
+          setFocus={setHasFocus}
+          setHover={setHasHover}
+          ref={node => {
+            if (node) {
+              const items = getItems();
+              items.set(item.id, node);
+            }
+            return () => {
+              const items = getItems();
+              items?.delete(item.id);
+            };
+          }}
+          menuLevel={menuLevel}
+          closeParent={close}
+          key={item.id}
+        />
       ))}
     </ul>
   );

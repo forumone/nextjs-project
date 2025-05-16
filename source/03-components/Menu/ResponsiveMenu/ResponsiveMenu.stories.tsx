@@ -1,6 +1,6 @@
+import dropdownMenuArgs from '@/source/03-components/Menu/DropdownMenu/dropdownMenuArgs';
 import { Meta, StoryObj } from '@storybook/react';
 import ResponsiveMenuComponent from './ResponsiveMenu';
-import responsiveMenuArgs from './responsiveMenuArgs';
 
 const meta: Meta<typeof ResponsiveMenuComponent> = {
   title: 'Components/Menu/Responsive Menu',
@@ -10,7 +10,7 @@ const meta: Meta<typeof ResponsiveMenuComponent> = {
 
 type Story = StoryObj<typeof ResponsiveMenuComponent>;
 const ResponsiveMenu: Story = {
-  args: responsiveMenuArgs,
+  args: dropdownMenuArgs,
 };
 
 export default meta;

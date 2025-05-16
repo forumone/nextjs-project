@@ -13,7 +13,6 @@ const dropdownMenuArgs = {
       title: 'About',
       url: '#0',
       inActiveTrail: false,
-      isButton: true,
       below: [
         {
           id: 'about-submenu-one',
