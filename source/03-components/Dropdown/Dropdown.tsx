@@ -33,6 +33,11 @@ export interface DropdownProps {
    * Pre-expanded items
    */
   expandedItems?: Record<string | number, boolean>;
+
+  /**
+   * Whether to use arrow keys for navigation
+   */
+  useArrowKeys?: boolean;
 }
 
 /**
@@ -45,6 +50,7 @@ function Dropdown({
   className = '',
   disabled = false,
   expandedItems: initialExpandedItems,
+  useArrowKeys = true,
 }: DropdownProps): JSX.Element {
   const [selected, setSelected] = useState<DropdownItem | undefined>(
     selectedItem,
@@ -58,11 +64,6 @@ function Dropdown({
   useEffect(() => {
     setSelected(selectedItem);
   }, [selectedItem]);
-
-  // Function to close all open menus
-  const closeAllMenus = () => {
-    setExpandedItems({});
-  };
 
   // Helper function to check if an element is a descendant of another element
   const isElementDescendantOf = (child: Node, parent: Node): boolean => {
@@ -136,12 +137,225 @@ function Dropdown({
     return null;
   };
 
-  // Add event listeners for click outside, ESC key, and focus management only if a menu is open
+  // Function to toggle expanding/collapsing an item
+  const toggleExpandItem = (itemTitle: string, event: React.MouseEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    setExpandedItems(prev => {
+      const newExpandedItems = { ...prev };
+      const isCurrentlyExpanded = prev[itemTitle] || false;
+
+      // Toggle the current item
+      newExpandedItems[itemTitle] = !isCurrentlyExpanded;
+
+      // If we're closing an item, also close all its children
+      if (isCurrentlyExpanded) {
+        // Find the item in the items array (or nested arrays)
+        const findAndCloseChildren = (itemsToSearch: DropdownItem[]) => {
+          for (const item of itemsToSearch) {
+            if (item.title === itemTitle && item.below) {
+              // Close all direct children
+              item.below.forEach(child => {
+                newExpandedItems[child.title] = false;
+                // Recursively close any grandchildren
+                if (child.below && child.below.length > 0) {
+                  findAndCloseChildren(child.below);
+                }
+              });
+              return true; // Item found and processed
+            }
+
+            // Check in the item's children
+            if (item.below && item.below.length > 0) {
+              const found = findAndCloseChildren(item.below);
+              if (found) return true;
+            }
+          }
+          return false; // Item not found in this branch
+        };
+
+        findAndCloseChildren(items);
+      } else {
+        // We're opening an item
+        // Find the parent of the current item
+        const parentTitle = findParentOf(itemTitle, items);
+
+        // Close all other open items at the same level
+        Object.keys(prev).forEach(key => {
+          // Skip the current item
+          if (key === itemTitle) return;
+
+          // Skip if the item is a parent of the current item
+          if (parentTitle && key === parentTitle) return;
+
+          // Skip if the item is an ancestor of the current item
+          if (isDescendantOf(itemTitle, key, items)) return;
+
+          // Skip if the current item is an ancestor of this item
+          if (isDescendantOf(key, itemTitle, items)) return;
+
+          // If we're at the same level, close the other item
+          const keyParent = findParentOf(key, items);
+          if (keyParent === parentTitle) {
+            newExpandedItems[key] = false;
+
+            // Also close all children of this item
+            const findAndCloseChildren = (itemsToSearch: DropdownItem[]) => {
+              for (const item of itemsToSearch) {
+                if (item.title === key && item.below) {
+                  // Close all direct children
+                  item.below.forEach(child => {
+                    newExpandedItems[child.title] = false;
+                    // Recursively close any grandchildren
+                    if (child.below && child.below.length > 0) {
+                      findAndCloseChildren(child.below);
+                    }
+                  });
+                  return true; // Item found and processed
+                }
+
+                // Check in the item's children
+                if (item.below && item.below.length > 0) {
+                  const found = findAndCloseChildren(item.below);
+                  if (found) return true;
+                }
+              }
+              return false; // Item not found in this branch
+            };
+
+            findAndCloseChildren(items);
+          }
+        });
+      }
+
+      return newExpandedItems;
+    });
+  };
+
+  // Function to close all open menus
+  const closeAllMenus = () => {
+    setExpandedItems({});
+  };
+
+  // Add event listeners for click outside, ESC key, keyboard navigation, and focus management
   useEffect(() => {
     // Check if any menu is open
     const isAnyMenuOpen = Object.values(expandedItems).some(Boolean);
 
-    // Only add event listeners if a menu is open
+    // Add keyboard navigation event listener regardless of menu state
+    const handleKeyboardNavigation = (event: KeyboardEvent) => {
+      if (!useArrowKeys) return;
+
+      // Get all focusable elements in the dropdown
+      if (!dropdownRef.current) return;
+
+      const focusableElements =
+        dropdownRef.current.querySelectorAll<HTMLElement>('button, a');
+
+      if (focusableElements.length === 0) return;
+
+      // Find the currently focused element
+      const focusedElement = document.activeElement as HTMLElement;
+      if (!focusedElement || !dropdownRef.current.contains(focusedElement)) {
+        return;
+      }
+
+      // Find the index of the focused element
+      const focusedIndex =
+        Array.from(focusableElements).indexOf(focusedElement);
+      if (focusedIndex === -1) return;
+
+      // Check if the focused element is a button
+      const isFocusedButton = focusedElement.tagName.toLowerCase() === 'button';
+
+      // Check if the button's dropdown is expanded
+      const isDropdownExpanded =
+        isFocusedButton &&
+        focusedElement.getAttribute('aria-expanded') === 'true';
+
+      // Handle arrow keys
+      if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
+        event.preventDefault();
+
+        // If focus is on a button and its dropdown is collapsed, first expand its submenu and then move focus to the first link
+        if (isFocusedButton && !isDropdownExpanded) {
+          // Get the title of the button
+          const buttonTitle = focusedElement.textContent?.trim();
+          if (buttonTitle) {
+            // Expand the submenu by directly updating the expandedItems state
+            setExpandedItems(prev => {
+              const newExpandedItems = { ...prev };
+              newExpandedItems[buttonTitle] = true;
+              return newExpandedItems;
+            });
+
+            // Find the first link in the dropdown
+            const buttonParent = focusedElement.closest('li');
+            if (buttonParent) {
+              // Use setTimeout to allow the DOM to update after the state change
+              setTimeout(() => {
+                const firstLink = buttonParent.querySelector('ul a');
+                if (firstLink) {
+                  (firstLink as HTMLElement).focus();
+                }
+              }, 0);
+            }
+            return;
+          }
+        }
+
+        // If focus is on a button and its dropdown is expanded, moves focus to the first link in the dropdown
+        if (isFocusedButton && isDropdownExpanded) {
+          // Find the first link in the dropdown
+          const buttonParent = focusedElement.closest('li');
+          if (buttonParent) {
+            const firstLink = buttonParent.querySelector('ul a');
+            if (firstLink) {
+              (firstLink as HTMLElement).focus();
+              return;
+            }
+          }
+        }
+
+        // If focus is on a link, and it is not the last item, moves focus to the next item
+        if (!isFocusedButton && focusedIndex < focusableElements.length - 1) {
+          focusableElements[focusedIndex + 1].focus();
+        }
+      }
+
+      if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
+        event.preventDefault();
+
+        // If focus is on a button or link, and it is not the first item in its list, moves focus to the previous button or link
+        if (focusedIndex > 0) {
+          focusableElements[focusedIndex - 1].focus();
+        }
+      }
+
+      if (event.key === 'Home') {
+        event.preventDefault();
+
+        // If focus is on a button or link, and it is not the first item in its list, moves focus to the first button or link
+        if (focusableElements.length > 0) {
+          focusableElements[0].focus();
+        }
+      }
+
+      if (event.key === 'End') {
+        event.preventDefault();
+
+        // If focus is on a button or link, and it is not the last item in its list, moves focus to the last button or link
+        if (focusableElements.length > 0) {
+          focusableElements[focusableElements.length - 1].focus();
+        }
+      }
+    };
+
+    // Add keyboard navigation event listener
+    document.addEventListener('keydown', handleKeyboardNavigation);
+
+    // Only add other event listeners if a menu is open
     if (isAnyMenuOpen) {
       const handleClickOutside = (event: MouseEvent) => {
         if (
@@ -319,12 +533,30 @@ function Dropdown({
             items,
           );
 
-          // If they share the same parent (grandparent of lost focus item),
-          // then the receiving focus item is a sibling of the parent of the lost focus item
-          if (
+          // Check if the receiving focus item is a sibling of the parent of the lost focus item
+          // This can happen in two ways:
+
+          // Case 1: They share the same parent (grandparent of lost focus item)
+          const sharesParent = Boolean(
             lostFocusGrandparentTitle &&
-            lostFocusGrandparentTitle === receivingFocusParentTitle
-          ) {
+              lostFocusGrandparentTitle === receivingFocusParentTitle,
+          );
+
+          // Case 2: The receiving focus item is a direct sibling of the parent of the lost focus item
+          // This is the case when tabbing from a third-level item to a second-level item
+          const directSiblingCheck = findParentOf(
+            receivingFocusItemTitle,
+            items,
+          );
+          const isDirectSibling = Boolean(
+            lostFocusGrandparentTitle &&
+              directSiblingCheck &&
+              lostFocusGrandparentTitle === directSiblingCheck,
+          );
+
+          const isSiblingOfParent = sharesParent || isDirectSibling;
+
+          if (isSiblingOfParent) {
             setExpandedItems(prev => {
               const newExpandedItems: Record<string, boolean> = { ...prev };
 
@@ -419,104 +651,11 @@ function Dropdown({
       };
     }
 
-    // No cleanup needed if no listeners were added
-    return undefined;
-  }, [expandedItems]);
-
-  const toggleExpandItem = (itemTitle: string, event: React.MouseEvent) => {
-    event.preventDefault();
-    event.stopPropagation();
-
-    setExpandedItems(prev => {
-      const newExpandedItems = { ...prev };
-      const isCurrentlyExpanded = prev[itemTitle] || false;
-
-      // Toggle the current item
-      newExpandedItems[itemTitle] = !isCurrentlyExpanded;
-
-      // If we're closing an item, also close all its children
-      if (isCurrentlyExpanded) {
-        // Find the item in the items array (or nested arrays)
-        const findAndCloseChildren = (itemsToSearch: DropdownItem[]) => {
-          for (const item of itemsToSearch) {
-            if (item.title === itemTitle && item.below) {
-              // Close all direct children
-              item.below.forEach(child => {
-                newExpandedItems[child.title] = false;
-                // Recursively close any grandchildren
-                if (child.below && child.below.length > 0) {
-                  findAndCloseChildren(child.below);
-                }
-              });
-              return true; // Item found and processed
-            }
-
-            // Check in the item's children
-            if (item.below && item.below.length > 0) {
-              const found = findAndCloseChildren(item.below);
-              if (found) return true;
-            }
-          }
-          return false; // Item not found in this branch
-        };
-
-        findAndCloseChildren(items);
-      } else {
-        // We're opening an item
-        // Find the parent of the current item
-        const parentTitle = findParentOf(itemTitle, items);
-
-        // Close all other open items at the same level
-        Object.keys(prev).forEach(key => {
-          // Skip the current item
-          if (key === itemTitle) return;
-
-          // Skip if the item is a parent of the current item
-          if (parentTitle && key === parentTitle) return;
-
-          // Skip if the item is an ancestor of the current item
-          if (isDescendantOf(itemTitle, key, items)) return;
-
-          // Skip if the current item is an ancestor of this item
-          if (isDescendantOf(key, itemTitle, items)) return;
-
-          // If we're at the same level, close the other item
-          const keyParent = findParentOf(key, items);
-          if (keyParent === parentTitle) {
-            newExpandedItems[key] = false;
-
-            // Also close all children of this item
-            const findAndCloseChildren = (itemsToSearch: DropdownItem[]) => {
-              for (const item of itemsToSearch) {
-                if (item.title === key && item.below) {
-                  // Close all direct children
-                  item.below.forEach(child => {
-                    newExpandedItems[child.title] = false;
-                    // Recursively close any grandchildren
-                    if (child.below && child.below.length > 0) {
-                      findAndCloseChildren(child.below);
-                    }
-                  });
-                  return true; // Item found and processed
-                }
-
-                // Check in the item's children
-                if (item.below && item.below.length > 0) {
-                  const found = findAndCloseChildren(item.below);
-                  if (found) return true;
-                }
-              }
-              return false; // Item not found in this branch
-            };
-
-            findAndCloseChildren(items);
-          }
-        });
-      }
-
-      return newExpandedItems;
-    });
-  };
+    // Clean up keyboard navigation event listener
+    return () => {
+      document.removeEventListener('keydown', handleKeyboardNavigation);
+    };
+  }, [expandedItems, useArrowKeys]);
 
   const handleSelect = (item: DropdownItem) => {
     setSelected(item);
