@@ -1,4 +1,4 @@
-@import 'mixins';
+@import '../../00-config/mixins.css';
 
 /* Submenu styles */
 .submenu {
@@ -7,12 +7,20 @@
   background-color: var(--ui-background-dark);
   color: var(--text-on-dark);
   display: none;
-  inset-block-start: 100%; /* Position below the parent item */
-  inset-inline-start: 0; /* Align left edge with parent */
   list-style-type: none;
   margin: var(--spacing-1) 0 0;
   padding: 0;
-  position: absolute;
+  position: static;
+  width: 100%;
+}
+
+@media (--desktop) {
+  .submenu {
+    inset-block-start: 100%; /* Position below the parent item */
+    inset-inline-start: 0; /* Align left edge with parent */
+    position: absolute;
+    width: auto;
+  }
 }
 
 .submenu .link {
@@ -61,11 +69,17 @@
 
 /* Main container */
 .dropdown {
-  @include list-inline;
+  @include list-clean;
 
   list-style-type: none;
   margin-inline-start: 0;
   padding-inline-start: 0;
+}
+
+@media (--desktop) {
+  .dropdown {
+    @include list-inline;
+  }
 }
 
 .dropdown--disabled {
@@ -74,8 +88,16 @@
 }
 
 .dropdown > .item {
-  display: inline-block;
+  display: block;
+  margin-block-end: var(--spacing-2);
   position: relative;
+}
+
+@media (--desktop) {
+  .dropdown > .item {
+    display: inline-block;
+    margin-block-end: 0;
+  }
 }
 
 .dropdown > .item > .link {
@@ -95,7 +117,7 @@
 }
 
 .dropdown > .item > .link.has-subnav::after {
-  background-image: url('/images/menu-arrow-down');
+  background-image: url('/images/menu-arrow-down.svg');
   background-size: 16px 16px;
   content: '';
   display: block;
@@ -239,9 +261,15 @@
   margin: 0;
 }
 
-/* Position nested submenus to the right of their parent with top edges aligned */
+/* Position nested submenus */
 .submenu--nested {
-  inset-block-start: 0; /* Align top edge with parent */
-  inset-inline-start: 100%; /* Position to the right of parent */
-  margin-inline-start: var(--spacing-1); /* Add a small margin for spacing */
+  margin-inline-start: var(--spacing-3); /* Indent on mobile */
+}
+
+@media (--desktop) {
+  .submenu--nested {
+    inset-block-start: 0; /* Align top edge with parent */
+    inset-inline-start: 100%; /* Position to the right of parent */
+    margin-inline-start: var(--spacing-1); /* Add a small margin for spacing */
+  }
 }

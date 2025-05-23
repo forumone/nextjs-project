@@ -16,26 +16,5 @@ const Dropdown: Story = {
   name: 'Navigation Menu from YAML',
 };
 
-const WithExpandedAbout: Story = {
-  args: {
-    ...dropdownArgs,
-    // Pre-expand the About section
-    expandedItems: { About: true },
-  },
-  name: 'Navigation Menu with Expanded About Section',
-};
-
-const WithNestedSubmenu: Story = {
-  args: {
-    ...dropdownArgs,
-    // Pre-expand the About section and the About Staff submenu
-    expandedItems: {
-      About: true,
-      'About Staff': true,
-    },
-  },
-  name: 'Navigation Menu with Nested Submenu',
-};
-
 export default meta;
-export { Dropdown, WithExpandedAbout, WithNestedSubmenu };
+export { Dropdown };

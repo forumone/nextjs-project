@@ -154,7 +154,6 @@ const dropdownArgs = {
       in_active_trail: false,
     },
   ],
-  disabled: false,
 } satisfies Partial<DropdownProps>;
 
 export default dropdownArgs;

@@ -1,38 +1,23 @@
 import clsx from 'clsx';
-import { JSX, useEffect, useRef, useState } from 'react';
+import { GessoComponent } from 'gesso';
+import {
+  FocusEventHandler,
+  JSX,
+  KeyboardEvent as ReactKeyboardEvent,
+  MouseEvent as ReactMouseEvent,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
+import { flushSync } from 'react-dom';
 import DropdownItem from './DropdownItem';
 import styles from './dropdown.module.css';
 
-export interface DropdownProps {
+interface DropdownProps extends GessoComponent {
   /**
    * Array of items to display in the dropdown
    */
   items: DropdownItem[];
-
-  /**
-   * Currently selected item
-   */
-  selectedItem?: DropdownItem;
-
-  /**
-   * Callback function when an item is selected
-   */
-  onSelect?: (item: DropdownItem) => void;
-
-  /**
-   * Additional CSS class name
-   */
-  className?: string;
-
-  /**
-   * Whether the dropdown is disabled
-   */
-  disabled?: boolean;
-
-  /**
-   * Pre-expanded items
-   */
-  expandedItems?: Record<string | number, boolean>;
 
   /**
    * Whether to use arrow keys for navigation
@@ -40,105 +25,99 @@ export interface DropdownProps {
   useArrowKeys?: boolean;
 }
 
+// Helper function to check if an item is a descendant of another item
+const isDescendantOf = (
+  childTitle: string,
+  parentTitle: string,
+  itemsToSearch: DropdownItem[],
+): boolean => {
+  for (const item of itemsToSearch) {
+    if (item.title === parentTitle && item.below) {
+      // Check if the child is a direct descendant
+      if (item.below.some(child => child.title === childTitle)) {
+        return true;
+      }
+
+      // Check if the child is a descendant of any of the children
+      for (const child of item.below) {
+        if (child.below && isDescendantOf(childTitle, child.title, [child])) {
+          return true;
+        }
+      }
+    }
+
+    // Check in the item's children
+    if (item.below && item.below.length > 0) {
+      if (isDescendantOf(childTitle, parentTitle, item.below)) {
+        return true;
+      }
+    }
+  }
+  return false;
+};
+
+// Helper function to find the parent of an item
+const findParentOf = (
+  childTitle: string,
+  itemsToSearch: DropdownItem[],
+  currentPath: string[] = [],
+): string | null => {
+  for (const item of itemsToSearch) {
+    if (item.below) {
+      // Check if the child is a direct descendant
+      if (item.below.some(child => child.title === childTitle)) {
+        return item.title;
+      }
+
+      // Check in the item's children
+      for (const child of item.below) {
+        const result = findParentOf(
+          childTitle,
+          [child],
+          [...currentPath, item.title],
+        );
+        if (result) {
+          return result;
+        }
+      }
+    }
+  }
+  return null;
+};
+
 /**
  * Dropdown menu component
  */
 function Dropdown({
   items,
-  selectedItem,
-  onSelect,
-  className = '',
-  disabled = false,
-  expandedItems: initialExpandedItems,
+  modifierClasses,
   useArrowKeys = true,
 }: DropdownProps): JSX.Element {
-  const [selected, setSelected] = useState<DropdownItem | undefined>(
-    selectedItem,
-  );
   const [expandedItems, setExpandedItems] = useState<
     Record<string | number, boolean>
-  >(initialExpandedItems || {});
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  >({});
+  const [isDesktop, setIsDesktop] = useState<boolean>(false);
+  const dropdownRef = useRef<HTMLUListElement>(null);
 
-  // Update selected item when prop changes
+  // Check if any menu is open
+  const isAnyMenuOpen = Object.values(expandedItems).some(Boolean);
+
   useEffect(() => {
-    setSelected(selectedItem);
-  }, [selectedItem]);
-
-  // Helper function to check if an element is a descendant of another element
-  const isElementDescendantOf = (child: Node, parent: Node): boolean => {
-    let node = child.parentNode;
-    while (node !== null) {
-      if (node === parent) {
-        return true;
-      }
-      node = node.parentNode;
-    }
-    return false;
-  };
-
-  // Helper function to check if an item is a descendant of another item
-  const isDescendantOf = (
-    childTitle: string,
-    parentTitle: string,
-    itemsToSearch: DropdownItem[],
-  ): boolean => {
-    for (const item of itemsToSearch) {
-      if (item.title === parentTitle && item.below) {
-        // Check if the child is a direct descendant
-        if (item.below.some(child => child.title === childTitle)) {
-          return true;
-        }
-
-        // Check if the child is a descendant of any of the children
-        for (const child of item.below) {
-          if (child.below && isDescendantOf(childTitle, child.title, [child])) {
-            return true;
-          }
-        }
-      }
-
-      // Check in the item's children
-      if (item.below && item.below.length > 0) {
-        if (isDescendantOf(childTitle, parentTitle, item.below)) {
-          return true;
-        }
-      }
-    }
-    return false;
-  };
-
-  // Helper function to find the parent of an item
-  const findParentOf = (
-    childTitle: string,
-    itemsToSearch: DropdownItem[],
-    currentPath: string[] = [],
-  ): string | null => {
-    for (const item of itemsToSearch) {
-      if (item.below) {
-        // Check if the child is a direct descendant
-        if (item.below.some(child => child.title === childTitle)) {
-          return item.title;
-        }
-
-        // Check in the item's children
-        for (const child of item.below) {
-          const result = findParentOf(
-            childTitle,
-            [child],
-            [...currentPath, item.title],
-          );
-          if (result) {
-            return result;
-          }
-        }
-      }
-    }
-    return null;
-  };
+    const desktopMediaQuery = window.matchMedia('(width >= 64em)');
+    const handleMediaQueryChange = (
+      e: MediaQueryList | MediaQueryListEvent,
+    ) => {
+      setIsDesktop(e.matches);
+    };
+    desktopMediaQuery.addEventListener('change', handleMediaQueryChange);
+    handleMediaQueryChange(desktopMediaQuery);
+    return () => {
+      desktopMediaQuery.removeEventListener('change', handleMediaQueryChange);
+    };
+  }, []);
 
   // Function to toggle expanding/collapsing an item
-  const toggleExpandItem = (itemTitle: string, event: React.MouseEvent) => {
+  const toggleExpandItem = (itemTitle: string, event: ReactMouseEvent) => {
     event.preventDefault();
     event.stopPropagation();
 
@@ -181,315 +160,37 @@ function Dropdown({
         // Find the parent of the current item
         const parentTitle = findParentOf(itemTitle, items);
 
-        // Close all other open items at the same level
-        Object.keys(prev).forEach(key => {
-          // Skip the current item
-          if (key === itemTitle) return;
+        // On desktop, only allow one submenu to be open at a time
+        // On mobile, allow multiple submenus to be open simultaneously
+        if (isDesktop) {
+          // Close all other open items at the same level
+          Object.keys(prev).forEach(key => {
+            // Skip the current item
+            if (key === itemTitle) return;
 
-          // Skip if the item is a parent of the current item
-          if (parentTitle && key === parentTitle) return;
+            // Skip if the item is a parent of the current item
+            if (parentTitle && key === parentTitle) return;
 
-          // Skip if the item is an ancestor of the current item
-          if (isDescendantOf(itemTitle, key, items)) return;
+            // Skip if the item is an ancestor of the current item
+            if (isDescendantOf(itemTitle, key, items)) return;
 
-          // Skip if the current item is an ancestor of this item
-          if (isDescendantOf(key, itemTitle, items)) return;
+            // Skip if the current item is an ancestor of this item
+            if (isDescendantOf(key, itemTitle, items)) return;
 
-          // If we're at the same level, close the other item
-          const keyParent = findParentOf(key, items);
-          if (keyParent === parentTitle) {
-            newExpandedItems[key] = false;
+            // If we're at the same level, close the other item
+            const keyParent = findParentOf(key, items);
+            // For top-level items (parentTitle is null), only close other items on desktop
+            // For nested items, close other items at the same level regardless of desktop/mobile
+            if (
+              keyParent === parentTitle &&
+              (parentTitle !== null || isDesktop)
+            ) {
+              newExpandedItems[key] = false;
 
-            // Also close all children of this item
-            const findAndCloseChildren = (itemsToSearch: DropdownItem[]) => {
-              for (const item of itemsToSearch) {
-                if (item.title === key && item.below) {
-                  // Close all direct children
-                  item.below.forEach(child => {
-                    newExpandedItems[child.title] = false;
-                    // Recursively close any grandchildren
-                    if (child.below && child.below.length > 0) {
-                      findAndCloseChildren(child.below);
-                    }
-                  });
-                  return true; // Item found and processed
-                }
-
-                // Check in the item's children
-                if (item.below && item.below.length > 0) {
-                  const found = findAndCloseChildren(item.below);
-                  if (found) return true;
-                }
-              }
-              return false; // Item not found in this branch
-            };
-
-            findAndCloseChildren(items);
-          }
-        });
-      }
-
-      return newExpandedItems;
-    });
-  };
-
-  // Function to close all open menus
-  const closeAllMenus = () => {
-    setExpandedItems({});
-  };
-
-  // Add event listeners for click outside, ESC key, keyboard navigation, and focus management
-  useEffect(() => {
-    // Check if any menu is open
-    const isAnyMenuOpen = Object.values(expandedItems).some(Boolean);
-
-    // Add keyboard navigation event listener regardless of menu state
-    const handleKeyboardNavigation = (event: KeyboardEvent) => {
-      if (!useArrowKeys) return;
-
-      // Get all focusable elements in the dropdown
-      if (!dropdownRef.current) return;
-
-      const focusableElements =
-        dropdownRef.current.querySelectorAll<HTMLElement>('button, a');
-
-      if (focusableElements.length === 0) return;
-
-      // Find the currently focused element
-      const focusedElement = document.activeElement as HTMLElement;
-      if (!focusedElement || !dropdownRef.current.contains(focusedElement)) {
-        return;
-      }
-
-      // Find the index of the focused element
-      const focusedIndex =
-        Array.from(focusableElements).indexOf(focusedElement);
-      if (focusedIndex === -1) return;
-
-      // Check if the focused element is a button
-      const isFocusedButton = focusedElement.tagName.toLowerCase() === 'button';
-
-      // Check if the button's dropdown is expanded
-      const isDropdownExpanded =
-        isFocusedButton &&
-        focusedElement.getAttribute('aria-expanded') === 'true';
-
-      // Handle arrow keys
-      if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
-        event.preventDefault();
-
-        // If focus is on a button and its dropdown is collapsed, first expand its submenu and then move focus to the first link
-        if (isFocusedButton && !isDropdownExpanded) {
-          // Get the title of the button
-          const buttonTitle = focusedElement.textContent?.trim();
-          if (buttonTitle) {
-            // Expand the submenu by directly updating the expandedItems state
-            setExpandedItems(prev => {
-              const newExpandedItems = { ...prev };
-              newExpandedItems[buttonTitle] = true;
-              return newExpandedItems;
-            });
-
-            // Find the first link in the dropdown
-            const buttonParent = focusedElement.closest('li');
-            if (buttonParent) {
-              // Use setTimeout to allow the DOM to update after the state change
-              setTimeout(() => {
-                const firstLink = buttonParent.querySelector('ul a');
-                if (firstLink) {
-                  (firstLink as HTMLElement).focus();
-                }
-              }, 0);
-            }
-            return;
-          }
-        }
-
-        // If focus is on a button and its dropdown is expanded, moves focus to the first link in the dropdown
-        if (isFocusedButton && isDropdownExpanded) {
-          // Find the first link in the dropdown
-          const buttonParent = focusedElement.closest('li');
-          if (buttonParent) {
-            const firstLink = buttonParent.querySelector('ul a');
-            if (firstLink) {
-              (firstLink as HTMLElement).focus();
-              return;
-            }
-          }
-        }
-
-        // If focus is on a link, and it is not the last item, moves focus to the next item
-        if (!isFocusedButton && focusedIndex < focusableElements.length - 1) {
-          focusableElements[focusedIndex + 1].focus();
-        }
-      }
-
-      if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
-        event.preventDefault();
-
-        // If focus is on a button or link, and it is not the first item in its list, moves focus to the previous button or link
-        if (focusedIndex > 0) {
-          focusableElements[focusedIndex - 1].focus();
-        }
-      }
-
-      if (event.key === 'Home') {
-        event.preventDefault();
-
-        // If focus is on a button or link, and it is not the first item in its list, moves focus to the first button or link
-        if (focusableElements.length > 0) {
-          focusableElements[0].focus();
-        }
-      }
-
-      if (event.key === 'End') {
-        event.preventDefault();
-
-        // If focus is on a button or link, and it is not the last item in its list, moves focus to the last button or link
-        if (focusableElements.length > 0) {
-          focusableElements[focusableElements.length - 1].focus();
-        }
-      }
-    };
-
-    // Add keyboard navigation event listener
-    document.addEventListener('keydown', handleKeyboardNavigation);
-
-    // Only add other event listeners if a menu is open
-    if (isAnyMenuOpen) {
-      const handleClickOutside = (event: MouseEvent) => {
-        if (
-          dropdownRef.current &&
-          !dropdownRef.current.contains(event.target as Node)
-        ) {
-          closeAllMenus();
-        }
-      };
-
-      const handleEscKey = (event: KeyboardEvent) => {
-        if (event.key === 'Escape') {
-          closeAllMenus();
-        }
-      };
-
-      const handleFocusOut = (event: FocusEvent) => {
-        // If the dropdown doesn't contain the element that lost focus, do nothing
-        if (!dropdownRef.current?.contains(event.target as Node)) {
-          return;
-        }
-
-        // If the related target (element receiving focus) is null or outside the dropdown, close all menus
-        if (
-          !event.relatedTarget ||
-          !dropdownRef.current.contains(event.relatedTarget as Node)
-        ) {
-          closeAllMenus();
-          return;
-        }
-
-        // Find the menu item that lost focus
-        const menuItems = dropdownRef.current.querySelectorAll(
-          `.${styles.item}`,
-        );
-        let lostFocusItem: Element | null = null;
-        let lostFocusItemTitle: string | null = null;
-
-        Array.from(menuItems).some(item => {
-          if (item.contains(event.target as Node)) {
-            lostFocusItem = item;
-            // Try to extract the title from the data attribute or text content
-            const titleElement = item.querySelector('a, button');
-            if (titleElement) {
-              lostFocusItemTitle = titleElement.textContent?.trim() || null;
-            }
-            return true; // Break the loop
-          }
-          return false;
-        });
-
-        // If we couldn't find the menu item that lost focus, do nothing
-        if (!lostFocusItem || !lostFocusItemTitle) {
-          return;
-        }
-
-        // If the element receiving focus is a descendant of the menu item that lost focus, do nothing
-        if (isElementDescendantOf(event.relatedTarget as Node, lostFocusItem)) {
-          return;
-        }
-
-        // Find the item that is receiving focus
-        let receivingFocusItem: Element | null = null;
-        let receivingFocusItemTitle: string | null = null;
-
-        Array.from(menuItems).some(item => {
-          if (item.contains(event.relatedTarget as Node)) {
-            receivingFocusItem = item;
-            // Try to extract the title from the data attribute or text content
-            const titleElement = item.querySelector('a, button');
-            if (titleElement) {
-              receivingFocusItemTitle =
-                titleElement.textContent?.trim() || null;
-            }
-            return true; // Break the loop
-          }
-          return false;
-        });
-
-        // If we couldn't find the item receiving focus, close all menus
-        if (!receivingFocusItem || !receivingFocusItemTitle) {
-          closeAllMenus();
-          return;
-        }
-
-        // Check if the receiving focus item is a direct parent of the lost focus item
-        const lostFocusParentTitle = findParentOf(lostFocusItemTitle, items);
-
-        // If the receiving focus item is the direct parent of the lost focus item,
-        // or it's the toggle button for the parent, don't close the menu
-        if (lostFocusParentTitle === receivingFocusItemTitle) {
-          return;
-        }
-
-        // Check if the receiving focus item is a top-level item
-        const isReceivingFocusTopLevel = items.some(
-          item => item.title === receivingFocusItemTitle,
-        );
-
-        // Check if the lost focus item is a top-level item
-        const isLostFocusTopLevel = items.some(
-          item => item.title === lostFocusItemTitle,
-        );
-
-        // If moving from a child item to a different top-level item, close all menus except the new one
-        if (isReceivingFocusTopLevel && !isLostFocusTopLevel) {
-          setExpandedItems(prev => {
-            const newExpandedItems: Record<string, boolean> = {};
-            // Only keep the receiving focus item expanded if it was already expanded
-            if (receivingFocusItemTitle && prev[receivingFocusItemTitle]) {
-              newExpandedItems[receivingFocusItemTitle] = true;
-            }
-            return newExpandedItems;
-          });
-          return;
-        }
-
-        // If moving between items at the same level that share the same parent,
-        // close the lost focus item's submenu but keep the parent menu open
-        if (
-          lostFocusParentTitle &&
-          lostFocusParentTitle === findParentOf(receivingFocusItemTitle, items)
-        ) {
-          setExpandedItems(prev => {
-            const newExpandedItems: Record<string, boolean> = { ...prev };
-
-            // Only close the lost focus item if it's expanded
-            if (lostFocusItemTitle && newExpandedItems[lostFocusItemTitle]) {
-              newExpandedItems[lostFocusItemTitle] = false;
-
-              // Also close any children of the lost focus item
+              // Also close all children of this item
               const findAndCloseChildren = (itemsToSearch: DropdownItem[]) => {
                 for (const item of itemsToSearch) {
-                  if (item.title === lostFocusItemTitle && item.below) {
+                  if (item.title === key && item.below) {
                     // Close all direct children
                     item.below.forEach(child => {
                       newExpandedItems[child.title] = false;
@@ -512,157 +213,245 @@ function Dropdown({
 
               findAndCloseChildren(items);
             }
-
-            return newExpandedItems;
           });
-          return;
         }
+      }
 
-        // If the receiving focus item is a sibling of the parent of the lost focus item,
-        // close the parent of the lost focus item and all its children
-        if (lostFocusParentTitle) {
-          // Find the parent of the parent of the lost focus item
-          const lostFocusGrandparentTitle = findParentOf(
-            lostFocusParentTitle,
-            items,
-          );
+      return newExpandedItems;
+    });
+  };
 
-          // Find the parent of the receiving focus item
-          const receivingFocusParentTitle = findParentOf(
-            receivingFocusItemTitle,
-            items,
-          );
+  // Function to close all open menus
+  const closeAllMenus = () => {
+    setExpandedItems({});
+  };
 
-          // Check if the receiving focus item is a sibling of the parent of the lost focus item
-          // This can happen in two ways:
+  /**
+   * Handles keyboard navigation using arrow keys.
+   *
+   * @param {React.KeyboardEvent} event - The keyboard event triggered by user interaction.
+   *
+   * Behavior:
+   * - Focus management is applied only if the currently active element is inside the dropdown menu.
+   * - Validates whether the active element is a button or a link within its hierarchical context (top-level or nested submenu).
+   * - Handles different navigation keys:
+   *   - ArrowDown/ArrowRight: Moves focus to the next focusable element or handles submenu expansion.
+   *   - ArrowUp/ArrowLeft: Moves focus to the previous focusable element within the menu.
+   *   - Home: Moves focus to the first focusable element within the current menu level.
+   *   - End: Moves focus to the last focusable element within the current menu level.
+   * - For dropdown buttons, ensures expanded state is managed and focuses on the first element within the submenu if applicable.
+   */
+  const handleArrowKeysNavigation = (event: ReactKeyboardEvent) => {
+    if (!dropdownRef.current) return;
 
-          // Case 1: They share the same parent (grandparent of lost focus item)
-          const sharesParent = Boolean(
-            lostFocusGrandparentTitle &&
-              lostFocusGrandparentTitle === receivingFocusParentTitle,
-          );
+    // Find the currently focused element
+    const focusedElement = document.activeElement as HTMLElement;
+    if (!focusedElement || !dropdownRef.current.contains(focusedElement)) {
+      return;
+    }
 
-          // Case 2: The receiving focus item is a direct sibling of the parent of the lost focus item
-          // This is the case when tabbing from a third-level item to a second-level item
-          const directSiblingCheck = findParentOf(
-            receivingFocusItemTitle,
-            items,
-          );
-          const isDirectSibling = Boolean(
-            lostFocusGrandparentTitle &&
-              directSiblingCheck &&
-              lostFocusGrandparentTitle === directSiblingCheck,
-          );
+    // Check if the focused element is a button
+    const isFocusedButton = focusedElement.tagName.toLowerCase() === 'button';
 
-          const isSiblingOfParent = sharesParent || isDirectSibling;
+    // Check if the button's dropdown is expanded
+    const isDropdownExpanded =
+      isFocusedButton &&
+      focusedElement.getAttribute('aria-expanded') === 'true';
 
-          if (isSiblingOfParent) {
+    const parentSubmenu = focusedElement.closest('ul');
+
+    if (!parentSubmenu) return;
+
+    // Determine if the focused element is in the top level or a nested level
+    const isTopLevel = parentSubmenu === dropdownRef.current;
+
+    // For top level, get all focusable elements
+    // For nested levels, only get links if not a top-level item
+    const selector = isTopLevel ? 'button, a' : 'a';
+
+    // Get the appropriate focusable elements based on the level, but only within the current submenu
+    const focusableElements = parentSubmenu.querySelectorAll<HTMLElement>(
+      `:scope > li > :is(${selector})`,
+    );
+
+    if (focusableElements.length === 0) return;
+
+    // Find the index of the focused element
+    const focusedIndex = Array.from(focusableElements).indexOf(focusedElement);
+    if (focusedIndex === -1) return;
+
+    // Handle arrow keys
+    if (event.key === 'ArrowDown' && isFocusedButton) {
+      event.preventDefault();
+      if (!isDropdownExpanded) {
+        // Get the title of the button
+        const buttonTitle = focusedElement.textContent?.trim();
+        if (buttonTitle) {
+          // Expand the submenu by directly updating the expandedItems state
+          flushSync(() =>
             setExpandedItems(prev => {
-              const newExpandedItems: Record<string, boolean> = { ...prev };
-
-              // Close the parent of the lost focus item
-              if (newExpandedItems[lostFocusParentTitle]) {
-                newExpandedItems[lostFocusParentTitle] = false;
-
-                // Also close any children of the parent of the lost focus item
-                const findAndCloseChildren = (
-                  itemsToSearch: DropdownItem[],
-                ) => {
-                  for (const item of itemsToSearch) {
-                    if (item.title === lostFocusParentTitle && item.below) {
-                      // Close all direct children
-                      item.below.forEach(child => {
-                        newExpandedItems[child.title] = false;
-                        // Recursively close any grandchildren
-                        if (child.below && child.below.length > 0) {
-                          findAndCloseChildren(child.below);
-                        }
-                      });
-                      return true; // Item found and processed
-                    }
-
-                    // Check in the item's children
-                    if (item.below && item.below.length > 0) {
-                      const found = findAndCloseChildren(item.below);
-                      if (found) return true;
-                    }
-                  }
-                  return false; // Item not found in this branch
-                };
-
-                findAndCloseChildren(items);
-              }
-
+              const newExpandedItems = { ...prev };
+              newExpandedItems[buttonTitle] = true;
               return newExpandedItems;
-            });
-            return;
-          }
+            }),
+          );
         }
 
-        // For any other case, close the lost focus item's submenu
-        setExpandedItems(prev => {
-          const newExpandedItems: Record<string, boolean> = { ...prev };
-
-          // Only close the lost focus item if it's expanded
-          if (lostFocusItemTitle && newExpandedItems[lostFocusItemTitle]) {
-            newExpandedItems[lostFocusItemTitle] = false;
-
-            // Also close any children of the lost focus item
-            const findAndCloseChildren = (itemsToSearch: DropdownItem[]) => {
-              for (const item of itemsToSearch) {
-                if (item.title === lostFocusItemTitle && item.below) {
-                  // Close all direct children
-                  item.below.forEach(child => {
-                    newExpandedItems[child.title] = false;
-                    // Recursively close any grandchildren
-                    if (child.below && child.below.length > 0) {
-                      findAndCloseChildren(child.below);
-                    }
-                  });
-                  return true; // Item found and processed
-                }
-
-                // Check in the item's children
-                if (item.below && item.below.length > 0) {
-                  const found = findAndCloseChildren(item.below);
-                  if (found) return true;
-                }
-              }
-              return false; // Item not found in this branch
-            };
-
-            findAndCloseChildren(items);
+        // Find the first link in the dropdown
+        const buttonParent = focusedElement.closest('li');
+        if (buttonParent) {
+          const firstLink = buttonParent.querySelector<HTMLAnchorElement>(
+            ':scope > ul > li > a',
+          );
+          if (firstLink) {
+            firstLink.focus();
           }
+        }
+        return;
+      }
+    } else if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
+      event.preventDefault();
+      if (!isFocusedButton && focusedIndex < focusableElements.length - 1) {
+        focusableElements[focusedIndex + 1].focus();
+      }
+    } else if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
+      event.preventDefault();
+      if (focusedIndex > 0) {
+        focusableElements[focusedIndex - 1].focus();
+      }
+    } else if (event.key === 'Home') {
+      event.preventDefault();
+      if (focusableElements.length > 0) {
+        focusableElements[0].focus();
+      }
+    } else if (event.key === 'End') {
+      event.preventDefault();
+      if (focusableElements.length > 0) {
+        focusableElements[focusableElements.length - 1].focus();
+      }
+    }
+  };
 
-          return newExpandedItems;
-        });
+  /**
+   * Handles the focus out event for dropdown menu items.
+   *
+   * Behavior:
+   * - If the dropdown container does not encompass the currentTarget (the element losing focus), the function does nothing.
+   * - If the related target (element receiving focus) is null or outside the dropdown boundaries, all menus are closed.
+   * - Ensures that focus transitions within the same menu or menu hierarchy do not cause unnecessary state changes.
+   * - Updates the `expandedItems` state based on whether the focus transition relates to valid menu hierarchies.
+   *
+   * @param {React.FocusEvent<HTMLAnchorElement | HTMLButtonElement>} event - The focus out event object.
+   */
+  const handleFocusOut: FocusEventHandler<
+    HTMLAnchorElement | HTMLButtonElement
+  > = event => {
+    const { currentTarget, relatedTarget } = event;
+    // If the dropdown doesn't contain the element that lost focus, do nothing
+    if (!dropdownRef.current?.contains(currentTarget)) {
+      return;
+    }
+
+    // If the related target (element receiving focus) is null or outside the dropdown, close all menus
+    if (
+      !relatedTarget ||
+      !dropdownRef.current.contains(relatedTarget as Element)
+    ) {
+      closeAllMenus();
+      return;
+    }
+
+    const lostFocusItem = currentTarget.closest('li');
+    const lostFocusItemTitle = currentTarget.textContent?.trim() || null;
+
+    // If we couldn't find the menu item that lost focus, do nothing
+    if (!lostFocusItem || !lostFocusItemTitle) {
+      return;
+    }
+
+    // If the element receiving focus is a descendant of the menu item that lost focus, do nothing
+    if (lostFocusItem.contains(relatedTarget as Element)) {
+      return;
+    }
+
+    const receivingFocusItem = relatedTarget.closest('li');
+    if (!receivingFocusItem) {
+      closeAllMenus();
+      return;
+    }
+    const receivingFocusTitleElement = receivingFocusItem.querySelector<
+      HTMLAnchorElement | HTMLButtonElement
+    >(`:scope > :is(a, button)`);
+    const receivingFocusItemTitle: string | null =
+      receivingFocusTitleElement?.textContent?.trim() || null;
+    if (!receivingFocusItemTitle) {
+      closeAllMenus();
+      return;
+    }
+
+    const allMenuItems = Array.from(
+      dropdownRef.current.querySelectorAll<
+        HTMLAnchorElement | HTMLButtonElement
+      >('a, button'),
+    );
+
+    const newExpandedItems = Object.entries(expandedItems).map(([key]) => {
+      const menuButtonOrLink = allMenuItems.find(
+        v => v?.textContent?.trim() === key,
+      );
+      if (!menuButtonOrLink) {
+        return [key, false];
+      }
+      const menuItem = menuButtonOrLink.closest('li');
+      if (!menuItem) {
+        return [key, false];
+      }
+
+      // Keep the menu open if the element receiving focus is an ancestor of the menu item.
+      if (receivingFocusItem.contains(menuItem)) {
+        return [key, true];
+      }
+
+      // Keep the menu open if the menu item is an ancestor of the element receiving focus.
+      if (menuItem.contains(receivingFocusItem)) {
+        return [key, true];
+      }
+
+      return [key, false];
+    });
+
+    setExpandedItems(Object.fromEntries(newExpandedItems));
+  };
+
+  // Add event listeners for click outside, ESC key, keyboard navigation, and focus management
+  useEffect(() => {
+    if (!dropdownRef.current) return;
+    // Only add event listeners while a menu is open
+    if (isAnyMenuOpen) {
+      const handleClickOutside = (event: MouseEvent) => {
+        if (
+          dropdownRef.current &&
+          !dropdownRef.current.contains(event.target as Node)
+        ) {
+          closeAllMenus();
+        }
       };
 
-      // Add event listeners
+      const handleEscKey = (event: KeyboardEvent) => {
+        if (event.key === 'Escape') {
+          closeAllMenus();
+        }
+      };
+
       document.addEventListener('mousedown', handleClickOutside);
       document.addEventListener('keydown', handleEscKey);
-      document.addEventListener('focusout', handleFocusOut);
 
-      // Clean up event listeners
       return () => {
         document.removeEventListener('mousedown', handleClickOutside);
         document.removeEventListener('keydown', handleEscKey);
-        document.removeEventListener('focusout', handleFocusOut);
       };
     }
-
-    // Clean up keyboard navigation event listener
-    return () => {
-      document.removeEventListener('keydown', handleKeyboardNavigation);
-    };
-  }, [expandedItems, useArrowKeys]);
-
-  const handleSelect = (item: DropdownItem) => {
-    setSelected(item);
-    if (onSelect) {
-      onSelect(item);
-    }
-  };
+  }, [isAnyMenuOpen]);
 
   const renderDropdownItem = (item: DropdownItem, isChild = false) => {
     // Get properties from item
@@ -671,18 +460,18 @@ function Dropdown({
     const itemBelow = item.below || [];
     const hasChildren = itemBelow.length > 0;
     const isExpanded = expandedItems[itemTitle] || false;
-    const isActive = item.is_active || selected?.title === item.title || false;
     const isInActiveTrail = item.in_active_trail || false;
 
     // For top-level items without children, render as links
     if (!hasChildren && !isChild && itemUrl) {
       return (
-        <li
-          key={itemTitle}
-          className={`${styles.item} ${isActive ? styles['item--selected'] : ''} ${isInActiveTrail ? styles['item--active-trail'] : ''}`}
-          role="none"
-        >
-          <a href={itemUrl} className={styles.link}>
+        <li key={itemTitle} className={clsx(styles.item)}>
+          <a
+            href={itemUrl}
+            className={styles.link}
+            onKeyDown={useArrowKeys ? handleArrowKeysNavigation : undefined}
+            onBlur={handleFocusOut}
+          >
             {itemTitle}
           </a>
         </li>
@@ -703,6 +492,8 @@ function Dropdown({
             onClick={e => toggleExpandItem(itemTitle, e)}
             aria-expanded={isExpanded}
             aria-haspopup="true"
+            onKeyDown={useArrowKeys ? handleArrowKeysNavigation : undefined}
+            onBlur={handleFocusOut}
           >
             {itemTitle}
           </button>
@@ -720,24 +511,25 @@ function Dropdown({
       return (
         <li
           key={itemTitle}
-          className={`${styles.item} ${styles['item--child']} ${styles['item--has-children']} ${isExpanded ? styles['item--expanded'] : ''} ${isActive ? styles['item--selected'] : ''} ${isInActiveTrail ? styles['item--active-trail'] : ''}`}
+          className={`${styles.item} ${styles['item--child']} ${styles['item--has-children']} ${isExpanded ? styles['item--expanded'] : ''} ${isInActiveTrail ? styles['item--active-trail'] : ''}`}
           role="none"
         >
-          <div className={styles['item-wrapper']}>
-            <a
-              href={itemUrl}
-              className={clsx(styles.link, styles['has-subnav'])}
-            >
-              {itemTitle}
-            </a>
-            <button
-              type="button"
-              className={styles['subnav-toggle']}
-              onClick={e => toggleExpandItem(itemTitle, e)}
-              aria-expanded={isExpanded}
-              aria-label={`Toggle ${itemTitle} submenu`}
-            />
-          </div>
+          <a
+            href={itemUrl}
+            className={clsx(styles.link, styles['has-subnav'])}
+            onKeyDown={useArrowKeys ? handleArrowKeysNavigation : undefined}
+            onBlur={handleFocusOut}
+          >
+            {itemTitle}
+          </a>
+          <button
+            type="button"
+            className={styles['subnav-toggle']}
+            onClick={e => toggleExpandItem(itemTitle, e)}
+            aria-expanded={isExpanded}
+            aria-label={`Toggle ${itemTitle} submenu`}
+            onBlur={handleFocusOut}
+          />
           {isExpanded && itemBelow.length > 0 && (
             <ul className={`${styles.submenu} ${styles['submenu--nested']}`}>
               {itemBelow.map(child => renderDropdownItem(child, true))}
@@ -752,10 +544,15 @@ function Dropdown({
       return (
         <li
           key={itemTitle}
-          className={`${styles.item} ${styles['item--child']} ${isActive ? styles['item--selected'] : ''} ${isInActiveTrail ? styles['item--active-trail'] : ''}`}
+          className={`${styles.item} ${styles['item--child']} ${isInActiveTrail ? styles['item--active-trail'] : ''}`}
           role="none"
         >
-          <a href={itemUrl} className={styles.link}>
+          <a
+            href={itemUrl}
+            className={styles.link}
+            onKeyDown={useArrowKeys ? handleArrowKeysNavigation : undefined}
+            onBlur={handleFocusOut}
+          >
             {itemTitle}
           </a>
         </li>
@@ -766,10 +563,8 @@ function Dropdown({
     return (
       <li
         key={itemTitle}
-        className={`${styles.item} ${isActive ? styles['item--selected'] : ''} ${isInActiveTrail ? styles['item--active-trail'] : ''}`}
-        onClick={() => handleSelect(item)}
+        className={`${styles.item} ${isInActiveTrail ? styles['item--active-trail'] : ''}`}
         role="option"
-        aria-selected={isActive}
       >
         {itemTitle}
       </li>
@@ -777,15 +572,13 @@ function Dropdown({
   };
 
   return (
-    <div
-      className={`${styles.dropdown} ${className} ${disabled ? styles['dropdown--disabled'] : ''}`}
-      ref={dropdownRef}
-    >
-      <ul className={styles.dropdown} role="menu">
+    <nav className={clsx(styles.dropdown, modifierClasses)}>
+      <ul className={styles.dropdown} ref={dropdownRef}>
         {items.map(item => renderDropdownItem(item))}
       </ul>
-    </div>
+    </nav>
   );
 }
 
 export default Dropdown;
+export type { DropdownProps };
