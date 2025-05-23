@@ -6,7 +6,6 @@
 
   background-color: var(--ui-background-dark);
   color: var(--text-on-dark);
-  display: none;
   list-style-type: none;
   margin: var(--spacing-1) 0 0;
   padding: 0;

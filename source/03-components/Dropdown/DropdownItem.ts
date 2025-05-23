@@ -1,4 +1,5 @@
 interface DropdownItem {
+  readonly id: string | number;
   readonly title: string;
   readonly url?: string;
   readonly below?: DropdownItem[];

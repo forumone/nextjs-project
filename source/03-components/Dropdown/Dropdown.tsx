@@ -27,20 +27,20 @@ interface DropdownProps extends GessoComponent {
 
 // Helper function to check if an item is a descendant of another item
 const isDescendantOf = (
-  childTitle: string,
-  parentTitle: string,
+  childId: string | number,
+  parentId: string | number,
   itemsToSearch: DropdownItem[],
 ): boolean => {
   for (const item of itemsToSearch) {
-    if (item.title === parentTitle && item.below) {
+    if (item.id === parentId && item.below) {
       // Check if the child is a direct descendant
-      if (item.below.some(child => child.title === childTitle)) {
+      if (item.below.some(child => child.id === childId)) {
         return true;
       }
 
       // Check if the child is a descendant of any of the children
       for (const child of item.below) {
-        if (child.below && isDescendantOf(childTitle, child.title, [child])) {
+        if (child.below && isDescendantOf(childId, child.id, [child])) {
           return true;
         }
       }
@@ -48,7 +48,7 @@ const isDescendantOf = (
 
     // Check in the item's children
     if (item.below && item.below.length > 0) {
-      if (isDescendantOf(childTitle, parentTitle, item.below)) {
+      if (isDescendantOf(childId, parentId, item.below)) {
         return true;
       }
     }
@@ -58,23 +58,23 @@ const isDescendantOf = (
 
 // Helper function to find the parent of an item
 const findParentOf = (
-  childTitle: string,
+  childId: string | number,
   itemsToSearch: DropdownItem[],
-  currentPath: string[] = [],
-): string | null => {
+  currentPath: (string | number)[] = [],
+): string | number | null => {
   for (const item of itemsToSearch) {
     if (item.below) {
       // Check if the child is a direct descendant
-      if (item.below.some(child => child.title === childTitle)) {
-        return item.title;
+      if (item.below.some(child => child.id === childId)) {
+        return item.id;
       }
 
       // Check in the item's children
       for (const child of item.below) {
         const result = findParentOf(
-          childTitle,
+          childId,
           [child],
-          [...currentPath, item.title],
+          [...currentPath, item.id],
         );
         if (result) {
           return result;
@@ -117,26 +117,29 @@ function Dropdown({
   }, []);
 
   // Function to toggle expanding/collapsing an item
-  const toggleExpandItem = (itemTitle: string, event: ReactMouseEvent) => {
+  const toggleExpandItem = (
+    itemId: string | number,
+    event: ReactMouseEvent,
+  ) => {
     event.preventDefault();
     event.stopPropagation();
 
     setExpandedItems(prev => {
       const newExpandedItems = { ...prev };
-      const isCurrentlyExpanded = prev[itemTitle] || false;
+      const isCurrentlyExpanded = prev[itemId] || false;
 
       // Toggle the current item
-      newExpandedItems[itemTitle] = !isCurrentlyExpanded;
+      newExpandedItems[itemId] = !isCurrentlyExpanded;
 
       // If we're closing an item, also close all its children
       if (isCurrentlyExpanded) {
         // Find the item in the items array (or nested arrays)
         const findAndCloseChildren = (itemsToSearch: DropdownItem[]) => {
           for (const item of itemsToSearch) {
-            if (item.title === itemTitle && item.below) {
+            if (item.id === itemId && item.below) {
               // Close all direct children
               item.below.forEach(child => {
-                newExpandedItems[child.title] = false;
+                newExpandedItems[child.id] = false;
                 // Recursively close any grandchildren
                 if (child.below && child.below.length > 0) {
                   findAndCloseChildren(child.below);
@@ -158,7 +161,7 @@ function Dropdown({
       } else {
         // We're opening an item
         // Find the parent of the current item
-        const parentTitle = findParentOf(itemTitle, items);
+        const parentId = findParentOf(itemId, items);
 
         // On desktop, only allow one submenu to be open at a time
         // On mobile, allow multiple submenus to be open simultaneously
@@ -166,34 +169,31 @@ function Dropdown({
           // Close all other open items at the same level
           Object.keys(prev).forEach(key => {
             // Skip the current item
-            if (key === itemTitle) return;
+            if (key === String(itemId)) return;
 
             // Skip if the item is a parent of the current item
-            if (parentTitle && key === parentTitle) return;
+            if (parentId && key === String(parentId)) return;
 
             // Skip if the item is an ancestor of the current item
-            if (isDescendantOf(itemTitle, key, items)) return;
+            if (isDescendantOf(itemId, key, items)) return;
 
             // Skip if the current item is an ancestor of this item
-            if (isDescendantOf(key, itemTitle, items)) return;
+            if (isDescendantOf(key, itemId, items)) return;
 
             // If we're at the same level, close the other item
             const keyParent = findParentOf(key, items);
-            // For top-level items (parentTitle is null), only close other items on desktop
+            // For top-level items (parentId is null), only close other items on desktop
             // For nested items, close other items at the same level regardless of desktop/mobile
-            if (
-              keyParent === parentTitle &&
-              (parentTitle !== null || isDesktop)
-            ) {
+            if (keyParent === parentId && (parentId !== null || isDesktop)) {
               newExpandedItems[key] = false;
 
               // Also close all children of this item
               const findAndCloseChildren = (itemsToSearch: DropdownItem[]) => {
                 for (const item of itemsToSearch) {
-                  if (item.title === key && item.below) {
+                  if (item.id === key && item.below) {
                     // Close all direct children
                     item.below.forEach(child => {
-                      newExpandedItems[child.title] = false;
+                      newExpandedItems[child.id] = false;
                       // Recursively close any grandchildren
                       if (child.below && child.below.length > 0) {
                         findAndCloseChildren(child.below);
@@ -284,14 +284,14 @@ function Dropdown({
     if (event.key === 'ArrowDown' && isFocusedButton) {
       event.preventDefault();
       if (!isDropdownExpanded) {
-        // Get the title of the button
-        const buttonTitle = focusedElement.textContent?.trim();
-        if (buttonTitle) {
+        // Get the id of the button from the data attribute
+        const buttonId = focusedElement.getAttribute('data-id');
+        if (buttonId) {
           // Expand the submenu by directly updating the expandedItems state
           flushSync(() =>
             setExpandedItems(prev => {
               const newExpandedItems = { ...prev };
-              newExpandedItems[buttonTitle] = true;
+              newExpandedItems[buttonId] = true;
               return newExpandedItems;
             }),
           );
@@ -362,10 +362,10 @@ function Dropdown({
     }
 
     const lostFocusItem = currentTarget.closest('li');
-    const lostFocusItemTitle = currentTarget.textContent?.trim() || null;
+    const lostFocusItemId = currentTarget.getAttribute('data-id') || null;
 
     // If we couldn't find the menu item that lost focus, do nothing
-    if (!lostFocusItem || !lostFocusItemTitle) {
+    if (!lostFocusItem || !lostFocusItemId) {
       return;
     }
 
@@ -379,25 +379,19 @@ function Dropdown({
       closeAllMenus();
       return;
     }
-    const receivingFocusTitleElement = receivingFocusItem.querySelector<
+    const receivingFocusElement = receivingFocusItem.querySelector<
       HTMLAnchorElement | HTMLButtonElement
     >(`:scope > :is(a, button)`);
-    const receivingFocusItemTitle: string | null =
-      receivingFocusTitleElement?.textContent?.trim() || null;
-    if (!receivingFocusItemTitle) {
+    const receivingFocusItemId: string | null =
+      receivingFocusElement?.getAttribute('data-id') || null;
+    if (!receivingFocusItemId) {
       closeAllMenus();
       return;
     }
 
-    const allMenuItems = Array.from(
-      dropdownRef.current.querySelectorAll<
-        HTMLAnchorElement | HTMLButtonElement
-      >('a, button'),
-    );
-
     const newExpandedItems = Object.entries(expandedItems).map(([key]) => {
-      const menuButtonOrLink = allMenuItems.find(
-        v => v?.textContent?.trim() === key,
+      const menuButtonOrLink = dropdownRef.current?.querySelector(
+        `[data-id="${key}"]`,
       );
       if (!menuButtonOrLink) {
         return [key, false];
@@ -454,19 +448,20 @@ function Dropdown({
   }, [isAnyMenuOpen]);
 
   const renderDropdownItem = (item: DropdownItem, isChild = false) => {
-    const { title, url } = item;
+    const { id, title, url } = item;
 
     const hasChildren = item.below?.length && item.below.length > 0;
-    const isExpanded = expandedItems[item.title] || false;
+    const isExpanded = expandedItems[item.id] || false;
     const isInActiveTrail = item.in_active_trail || false;
 
     // For top-level items without children, render as links
     if (!hasChildren && !isChild && url) {
       return (
-        <li key={title} className={clsx(styles.item)}>
+        <li key={id} className={clsx(styles.item)}>
           <a
             href={url}
             className={styles.link}
+            data-id={id}
             onKeyDown={useArrowKeys ? handleArrowKeysNavigation : undefined}
             onBlur={handleFocusOut}
           >
@@ -480,7 +475,7 @@ function Dropdown({
     if (hasChildren && !isChild) {
       return (
         <li
-          key={title}
+          key={id}
           className={clsx(styles.item, styles['has-subnav'], {
             [styles['item--expanded']]: isExpanded,
             [styles['item--active-trail']]: isInActiveTrail,
@@ -489,9 +484,10 @@ function Dropdown({
           <button
             type="button"
             className={clsx(styles.link, styles['has-subnav'])}
-            onClick={e => toggleExpandItem(title, e)}
+            onClick={e => toggleExpandItem(id, e)}
             aria-expanded={isExpanded}
             aria-haspopup="true"
+            data-id={id}
             onKeyDown={useArrowKeys ? handleArrowKeysNavigation : undefined}
             onBlur={handleFocusOut}
           >
@@ -510,7 +506,7 @@ function Dropdown({
     if (isChild && hasChildren) {
       return (
         <li
-          key={title}
+          key={id}
           className={clsx(
             styles.item,
             styles['item--child'],
@@ -524,6 +520,7 @@ function Dropdown({
           <a
             href={url}
             className={clsx(styles.link, styles['has-subnav'])}
+            data-id={id}
             onKeyDown={useArrowKeys ? handleArrowKeysNavigation : undefined}
             onBlur={handleFocusOut}
           >
@@ -532,13 +529,13 @@ function Dropdown({
           <button
             type="button"
             className={styles['subnav-toggle']}
-            onClick={e => toggleExpandItem(title, e)}
+            onClick={e => toggleExpandItem(id, e)}
             aria-expanded={isExpanded}
             aria-label={`Toggle ${title} submenu`}
             onBlur={handleFocusOut}
           />
           {isExpanded && hasChildren && (
-            <ul className={`${styles.submenu} ${styles['submenu--nested']}`}>
+            <ul className={clsx(styles.submenu, styles['submenu--nested'])}>
               {item.below.map(child => renderDropdownItem(child, true))}
             </ul>
           )}
@@ -550,7 +547,7 @@ function Dropdown({
     if (isChild && !hasChildren) {
       return (
         <li
-          key={title}
+          key={id}
           className={clsx(styles.item, styles['item--child'], {
             [styles['item--active-trail']]: isInActiveTrail,
           })}
@@ -558,6 +555,7 @@ function Dropdown({
           <a
             href={url}
             className={styles.link}
+            data-id={id}
             onKeyDown={useArrowKeys ? handleArrowKeysNavigation : undefined}
             onBlur={handleFocusOut}
           >
@@ -570,7 +568,7 @@ function Dropdown({
     // Fallback for any other case
     return (
       <li
-        key={title}
+        key={id}
         className={clsx(styles.item, {
           [styles['item--active-trail']]: isInActiveTrail,
         })}
