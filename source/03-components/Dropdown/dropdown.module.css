@@ -1,0 +1,247 @@
+@import 'mixins';
+
+/* Submenu styles */
+.submenu {
+  @include list-clean;
+
+  background-color: var(--ui-background-dark);
+  color: var(--text-on-dark);
+  display: none;
+  inset-block-start: 100%; /* Position below the parent item */
+  inset-inline-start: 0; /* Align left edge with parent */
+  list-style-type: none;
+  margin: var(--spacing-1) 0 0;
+  padding: 0;
+  position: absolute;
+}
+
+.submenu .link {
+  color: currentColor;
+  display: block;
+  line-height: var(--line-height-short);
+  padding: var(--spacing-2) calc(var(--spacing-3) + 7px) var(--spacing-2)
+    var(--spacing-3);
+  position: relative;
+  text-decoration: none;
+  width: 200px;
+}
+
+.submenu .link.has-subnav::after {
+  @include image-replace(16px, 16px);
+
+  background-size: 16px 16px;
+  block-size: 16px;
+  content: '';
+  display: block;
+  inline-size: 16px;
+  inset-block-start: 50%;
+  inset-inline-end: 5px;
+  overflow: hidden;
+  position: absolute;
+  transform: translateY(-50%);
+}
+
+/* Basic elements */
+.item {
+  margin-block-end: 0;
+}
+
+.item--has-children {
+  position: relative;
+}
+
+.link.has-subnav {
+  position: relative;
+}
+
+.item--selected > .link,
+.item--active-trail > .link {
+  font-weight: var(--font-weight-bold);
+}
+
+/* Main container */
+.dropdown {
+  @include list-inline;
+
+  list-style-type: none;
+  margin-inline-start: 0;
+  padding-inline-start: 0;
+}
+
+.dropdown--disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.dropdown > .item {
+  display: inline-block;
+  position: relative;
+}
+
+.dropdown > .item > .link {
+  background-color: transparent;
+  border: 0;
+  display: inline-block;
+  font-weight: var(--font-weight-semibold);
+  margin-inline-end: var(--spacing-5);
+  padding: 0;
+  position: relative;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.dropdown > .item > .link.has-subnav {
+  padding-inline-end: 25px;
+}
+
+.dropdown > .item > .link.has-subnav::after {
+  background-image: url('/images/menu-arrow-down');
+  background-size: 16px 16px;
+  content: '';
+  display: block;
+  height: 16px;
+  inset-block-start: 50%;
+  inset-inline-end: 5px;
+  overflow: hidden;
+  position: absolute;
+  transform: translateY(-40%);
+  width: 16px;
+}
+
+.dropdown > .item > button.link {
+  @include text-button;
+
+  appearance: none;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  color: var(--text-link);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.dropdown > .item > button.link:visited {
+  color: var(--text-link-visited);
+}
+
+.dropdown > .item > button.link:hover,
+.dropdown > .item > button.link:focus {
+  color: var(--text-link-hover);
+}
+
+.dropdown > .item > button.link:active {
+  color: var(--text-link-active);
+}
+
+.dropdown > .item > button.link[disabled] {
+  color: var(--button-text-disabled);
+  cursor: default;
+  pointer-events: none;
+}
+
+/* Toggle button */
+.toggle {
+  @include text-button;
+
+  appearance: none;
+  background: transparent;
+  block-size: 16px;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  cursor: pointer;
+  display: block;
+  font-family: inherit;
+  font-size: inherit;
+  inline-size: 16px;
+  inset-block-start: 50%;
+  inset-inline-end: 5px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  -webkit-tap-highlight-color: transparent;
+  transform: translateY(-40%);
+}
+
+.toggle::before {
+  block-size: 150%;
+  content: '';
+  display: block;
+  inline-size: 0;
+}
+
+.toggle svg {
+  pointer-events: none;
+}
+
+.item--expanded > .submenu {
+  display: block;
+}
+
+.submenu .item.has-subnav {
+  position: relative;
+}
+
+.submenu .link:hover,
+.submenu .link:focus {
+  background-color: var(--ui-background-dark);
+}
+
+.submenu .link.has-subnav::before {
+  block-size: 150%;
+  content: '';
+  display: block;
+  inline-size: 0;
+}
+
+.submenu .subnav-toggle {
+  @include text-button;
+
+  appearance: none;
+  background: transparent url('/images/menu-arrow-right.svg');
+  background-size: var(--spacing-3) var(--spacing-3);
+  block-size: calc(var(--spacing-3) + 2px);
+  border: 1px solid currentColor;
+  border-radius: 0;
+  box-shadow: none;
+  color: inherit;
+  cursor: pointer;
+  display: block;
+  font-family: inherit;
+  font-size: inherit;
+  inline-size: calc(var(--spacing-3) + 2px);
+  inset-block-start: 50%;
+  inset-inline-end: 5px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  -webkit-tap-highlight-color: transparent;
+  transform: translateY(-50%);
+}
+
+.submenu .subnav-toggle::before {
+  block-size: 150%;
+  content: '';
+  display: block;
+  inline-size: 0;
+}
+
+.submenu .subnav-toggle:hover,
+.submenu .subnav-toggle:focus-visible {
+  background-color: var(--ui-background-dark);
+}
+
+.submenu .submenu {
+  margin: 0;
+}
+
+/* Position nested submenus to the right of their parent with top edges aligned */
+.submenu--nested {
+  inset-block-start: 0; /* Align top edge with parent */
+  inset-inline-start: 100%; /* Position to the right of parent */
+  margin-inline-start: var(--spacing-1); /* Add a small margin for spacing */
+}
