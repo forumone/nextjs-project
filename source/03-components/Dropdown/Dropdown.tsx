@@ -4,13 +4,12 @@ import {
   FocusEventHandler,
   JSX,
   KeyboardEvent as ReactKeyboardEvent,
-  MouseEvent as ReactMouseEvent,
   useEffect,
   useRef,
   useState,
 } from 'react';
 import { flushSync } from 'react-dom';
-import DropdownItem from './DropdownItem';
+import type DropdownItem from './DropdownItem';
 import styles from './dropdown.module.css';
 
 interface DropdownProps extends GessoComponent {
@@ -119,7 +118,7 @@ function Dropdown({
   // Function to toggle expanding/collapsing an item
   const toggleExpandItem = (
     itemId: string | number,
-    event: ReactMouseEvent,
+    event: React.MouseEvent,
   ) => {
     event.preventDefault();
     event.stopPropagation();
@@ -131,90 +130,66 @@ function Dropdown({
       // Toggle the current item
       newExpandedItems[itemId] = !isCurrentlyExpanded;
 
-      // If we're closing an item, also close all its children
-      if (isCurrentlyExpanded) {
-        // Find the item in the items array (or nested arrays)
-        const findAndCloseChildren = (itemsToSearch: DropdownItem[]) => {
-          for (const item of itemsToSearch) {
-            if (item.id === itemId && item.below) {
-              // Close all direct children
-              item.below.forEach(child => {
-                newExpandedItems[child.id] = false;
-                // Recursively close any grandchildren
-                if (child.below && child.below.length > 0) {
-                  findAndCloseChildren(child.below);
-                }
-              });
-              return true; // Item found and processed
-            }
-
-            // Check in the item's children
-            if (item.below && item.below.length > 0) {
-              const found = findAndCloseChildren(item.below);
-              if (found) return true;
-            }
+      // Helper function to find an item by its ID
+      const findItemById = (
+        itemsToSearch: DropdownItem[],
+        id: string | number,
+      ): DropdownItem | null => {
+        for (const item of itemsToSearch) {
+          if (item.id === id) {
+            return item;
           }
-          return false; // Item not found in this branch
-        };
 
-        findAndCloseChildren(items);
-      } else {
-        // We're opening an item
-        // Find the parent of the current item
-        const parentId = findParentOf(itemId, items);
+          if (item.below?.length) {
+            const found = findItemById(item.below, id);
+            if (found) return found;
+          }
+        }
+        return null;
+      };
 
-        // On desktop, only allow one submenu to be open at a time
-        // On mobile, allow multiple submenus to be open simultaneously
-        if (isDesktop) {
-          // Close all other open items at the same level
-          Object.keys(prev).forEach(key => {
-            // Skip the current item
-            if (key === String(itemId)) return;
+      // Helper function to close an item and all its children
+      const closeItemAndChildren = (id: string | number) => {
+        newExpandedItems[id] = false;
+        const itemToClose = findItemById(items, id);
 
-            // Skip if the item is a parent of the current item
-            if (parentId && key === String(parentId)) return;
-
-            // Skip if the item is an ancestor of the current item
-            if (isDescendantOf(itemId, key, items)) return;
-
-            // Skip if the current item is an ancestor of this item
-            if (isDescendantOf(key, itemId, items)) return;
-
-            // If we're at the same level, close the other item
-            const keyParent = findParentOf(key, items);
-            // For top-level items (parentId is null), only close other items on desktop
-            // For nested items, close other items at the same level regardless of desktop/mobile
-            if (keyParent === parentId && (parentId !== null || isDesktop)) {
-              newExpandedItems[key] = false;
-
-              // Also close all children of this item
-              const findAndCloseChildren = (itemsToSearch: DropdownItem[]) => {
-                for (const item of itemsToSearch) {
-                  if (item.id === key && item.below) {
-                    // Close all direct children
-                    item.below.forEach(child => {
-                      newExpandedItems[child.id] = false;
-                      // Recursively close any grandchildren
-                      if (child.below && child.below.length > 0) {
-                        findAndCloseChildren(child.below);
-                      }
-                    });
-                    return true; // Item found and processed
-                  }
-
-                  // Check in the item's children
-                  if (item.below && item.below.length > 0) {
-                    const found = findAndCloseChildren(item.below);
-                    if (found) return true;
-                  }
-                }
-                return false; // Item not found in this branch
-              };
-
-              findAndCloseChildren(items);
-            }
+        if (itemToClose?.below?.length) {
+          itemToClose.below.forEach(child => {
+            closeItemAndChildren(child.id);
           });
         }
+      };
+
+      // If we're closing an item, also close all its children
+      if (isCurrentlyExpanded) {
+        const item = findItemById(items, itemId);
+        if (item?.below?.length) {
+          item.below.forEach(child => closeItemAndChildren(child.id));
+        }
+      } else if (isDesktop) {
+        // We're opening an item and on desktop
+        const parentId = findParentOf(itemId, items);
+
+        // Close siblings (items at the same level)
+        Object.keys(prev).forEach(key => {
+          const keyId = key as string | number;
+
+          // Skip if this is the current item or has a parent/child relationship with it
+          if (
+            keyId === itemId ||
+            (parentId && keyId === parentId) ||
+            isDescendantOf(itemId, keyId, items) ||
+            isDescendantOf(keyId, itemId, items)
+          ) {
+            return;
+          }
+
+          // If we're at the same level, close the other item and its children
+          const keyParent = findParentOf(keyId, items);
+          if (keyParent === parentId && (parentId !== null || isDesktop)) {
+            closeItemAndChildren(keyId);
+          }
+        });
       }
 
       return newExpandedItems;
@@ -389,32 +364,38 @@ function Dropdown({
       return;
     }
 
-    const newExpandedItems = Object.entries(expandedItems).map(([key]) => {
-      const menuButtonOrLink = dropdownRef.current?.querySelector(
-        `[data-id="${key}"]`,
-      );
-      if (!menuButtonOrLink) {
-        return [key, false];
-      }
-      const menuItem = menuButtonOrLink.closest('li');
-      if (!menuItem) {
-        return [key, false];
-      }
+    setExpandedItems(prevState => {
+      const newState = { ...prevState };
+      Object.keys(newState).forEach(key => {
+        const menuButtonOrLink = dropdownRef.current?.querySelector(
+          `[data-id="${key}"]`,
+        );
+        if (!menuButtonOrLink) {
+          newState[key] = false;
+          return;
+        }
+        const menuItem = menuButtonOrLink.closest('li');
+        if (!menuItem) {
+          newState[key] = false;
+          return;
+        }
 
-      // Keep the menu open if the element receiving focus is an ancestor of the menu item.
-      if (receivingFocusItem.contains(menuItem)) {
-        return [key, true];
-      }
+        // Keep the menu open if the element receiving focus is an ancestor of the menu item.
+        if (receivingFocusItem.contains(menuItem)) {
+          newState[key] = true;
+          return;
+        }
 
-      // Keep the menu open if the menu item is an ancestor of the element receiving focus.
-      if (menuItem.contains(receivingFocusItem)) {
-        return [key, true];
-      }
+        // Keep the menu open if the menu item is an ancestor of the element receiving focus.
+        if (menuItem.contains(receivingFocusItem)) {
+          newState[key] = true;
+          return;
+        }
 
-      return [key, false];
+        newState[key] = false;
+      });
+      return newState;
     });
-
-    setExpandedItems(Object.fromEntries(newExpandedItems));
   };
 
   // Add event listeners for click outside, ESC key, keyboard navigation, and focus management
@@ -512,7 +493,7 @@ function Dropdown({
             styles['item--child'],
             styles['item--has-children'],
             {
-              [styles['item--active-trail']]: isExpanded,
+              [styles['item--expanded']]: isExpanded,
               [styles['item--active-trail']]: isInActiveTrail,
             },
           )}
@@ -579,7 +560,7 @@ function Dropdown({
   };
 
   return (
-    <nav className={clsx(styles.dropdown, modifierClasses)}>
+    <nav className={clsx(modifierClasses)}>
       <ul className={styles.dropdown} ref={dropdownRef}>
         {items.map(item => renderDropdownItem(item))}
       </ul>
