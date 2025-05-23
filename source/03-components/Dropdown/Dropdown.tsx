@@ -311,7 +311,7 @@ function Dropdown({
       }
     } else if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
       event.preventDefault();
-      if (!isFocusedButton && focusedIndex < focusableElements.length - 1) {
+      if (focusedIndex < focusableElements.length - 1) {
         focusableElements[focusedIndex + 1].focus();
       }
     } else if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
@@ -454,25 +454,23 @@ function Dropdown({
   }, [isAnyMenuOpen]);
 
   const renderDropdownItem = (item: DropdownItem, isChild = false) => {
-    // Get properties from item
-    const itemTitle = item.title;
-    const itemUrl = item.url || '';
-    const itemBelow = item.below || [];
-    const hasChildren = itemBelow.length > 0;
-    const isExpanded = expandedItems[itemTitle] || false;
+    const { title, url } = item;
+
+    const hasChildren = item.below?.length && item.below.length > 0;
+    const isExpanded = expandedItems[item.title] || false;
     const isInActiveTrail = item.in_active_trail || false;
 
     // For top-level items without children, render as links
-    if (!hasChildren && !isChild && itemUrl) {
+    if (!hasChildren && !isChild && url) {
       return (
-        <li key={itemTitle} className={clsx(styles.item)}>
+        <li key={title} className={clsx(styles.item)}>
           <a
-            href={itemUrl}
+            href={url}
             className={styles.link}
             onKeyDown={useArrowKeys ? handleArrowKeysNavigation : undefined}
             onBlur={handleFocusOut}
           >
-            {itemTitle}
+            {title}
           </a>
         </li>
       );
@@ -482,24 +480,26 @@ function Dropdown({
     if (hasChildren && !isChild) {
       return (
         <li
-          key={itemTitle}
-          className={`${styles.item} ${styles['has-subnav']} ${isExpanded ? styles['item--expanded'] : ''} ${isInActiveTrail ? styles['item--active-trail'] : ''}`}
-          role="none"
+          key={title}
+          className={clsx(styles.item, styles['has-subnav'], {
+            [styles['item--expanded']]: isExpanded,
+            [styles['item--active-trail']]: isInActiveTrail,
+          })}
         >
           <button
             type="button"
             className={clsx(styles.link, styles['has-subnav'])}
-            onClick={e => toggleExpandItem(itemTitle, e)}
+            onClick={e => toggleExpandItem(title, e)}
             aria-expanded={isExpanded}
             aria-haspopup="true"
             onKeyDown={useArrowKeys ? handleArrowKeysNavigation : undefined}
             onBlur={handleFocusOut}
           >
-            {itemTitle}
+            {title}
           </button>
-          {isExpanded && itemBelow.length > 0 && (
+          {isExpanded && hasChildren && (
             <ul className={styles.submenu}>
-              {itemBelow.map(child => renderDropdownItem(child, true))}
+              {item.below.map(child => renderDropdownItem(child, true))}
             </ul>
           )}
         </li>
@@ -510,29 +510,36 @@ function Dropdown({
     if (isChild && hasChildren) {
       return (
         <li
-          key={itemTitle}
-          className={`${styles.item} ${styles['item--child']} ${styles['item--has-children']} ${isExpanded ? styles['item--expanded'] : ''} ${isInActiveTrail ? styles['item--active-trail'] : ''}`}
-          role="none"
+          key={title}
+          className={clsx(
+            styles.item,
+            styles['item--child'],
+            styles['item--has-children'],
+            {
+              [styles['item--active-trail']]: isExpanded,
+              [styles['item--active-trail']]: isInActiveTrail,
+            },
+          )}
         >
           <a
-            href={itemUrl}
+            href={url}
             className={clsx(styles.link, styles['has-subnav'])}
             onKeyDown={useArrowKeys ? handleArrowKeysNavigation : undefined}
             onBlur={handleFocusOut}
           >
-            {itemTitle}
+            {title}
           </a>
           <button
             type="button"
             className={styles['subnav-toggle']}
-            onClick={e => toggleExpandItem(itemTitle, e)}
+            onClick={e => toggleExpandItem(title, e)}
             aria-expanded={isExpanded}
-            aria-label={`Toggle ${itemTitle} submenu`}
+            aria-label={`Toggle ${title} submenu`}
             onBlur={handleFocusOut}
           />
-          {isExpanded && itemBelow.length > 0 && (
+          {isExpanded && hasChildren && (
             <ul className={`${styles.submenu} ${styles['submenu--nested']}`}>
-              {itemBelow.map(child => renderDropdownItem(child, true))}
+              {item.below.map(child => renderDropdownItem(child, true))}
             </ul>
           )}
         </li>
@@ -543,17 +550,18 @@ function Dropdown({
     if (isChild && !hasChildren) {
       return (
         <li
-          key={itemTitle}
-          className={`${styles.item} ${styles['item--child']} ${isInActiveTrail ? styles['item--active-trail'] : ''}`}
-          role="none"
+          key={title}
+          className={clsx(styles.item, styles['item--child'], {
+            [styles['item--active-trail']]: isInActiveTrail,
+          })}
         >
           <a
-            href={itemUrl}
+            href={url}
             className={styles.link}
             onKeyDown={useArrowKeys ? handleArrowKeysNavigation : undefined}
             onBlur={handleFocusOut}
           >
-            {itemTitle}
+            {title}
           </a>
         </li>
       );
@@ -562,11 +570,12 @@ function Dropdown({
     // Fallback for any other case
     return (
       <li
-        key={itemTitle}
-        className={`${styles.item} ${isInActiveTrail ? styles['item--active-trail'] : ''}`}
-        role="option"
+        key={title}
+        className={clsx(styles.item, {
+          [styles['item--active-trail']]: isInActiveTrail,
+        })}
       >
-        {itemTitle}
+        {title}
       </li>
     );
   };
