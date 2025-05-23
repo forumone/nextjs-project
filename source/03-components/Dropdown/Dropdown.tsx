@@ -382,13 +382,11 @@ function Dropdown({
 
         // Keep the menu open if the element receiving focus is an ancestor of the menu item.
         if (receivingFocusItem.contains(menuItem)) {
-          newState[key] = true;
           return;
         }
 
         // Keep the menu open if the menu item is an ancestor of the element receiving focus.
         if (menuItem.contains(receivingFocusItem)) {
-          newState[key] = true;
           return;
         }
 
