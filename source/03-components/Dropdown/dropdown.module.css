@@ -53,10 +53,6 @@
   margin-block-end: 0;
 }
 
-.item--has-children {
-  position: relative;
-}
-
 .link.has-subnav {
   position: relative;
 }

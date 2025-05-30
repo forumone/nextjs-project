@@ -19,7 +19,6 @@
 .DS_Store
 *.pem
 .idea
-.junie
 
 # debug
 npm-debug.log*
@@ -40,3 +39,4 @@ tsconfig.tsbuildinfo
 
 # Storybook build files
 storybook-static/
+!/.junie/guidelines.md

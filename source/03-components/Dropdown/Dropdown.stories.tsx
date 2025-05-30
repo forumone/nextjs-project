@@ -4,7 +4,7 @@ import DropdownComponent from './Dropdown';
 import dropdownArgs from './dropdownArgs';
 
 const meta: Meta<typeof DropdownComponent> = {
-  title: 'Components/Dropdown',
+  title: 'Components/Menu/Dropdown',
   component: DropdownComponent,
   decorators: [withGlobalWrapper],
   tags: ['autodocs'],
@@ -13,7 +13,6 @@ const meta: Meta<typeof DropdownComponent> = {
 type Story = StoryObj<typeof DropdownComponent>;
 const Dropdown: Story = {
   args: dropdownArgs,
-  name: 'Navigation Menu from YAML',
 };
 
 export default meta;
