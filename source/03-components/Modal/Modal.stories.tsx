@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/nextjs';
 import Constrain from '../../02-layouts/Constrain/Constrain';
 import { Button } from '../Button';
 import ModalComponent from './Modal';

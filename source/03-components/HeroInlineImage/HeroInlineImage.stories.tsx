@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/nextjs';
 import HeroInlineImage from './HeroInlineImage';
 import styles from './hero-inline-image.module.css';
 import heroInlineImageArgs from './heroInlineImageArgs';

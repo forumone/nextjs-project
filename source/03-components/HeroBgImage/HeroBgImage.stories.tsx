@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/nextjs';
 import HeroBgImage from './HeroBgImage';
 import styles from './hero-bg-image.module.css';
 import heroBgImageArgs from './heroBgImageArgs';
