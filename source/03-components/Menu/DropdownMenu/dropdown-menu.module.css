@@ -136,214 +136,119 @@
   }
 
   @media (--desktop) {
-    .submenu .link.has-subnav::after {
-      @include image-replace(16px, 16px);
+    .menu {
+      --dropdown-menu-font-size: var(--base-font-size);
+      --dropdown-menu-button-height: 16px;
+      --dropdown-menu-button-width: 16px;
 
-      background-size: 16px 16px;
-      block-size: 16px;
-      content: '';
-      display: block;
-      inline-size: 16px;
+      padding-block: 0;
+    }
+
+    .item {
+      margin-block-end: 0;
+      position: relative;
+    }
+
+    .link {
+      font-family: inherit;
+      margin-inline-end: 0;
+      z-index: unset;
+
+      &.has-subnav {
+        margin-inline-end: 0;
+        padding-inline-end: var(--dropdown-menu-button-width);
+      }
+    }
+
+    .subnav-toggle {
+      background-image: url('/images/menu-arrow-right.svg');
+      background-size: var(--dropdown-menu-button-width) var(--dropdown-menu-button-height);
+      border: 1px solid currentColor;
       inset-block-start: 50%;
       inset-inline-end: 5px;
-      overflow: hidden;
-      position: absolute;
       transform: translateY(-50%);
+
+      &:hover,
+      &:focus-visible {
+        background-color: var(--ui-background-darker);
+      }
+
+      &[aria-expanded="true"] {
+        background-image: url('/images/menu-arrow-right.svg');
+      }
     }
 
-    .item--selected > .link,
-    .item--active-trail > .link {
-      font-weight: var(--font-weight-bold);
-    }
+    .submenu {
+      --dropdown-menu-button-height: calc(var(--spacing-3) + 2px);
+      --dropdown-menu-button-width: calc(var(--spacing-3) + 2px);
+      --dropdown-menu-font-size: var(--base-font-size);
+      --dropdown-menu-line-height: var(--line-height-short);
 
-    .link.has-subnav {
-      position: relative;
-    }
+      background-color: var(--ui-background-dark);
+      color: var(--ui-text-lighter);
+      inline-size: auto;
+      inset-block-start: 100%;
+      inset-inline-start: 0;
+      margin-block: var(--spacing-1) 0;
+      position: absolute;
 
-    .submenu .link {
-      color: currentColor;
-      display: block;
-      line-height: var(--line-height-short);
-      padding: var(--spacing-2) calc(var(--spacing-3) + 7px) var(--spacing-2)
-        var(--spacing-3);
-      position: relative;
-      text-decoration: none;
-      width: 200px;
+      .link {
+        color: currentColor;
+        inline-size: rem-convert(200px);
+        padding-block: var(--spacing-2);
+        padding-inline: var(--spacing-3) calc(var(--spacing-3) + 7px);
+
+        &:hover,
+        &:focus {
+          background-color: var(--ui-background-darker);
+          color: currentColor;
+        }
+      }
+
+      .submenu {
+        inset-block-start: 0;
+        inset-inline-start: 100%;
+      }
     }
 
     .dropdown {
       @include list-inline;
-    }
 
-    .submenu {
-      inset-block-start: 100%; /* Position below the parent item */
-      inset-inline-start: 0; /* Align left edge with parent */
-      position: absolute;
-      width: auto;
-    }
-  }
+      margin-block-start: 0;
 
-  @media (--desktop) {
-    .dropdown--disabled {
-      opacity: 0.5;
-      pointer-events: none;
-    }
+      > .item {
+        display: inline-block;
 
-    .dropdown > .item {
-      display: block;
-      margin-block-end: var(--spacing-2);
-      position: relative;
-    }
+        > .link {
+          @include link;
 
-    .dropdown > .item > .link {
-      background-color: transparent;
-      border: 0;
-      display: inline-block;
-      font-weight: var(--font-weight-semibold);
-      margin-inline-end: var(--spacing-5);
-      padding: 0;
-      position: relative;
-      text-decoration: none;
-      text-transform: uppercase;
-    }
+          display: inline-block;
+          font-weight: var(--font-weight-semibold);
+          margin-inline-end: var(--spacing-5);
+          padding: 0;
+          position: relative;
+          text-transform: uppercase;
 
-    .dropdown > .item > .link.has-subnav {
-      padding-inline-end: 25px;
-    }
+          &.has-subnav {
+            margin-inline-end: 0;
+            padding-inline-end: 25px;
 
-    .dropdown > .item > .link.has-subnav::after {
-      background-image: url('/images/menu-arrow-down.svg');
-      background-size: 16px 16px;
-      content: '';
-      display: block;
-      height: 16px;
-      inset-block-start: 50%;
-      inset-inline-end: 5px;
-      overflow: hidden;
-      position: absolute;
-      transform: translateY(-40%);
-      width: 16px;
-    }
+            /* stylelint-disable-next-line max-nesting-depth */
+            &::after {
+              background-image: url('/images/menu-arrow-down.svg');
+              background-size: var(--dropdown-menu-button-width) var(--dropdown-menu-button-height);
+              inset-block-start: 50%;
+              inset-inline-end: 5px;
+              overflow: hidden;
+              transform: translateY(-40%);
+            }
+          }
 
-    .dropdown > .item > button.link {
-      @include text-button;
-
-      appearance: none;
-      background: transparent;
-      border: 0;
-      border-radius: 0;
-      box-shadow: none;
-      color: var(--text-link);
-      cursor: pointer;
-      font-family: inherit;
-      font-size: inherit;
-      padding: 0;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .dropdown > .item > button.link:visited {
-      color: var(--text-link-visited);
-    }
-
-    .dropdown > .item > button.link:hover,
-    .dropdown > .item > button.link:focus {
-      color: var(--text-link-hover);
-    }
-
-    .dropdown > .item > button.link:active {
-      color: var(--text-link-active);
-    }
-
-    .dropdown > .item > button.link[disabled] {
-      color: var(--button-text-disabled);
-      cursor: default;
-      pointer-events: none;
-    }
-
-    /* Toggle button */
-    .toggle {
-      @include text-button;
-
-      appearance: none;
-      background: transparent;
-      block-size: 16px;
-      border: 0;
-      border-radius: 0;
-      box-shadow: none;
-      cursor: pointer;
-      display: block;
-      font-family: inherit;
-      font-size: inherit;
-      inline-size: 16px;
-      inset-block-start: 50%;
-      inset-inline-end: 5px;
-      overflow: hidden;
-      padding: 0;
-      position: absolute;
-      -webkit-tap-highlight-color: transparent;
-      transform: translateY(-40%);
-    }
-
-    .toggle::before {
-      block-size: 150%;
-      content: '';
-      display: block;
-      inline-size: 0;
-    }
-
-    .toggle svg {
-      pointer-events: none;
-    }
-
-    .item--expanded > .submenu {
-      display: block;
-    }
-
-    .submenu .item.has-subnav {
-      position: relative;
-    }
-
-    .submenu .link:hover,
-    .submenu .link:focus {
-      background-color: var(--ui-background-dark);
-    }
-
-    .submenu .link.has-subnav::before {
-      block-size: 150%;
-      content: '';
-      display: block;
-      inline-size: 0;
-    }
-
-    .submenu .subnav-toggle::before {
-      block-size: 150%;
-      content: '';
-      display: block;
-      inline-size: 0;
-    }
-
-    .submenu .subnav-toggle:hover,
-    .submenu .subnav-toggle:focus-visible {
-      background-color: var(--ui-background-dark);
-    }
-
-    .submenu .submenu {
-      margin: 0;
-    }
-
-    /* Position nested submenus */
-    .submenu--nested {
-      margin-inline-start: var(--spacing-3); /* Indent on mobile */
-    }
-  }
-
-  @media (--desktop) {
-    .submenu--nested {
-      inset-block-start: 0; /* Align top edge with parent */
-      inset-inline-start: 100%; /* Position to the right of parent */
-      margin-inline-start: var(
-        --spacing-1
-      ); /* Add a small margin for spacing */
+          &:is(button) {
+            @include text-button;
+          }
+        }
+      }
     }
   }
 }
