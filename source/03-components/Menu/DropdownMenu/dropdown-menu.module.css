@@ -164,6 +164,7 @@
       background-image: url('/images/menu-arrow-right.svg');
       background-size: var(--dropdown-menu-button-width) var(--dropdown-menu-button-height);
       border: 1px solid currentColor;
+      color: inherit;
       inset-block-start: 50%;
       inset-inline-end: 5px;
       transform: translateY(-50%);
@@ -194,6 +195,7 @@
 
       .link {
         color: currentColor;
+        font-weight: var(--font-weight-regular);
         inline-size: rem-convert(200px);
         padding-block: var(--spacing-2);
         padding-inline: var(--spacing-3) calc(var(--spacing-3) + 7px);
@@ -208,6 +210,7 @@
       .submenu {
         inset-block-start: 0;
         inset-inline-start: 100%;
+        margin-block-start: 0;
       }
     }
 
@@ -230,7 +233,6 @@
           text-transform: uppercase;
 
           &.has-subnav {
-            margin-inline-end: 0;
             padding-inline-end: 25px;
 
             /* stylelint-disable-next-line max-nesting-depth */
@@ -246,6 +248,8 @@
 
           &:is(button) {
             @include text-button;
+
+            inline-size: auto;
           }
         }
       }
