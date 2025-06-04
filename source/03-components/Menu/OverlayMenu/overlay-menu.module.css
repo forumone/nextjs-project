@@ -2,34 +2,31 @@
   .overlay {
     background-color: transparent;
     block-size: 0;
+    border: 0;
     inline-size: 0;
     inset: 0;
+    interpolate-size: allow-keywords;
+    opacity: 0;
     overflow: hidden;
     position: fixed;
-    transition: all var(--duration-long) var(--easing-ease-in-out);
-    z-index: -1;
+    transition: all var(--duration-long) var(--easing-ease-in-out) allow-discrete;
 
-    &.is-open {
+    &[open] {
       background-color: var(--ui-background-light);
-      block-size: 100vh;
-      inline-size: 100vw;
+      block-size: 100dvh;
+      inline-size: 100dvw;
+      max-block-size: none;
+      max-inline-size: none;
+      opacity: 1;
       overflow-y: auto;
-      z-index: 1000;
     }
-  }
 
-  .menu {
-    align-items: center;
-    block-size: calc(100% - 55px);
-    display: flex;
-    flex-flow: column nowrap;
-    font-size: var(--font-size-8);
-    inline-size: 100%;
-    justify-content: center;
-  }
-
-  .link {
-    margin-inline-end: 0;
-    text-decoration: none;
+    @starting-style {
+      &[open] {
+        block-size: 0;
+        inline-size: 0;
+        opacity: 0;
+      }
+    }
   }
 }

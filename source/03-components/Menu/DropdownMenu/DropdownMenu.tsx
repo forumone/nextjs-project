@@ -1,3 +1,5 @@
+import { MenuItem, MenuProps } from '@/source/03-components/Menu/Menu';
+import OverlayMenu from '@/source/03-components/Menu/OverlayMenu/OverlayMenu';
 import clsx from 'clsx';
 import { GessoComponent } from 'gesso';
 import {
@@ -10,48 +12,24 @@ import {
   useState,
 } from 'react';
 import { flushSync } from 'react-dom';
-import styles from './dropdown.module.css';
+import styles from './dropdown-menu.module.css';
 import DropdownContext from './DropdownContext';
 import DropdownItem from './DropdownItem';
 
-interface DropdownMenuItem {
-  readonly id: string | number;
-  readonly title: string;
-  readonly url?: string;
-  readonly below?: DropdownMenuItem[];
-  readonly in_active_trail?: boolean;
-  readonly is_active?: boolean;
-  readonly original_link?: {
-    options: {
-      attributes: {
-        class: string;
-      };
-    };
-  };
-}
-
-interface DropdownProps extends GessoComponent {
-  /**
-   * Array of items to display in the dropdown
-   */
-  items: DropdownMenuItem[];
-
+interface DropdownProps extends GessoComponent, MenuProps {
   /**
    * Whether to use arrow keys for navigation
    */
   useArrowKeys?: boolean;
 }
 
-function hasDirectDescendant(
-  item: DropdownMenuItem,
-  childId: DropdownMenuItem['id'],
-): boolean {
+function hasDirectDescendant(item: MenuItem, childId: MenuItem['id']): boolean {
   return item.below?.some(child => child.id === childId) || false;
 }
 
 function hasDescendantInChildren(
-  item: DropdownMenuItem,
-  childId: DropdownMenuItem['id'],
+  item: MenuItem,
+  childId: MenuItem['id'],
 ): boolean {
   return (
     item.below?.some(
@@ -68,9 +46,9 @@ function hasDescendantInChildren(
  * within a hierarchy of dropdown items.
  */
 function isDescendantOf(
-  childId: DropdownMenuItem['id'],
-  parentId: DropdownMenuItem['id'],
-  itemsToSearch: DropdownMenuItem[],
+  childId: MenuItem['id'],
+  parentId: MenuItem['id'],
+  itemsToSearch: MenuItem[],
 ): boolean {
   for (const item of itemsToSearch) {
     // Case 1: Current item is the parent we're looking for
@@ -97,7 +75,7 @@ function isDescendantOf(
  */
 function findParentOf(
   childId: string | number,
-  itemsToSearch: DropdownMenuItem[],
+  itemsToSearch: MenuItem[],
 ): string | number | null {
   for (const item of itemsToSearch) {
     if (item.below) {
@@ -124,9 +102,9 @@ function findParentOf(
  * Searches for an item by its unique identifier within a hierarchical list of dropdown items.
  */
 function findItemById(
-  itemsToSearch: DropdownMenuItem[],
+  itemsToSearch: MenuItem[],
   id: string | number,
-): DropdownMenuItem | null {
+): MenuItem | null {
   for (const item of itemsToSearch) {
     if (item.id === id) {
       return item;
@@ -141,9 +119,9 @@ function findItemById(
 }
 
 /**
- * Dropdown menu component
+ * DropdownMenu menu component
  */
-function Dropdown({
+function DropdownMenu({
   items,
   modifierClasses,
   useArrowKeys = true,
@@ -449,27 +427,33 @@ function Dropdown({
     }
   }, [isAnyMenuOpen]);
 
+  const DropdownMenuInner = (
+    <ul className={styles.dropdown} ref={dropdownRef}>
+      {items.map(item => (
+        <DropdownItem
+          key={item.id}
+          item={item}
+          isChild={false}
+          isExpanded={expandedItems[item.id] || false}
+          useArrowKeys={useArrowKeys}
+          onItemClick={handleClick}
+          onKeyDown={handleArrowKeysNavigation}
+          onBlur={handleFocusOut}
+        />
+      ))}
+    </ul>
+  );
+
   return (
     <DropdownContext.Provider value={expandedItems}>
-      <nav className={clsx(modifierClasses)}>
-        <ul className={styles.dropdown} ref={dropdownRef}>
-          {items.map(item => (
-            <DropdownItem
-              key={item.id}
-              item={item}
-              isChild={false}
-              isExpanded={expandedItems[item.id] || false}
-              useArrowKeys={useArrowKeys}
-              onItemClick={handleClick}
-              onKeyDown={handleArrowKeysNavigation}
-              onBlur={handleFocusOut}
-            />
-          ))}
-        </ul>
-      </nav>
+      {isDesktop ? (
+        <nav className={clsx(modifierClasses)}>{DropdownMenuInner}</nav>
+      ) : (
+        <OverlayMenu>{DropdownMenuInner}</OverlayMenu>
+      )}
     </DropdownContext.Provider>
   );
 }
 
-export default Dropdown;
-export type { DropdownMenuItem, DropdownProps };
+export default DropdownMenu;
+export type { DropdownProps };

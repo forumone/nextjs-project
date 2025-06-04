@@ -74,7 +74,7 @@ function StyledSelect<
               : 'var(--ui-border-dark)',
           },
         }),
-        // Dropdown caret.
+        // DropdownMenu caret.
         dropdownIndicator: baseStyles => ({
           ...baseStyles,
         }),

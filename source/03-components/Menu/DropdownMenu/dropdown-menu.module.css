@@ -1,4 +1,16 @@
-@import '../../00-config/mixins.css';
+@import 'mixins';
+
+.dropdown {
+  @include list-clean;
+
+  list-style-type: none;
+  margin-inline-start: 0;
+  padding-inline-start: 0;
+}
+
+.item {
+  margin-block-end: 0;
+}
 
 /* Submenu styles */
 .submenu {
@@ -11,15 +23,6 @@
   padding: 0;
   position: static;
   width: 100%;
-}
-
-@media (--desktop) {
-  .submenu {
-    inset-block-start: 100%; /* Position below the parent item */
-    inset-inline-start: 0; /* Align left edge with parent */
-    position: absolute;
-    width: auto;
-  }
 }
 
 .submenu .link {
@@ -48,10 +51,7 @@
   transform: translateY(-50%);
 }
 
-/* Basic elements */
-.item {
-  margin-block-end: 0;
-}
+
 
 .link.has-subnav {
   position: relative;
@@ -62,18 +62,16 @@
   font-weight: var(--font-weight-bold);
 }
 
-/* Main container */
-.dropdown {
-  @include list-clean;
-
-  list-style-type: none;
-  margin-inline-start: 0;
-  padding-inline-start: 0;
-}
-
 @media (--desktop) {
   .dropdown {
     @include list-inline;
+  }
+
+  .submenu {
+    inset-block-start: 100%; /* Position below the parent item */
+    inset-inline-start: 0; /* Align left edge with parent */
+    position: absolute;
+    width: auto;
   }
 }
 

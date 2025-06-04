@@ -1,4 +1,5 @@
-import DropdownContext from '@/source/03-components/Dropdown/DropdownContext';
+import DropdownContext from '@/source/03-components/Menu/DropdownMenu/DropdownContext';
+import { MenuItem } from '@/source/03-components/Menu/Menu';
 import clsx from 'clsx';
 import { GessoComponent } from 'gesso';
 import {
@@ -9,11 +10,10 @@ import {
   MouseEvent as ReactMouseEvent,
   useContext,
 } from 'react';
-import type { DropdownMenuItem } from './Dropdown';
-import styles from './dropdown.module.css';
+import styles from './dropdown-menu.module.css';
 
 interface DropdownItemProps extends GessoComponent {
-  item: DropdownMenuItem;
+  item: MenuItem;
   isChild?: boolean;
   isExpanded: boolean;
   useArrowKeys?: boolean;
@@ -52,7 +52,7 @@ type DropdownLinkProps = Pick<
   DropdownItemProps,
   'useArrowKeys' | 'onKeyDown' | 'onBlur'
 > &
-  Pick<DropdownMenuItem, 'url' | 'id' | 'title'>;
+  Pick<MenuItem, 'url' | 'id' | 'title'>;
 
 interface DropdownMenubarLinkProps
   extends DropdownItemWrapperProps,
@@ -87,7 +87,7 @@ function DropdownMenubarLink({
 }
 
 type DropdownMenubarButtonProps = DropdownItemWrapperProps &
-  Pick<DropdownMenuItem, 'id' | 'title' | 'below'> &
+  Pick<MenuItem, 'id' | 'title' | 'below'> &
   Pick<
     DropdownItemProps,
     'useArrowKeys' | 'onKeyDown' | 'onBlur' | 'onItemClick'
@@ -256,7 +256,7 @@ function DropdownItem({
   const { id, title, url } = item;
 
   const hasChildren = item.below?.length && item.below.length > 0;
-  const isInActiveTrail = item.in_active_trail || false;
+  const isInActiveTrail = item.inActiveTrail || false;
 
   // For top-level items without children, render as links
   if (!hasChildren && !isChild && url) {

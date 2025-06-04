@@ -2,27 +2,34 @@
 
 import clsx from 'clsx';
 import { GessoComponent } from 'gesso';
-import { JSX, useCallback, useEffect, useId, useRef, useState } from 'react';
+import {
+  JSX,
+  ReactElement,
+  useCallback,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+} from 'react';
 import HamburgerButton from '../../HamburgerButton/HamburgerButton';
 import buttonStyles from '../../HamburgerButton/hamburger-button.module.css';
-import Menu, { MenuItem } from '../Menu';
 import styles from './overlay-menu.module.css';
 
 interface OverlayMenuProps extends GessoComponent {
-  items: MenuItem[];
+  children: ReactElement;
 }
 
 const focusableElementsString =
   'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex="0"], [contenteditable]';
 
 function OverlayMenu({
-  items,
+  children,
   modifierClasses,
 }: OverlayMenuProps): JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
-  const navId = useId();
-  const navRef = useRef<HTMLElement>(null);
-  const focusableElements = navRef.current?.querySelectorAll<HTMLElement>(
+  const dialogId = useId();
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const focusableElements = dialogRef.current?.querySelectorAll<HTMLElement>(
     focusableElementsString,
   );
 
@@ -57,15 +64,13 @@ function OverlayMenu({
   useEffect(() => {
     if (isOpen) {
       document.body.classList.add('has-open-menu');
-      const firstElement = focusableElements && focusableElements[0];
-      firstElement?.focus();
       window.addEventListener('keydown', handleKeydown);
     } else {
       document.body.classList.remove('has-open-menu');
       window.removeEventListener('keydown', handleKeydown);
       // Focus menu button on close
       const button = document.querySelector(
-        `[aria-controls="${navId}"]`,
+        `[aria-controls="${dialogId}"]`,
       ) as HTMLButtonElement;
       button?.focus();
     }
@@ -73,42 +78,40 @@ function OverlayMenu({
       document.body.classList.remove('has-open-menu');
       window.removeEventListener('keydown', handleKeydown);
     };
-  }, [isOpen, navId, focusableElements, handleKeydown]);
+  }, [isOpen, dialogId, focusableElements, handleKeydown]);
 
   return (
     <>
       <HamburgerButton
-        aria-controls={navId}
+        aria-controls={dialogId}
         aria-expanded={isOpen}
-        onClick={() => setIsOpen(true)}
+        onClick={() => {
+          setIsOpen(true);
+          dialogRef.current?.showModal();
+        }}
         hidden={isOpen}
         text="Menu"
         modifierClasses={buttonStyles['button--menu']}
       />
-      <nav
-        className={clsx(
-          styles.overlay,
-          isOpen && styles['is-open'],
-          modifierClasses,
-        )}
-        id={navId}
-        ref={navRef}
+      <dialog
+        className={clsx(styles.overlay, modifierClasses)}
+        id={dialogId}
+        ref={dialogRef}
       >
         <HamburgerButton
-          onClick={() => setIsOpen(false)}
-          aria-controls={navId}
+          onClick={() => {
+            setIsOpen(false);
+            dialogRef.current?.close();
+          }}
+          aria-controls={dialogId}
           aria-expanded={isOpen}
           hidden={!isOpen}
           text="Close"
           modifierClasses={buttonStyles['button--close']}
-          autoFocus
+          autoFocus={true}
         />
-        <Menu
-          items={items}
-          modifierClasses={styles.menu}
-          linkClasses={styles.link}
-        />
-      </nav>
+        {children}
+      </dialog>
     </>
   );
 }

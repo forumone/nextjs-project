@@ -5,6 +5,7 @@ import { ReactNode, type JSX } from 'react';
 import styles from './menu.module.css';
 
 interface MenuItem {
+  id: string | number;
   title: ReactNode;
   url: string;
   inActiveTrail?: boolean;
