@@ -447,9 +447,13 @@ function DropdownMenu({
   return (
     <DropdownContext.Provider value={expandedItems}>
       {isDesktop ? (
-        <nav className={clsx(modifierClasses)}>{DropdownMenuInner}</nav>
+        <nav className={clsx(styles.menu, modifierClasses)}>
+          {DropdownMenuInner}
+        </nav>
       ) : (
-        <OverlayMenu>{DropdownMenuInner}</OverlayMenu>
+        <OverlayMenu modifierClasses={clsx(styles.menu, modifierClasses)}>
+          <nav>{DropdownMenuInner}</nav>
+        </OverlayMenu>
       )}
     </DropdownContext.Provider>
   );
