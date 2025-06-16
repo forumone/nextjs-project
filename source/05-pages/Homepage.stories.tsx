@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/nextjs';
 import Grid from '../02-layouts/Grid/Grid';
 import Section from '../02-layouts/Section/Section';
 import Card, { CardProps } from '../03-components/Card/Card';

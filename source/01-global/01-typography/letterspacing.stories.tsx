@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/nextjs';
 import { Property } from 'csstype';
 import { useEffect, useState } from 'react';
 import { withGlobalWrapper } from '../../../.storybook/decorators';
