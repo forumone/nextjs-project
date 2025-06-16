@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/nextjs';
 import { withGlobalWrapper } from '../../../.storybook/decorators';
 import { Select } from './FormItem';
 import selectArgs from './selectArgs';

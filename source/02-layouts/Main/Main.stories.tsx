@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/nextjs';
 import SampleContent from '../../06-utility/storybook/SampleContent';
 import MainLayout from './Main';
 import mainArgs from './mainArgs';

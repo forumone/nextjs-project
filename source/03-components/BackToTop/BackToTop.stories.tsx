@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/nextjs';
 import BackToTopComponent from './BackToTop';
 import styles from './back-to-top.module.css';
 import backToTopArgs from './backToTopArgs';

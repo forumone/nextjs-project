@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/nextjs';
 import Menu from './Menu';
 import footerStyles from './menu-footer.module.css';
 import menuArgs from './menuArgs';

@@ -1,5 +1,5 @@
 import { WYSIWYG as WysiwygStory } from '@/source/03-components/Wysiwyg/Wysiwyg.stories';
-import { Meta, StoryObj } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/nextjs';
 import Breadcrumb from '../03-components/Breadcrumb/Breadcrumb';
 import { Breadcrumb as BreadcrumbStory } from '../03-components/Breadcrumb/Breadcrumb.stories';
 import Wysiwyg from '../03-components/Wysiwyg/Wysiwyg';

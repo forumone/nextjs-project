@@ -6,6 +6,7 @@ $border-radius: 3px;
 @layer components {
   .group {
     display: flex;
+    isolation: isolate;
     margin-block: var(--spacing-2);
     margin-inline: 0;
   }
