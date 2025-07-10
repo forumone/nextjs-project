@@ -9,7 +9,7 @@ async function GET(request: NextRequest) {
   }
 
   const query = request.nextUrl.searchParams;
-  let slug = query.get('slug');
+  let slug = query.get('path');
   if (!slug) {
     return;
   }
