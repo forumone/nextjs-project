@@ -7,9 +7,9 @@ body {
   color: var(--text-primary);
   inline-size: 100%;
   margin: 0;
+  overflow-wrap: break-word;
   overflow-x: hidden;
   padding: 0;
-  word-wrap: break-word;
 
   &.has-open-menu,
   &.has-open-modal {

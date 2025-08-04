@@ -10,8 +10,8 @@
   text-rendering: optimizeLegibility;
 
   @media print {
+    break-after: avoid;
     orphans: 3;
-    page-break-after: avoid;
     widows: 3;
 
     &::after {
