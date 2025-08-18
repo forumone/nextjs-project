@@ -6,7 +6,7 @@ img {
   vertical-align: middle;
 
   @media print {
+    break-inside: avoid;
     max-width: 100% !important;
-    page-break-inside: avoid;
   }
 }

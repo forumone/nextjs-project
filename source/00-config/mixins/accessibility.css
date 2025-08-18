@@ -4,12 +4,12 @@
   @param {Boolean} $important
  */
 @mixin visually-hidden($important: false) {
-  clip: rect(1px, 1px, 1px, 1px) iff($important, !important);
+  clip-path: rect(1px, 1px, 1px, 1px) iff($important, !important);
   height: 1px iff($important, !important);
   overflow: hidden iff($important, !important);
+  overflow-wrap: normal iff($important, !important);
   position: absolute iff($important, !important);
   width: 1px iff($important, !important);
-  word-wrap: normal iff($important, !important);
 }
 
 /**
@@ -24,7 +24,7 @@
   @param {boolean} $important
  */
 @mixin visually-hidden-off($important: false) {
-  clip: auto iff($important, !important);
+  clip-path: auto iff($important, !important);
   height: auto iff($important, !important);
   overflow: visible iff($important, !important);
   position: static iff($important, !important);

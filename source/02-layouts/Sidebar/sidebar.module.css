@@ -6,7 +6,7 @@
     --sidebar-width: 300px;
     @media (--sidebar) {
       display: grid;
-      grid-gap: var(--sidebar-gutter);
+      gap: var(--sidebar-gutter);
       grid-template-columns: minmax(0, 1fr);
 
       .full {
