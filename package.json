@@ -13,7 +13,7 @@
     "prettier:write": "prettier --write app source/",
     "tsc": "tsc --noEmit",
     "test": "npm run lint && npm run tsc",
-    "component": "plop",
+    "component": "node lib/create-component.mjs",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build -o storybook",
     "build-icons": "svgr --out-dir source/01-global/icon/icons -- source/01-global/icon/svgs"
@@ -34,6 +34,7 @@
     "@eslint/eslintrc": "^3.3.1",
     "@forumone/eslint-config-es5": "^3.0.3",
     "@forumone/eslint-config-react": "^3.0.2",
+    "@inquirer/prompts": "^7.8.4",
     "@next/eslint-plugin-next": "15.5.2",
     "@storybook/addon-a11y": "^9.1.4",
     "@storybook/addon-docs": "^9.1.4",
