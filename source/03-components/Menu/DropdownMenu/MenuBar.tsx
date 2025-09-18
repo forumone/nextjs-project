@@ -3,7 +3,7 @@ import MenuBarItem, {
 } from '@/source/03-components/Menu/DropdownMenu/MenuBarItem';
 import { MenuItem, MenuProps } from '@/source/03-components/Menu/Menu';
 import clsx from 'clsx';
-import { JSX, useCallback, useRef, useState } from 'react';
+import { JSX, useCallback, useEffect, useRef, useState } from 'react';
 import styles from './dropdown-menu.module.css';
 
 interface DropdownMenuItem extends MenuItem {
@@ -24,7 +24,7 @@ function MenuBar({
   const [expandedItem, setExpandedItem] = useState<
     DropdownMenuItem['id'] | null
   >(null);
-
+  const menuRef = useRef<HTMLUListElement>(null);
   const itemsRef = useRef<Map<DropdownMenuItem['id'], MenuBarItemRef> | null>(
     null,
   );
@@ -98,8 +98,28 @@ function MenuBar({
     }
   }
 
+  useEffect(() => {
+    const handleGlobalClick = (e: MouseEvent) => {
+      if (!menuRef.current || !expandedItem) {
+        return;
+      }
+      const target = e.target as HTMLElement;
+      if (!menuRef.current.contains(target) && menuRef.current !== target) {
+        setExpandedItem(null);
+      }
+    };
+    if (expandedItem) {
+      window.addEventListener('click', handleGlobalClick);
+    } else {
+      window.removeEventListener('click', handleGlobalClick);
+    }
+    return () => {
+      window.removeEventListener('click', handleGlobalClick);
+    };
+  }, [expandedItem]);
+
   return (
-    <ul className={clsx(styles.menu, modifierClasses)}>
+    <ul className={clsx(styles.menu, modifierClasses)} ref={menuRef}>
       {menuItems.map(({ ...item }) => (
         <li key={item.id} className={clsx(styles.item, itemClasses)}>
           <MenuBarItem
