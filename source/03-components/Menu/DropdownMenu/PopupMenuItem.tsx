@@ -105,7 +105,7 @@ const PopupMenuItem = forwardRef<PopupMenuItemRef, PopupMenuItemProps>(
         openMenu();
       } else {
         focusOnController();
-        closeMenu(true);
+        setParentExpanded(null);
       }
     };
 

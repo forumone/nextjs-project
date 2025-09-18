@@ -9,7 +9,7 @@
     transition: all var(--duration-long) var(--easing-ease-in-out);
     z-index: -1;
 
-    &.is-open {
+    &:global(.is-open) {
       background-color: var(--ui-background-light);
       block-size: 100vh;
       inline-size: 100vw;

@@ -8,32 +8,31 @@
 
   .menu {
     display: flex;
+    flex-direction: column;
     gap: var(--spacing-5);
   }
 
   .subnav {
     background-color: var(--ui-background-dark);
     color: var(--ui-text-lighter);
-    inset-block-start: 100%;
-    inset-inline-start: 0;
     margin-block: 0;
     margin-inline: 0;
     padding: 0;
-    position: absolute;
 
     &:global(.is-hidden) {
       display: none;
-    }
-
-    .subnav {
-      inset-block-start: 0;
-      inset-inline-start: 100%;
     }
   }
 
   .item {
     margin-block-end: 0;
     position: relative;
+
+    .subnav & {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
   }
 
   .link {
@@ -64,17 +63,13 @@
   .toggle {
     @include text-button;
 
-    background-image: url('/images/menu-arrow-right.svg');
+    background-image: url('/images/menu-arrow-down.svg');
     background-size: var(--spacing-3) var(--spacing-3);
     block-size: calc(var(--spacing-3) + 2px);
     border: 1px solid currentColor;
     color: inherit;
     display: block;
     inline-size: calc(var(--spacing-3) + 2px);
-    inset-block-start: 50%;
-    inset-inline-end: 5px;
-    position: absolute;
-    transform: translateY(-50%);
 
     &:hover,
     &:focus-visible {
@@ -137,4 +132,35 @@
   }
 
   /* End Firefox workaround */
+
+  @media(--tablet) {
+    .menu {
+      flex-direction: row;
+    }
+
+    .item {
+      .subnav & {
+        display: block;
+      }
+    }
+
+    .subnav {
+      inset-block-start: 100%;
+      inset-inline-start: 0;
+      position: absolute;
+
+      .subnav {
+        inset-block-start: 0;
+        inset-inline-start: 100%;
+      }
+    }
+
+    .toggle {
+      background-image: url('/images/menu-arrow-right.svg');
+      inset-block-start: 50%;
+      inset-inline-end: 5px;
+      position: absolute;
+      transform: translateY(-50%);
+    }
+  }
 }
