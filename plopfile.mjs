@@ -185,23 +185,23 @@ Include Story?: {{ useStorybook }}
       actions.push({
         type: 'add',
         path: './source/{{ componentLocation }}/{{ componentName }}/{{ componentName }}.tsx',
-        templateFile: './lib/plop-templates/Component.hbs',
+        templateFile: './lib/templates/Component.hbs',
       });
       actions.push({
         type: 'add',
         path: './source/{{ componentLocation }}/{{ componentName }}/{{ kebabCase componentName }}.module.css',
-        templateFile: './lib/plop-templates/Stylesheet.hbs',
+        templateFile: './lib/templates/Stylesheet.hbs',
       });
       if (data.useStorybook) {
         actions.push({
           type: 'add',
           path: './source/{{ componentLocation }}/{{ componentName }}/{{ camelCase componentName }}Args.ts',
-          templateFile: './lib/plop-templates/Data.hbs',
+          templateFile: './lib/templates/Data.hbs',
         });
         actions.push({
           type: 'add',
           path: './source/{{ componentLocation }}/{{ componentName }}/{{ componentName }}.stories.tsx',
-          templateFile: './lib/plop-templates/Story.hbs',
+          templateFile: './lib/templates/Story.hbs',
         });
       }
       return actions;

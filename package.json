@@ -56,8 +56,6 @@
     "eslint": "^9.34.0",
     "html-react-parser": "^5.2.6",
     "husky": "^9.1.7",
-    "inquirer": "^10.2.2",
-    "plop": "^4.0.1",
     "postcss": "^8.5.6",
     "postcss-advanced-variables": "github:kmonahan/postcss-advanced-variables",
     "postcss-import": "^16.1.1",
