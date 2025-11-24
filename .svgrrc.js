@@ -50,6 +50,7 @@ module.exports = {
       ],
     },
   },
+  jsxRuntime: 'automatic',
   template: iconTemplate,
   indexTemplate,
 };
