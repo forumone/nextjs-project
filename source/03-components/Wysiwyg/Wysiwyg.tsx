@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import { GessoComponent } from 'gesso';
 import { JSX, ReactNode } from 'react';
+import styles from './wysiwyg.module.css';
 
 interface WysiwygProps extends GessoComponent {
   children?: ReactNode;
@@ -8,7 +9,7 @@ interface WysiwygProps extends GessoComponent {
 
 function Wysiwyg({ children, modifierClasses }: WysiwygProps): JSX.Element {
   return (
-    <div className={clsx('c-wysiwyg u-clearfix', modifierClasses)}>
+    <div className={clsx(styles.wysiwyg, 'u-clearfix', modifierClasses)}>
       {children}
     </div>
   );
