@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/nextjs';
-import { withGlobalWrapper } from '../../../.storybook/decorators';
+import { withGlobalWrapper } from '~/.storybook/decorators';
 import { Input } from './FormItem';
 import checkboxArgs from './checkboxArgs';
 import radioArgs from './radioArgs';

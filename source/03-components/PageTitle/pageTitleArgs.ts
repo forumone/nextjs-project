@@ -1,4 +1,4 @@
-import { PageTitleProps } from '@/source/03-components/PageTitle/PageTitle';
+import { PageTitleProps } from '~components/PageTitle/PageTitle';
 
 const pageTitleArgs = {
   pageTitle: 'Page Title',

@@ -1,17 +1,17 @@
-import CursorNavigation, {
-  ArchiveParams,
-} from '@/app/_components/content/CursorNavigation';
-import Article from '@/source/03-components/Article/Article';
-import LandingPage from '@/source/04-templates/LandingPage/LandingPage';
-import { NextSearchParamsProp } from '@/types/NextSearchParams';
-import {
-  BlogArchiveQuery,
-  BlogArchiveQueryVariables,
-} from '@/types/__generated__/graphql';
-import stringParamsFromSearch from '@/util/wp/stringParamsFromSearch';
 import { getClient } from '@faustwp/experimental-app-router';
 import { Metadata } from 'next';
 import Link from 'next/link';
+import CursorNavigation, {
+  ArchiveParams,
+} from '~/app/_components/content/CursorNavigation';
+import { NextSearchParamsProp } from '~/types/NextSearchParams';
+import {
+  BlogArchiveQuery,
+  BlogArchiveQueryVariables,
+} from '~/types/__generated__/graphql';
+import stringParamsFromSearch from '~/util/wp/stringParamsFromSearch';
+import Article from '~components/Article/Article';
+import LandingPage from '~templates/LandingPage/LandingPage';
 import blogArchiveQuery from './blogArchiveQuery';
 
 const PAGE_TITLE = 'Blog';

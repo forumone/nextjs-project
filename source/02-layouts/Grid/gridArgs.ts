@@ -1,4 +1,4 @@
-import { GridProps } from '@/source/02-layouts/Grid/Grid';
+import { GridProps } from '~layouts/Grid/Grid';
 
 export default {
   numCols: 3,

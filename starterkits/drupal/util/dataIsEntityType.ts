@@ -1,5 +1,5 @@
-import { RouteInternal } from '@/types/__generated__/graphql';
-import entityIsType from '@/util/entityIsType';
+import { RouteInternal } from '~/types/__generated__/graphql';
+import entityIsType from '~/util/entityIsType';
 
 function routeIsInternal(
   route: { __typename?: string } | null | undefined,

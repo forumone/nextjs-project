@@ -1,5 +1,5 @@
-import CallToAction from '@/source/03-components/CallToAction/CallToAction';
-import { FragmentType, getFragmentData, graphql } from '@/types/__generated__';
+import { FragmentType, getFragmentData, graphql } from '~/types/__generated__';
+import CallToAction from '~components/CallToAction/CallToAction';
 
 const CallToActionParagraphFragment = graphql(`
   fragment CallToActionParagraphFragment on ParagraphCallToAction {

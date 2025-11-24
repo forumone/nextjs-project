@@ -9,7 +9,7 @@ import {
   useEffect,
   useRef,
 } from 'react';
-import { slideCollapse, slideExpand } from '../../06-utility/slide';
+import { slideCollapse, slideExpand } from '~utility/slide';
 import styles from './accordion-item.module.css';
 
 interface AccordionItemProps extends GessoComponent {

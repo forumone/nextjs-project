@@ -1,6 +1,6 @@
-import Card from '@/source/03-components/Card/Card';
-import { FragmentType, getFragmentData, graphql } from '@/types/__generated__';
 import Image from 'next/image';
+import { FragmentType, getFragmentData, graphql } from '~/types/__generated__';
+import Card from '~components/Card/Card';
 
 const CardParagraphFragment = graphql(`
   fragment CardParagraphFragment on ParagraphCard {

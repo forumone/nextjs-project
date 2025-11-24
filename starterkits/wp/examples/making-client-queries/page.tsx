@@ -1,7 +1,7 @@
 'use client';
 
-import { MyQueryQuery } from '@/types/__generated__/graphql';
 import { gql, useQuery } from '@apollo/client';
+import { MyQueryQuery } from '~/types/__generated__/graphql';
 
 /**
  * You can make client side queries as well with Apollo's `useQuery` hook within

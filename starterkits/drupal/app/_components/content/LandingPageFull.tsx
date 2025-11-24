@@ -1,6 +1,6 @@
-import mapParagraph from '@/app/_components/paragraphs/mapParagraph';
-import Page from '@/source/04-templates/Page/Page';
-import { FragmentType, getFragmentData, graphql } from '@/types/__generated__';
+import mapParagraph from '~/app/_components/paragraphs/mapParagraph';
+import { FragmentType, getFragmentData, graphql } from '~/types/__generated__';
+import Page from '~templates/Page/Page';
 
 const LandingPageFragment = graphql(`
   fragment LandingPageFragment on NodeLandingPage {

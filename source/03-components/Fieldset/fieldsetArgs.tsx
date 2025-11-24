@@ -1,4 +1,4 @@
-import { FieldsetProps } from '@/source/03-components/Fieldset/Fieldset';
+import { FieldsetProps } from '~components/Fieldset/Fieldset';
 
 const fieldsetArgs = {
   legend: 'Fieldset',

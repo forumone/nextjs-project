@@ -1,14 +1,14 @@
 'use client';
 
-import SearchParams from '@/app/search/SearchParams';
-import Constrain from '@/source/02-layouts/Constrain/Constrain';
-import { Button } from '@/source/03-components/Button';
-import FormItem from '@/source/03-components/FormItem/FormItem';
 import clsx from 'clsx';
 import { ConstrainComponent } from 'gesso';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { FormEvent, FormEventHandler, JSX, useId, useState } from 'react';
+import SearchParams from '~/app/search/SearchParams';
+import { Button } from '~components/Button';
+import FormItem from '~components/FormItem/FormItem';
+import Constrain from '~layouts/Constrain/Constrain';
 import styles from './site-search.module.css';
 
 interface SiteSearchFormProps extends ConstrainComponent {

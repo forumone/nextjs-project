@@ -1,4 +1,4 @@
-import { graphql } from '@/types/__generated__';
+import { graphql } from '~/types/__generated__';
 
 const MenuItemFragment = graphql(`
   fragment MenuItemFragment on MenuItem {

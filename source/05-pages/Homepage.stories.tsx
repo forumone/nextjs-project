@@ -1,13 +1,13 @@
 import { Meta, StoryObj } from '@storybook/nextjs';
-import Grid from '../02-layouts/Grid/Grid';
-import Section from '../02-layouts/Section/Section';
-import Card, { CardProps } from '../03-components/Card/Card';
-import { Default as CardStory } from '../03-components/Card/Card.stories';
+import Card, { CardProps } from '~components/Card/Card';
+import { Default as CardStory } from '~components/Card/Card.stories';
 import HeroBgImage, {
   HeroBgImageProps,
-} from '../03-components/HeroBgImage/HeroBgImage';
-import { Default as HeroStory } from '../03-components/HeroBgImage/HeroBgImage.stories';
-import LandingPage from '../04-templates/LandingPage/LandingPage';
+} from '~components/HeroBgImage/HeroBgImage';
+import { Default as HeroStory } from '~components/HeroBgImage/HeroBgImage.stories';
+import Grid from '~layouts/Grid/Grid';
+import Section from '~layouts/Section/Section';
+import LandingPage from '~templates/LandingPage/LandingPage';
 import PageWrapper from './page-wrappers/default';
 
 interface HomepageStoryArgs {

@@ -1,4 +1,4 @@
-import { TagProps } from '@/source/03-components/Tag/Tag';
+import { TagProps } from '~components/Tag/Tag';
 
 const tagArgs = {
   title: 'Title',

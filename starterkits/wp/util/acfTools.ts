@@ -1,4 +1,4 @@
-import { isNotNullNorUndefined } from '@/util/isNullOrUndefined';
+import { isNotNullNorUndefined } from '~/util/isNullOrUndefined';
 
 /**
  * Returns an array of objects given data from an ACF repeater/flex content field.

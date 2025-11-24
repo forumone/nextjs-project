@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/nextjs';
-import { withGlobalWrapper } from '../../../.storybook/decorators';
+import { withGlobalWrapper } from '~/.storybook/decorators';
 import StyledSelectComponent from './StyledSelect';
 import styledSelectArgs from './styledSelectArgs';
 import withGroupsArgs from './withGroupsArgs';

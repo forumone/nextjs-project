@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { GessoComponent } from 'gesso';
-import Tag, { TagProps } from '../Tag/Tag';
+import Tag, { TagProps } from '~components/Tag/Tag';
 import styles from './tag-list.module.css';
 
 import type { JSX } from 'react';

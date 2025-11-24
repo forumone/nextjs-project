@@ -1,4 +1,4 @@
-import { ButtonGroupProps } from '@/source/03-components/ButtonGroup/ButtonGroup';
+import { ButtonGroupProps } from '~components/ButtonGroup/ButtonGroup';
 
 const buttonGroupArgs = {
   heading: 'Heading',

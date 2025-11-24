@@ -1,16 +1,16 @@
-import Main from '@/source/02-layouts/Main/Main';
-import Article from '@/source/03-components/Article/Article';
-import { LinkButton } from '@/source/03-components/Button';
-import { NextSearchParamsProp } from '@/types/NextSearchParams';
-import {
-  SearchQuery,
-  SearchQueryVariables,
-} from '@/types/__generated__/graphql';
-import stringParamsFromSearch from '@/util/wp/stringParamsFromSearch';
 import { getClient } from '@faustwp/experimental-app-router';
 import parse from 'html-react-parser';
 import { Metadata } from 'next';
 import Link from 'next/link';
+import { NextSearchParamsProp } from '~/types/NextSearchParams';
+import {
+  SearchQuery,
+  SearchQueryVariables,
+} from '~/types/__generated__/graphql';
+import stringParamsFromSearch from '~/util/wp/stringParamsFromSearch';
+import Article from '~components/Article/Article';
+import { LinkButton } from '~components/Button';
+import Main from '~layouts/Main/Main';
 import SearchForm from './SearchForm';
 import SearchParams from './SearchParams';
 import searchQuery from './searchQuery';

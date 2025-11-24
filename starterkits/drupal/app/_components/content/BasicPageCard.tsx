@@ -1,6 +1,6 @@
-import Card from '@/source/03-components/Card/Card';
-import { FragmentType, getFragmentData, graphql } from '@/types/__generated__';
 import { JSX } from 'react';
+import { FragmentType, getFragmentData, graphql } from '~/types/__generated__';
+import Card from '~components/Card/Card';
 
 const BasicPageCardFragment = graphql(`
   fragment BasicPageCardFragment on NodePage {

@@ -1,27 +1,27 @@
-import '@/source/00-config/index.css';
+import '~/source/00-config/index.css';
 
-import ClientProvider from '@/app/ClientProvider';
-import layoutMetadataQuery from '@/app/layoutMetadataQuery';
-import '@/faust.config.js';
-import sourceSansPro from '@/source/01-global/fonts/source-sans';
-import '@/source/01-global/index.css';
-import Footer from '@/source/02-layouts/Footer/Footer';
-import Header from '@/source/02-layouts/Header/Header';
-import SiteContainer from '@/source/02-layouts/SiteContainer/SiteContainer';
-import BackToTop from '@/source/03-components/BackToTop/BackToTop';
-import Menu from '@/source/03-components/Menu/Menu';
-import addBasePath from '@/source/06-utility/addBasePath';
-import '@/source/06-utility/index.css';
-import {
-  GetLayoutQuery,
-  LayoutMetadataQuery,
-} from '@/types/__generated__/graphql';
-import { arrayFromAcf } from '@/util/wp/acfTools';
 import { gql } from '@apollo/client';
 import { getClient } from '@faustwp/experimental-app-router';
 import { FaustProvider } from '@faustwp/experimental-app-router/ssr';
 import { Metadata } from 'next';
 import { PropsWithChildren } from 'react';
+import ClientProvider from '~/app/ClientProvider';
+import layoutMetadataQuery from '~/app/layoutMetadataQuery';
+import '~/faust.config.js';
+import {
+  GetLayoutQuery,
+  LayoutMetadataQuery,
+} from '~/types/__generated__/graphql';
+import { arrayFromAcf } from '~/util/wp/acfTools';
+import BackToTop from '~components/BackToTop/BackToTop';
+import Menu from '~components/Menu/Menu';
+import sourceSansPro from '~global/fonts/source-sans';
+import '~global/index.css';
+import Footer from '~layouts/Footer/Footer';
+import Header from '~layouts/Header/Header';
+import SiteContainer from '~layouts/SiteContainer/SiteContainer';
+import addBasePath from '~utility/addBasePath';
+import '~utility/index.css';
 
 export async function generateMetadata(): Promise<Metadata> {
   const client = await getClient();

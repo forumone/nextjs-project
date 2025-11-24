@@ -1,9 +1,9 @@
 import clsx from 'clsx';
 import { GessoComponent } from 'gesso';
 import { JSX, ReactNode } from 'react';
-import listStyles from '../List/list.module.css';
-import PageTitle from '../PageTitle/PageTitle';
-import Wysiwyg from '../Wysiwyg/Wysiwyg';
+import listStyles from '~components/List/list.module.css';
+import PageTitle from '~components/PageTitle/PageTitle';
+import Wysiwyg from '~components/Wysiwyg/Wysiwyg';
 import styles from './article.module.css';
 
 interface ArticleProps extends GessoComponent {

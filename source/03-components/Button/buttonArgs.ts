@@ -1,4 +1,4 @@
-import { SharedButtonProps } from '@/source/03-components/Button/Button';
+import { SharedButtonProps } from '~components/Button/Button';
 
 const buttonArgs = {
   label: 'Button',

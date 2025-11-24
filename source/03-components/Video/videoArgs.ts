@@ -1,4 +1,4 @@
-import { VideoProps } from '@/source/03-components/Video/Video';
+import { VideoProps } from '~components/Video/Video';
 
 const videoArgs = {
   iframeSrc: 'https://player.vimeo.com/video/505735218',

@@ -1,4 +1,4 @@
-import { SelectProps } from '@/source/03-components/FormItem/FormItem';
+import { SelectProps } from '~components/FormItem/FormItem';
 
 const selectWithGroups = {
   label: 'Select with groups',

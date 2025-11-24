@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/nextjs';
-import { withGlobalWrapper } from '../../../.storybook/decorators';
-import Grid from '../../02-layouts/Grid/Grid';
+import { withGlobalWrapper } from '~/.storybook/decorators';
+import Grid from '~layouts/Grid/Grid';
 import CardComponent from './Card';
 import styles from './card.module.css';
 import cardArgs from './cardArgs';
