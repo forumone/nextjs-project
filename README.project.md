@@ -8,7 +8,7 @@ This is a starter app for [Next.js](https://nextjs.org/) (bootstrapped with [`cr
 * [Stylelint](https://stylelint.io/)
 * [Prettier](https://prettier.io/)
 
-Note that Next v14 comes with the following installed already:
+Note that Next v15 comes with the following installed already:
 * [Webpack v5](https://webpack.js.org/concepts/)
 * [CSS Modules](https://github.com/css-modules/css-modules)
 
@@ -83,6 +83,18 @@ ddev nextjs icons
   and should not be edited manually.
 - `util`: Utility functions for working with CMSes or working with queries. Front-end
   utilities and Storybook helpers are in `source/06-utility`
+
+## Path alias
+TypeScript is configured with several path aliases for use in imports.
+- `~global/`: `source/01-global/`
+- `~layouts/`: `source/02-layouts/`
+- `~components/`: `source/03-components/`
+- `~templates/`: `source/04-templates/`
+- `~pages/`: `source/05-pages/`
+- `~utility`: `source/06-utilities/`
+- `~/`: project root
+
+Other aliases can be added in tsconfig.json.
 
 ## Helpful commands
 
