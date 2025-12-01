@@ -4,8 +4,7 @@ import { ComponentProps, type JSX } from 'react';
 import styles from './hamburger-button.module.css';
 
 interface HamburgerButtonProps
-  extends ComponentProps<'button'>,
-    GessoComponent {
+  extends ComponentProps<'button'>, GessoComponent {
   text: string;
 }
 
