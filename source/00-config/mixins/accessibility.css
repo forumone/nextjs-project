@@ -4,7 +4,7 @@
   @param {Boolean} $important
  */
 @mixin visually-hidden($important: false) {
-  clip-path: rect(1px, 1px, 1px, 1px) iff($important, !important);
+  clip-path: rect(1px 1px 1px 1px) iff($important, !important);
   height: 1px iff($important, !important);
   overflow: hidden iff($important, !important);
   overflow-wrap: normal iff($important, !important);

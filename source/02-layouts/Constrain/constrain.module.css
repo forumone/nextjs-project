@@ -1,6 +1,6 @@
 @import 'mixins';
 
-@layer layout {
+@layer layouts {
   .constrain {
     @include layout-constrain();
   }

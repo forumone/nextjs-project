@@ -1,4 +1,4 @@
-@layer config, global, vendor, layouts, components, utilities;
+@layer config, global, vendor, layouts, components, utility;
 
 @import 'vars/box-shadow.css' layer(config.base);
 @import 'vars/constrain.css' layer(config.base);
