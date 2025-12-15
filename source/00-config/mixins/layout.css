@@ -37,9 +37,9 @@
   and makes it flush with the edge of the viewport.
  */
 @mixin layout-full-bleed() {
-  inline-size: 100vw;
+  inline-size: calc(100vw - var(--gesso-scrollbar-width));
   inset-inline: 50%;
-  margin-inline: -50vw;
+  margin-inline: calc(-50vw + var(--gesso-scrollbar-width) / 2);
   position: relative;
 }
 
