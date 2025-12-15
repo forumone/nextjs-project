@@ -1,22 +1,19 @@
-import { FlatCompat } from '@eslint/eslintrc';
 import f1BaseConfig from '@forumone/eslint-config-es5';
 import f1ReactConfig from '@forumone/eslint-config-react';
+import nextPlugin from '@next/eslint-plugin-next';
 import { defineConfig, globalIgnores } from 'eslint/config';
 
-const compat = new FlatCompat({
-  // import.meta.dirname is available after Node.js v20.11.0
-  baseDirectory: import.meta.dirname,
-});
-
 const config = defineConfig([
-  globalIgnores(['**/Icon/icons/*.tsx']),
-  compat.config({
-    extends: ['plugin:@next/next/recommended'],
-  }),
   f1BaseConfig,
   {
     files: ['*.tsx', '*.jsx'],
     extends: [f1ReactConfig],
+    plugins: {
+      '@next/next': nextPlugin,
+    },
+    rules: {
+      ...nextPlugin.configs.recommended.rules,
+    },
   },
   {
     files: ['**/*.stories.tsx', '**/*Args.tsx'],
@@ -43,6 +40,15 @@ const config = defineConfig([
       '@typescript-eslint/ban-ts-comment': 'off',
     },
   },
+  globalIgnores([
+    // Default ignores of eslint-config-next:
+    '.next/**',
+    'out/**',
+    'build/**',
+    'next-env.d.ts',
+    // Ignore generated Icons
+    '**/icon/icons/*.tsx',
+  ]),
 ]);
 
 export default config;
