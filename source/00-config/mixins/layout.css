@@ -1,28 +1,27 @@
 @mixin layout-align-left($margin) {
-  float: left;
+  float: inline-start;
 
   @if $margin {
-    margin-right: $margin;
+    margin-inline-end: $margin;
   }
 }
 
 @mixin layout-align-right($margin) {
-  float: right;
+  float: inline-end;
 
   @if $margin {
-    margin-left: $margin;
+    margin-inline-start: $margin;
   }
 }
 
 @mixin layout-align-none {
   float: none;
-  margin-left: 0;
-  margin-right: 0;
+  margin-inline: 0;
 }
 
 @mixin layout-constrain() {
   margin-inline: auto;
-  max-width: var(--constrain-md);
+  max-inline-size: var(--constrain-md);
   padding-inline: var(--site-margins);
 
   /**
@@ -38,20 +37,18 @@
   and makes it flush with the edge of the viewport.
  */
 @mixin layout-full-bleed() {
-  left: 50%;
+  inline-size: 100vw;
+  inset-inline: 50%;
   margin-inline: -50vw;
   position: relative;
-  right: 50%;
-  width: 100vw;
 }
 
 /**
   Reverses the above.
  */
 @mixin layout-undo-full-bleed() {
-  left: auto;
+  inline-size: auto;
+  inset-inline: auto;
   margin-inline: 0;
   position: static;
-  right: auto;
-  width: auto;
 }
