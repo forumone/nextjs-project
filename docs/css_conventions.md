@@ -68,3 +68,25 @@ AVOID
 ```css
 @media (min-width: 1024px) {}
 ```
+
+## Example CSS Structure
+```css
+@layer components {
+  .wrapper {
+    --local-var: value;
+    background-color: var(--color-surface);
+    display: flex;
+    padding-block: var(--spacing-md);
+    padding-inline: var(--spacing-lg);
+  }
+
+  .wrapper--primary {
+    background-color: var(--color-primary);
+  }
+
+  .title {
+    color: var(--color-text);
+    font-size: var(--font-size-lg);
+  }
+}
+```

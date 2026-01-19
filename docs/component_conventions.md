@@ -23,7 +23,30 @@ source/03-components/ComponentName/
 Read `docs/css_conventions.md` when you need a more detailed explanation of CSS in this project.
 
 ## TypeScript Patterns
-
 - Components export named exports with Props types
 - Use `ComponentProps<'element'>` for extending native element props
-- Add `'use client'` directive for components using client-side hooks or event handlers (App Router renders server-side by default)
+- Add `'use client';` directive at the top of the file when using:
+    - Event handlers (onClick, onChange, etc.)
+    - React hooks (useState, useEffect, useRef, etc.)
+    - Browser APIs
+
+### Props Examples
+**For extending native HTML elements:**
+```tsx
+import { ComponentProps } from 'react';
+
+interface ButtonProps extends GessoComponent, ComponentProps<'button'> {
+  variant?: 'primary' | 'secondary' | 'danger';
+  size?: 'small' | 'medium' | 'large';
+}
+```
+
+**For components with children:**
+```tsx
+import { PropsWithChildren } from 'react';
+
+interface CardProps extends GessoComponent, PropsWithChildren {
+  title: string;
+  imageUrl?: string;
+}
+```
