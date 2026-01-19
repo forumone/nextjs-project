@@ -37,11 +37,11 @@ Project configuration allows shorthand imports: `@import "mixins";` resolves to 
 - When block-size and inline-size differ, write them separately (never use shorthand):
   ```css
   /* CORRECT */
-  padding-block: var(--spacing-2xl);
-  padding-inline: var(--spacing-xl);
+  padding-block: var(--spacing-5);
+  padding-inline: var(--spacing-2-5);
 
   /* INCORRECT */
-  padding: var(--spacing-2xl) var(--spacing-xl);
+  padding: var(--spacing-5) var(--spacing-2-5);
   ```
 - Order CSS properties alphabetically. CSS custom properties/CSS variables are listed first, followed by all other CSS properties.
 - Use existing CSS variables where possible
@@ -74,19 +74,19 @@ AVOID
 @layer components {
   .wrapper {
     --local-var: value;
-    background-color: var(--color-surface);
+    background-color: var(--ui-background);
     display: flex;
-    padding-block: var(--spacing-md);
-    padding-inline: var(--spacing-lg);
+    padding-block: var(--spacing-2-5);
+    padding-inline: var(--spacing-4);
   }
 
   .wrapper--primary {
-    background-color: var(--color-primary);
+    background-color: var(--ui-accent);
   }
 
   .title {
-    color: var(--color-text);
-    font-size: var(--font-size-lg);
+    color: var(--text-primary);
+    font-size: var(--responsive-font-size-8);
   }
 }
 ```
