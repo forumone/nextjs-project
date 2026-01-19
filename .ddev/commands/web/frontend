@@ -46,6 +46,9 @@ case $1 in
   wp-editor-styles)
     npm run editor-styles
   ;;
+  sync-skills)
+    npm run sync-skills
+  ;;
   "")
     echo "Usage: frontend install|build|deploy|watch|(some other command in the theme service)"
   ;;
