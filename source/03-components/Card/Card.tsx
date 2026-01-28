@@ -2,9 +2,9 @@ import clsx from 'clsx';
 import { GessoComponent } from 'gesso';
 import Link from 'next/link';
 import { JSX, ReactNode } from 'react';
-import ReadMoreLink from '../ReadMoreLink/ReadMoreLink';
-import { TagProps } from '../Tag/Tag';
-import TagList from '../TagList/TagList';
+import ReadMoreLink from '~components/ReadMoreLink/ReadMoreLink';
+import { TagProps } from '~components/Tag/Tag';
+import TagList from '~components/TagList/TagList';
 import styles from './card.module.css';
 
 interface CardProps extends GessoComponent {

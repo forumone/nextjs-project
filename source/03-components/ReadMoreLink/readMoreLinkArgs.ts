@@ -1,4 +1,4 @@
-import { ReadMoreLinkProps } from '@/source/03-components/ReadMoreLink/ReadMoreLink';
+import { ReadMoreLinkProps } from '~components/ReadMoreLink/ReadMoreLink';
 
 const readMoreLinkArgs = {
   title: 'Title',

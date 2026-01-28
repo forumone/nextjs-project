@@ -1,4 +1,4 @@
-import { HeroBgImageProps } from '@/source/03-components/HeroBgImage/HeroBgImage';
+import { HeroBgImageProps } from '~components/HeroBgImage/HeroBgImage';
 
 const heroBgImageArgs = {
   hasOverlay: true,

@@ -1,4 +1,4 @@
-import { ModalProps } from '@/source/03-components/Modal/Modal';
+import { ModalProps } from '~components/Modal/Modal';
 
 const modalArgs = {
   defaultOpen: true,

@@ -1,4 +1,4 @@
-import { AccordionProps } from '@/source/03-components/Accordion/Accordion';
+import { AccordionProps } from '~components/Accordion/Accordion';
 
 const accordionArgs = {
   allowMultiple: true,

@@ -1,5 +1,5 @@
-import { SiteContainerProps } from '@/source/02-layouts/SiteContainer/SiteContainer';
-import SampleContent from '@/source/06-utility/storybook/SampleContent';
+import { SiteContainerProps } from '~layouts/SiteContainer/SiteContainer';
+import SampleContent from '~utility/storybook/SampleContent';
 
 export default {
   modifierClasses: '',

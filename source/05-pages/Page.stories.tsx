@@ -1,9 +1,9 @@
-import { WYSIWYG as WysiwygStory } from '@/source/03-components/Wysiwyg/Wysiwyg.stories';
 import { Meta, StoryObj } from '@storybook/nextjs';
-import Breadcrumb from '../03-components/Breadcrumb/Breadcrumb';
-import { Breadcrumb as BreadcrumbStory } from '../03-components/Breadcrumb/Breadcrumb.stories';
-import Wysiwyg from '../03-components/Wysiwyg/Wysiwyg';
-import PageTemplate, { PageProps } from '../04-templates/Page/Page';
+import Breadcrumb from '~components/Breadcrumb/Breadcrumb';
+import { Breadcrumb as BreadcrumbStory } from '~components/Breadcrumb/Breadcrumb.stories';
+import Wysiwyg from '~components/Wysiwyg/Wysiwyg';
+import { WYSIWYG as WysiwygStory } from '~components/Wysiwyg/Wysiwyg.stories';
+import PageTemplate, { PageProps } from '~templates/Page/Page';
 import PageWrapper from './page-wrappers/default';
 
 interface PageStoryArgs {

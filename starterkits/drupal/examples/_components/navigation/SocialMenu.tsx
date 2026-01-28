@@ -6,10 +6,10 @@
  * to each menu item, which is then mapped to an icon using the Icon component.
  */
 
-import Icons from '@/source/01-global/icon/icons';
-import Menu, { MenuItem } from '@/source/03-components/Menu/Menu';
-import styles from '@/source/03-components/Menu/menu-social.module.css';
-import { FragmentType, getFragmentData, graphql } from '@/types/__generated__';
+import { FragmentType, getFragmentData, graphql } from '~/types/__generated__';
+import Menu, { MenuItem } from '~components/Menu/Menu';
+import styles from '~components/Menu/menu-social.module.css';
+import Icons from '~global/icon/icons';
 
 /**
  * Fragment for the menu items. You may need to use the beta version of the

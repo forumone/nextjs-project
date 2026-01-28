@@ -1,6 +1,6 @@
-import { FragmentType, getFragmentData } from '@/types/__generated__';
 import dynamic from 'next/dynamic';
 import { JSX } from 'react';
+import { FragmentType, getFragmentData } from '~/types/__generated__';
 import AllParagraphsFragment from './AllParagraphsFragment';
 
 /**

@@ -32,7 +32,25 @@
     "incremental": true,
     "strictBindCallApply": true,
     "paths": {
-      "@/*": [
+      "~global/*": [
+        "./source/01-global/*"
+      ],
+      "~layouts/*": [
+        "./source/02-layouts/*"
+      ],
+      "~components/*": [
+        "./source/03-components/*"
+      ],
+      "~templates/*": [
+        "./source/04-templates/*"
+      ],
+      "~pages/*": [
+        "./source/05-pages/*"
+      ],
+      "~utility/*": [
+        "./source/06-utility/*"
+      ],
+      "~/*": [
         "./*"
       ]
     },

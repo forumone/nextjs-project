@@ -1,12 +1,14 @@
-import getPageQuery from '@/app/[slug]/getPageQuery';
-import BlocksViewer from '@/app/_components/content/BlocksViewer';
+import { ApolloClient } from '@apollo/client';
+import { getAuthClient, getClient } from '@faustwp/experimental-app-router';
+import { Metadata } from 'next';
+import Link from 'next/link';
+import getPageQuery from '~/app/[slug]/getPageQuery';
+import BlocksViewer from '~/app/_components/content/BlocksViewer';
 import CursorNavigation, {
   ArchiveParams,
-} from '@/app/_components/content/CursorNavigation';
-import blogArchiveQuery from '@/app/blog/blogArchiveQuery';
-import Article from '@/source/03-components/Article/Article';
-import LandingPage from '@/source/04-templates/LandingPage/LandingPage';
-import { NextSearchParamsProp } from '@/types/NextSearchParams';
+} from '~/app/_components/content/CursorNavigation';
+import blogArchiveQuery from '~/app/blog/blogArchiveQuery';
+import { NextSearchParamsProp } from '~/types/NextSearchParams';
 import {
   BlogArchiveQuery,
   BlogArchiveQueryVariables,
@@ -15,15 +17,13 @@ import {
   GetReadingSettingsQuery,
   HomeMetadataQuery,
   PageIdType,
-} from '@/types/__generated__/graphql';
-import { hasPreviewProps } from '@/util/wp/hasPreviewProp';
+} from '~/types/__generated__/graphql';
+import { hasPreviewProps } from '~/util/wp/hasPreviewProp';
 import stringParamsFromSearch, {
   StringParams,
-} from '@/util/wp/stringParamsFromSearch';
-import { ApolloClient } from '@apollo/client';
-import { getAuthClient, getClient } from '@faustwp/experimental-app-router';
-import { Metadata } from 'next';
-import Link from 'next/link';
+} from '~/util/wp/stringParamsFromSearch';
+import Article from '~components/Article/Article';
+import LandingPage from '~templates/LandingPage/LandingPage';
 import LoginForm from './[slug]/LoginForm';
 import homeMetadataQuery from './homeMetadataQuery';
 import readingSettingsQuery from './readingSettingsQuery';

@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/nextjs';
-import SampleContent from '../../06-utility/storybook/SampleContent';
+import SampleContent from '~utility/storybook/SampleContent';
 import LandingPageTemplate from './LandingPage';
 
 const meta: Meta<typeof LandingPageTemplate> = {

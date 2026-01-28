@@ -1,4 +1,4 @@
-import { MainProps } from '@/source/02-layouts/Main/Main';
+import { MainProps } from '~layouts/Main/Main';
 
 export default {
   id: 'main',

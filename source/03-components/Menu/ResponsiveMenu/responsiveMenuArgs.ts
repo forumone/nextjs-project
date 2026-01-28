@@ -1,4 +1,4 @@
-import { ResponsiveMenuProps } from '@/source/03-components/Menu/ResponsiveMenu/ResponsiveMenu';
+import { ResponsiveMenuProps } from '~components/Menu/ResponsiveMenu/ResponsiveMenu';
 
 const responsiveMenuArgs = {
   items: [

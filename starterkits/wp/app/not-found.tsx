@@ -1,5 +1,5 @@
-import Main from '@/source/02-layouts/Main/Main';
-import PageTitle from '@/source/03-components/PageTitle/PageTitle';
+import PageTitle from '~components/PageTitle/PageTitle';
+import Main from '~layouts/Main/Main';
 
 function NotFoundPage() {
   return (

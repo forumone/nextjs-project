@@ -1,4 +1,4 @@
-import { ConstrainProps } from '@/source/02-layouts/Constrain/Constrain';
+import { ConstrainProps } from '~layouts/Constrain/Constrain';
 
 export default {
   modifierClasses: '',

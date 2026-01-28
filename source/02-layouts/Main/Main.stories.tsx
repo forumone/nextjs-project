@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/nextjs';
-import SampleContent from '../../06-utility/storybook/SampleContent';
+import SampleContent from '~utility/storybook/SampleContent';
 import MainLayout from './Main';
 import mainArgs from './mainArgs';
 

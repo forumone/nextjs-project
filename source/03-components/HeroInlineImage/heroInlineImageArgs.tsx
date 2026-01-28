@@ -1,4 +1,4 @@
-import { HeroInlineImageProps } from '@/source/03-components/HeroInlineImage/HeroInlineImage';
+import { HeroInlineImageProps } from '~components/HeroInlineImage/HeroInlineImage';
 
 const heroInlineImageArgs = {
   hasOverlay: true,

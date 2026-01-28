@@ -1,10 +1,10 @@
 'use client';
 
-import SearchParams from '@/app/search/SearchParams';
-import { Button } from '@/source/03-components/Button';
-import usePrevious from '@/util/usePrevious';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { FormEventHandler, useEffect, useState } from 'react';
+import SearchParams from '~/app/search/SearchParams';
+import usePrevious from '~/util/usePrevious';
+import { Button } from '~components/Button';
 
 function SearchForm() {
   const pathname = usePathname();

@@ -1,4 +1,4 @@
-import { OverlayMenuProps } from '@/source/03-components/Menu/OverlayMenu/OverlayMenu';
+import { OverlayMenuProps } from '~components/Menu/OverlayMenu/OverlayMenu';
 
 const overlayMenuArgs = {
   items: [

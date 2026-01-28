@@ -1,15 +1,15 @@
-import { FooterMenu as FooterMenuStory } from '@/source/03-components/Menu/Menu.stories';
 import { ReactNode, type JSX } from 'react';
-import Footer from '../../02-layouts/Footer/Footer';
-import Header from '../../02-layouts/Header/Header';
-import SiteContainer from '../../02-layouts/SiteContainer/SiteContainer';
-import BackToTop from '../../03-components/BackToTop/BackToTop';
-import Menu from '../../03-components/Menu/Menu';
-import ResponsiveMenu from '../../03-components/Menu/ResponsiveMenu/ResponsiveMenu';
-import { ResponsiveMenu as ResponsiveMenuStory } from '../../03-components/Menu/ResponsiveMenu/ResponsiveMenu.stories';
-import SiteName from '../../03-components/SiteName/SiteName';
-import { SiteName as SiteNameStory } from '../../03-components/SiteName/SiteName.stories';
-import Skiplink from '../../03-components/Skiplink/Skiplink';
+import BackToTop from '~components/BackToTop/BackToTop';
+import Menu from '~components/Menu/Menu';
+import { FooterMenu as FooterMenuStory } from '~components/Menu/Menu.stories';
+import ResponsiveMenu from '~components/Menu/ResponsiveMenu/ResponsiveMenu';
+import { ResponsiveMenu as ResponsiveMenuStory } from '~components/Menu/ResponsiveMenu/ResponsiveMenu.stories';
+import SiteName from '~components/SiteName/SiteName';
+import { SiteName as SiteNameStory } from '~components/SiteName/SiteName.stories';
+import Skiplink from '~components/Skiplink/Skiplink';
+import Footer from '~layouts/Footer/Footer';
+import Header from '~layouts/Header/Header';
+import SiteContainer from '~layouts/SiteContainer/SiteContainer';
 
 interface PageWrapperProps {
   children?: ReactNode;

@@ -1,5 +1,5 @@
-import Quote from '@/source/03-components/Quote/Quote';
-import { FragmentType, getFragmentData, graphql } from '@/types/__generated__';
+import { FragmentType, getFragmentData, graphql } from '~/types/__generated__';
+import Quote from '~components/Quote/Quote';
 
 /**
  * Fragment for a quote paragraph with just two plain text fields,

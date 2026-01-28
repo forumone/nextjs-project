@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/nextjs';
-import Constrain from '../../02-layouts/Constrain/Constrain';
-import { Button } from '../Button';
+import { Button } from '~components/Button/Button';
+import Constrain from '~layouts/Constrain/Constrain';
 import ModalComponent from './Modal';
 import modalArgs from './modalArgs';
 

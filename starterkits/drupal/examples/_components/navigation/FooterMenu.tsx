@@ -3,15 +3,15 @@
  * Example integration for a simple one-level menu, such as in a footer.
  */
 
-import Menu from '@/source/03-components/Menu/Menu';
+import { FragmentType, getFragmentData, graphql } from '~/types/__generated__';
+import { prepMenuItems } from '~/util/prepMenuItems';
+import Menu from '~components/Menu/Menu';
 /**
  * The styles are imported here in order to pass the footer-specific class names
  * into the Menu component. Another option would be to create a component for
  * the footer menu in Storybook and import it instead of the generic Menu.
  */
-import styles from '@/source/03-components/Menu/menu-footer.module.css';
-import { FragmentType, getFragmentData, graphql } from '@/types/__generated__';
-import { prepMenuItems } from '@/util/prepMenuItems';
+import styles from '~components/Menu/menu-footer.module.css';
 
 /**
  * Fragment for the footer menu items.

@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { GessoComponent } from 'gesso';
 import { JSX, ReactNode } from 'react';
-import { LinkButton, LinkProps } from '../Button/Button';
+import { LinkButton, LinkProps } from '~components/Button/Button';
 import styles from './call-to-action.module.css';
 
 interface CallToActionProps extends GessoComponent {

@@ -1,4 +1,4 @@
-import { FigureProps } from '@/source/03-components/Figure/Figure';
+import { FigureProps } from '~components/Figure/Figure';
 
 const figureArgs = {
   media: (

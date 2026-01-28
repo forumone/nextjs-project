@@ -1,4 +1,4 @@
-import { LinkButton } from '@/source/03-components/Button';
+import { LinkButton } from '~components/Button';
 
 enum ArchiveParams {
   AFTER = 'after',

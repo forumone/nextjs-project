@@ -10,7 +10,7 @@ import React, {
   useMemo,
   useState,
 } from 'react';
-import getCssVar from '../../06-utility/getCssVar';
+import getCssVar from '~utility/getCssVar';
 import AccordionItem, { AccordionItemProps } from './AccordionItem';
 import styles from './accordion.module.css';
 

@@ -6,9 +6,9 @@
  * reused the same way a view mode would be.
  */
 
-import ImageTeaser from '@/source/03-components/ImageTeaser/ImageTeaser.tsx';
-import { FragmentType, getFragmentData, graphql } from '@/types/__generated__';
 import Image from 'next/image';
+import { FragmentType, getFragmentData, graphql } from '~/types/__generated__';
+import ImageTeaser from '~components/ImageTeaser/ImageTeaser.tsx';
 
 /**
  * Fragment for the film teaser. Compare with the fragment in FilmFull.tsx --

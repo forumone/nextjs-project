@@ -1,6 +1,6 @@
-import HeroInlineImage from '@/source/03-components/HeroInlineImage/HeroInlineImage';
-import { FragmentType, getFragmentData, graphql } from '@/types/__generated__';
 import Image from 'next/image';
+import { FragmentType, getFragmentData, graphql } from '~/types/__generated__';
+import HeroInlineImage from '~components/HeroInlineImage/HeroInlineImage';
 
 const HeroParagraphFragment = graphql(`
   fragment HeroParagraphFragment on ParagraphHero {
