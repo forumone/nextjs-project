@@ -62,7 +62,7 @@
     "postcss-advanced-variables": "github:kmonahan/postcss-advanced-variables",
     "postcss-import": "^16.1.1",
     "postcss-loader": "^8.2.0",
-    "postcss-nesting": "^13.0.2",
+    "postcss-nesting": "^14.0.0",
     "postcss-preset-env": "^11.1.2",
     "postcss-rem": "^3.0.0",
     "prettier": "^3.8.1",
