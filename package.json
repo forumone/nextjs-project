@@ -44,7 +44,7 @@
     "@svgr/babel-plugin-add-jsx-attribute": "^8.0.0",
     "@svgr/babel-plugin-remove-jsx-attribute": "^8.0.0",
     "@svgr/cli": "^8.1.0",
-    "@types/node": "^22.19.11",
+    "@types/node": "^24.10.13",
     "@types/react": "~19.2.7",
     "@types/react-dom": "~19.2.3",
     "change-case": "^5.4.4",
@@ -82,6 +82,6 @@
     "storybook": "$storybook"
   },
   "engines": {
-    "node": "22"
+    "node": "24"
   }
 }
