@@ -1,14 +1,14 @@
 'use client';
 
-import AngleDoubleLeft from '@/source/01-global/icon/icons/AngleDoubleLeft';
-import AngleDoubleRight from '@/source/01-global/icon/icons/AngleDoubleRight';
-import AngleLeft from '@/source/01-global/icon/icons/AngleLeft';
-import AngleRight from '@/source/01-global/icon/icons/AngleRight';
-import generatePagination from '@/source/06-utility/generatePagination';
 import clsx from 'clsx';
 import { GessoComponent } from 'gesso';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
+import AngleDoubleLeft from '~global/icon/icons/AngleDoubleLeft';
+import AngleDoubleRight from '~global/icon/icons/AngleDoubleRight';
+import AngleLeft from '~global/icon/icons/AngleLeft';
+import AngleRight from '~global/icon/icons/AngleRight';
+import generatePagination from '~utility/generatePagination';
 import styles from './pager.module.css';
 
 interface PagerProps extends GessoComponent {

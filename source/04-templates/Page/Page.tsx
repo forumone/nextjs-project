@@ -1,7 +1,7 @@
 import { JSX, ReactNode } from 'react';
-import { MAIN_ID } from '../../00-config/constants';
-import Main from '../../02-layouts/Main/Main';
-import Article from '../../03-components/Article/Article';
+import { MAIN_ID } from '~/source/00-config/constants';
+import Article from '~components/Article/Article';
+import Main from '~layouts/Main/Main';
 
 interface PageProps {
   mainId?: string;

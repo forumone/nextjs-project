@@ -1,4 +1,4 @@
-import { InlineFormProps } from '@/source/02-layouts/InlineForm/InlineForm';
+import { InlineFormProps } from '~layouts/InlineForm/InlineForm';
 
 export default {
   wrap: true,

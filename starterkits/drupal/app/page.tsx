@@ -1,10 +1,10 @@
 import { Metadata } from 'next';
 import Image from 'next/image';
-import heroPlaceholder from '../public/images/hero-placeholder.jpg';
-import Section from '../source/02-layouts/Section/Section';
-import HeroBgImage from '../source/03-components/HeroBgImage/HeroBgImage';
-import Wysiwyg from '../source/03-components/Wysiwyg/Wysiwyg';
-import LandingPage from '../source/04-templates/LandingPage/LandingPage';
+import heroPlaceholder from '~/public/images/hero-placeholder.jpg';
+import HeroBgImage from '~components/HeroBgImage/HeroBgImage';
+import Wysiwyg from '~components/Wysiwyg/Wysiwyg';
+import Section from '~layouts/Section/Section';
+import LandingPage from '~templates/LandingPage/LandingPage';
 
 const title = 'Forum One Next.js Starter App';
 

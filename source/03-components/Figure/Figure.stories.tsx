@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/nextjs';
-import { withGlobalWrapper } from '../../../.storybook/decorators';
-import Video from '../Video/Video';
-import { Video as VideoStory } from '../Video/Video.stories';
+import { withGlobalWrapper } from '~/.storybook/decorators';
+import Video from '~components/Video/Video';
+import { Video as VideoStory } from '~components/Video/Video.stories';
 import FigureComponent from './Figure';
 import styles from './figure.module.css';
 import figureArgs from './figureArgs';

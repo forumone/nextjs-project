@@ -1,4 +1,4 @@
-import { CallToActionProps } from '@/source/03-components/CallToAction/CallToAction';
+import { CallToActionProps } from '~components/CallToAction/CallToAction';
 
 const callToActionArgs = {
   body: <p>CTA content goes here…</p>,

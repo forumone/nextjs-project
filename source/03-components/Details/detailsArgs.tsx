@@ -1,4 +1,4 @@
-import { DetailsProps } from '@/source/03-components/Details/Details';
+import { DetailsProps } from '~components/Details/Details';
 
 const detailsArgs = {
   detailsSummary: 'Details summary',

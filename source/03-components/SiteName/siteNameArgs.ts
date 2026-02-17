@@ -1,4 +1,4 @@
-import { SiteNameProps } from '@/source/03-components/SiteName/SiteName';
+import { SiteNameProps } from '~components/SiteName/SiteName';
 
 const siteNameArgs = {
   siteName: 'Site Name',

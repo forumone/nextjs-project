@@ -4,10 +4,10 @@
  * shown on mobile.
  */
 
-import { MenuItem as GessoMenuItem } from '@/source/03-components/Menu/Menu';
-import ResponsiveMenu from '@/source/03-components/Menu/ResponsiveMenu/ResponsiveMenu';
-import { FragmentType, getFragmentData, graphql } from '@/types/__generated__';
-import { prepMenuItems } from '@/util/prepMenuItems';
+import { FragmentType, getFragmentData, graphql } from '~/types/__generated__';
+import { prepMenuItems } from '~/util/prepMenuItems';
+import { MenuItem as GessoMenuItem } from '~components/Menu/Menu';
+import ResponsiveMenu from '~components/Menu/ResponsiveMenu/ResponsiveMenu';
 
 /**
  * Fragment for the main menu.

@@ -1,4 +1,4 @@
-import { MenuProps } from '@/source/03-components/Menu/Menu';
+import { MenuProps } from '~components/Menu/Menu';
 
 const menuArgs = {
   items: [

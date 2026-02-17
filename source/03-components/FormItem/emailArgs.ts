@@ -1,4 +1,4 @@
-import { InputProps } from '@/source/03-components/FormItem/FormItem';
+import { InputProps } from '~components/FormItem/FormItem';
 
 const emailArgs = {
   id: 'email',

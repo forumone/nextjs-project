@@ -1,4 +1,4 @@
-import { WysiwygProps } from '@/source/03-components/Wysiwyg/Wysiwyg';
+import { WysiwygProps } from '~components/Wysiwyg/Wysiwyg';
 
 const wysiwygArgs = {
   children: (

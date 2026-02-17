@@ -3,9 +3,9 @@
 import clsx from 'clsx';
 import { GessoComponent } from 'gesso';
 import { JSX, useCallback, useEffect, useId, useRef, useState } from 'react';
-import HamburgerButton from '../../HamburgerButton/HamburgerButton';
-import buttonStyles from '../../HamburgerButton/hamburger-button.module.css';
-import Menu, { MenuItem } from '../Menu';
+import HamburgerButton from '~components/HamburgerButton/HamburgerButton';
+import buttonStyles from '~components/HamburgerButton/hamburger-button.module.css';
+import Menu, { MenuItem } from '~components/Menu/Menu';
 import styles from './overlay-menu.module.css';
 
 interface OverlayMenuProps extends GessoComponent {

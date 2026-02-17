@@ -1,4 +1,4 @@
-import { TextareaProps } from '@/source/03-components/FormItem/FormItem';
+import { TextareaProps } from '~components/FormItem/FormItem';
 
 const textareaArgs = {
   id: 'text',

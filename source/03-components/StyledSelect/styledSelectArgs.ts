@@ -1,5 +1,5 @@
-import DropdownOption from '@/source/03-components/StyledSelect/DropdownOption';
 import { Props } from 'react-select';
+import DropdownOption from './DropdownOption';
 
 const styledSelectArgs = {
   options: [

@@ -1,8 +1,8 @@
-import Wysiwyg from '@/source/03-components/Wysiwyg/Wysiwyg';
-import Page from '@/source/04-templates/Page/Page';
-import { FragmentType, getFragmentData, graphql } from '@/types/__generated__';
 import parse from 'html-react-parser';
 import { JSX } from 'react';
+import { FragmentType, getFragmentData, graphql } from '~/types/__generated__';
+import Wysiwyg from '~components/Wysiwyg/Wysiwyg';
+import Page from '~templates/Page/Page';
 
 const BasicPageFragment = graphql(`
   fragment BasicPageFragment on NodePage {

@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { GessoComponent } from 'gesso';
 import { ReactNode, type JSX } from 'react';
-import { LinkButton, LinkProps } from '../Button/Button';
+import { LinkButton, LinkProps } from '~components/Button/Button';
 import styles from './hero-bg-image.module.css';
 
 interface HeroBgImageProps extends GessoComponent {

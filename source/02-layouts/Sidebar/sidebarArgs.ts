@@ -1,4 +1,4 @@
-import { SidebarProps } from '@/source/02-layouts/Sidebar/Sidebar';
+import { SidebarProps } from '~layouts/Sidebar/Sidebar';
 
 export default {
   sidebarFirstLabel: '',

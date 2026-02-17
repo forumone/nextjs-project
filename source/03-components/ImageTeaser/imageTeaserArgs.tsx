@@ -1,4 +1,4 @@
-import { ImageTeaserProps } from '@/source/03-components/ImageTeaser/ImageTeaser';
+import { ImageTeaserProps } from '~components/ImageTeaser/ImageTeaser';
 
 const imageTeaserArgs = {
   url: '#0',

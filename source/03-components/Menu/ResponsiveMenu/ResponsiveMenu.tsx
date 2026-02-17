@@ -2,8 +2,8 @@
 
 import { GessoComponent } from 'gesso';
 import { useEffect, useState, type JSX } from 'react';
-import Menu, { MenuItem } from '../Menu';
-import OverlayMenu from '../OverlayMenu/OverlayMenu';
+import Menu, { MenuItem } from '~components/Menu/Menu';
+import OverlayMenu from '~components/Menu/OverlayMenu/OverlayMenu';
 import styles from './responsive-menu.module.css';
 
 interface ResponsiveMenuProps extends GessoComponent {

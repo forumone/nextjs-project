@@ -1,4 +1,4 @@
-import { SectionProps } from '@/source/02-layouts/Section/Section';
+import { SectionProps } from '~layouts/Section/Section';
 
 export default {
   title: 'Section title',

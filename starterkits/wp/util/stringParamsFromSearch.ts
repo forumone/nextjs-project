@@ -1,4 +1,4 @@
-import NextSearchParams from '@/types/NextSearchParams';
+import NextSearchParams from '~/types/NextSearchParams';
 
 type StringParams = Record<string, string | undefined>;
 

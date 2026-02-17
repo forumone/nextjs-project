@@ -3,7 +3,7 @@
  * See README.md
  */
 
-import { AuthorBlockFragmentFragment } from '@/types/__generated__/graphql';
+import { AuthorBlockFragmentFragment } from '~/types/__generated__/graphql';
 import fragments from './fragments';
 
 import type { JSX } from 'react';

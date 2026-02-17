@@ -3,11 +3,11 @@
  * Example integration for global header.
  */
 
-import Header from '@/source/02-layouts/Header/Header';
-import SiteName from '@/source/03-components/SiteName/SiteName';
-import { FragmentType, getFragmentData, graphql } from '@/types/__generated__';
 import { JSX } from 'react';
-import MainMenu from '../_navigation/MainMenu';
+import MainMenu from '~/app/_navigation/MainMenu';
+import { FragmentType, getFragmentData, graphql } from '~/types/__generated__';
+import SiteName from '~components/SiteName/SiteName';
+import Header from '~layouts/Header/Header';
 
 /**
  * Fragment for the global header.

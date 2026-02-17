@@ -3,8 +3,8 @@
  *
  * Example query and integration for a films listing page.
  */
-import { graphql } from '@/types/__generated__';
-import query from '@/util/query';
+import { graphql } from '~/types/__generated__';
+import query from '~/util/query';
 import FilmsListing from '../views/FilmsListing';
 
 /**

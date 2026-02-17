@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/nextjs';
-import { withGlobalWrapper } from '../../../.storybook/decorators';
+import { withGlobalWrapper } from '~/.storybook/decorators';
 import listStyles from './list.module.css';
 
 import type { JSX } from 'react';

@@ -1,4 +1,4 @@
-import { SkiplinkProps } from '@/source/03-components/Skiplink/Skiplink';
+import { SkiplinkProps } from '~components/Skiplink/Skiplink';
 
 const skiplinkArgs = {
   id: 'main',

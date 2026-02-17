@@ -1,8 +1,8 @@
-import Article from '@/source/03-components/Article/Article';
-import Wysiwyg from '@/source/03-components/Wysiwyg/Wysiwyg';
-import { FragmentType, getFragmentData, graphql } from '@/types/__generated__';
 import parse from 'html-react-parser';
 import { JSX } from 'react';
+import { FragmentType, getFragmentData, graphql } from '~/types/__generated__';
+import Article from '~components/Article/Article';
+import Wysiwyg from '~components/Wysiwyg/Wysiwyg';
 
 const ArticleFullFragment = graphql(`
   fragment ArticleFullFragment on NodeArticle {

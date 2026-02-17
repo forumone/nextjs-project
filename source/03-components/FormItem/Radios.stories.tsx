@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/nextjs';
-import { withGlobalWrapper } from '../../../.storybook/decorators';
-import Fieldset from '../Fieldset/Fieldset';
-import fieldsetStyles from '../Fieldset/fieldset.module.css';
+import { withGlobalWrapper } from '~/.storybook/decorators';
+import Fieldset from '~components/Fieldset/Fieldset';
+import fieldsetStyles from '~components/Fieldset/fieldset.module.css';
 import { Input } from './FormItem';
 import { Radio } from './FormItem.stories';
 

@@ -1,6 +1,6 @@
-import { FragmentType, getFragmentData, graphql } from '@/types/__generated__';
 import dynamic from 'next/dynamic';
 import { ComponentType } from 'react';
+import { FragmentType, getFragmentData, graphql } from '~/types/__generated__';
 
 const DynamicCardParagraphFragment = graphql(`
   fragment DynamicCardParagraphFragment on ParagraphDynamicCard {

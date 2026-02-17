@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import Page from '../../source/04-templates/Page/Page';
+import Page from '~templates/Page/Page';
 
 const title = 'About Forum One Next.js Starter App';
 

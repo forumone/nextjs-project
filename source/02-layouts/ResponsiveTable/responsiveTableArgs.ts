@@ -1,4 +1,4 @@
-import { ResponsiveTableProps } from '@/source/02-layouts/ResponsiveTable/ResponsiveTable';
+import { ResponsiveTableProps } from '~layouts/ResponsiveTable/ResponsiveTable';
 
 export default {
   labelledBy: 'tablecaption01',

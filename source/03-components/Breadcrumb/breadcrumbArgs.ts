@@ -1,4 +1,4 @@
-import { BreadcrumbProps } from '@/source/03-components/Breadcrumb/Breadcrumb';
+import { BreadcrumbProps } from '~components/Breadcrumb/Breadcrumb';
 
 const breadcrumbArgs = {
   title: 'Breadcrumb',

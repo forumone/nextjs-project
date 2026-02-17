@@ -6,10 +6,10 @@
  * of a content field that uses Paragraphs.
  */
 
-import Film from '@/source/04-templates/Film/Film';
-import { FragmentType, getFragmentData, graphql } from '@/types/__generated__';
 import Image from 'next/image';
 import { JSX } from 'react';
+import { FragmentType, getFragmentData, graphql } from '~/types/__generated__';
+import Film from '~templates/Film/Film';
 import mapParagraph from '../paragraphs/mapParagraph';
 
 /**

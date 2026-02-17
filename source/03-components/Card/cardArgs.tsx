@@ -1,4 +1,4 @@
-import { CardProps } from '@/source/03-components/Card/Card';
+import { CardProps } from '~components/Card/Card';
 
 const cardArgs = {
   title: 'Card title',

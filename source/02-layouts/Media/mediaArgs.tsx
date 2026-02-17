@@ -1,4 +1,4 @@
-import { MediaProps } from '@/source/02-layouts/Media/Media';
+import { MediaProps } from '~layouts/Media/Media';
 
 export default {
   media: (

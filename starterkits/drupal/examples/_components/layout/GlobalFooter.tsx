@@ -5,12 +5,12 @@
  * Also includes an example of retrieving a Custom Block from GraphQL.
  */
 
-import Footer from '@/source/02-layouts/Footer/Footer';
-import { FragmentType, getFragmentData, graphql } from '@/types/__generated__';
 import parse from 'html-react-parser';
 import { JSX } from 'react';
-import FooterMenu from '../navigation/FooterMenu';
-import SocialMenu from '../navigation/SocialMenu';
+import FooterMenu from '~/app/navigation/FooterMenu';
+import SocialMenu from '~/app/navigation/SocialMenu';
+import { FragmentType, getFragmentData, graphql } from '~/types/__generated__';
+import Footer from '~layouts/Footer/Footer';
 
 /**
  * Fragment for the global footer.

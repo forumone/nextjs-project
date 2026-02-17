@@ -1,4 +1,4 @@
-import { PagerProps } from '@/source/03-components/Pager/Pager';
+import { PagerProps } from '~components/Pager/Pager';
 
 const pagerArgs = {
   totalPages: 16,

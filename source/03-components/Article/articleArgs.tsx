@@ -1,4 +1,4 @@
-import { ArticleProps } from '@/source/03-components/Article/Article';
+import { ArticleProps } from '~components/Article/Article';
 
 const articleArgs = {
   title: 'Article Title',

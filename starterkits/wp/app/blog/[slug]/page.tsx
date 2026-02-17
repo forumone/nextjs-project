@@ -1,19 +1,19 @@
-import LoginForm from '@/app/[slug]/LoginForm';
-import BlocksViewer from '@/app/_components/content/BlocksViewer';
-import getPostQuery from '@/app/blog/[slug]/getPostQuery';
-import Article from '@/source/03-components/Article/Article';
-import LandingPage from '@/source/04-templates/LandingPage/LandingPage';
-import { NextSearchParamsProp } from '@/types/NextSearchParams';
-import {
-  GetPostQuery,
-  GetPostQueryVariables,
-  PostIdType,
-} from '@/types/__generated__/graphql';
-import { hasPreviewProps } from '@/util/wp/hasPreviewProp';
 import { ApolloClient } from '@apollo/client';
 import { getAuthClient, getClient } from '@faustwp/experimental-app-router';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import LoginForm from '~/app/[slug]/LoginForm';
+import BlocksViewer from '~/app/_components/content/BlocksViewer';
+import getPostQuery from '~/app/blog/[slug]/getPostQuery';
+import { NextSearchParamsProp } from '~/types/NextSearchParams';
+import {
+  GetPostQuery,
+  GetPostQueryVariables,
+  PostIdType,
+} from '~/types/__generated__/graphql';
+import { hasPreviewProps } from '~/util/wp/hasPreviewProp';
+import Article from '~components/Article/Article';
+import LandingPage from '~templates/LandingPage/LandingPage';
 
 async function getWpPostData(
   id: string,

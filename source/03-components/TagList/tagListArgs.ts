@@ -1,4 +1,4 @@
-import { TagListProps } from '@/source/03-components/TagList/TagList';
+import { TagListProps } from '~components/TagList/TagList';
 
 const tagListArgs = {
   items: [

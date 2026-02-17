@@ -1,6 +1,6 @@
-import Wysiwyg from '@/source/03-components/Wysiwyg/Wysiwyg';
-import { FragmentType, getFragmentData, graphql } from '@/types/__generated__';
 import parse from 'html-react-parser';
+import { FragmentType, getFragmentData, graphql } from '~/types/__generated__';
+import Wysiwyg from '~components/Wysiwyg/Wysiwyg';
 
 const WysiwygParagraphFragment = graphql(`
   fragment WysiwygParagraphFragment on ParagraphWysiwyg {

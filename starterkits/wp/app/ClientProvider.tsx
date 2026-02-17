@@ -1,8 +1,8 @@
 'use client';
 
-import coreBlocks from '@/app/_components/blocks/core';
 import { WordPressBlocksProvider } from '@faustwp/blocks';
 import { PropsWithChildren } from 'react';
+import coreBlocks from '~/app/_components/blocks/core';
 
 type ClientProviderProps = PropsWithChildren;
 /**

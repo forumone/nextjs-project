@@ -1,4 +1,4 @@
-import { FragmentType, getFragmentData, graphql } from '@/types/__generated__';
+import { FragmentType, getFragmentData, graphql } from '~/types/__generated__';
 
 const BlockEmbedParagraphFragment = graphql(`
   fragment BlockEmbedParagraphFragment on ParagraphBlockEmbed {

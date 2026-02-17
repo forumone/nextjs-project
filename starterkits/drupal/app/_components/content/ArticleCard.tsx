@@ -1,7 +1,7 @@
-import Card from '@/source/03-components/Card/Card';
-import { FragmentType, getFragmentData, graphql } from '@/types/__generated__';
 import Image from 'next/image';
 import { JSX } from 'react';
+import { FragmentType, getFragmentData, graphql } from '~/types/__generated__';
+import Card from '~components/Card/Card';
 
 const ArticleCardFragment = graphql(`
   fragment ArticleCardFragment on NodeArticle {

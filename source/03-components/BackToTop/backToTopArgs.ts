@@ -1,4 +1,4 @@
-import { BackToTopProps } from '@/source/03-components/BackToTop/BackToTop';
+import { BackToTopProps } from '~components/BackToTop/BackToTop';
 
 const backToTopArgs = {
   topElement: 'top',
