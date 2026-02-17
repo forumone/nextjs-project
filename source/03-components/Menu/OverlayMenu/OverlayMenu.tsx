@@ -22,40 +22,37 @@ function OverlayMenu({
   const [isOpen, setIsOpen] = useState(false);
   const navId = useId();
   const navRef = useRef<HTMLElement>(null);
-  const focusableElements = navRef.current?.querySelectorAll<HTMLElement>(
-    focusableElementsString,
-  );
 
-  const handleKeydown = useCallback(
-    (event: KeyboardEvent) => {
-      // Trap focus within the menu
-      if (focusableElements) {
-        const firstElement = focusableElements[0];
-        const lastElement = focusableElements[focusableElements.length - 1];
+  const handleKeydown = useCallback((event: KeyboardEvent) => {
+    const focusableElements = navRef.current?.querySelectorAll<HTMLElement>(
+      focusableElementsString,
+    );
+    // Trap focus within the menu
+    if (focusableElements) {
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
 
-        if (event.key === 'Tab') {
-          if (event.shiftKey && document.activeElement === firstElement) {
-            event.preventDefault();
-            lastElement.focus();
-          } else if (
-            !event.shiftKey &&
-            document.activeElement === lastElement
-          ) {
-            event.preventDefault();
-            firstElement.focus();
-          }
+      if (event.key === 'Tab') {
+        if (event.shiftKey && document.activeElement === firstElement) {
+          event.preventDefault();
+          lastElement.focus();
+        } else if (!event.shiftKey && document.activeElement === lastElement) {
+          event.preventDefault();
+          firstElement.focus();
         }
       }
-      // Close the menu when the escape key is pressed
-      if (event.key === 'Escape') {
-        setIsOpen(false);
-      }
-    },
-    [focusableElements],
-  );
+    }
+    // Close the menu when the escape key is pressed
+    if (event.key === 'Escape') {
+      setIsOpen(false);
+    }
+  }, []);
 
   useEffect(() => {
     if (isOpen) {
+      const focusableElements = navRef.current?.querySelectorAll<HTMLElement>(
+        focusableElementsString,
+      );
       document.body.classList.add('has-open-menu');
       const firstElement = focusableElements && focusableElements[0];
       firstElement?.focus();
@@ -73,7 +70,7 @@ function OverlayMenu({
       document.body.classList.remove('has-open-menu');
       window.removeEventListener('keydown', handleKeydown);
     };
-  }, [isOpen, navId, focusableElements, handleKeydown]);
+  }, [isOpen, navId, handleKeydown]);
 
   return (
     <>
