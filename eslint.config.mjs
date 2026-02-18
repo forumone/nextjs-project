@@ -1,19 +1,21 @@
+// For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
+import storybook from 'eslint-plugin-storybook';
+
 import f1BaseConfig from '@forumone/eslint-config-es5';
 import f1ReactConfig from '@forumone/eslint-config-react';
-import nextPlugin from '@next/eslint-plugin-next';
+import nextVitals from 'eslint-config-next/core-web-vitals';
+import nextTs from 'eslint-config-next/typescript';
+import prettier from 'eslint-config-prettier/flat';
 import { defineConfig, globalIgnores } from 'eslint/config';
 
 const config = defineConfig([
+  ...nextVitals,
+  ...nextTs,
+  prettier,
   f1BaseConfig,
   {
     files: ['*.tsx', '*.jsx'],
     extends: [f1ReactConfig],
-    plugins: {
-      '@next/next': nextPlugin,
-    },
-    rules: {
-      ...nextPlugin.configs.recommended.rules,
-    },
   },
   {
     files: ['**/*.stories.tsx', '**/*Args.tsx'],
@@ -49,6 +51,7 @@ const config = defineConfig([
     // Ignore generated Icons
     '**/icon/icons/*.tsx',
   ]),
+  ...storybook.configs['flat/recommended'],
 ]);
 
 export default config;
