@@ -6,6 +6,7 @@ import React, {
   JSX,
   KeyboardEvent,
   createRef,
+  useEffect,
   useId,
   useMemo,
   useState,
@@ -37,6 +38,12 @@ function Accordion({
   isStepList,
   modifierClasses,
 }: AccordionProps): JSX.Element {
+  useEffect(() => {
+    console.warn(isStepList);
+
+    // Lack of deps should trigger reactHooks linter
+  });
+
   const accordionId = useId();
   const [accordionItemsStatus, setAccordionItemsStatus] = useState(
     accordionItems.map((item, index) => ({
@@ -137,6 +144,12 @@ function Accordion({
 
   return (
     <>
+      {/* Should trigger jsx-a11y: */}
+      <img src="foo.png" />
+
+      {/* Should trigger jsx-a11y: */}
+      <div onClick={() => {}} />
+
       <div
         className={clsx(
           styles.accordion,
