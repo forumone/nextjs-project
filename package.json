@@ -83,6 +83,6 @@
     "storybook": "$storybook"
   },
   "engines": {
-    "node": ">=22"
+    "node": ">=24"
   }
 }
