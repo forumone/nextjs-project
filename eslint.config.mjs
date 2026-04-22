@@ -18,6 +18,12 @@ const config = defineConfig([
     extends: [f1ReactConfig],
   },
   {
+    files: ['**/*.tsx', '**/*.jsx'],
+    rules: {
+      'react/jsx-boolean-value': ['error', 'always'],
+    },
+  },
+  {
     files: ['**/*.stories.tsx', '**/*Args.tsx'],
     rules: {
       '@next/next/no-img-element': 'off',

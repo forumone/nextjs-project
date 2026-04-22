@@ -136,7 +136,7 @@ function Modal({
           className={styles.closeButton}
           aria-label="Close modal"
           aria-controls={`modal-${modalId}`}
-          autoFocus
+          autoFocus={true}
           onClick={closeModal}
         ></button>
         <div className={styles.content} id={`modal-content-${modalId}`}>
