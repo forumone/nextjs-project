@@ -12,7 +12,7 @@ module.exports = {
   webpackFinal: async config => {
     config.plugins.push(
       new StylelintWebpackPlugin({
-        exclude: ['node_modules', 'storybook', '.next'],
+        exclude: ['node_modules', 'storybook-static', '.next'],
       }),
     );
     config.module.rules.find(
