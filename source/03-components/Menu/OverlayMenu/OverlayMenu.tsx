@@ -98,7 +98,7 @@ function OverlayMenu({
           hidden={!isOpen}
           text="Close"
           modifierClasses={buttonStyles['button--close']}
-          autoFocus
+          autoFocus={true}
         />
         <Menu
           items={items}
