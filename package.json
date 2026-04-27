@@ -16,7 +16,7 @@
     "test": "npm run typegen && npm run lint && npm run tsc",
     "component": "node lib/create-component.mjs",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build -o storybook",
+    "build-storybook": "storybook build -o storybook-static",
     "build-icons": "svgr --out-dir source/01-global/icon/icons -- source/01-global/icon/svgs"
   },
   "browserslist": [
