@@ -18,7 +18,7 @@ module.exports = {
 
     config.plugins.push(
       new StylelintWebpackPlugin({
-        exclude: ['node_modules', 'storybook'],
+        exclude: ['node_modules', 'storybook-static'],
       }),
     );
 

@@ -26,6 +26,7 @@ git init
 git remote add origin git@github.com:forumone/[project-name].git
 ```
 4. Update configuration in the `./.ddev/config.yaml`. Update `name: nextjs-project` to the correct project name.
+5. Update configuration in `./.storybook/main.js`. Update `[allowedHosts: ['nextjs-project.ddev.site', 'localhost']]` to the correct project name.
 
 If you are setting up a headless Drupal project, 
 continue with the setup steps in /starterkits/drupal/README.md.

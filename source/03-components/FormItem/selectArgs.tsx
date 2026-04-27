@@ -10,7 +10,7 @@ const selectArgs = {
       <option>Option Three</option>
       <option>Option Four</option>
       <option>Option Five</option>
-      <option disabled>Disabled Option</option>
+      <option disabled={true}>Disabled Option</option>
     </>
   ),
 } satisfies SelectProps;

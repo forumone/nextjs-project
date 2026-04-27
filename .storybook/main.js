@@ -5,14 +5,22 @@ const YAML = require('yaml');
 module.exports = {
   staticDirs: ['../public'],
   stories: ['../source/**/*.stories.@(js|jsx|ts|tsx)', '../source/**/*.mdx'],
-  addons: ['@storybook/addon-links', '@storybook/addon-a11y', '@storybook/addon-docs'],
+  addons: [
+    '@storybook/addon-links',
+    '@storybook/addon-a11y',
+    '@storybook/addon-docs',
+  ],
   framework: {
     name: '@storybook/nextjs',
+  },
+  // Replace with the DDEV URL for your site
+  core: {
+    allowedHosts: ['nextjs-project.ddev.site', 'localhost'],
   },
   webpackFinal: async config => {
     config.plugins.push(
       new StylelintWebpackPlugin({
-        exclude: ['node_modules', 'storybook', '.next'],
+        exclude: ['node_modules', 'storybook-static', '.next'],
       }),
     );
     config.module.rules.find(

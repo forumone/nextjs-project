@@ -2,7 +2,6 @@
 import storybook from 'eslint-plugin-storybook';
 
 import f1BaseConfig from '@forumone/eslint-config-es5';
-import f1ReactConfig from '@forumone/eslint-config-react';
 import nextVitals from 'eslint-config-next/core-web-vitals';
 import nextTs from 'eslint-config-next/typescript';
 import prettier from 'eslint-config-prettier/flat';
@@ -14,8 +13,15 @@ const config = defineConfig([
   prettier,
   f1BaseConfig,
   {
-    files: ['*.tsx', '*.jsx'],
-    extends: [f1ReactConfig],
+    rules: {
+      'react-hooks/set-state-in-effect': 'warn',
+    },
+  },
+  {
+    files: ['**/*.tsx', '**/*.jsx'],
+    rules: {
+      'react/jsx-boolean-value': ['error', 'always'],
+    },
   },
   {
     files: ['**/*.stories.tsx', '**/*Args.tsx'],
