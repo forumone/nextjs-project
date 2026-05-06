@@ -1,11 +1,14 @@
 hooks:
   post-start:
     # Detects to see if the node_modules folder exists
-    - exec: 'sh -c "[ ! -d node_modules ] && npm ci || return"'
+    - exec: 'sh -c "[ ! -d node_modules ] && npm ci || true"'
       service: web
-      # pm2 does not live in the node path, so have to call binary directly
-    - exec: pm2 start --name next node_modules/.bin/next -- dev --webpack
-      service: web
-      # pm2 does not live in the node path, so have to call binary directly
-    - exec: pm2 start --name storybook node_modules/.bin/storybook -- dev --no-open -p 6006
-      service: web
+    - exec-host: |
+        if [ -z "$START_UP_SERVICE" ]; then
+          ddev exec pm2 start --name next node_modules/.bin/next -- dev --webpack
+          ddev exec pm2 start --name storybook node_modules/.bin/storybook -- dev --no-open -p 6006
+
+          echo "Next time use one of these for faster startup:"
+          echo "> ddev up nextjs"
+          echo "> ddev up storybook"
+        fi
