@@ -8,7 +8,7 @@ import LandingPage from '~templates/LandingPage/LandingPage';
 
 const title = 'Forum One Next.js Starter App';
 
-export const metadata: Metadata = {
+const metadata: Metadata = {
   title,
   description: 'Next app using TypeScript and PostCSS',
 };
@@ -70,3 +70,4 @@ function Home() {
 }
 
 export default Home;
+export { metadata };

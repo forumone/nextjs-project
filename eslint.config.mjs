@@ -21,6 +21,7 @@ const config = defineConfig([
     files: ['**/*.tsx', '**/*.jsx'],
     rules: {
       'react/jsx-boolean-value': ['error', 'always'],
+      'import/exports-last': 'error',
     },
   },
   {

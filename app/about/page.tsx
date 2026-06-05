@@ -3,7 +3,7 @@ import Page from '~templates/Page/Page';
 
 const title = 'About Forum One Next.js Starter App';
 
-export const metadata: Metadata = {
+const metadata: Metadata = {
   title,
   description: 'Next app using TypeScript and Emotion',
 };
@@ -126,3 +126,4 @@ function About() {
 }
 
 export default About;
+export { metadata };
