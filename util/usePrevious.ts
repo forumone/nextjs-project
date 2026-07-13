@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 
 function usePrevious<T>(value: T): T | null {
