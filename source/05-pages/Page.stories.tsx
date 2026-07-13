@@ -4,7 +4,7 @@ import { Breadcrumb as BreadcrumbStory } from '~components/Breadcrumb/Breadcrumb
 import Wysiwyg from '~components/Wysiwyg/Wysiwyg';
 import { WYSIWYG as WysiwygStory } from '~components/Wysiwyg/Wysiwyg.stories';
 import PageTemplate, { PageProps } from '~templates/Page/Page';
-import PageWrapper from './page-wrappers/default';
+import StorybookLayout from './page-wrappers/default';
 
 interface PageStoryArgs {
   page: PageProps;
@@ -16,9 +16,9 @@ const settings: Meta<PageStoryArgs> = {
 
 const Page: StoryObj<PageStoryArgs> = {
   render: args => (
-    <PageWrapper>
+    <StorybookLayout>
       <PageTemplate {...args.page} />
-    </PageWrapper>
+    </StorybookLayout>
   ),
   args: {
     page: {
