@@ -26,6 +26,7 @@ function PageWrapper({
   footerMenuItems,
   footerModifierClasses,
   footerItemClasses,
+  footerLinkClasses,
   children,
 }: PageWrapperProps): JSX.Element {
   return (
@@ -42,6 +43,7 @@ function PageWrapper({
             items={footerMenuItems}
             modifierClasses={footerModifierClasses}
             itemClasses={footerItemClasses}
+            linkClasses={footerLinkClasses}
           />
         </Footer>
       </SiteContainer>
