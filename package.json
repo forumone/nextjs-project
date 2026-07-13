@@ -33,7 +33,7 @@
   "devDependencies": {
     "@csstools/postcss-global-data": "^4.0.0",
     "@eslint/eslintrc": "^3.3.6",
-    "@forumone/eslint-config-es5": "^3.0.6",
+    "@forumone/eslint-config-es5": "^4.0.0",
     "@forumone/tiny-mustache": "^3.0.5",
     "@inquirer/prompts": "^8.5.2",
     "@storybook/addon-a11y": "^10.5.0",
