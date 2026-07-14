@@ -184,7 +184,7 @@ Runs `tsc --noEmit`, which will compile the TypeScript code without emitting fil
 * The current favicon implementation will probably not display correctly locally in Chrome (v94), but does display correctly in Firefox and Safari. Note that the favicon _does_ display correctly once deployed. Not sure why.
 
 ### Vendor Cascade Layer
-A cascade layer ([https://developer.mozilla.org/en-US/docs/Web/CSS/@layer](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer)) for thrid-party css is available called vendor.
+A cascade layer ([https://developer.mozilla.org/en-US/docs/Web/CSS/@layer](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer)) for third-party css is available called vendor.
 
 CSS can be added to this layer using @import. Ex: `@import "@thirdparty/dist/css/thirdparty-core.min.css" layer(vendor);`
 This can be added within the files for component and layout styles using the third-party package.

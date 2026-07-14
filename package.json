@@ -17,7 +17,7 @@
     "component": "node lib/create-component.mjs",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build -o storybook-static",
-    "build-icons": "svgr --out-dir source/01-global/icon/icons -- source/01-global/icon/svgs"
+    "build-icons": "node lib/generate-icon-manifest.mjs"
   },
   "browserslist": [
     "last 2 versions and not dead",
@@ -40,9 +40,6 @@
     "@storybook/addon-docs": "^10.4.2",
     "@storybook/addon-links": "^10.4.2",
     "@storybook/nextjs": "^10.4.2",
-    "@svgr/babel-plugin-add-jsx-attribute": "^8.0.0",
-    "@svgr/babel-plugin-remove-jsx-attribute": "^8.0.0",
-    "@svgr/cli": "^8.1.0",
     "@types/node": "^24.13.1",
     "@types/react": "~19.2.7",
     "@types/react-dom": "~19.2.3",
@@ -71,6 +68,7 @@
     "stylelint-config-standard": "^40.0.0",
     "stylelint-order": "^8.1.1",
     "stylelint-webpack-plugin": "^5.1.0",
+    "svg-spritemap-webpack-plugin": "^5.1.4",
     "typescript": "~5.9.2",
     "yaml": "^2.9.0"
   },

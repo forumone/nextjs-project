@@ -4,10 +4,7 @@ import clsx from 'clsx';
 import { GessoComponent } from 'gesso';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
-import AngleDoubleLeft from '~global/icon/icons/AngleDoubleLeft';
-import AngleDoubleRight from '~global/icon/icons/AngleDoubleRight';
-import AngleLeft from '~global/icon/icons/AngleLeft';
-import AngleRight from '~global/icon/icons/AngleRight';
+import Icon from '~global/icon/Icon';
 import generatePagination from '~utility/generatePagination';
 import styles from './pager.module.css';
 
@@ -46,7 +43,7 @@ function Pager({
               className={clsx(styles.link, styles['link--first'])}
               href={createPageURL(pagerItems.first)}
             >
-              <AngleDoubleLeft isHidden={true} />
+              <Icon name="angle-double-left" isHidden={true} />
               First
             </Link>
           </li>
@@ -57,7 +54,7 @@ function Pager({
               className={clsx(styles.link, styles['link--previous'])}
               href={createPageURL(pagerItems.previous)}
             >
-              <AngleLeft isHidden={true} />
+              <Icon name="angle-left" isHidden={true} />
               Previous
             </Link>
           </li>
@@ -110,7 +107,7 @@ function Pager({
               href={createPageURL(pagerItems.next)}
             >
               Next
-              <AngleRight isHidden={true} />
+              <Icon name="angle-right" isHidden={true} />
             </Link>
           </li>
         )}
@@ -121,7 +118,7 @@ function Pager({
               href={createPageURL(pagerItems.last)}
             >
               Last
-              <AngleDoubleRight isHidden={true} />
+              <Icon name="angle-double-right" isHidden={true} />
             </Link>
           </li>
         )}
