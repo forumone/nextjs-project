@@ -48,11 +48,21 @@ have more details about which to use when.
 
 ## Starting and stopping the project
 
-After following the "Initial Setup" instructions, you can start the local development server for the app by running:
+### Starting up Next.js
+
 ```bash
-ddev start
+ddev up nextjs
 ```
-Open [https://YOUR-PROJECT.ddev.site/](https://YOUR-PROJECT.ddev.site/) with your browser to see the app. If using storybook, use port `6006` by default to view it: [https://YOUR-PROJECT.ddev.site:6006](https://YOUR-PROJECT.ddev.site:6006).
+Open [https://YOUR-PROJECT.ddev.site/](https://YOUR-PROJECT.ddev.site/) to see the app.
+
+## Starting up Storybook
+
+```bash
+ddev up storybook
+```
+Open [https://YOUR-PROJECT.ddev.site:6006](https://YOUR-PROJECT.ddev.site:6006) (port 6006) to see Storybook.
+
+### Stopping
 
 To stop `ddev` for the project:
 ```bash
