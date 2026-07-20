@@ -1,4 +1,4 @@
-@layer component {
+@layer components {
   .skiplink {
     display: flex;
     font-family: var(--font-family-system);
