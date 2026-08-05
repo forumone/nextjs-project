@@ -35,7 +35,7 @@ const eslintConfig = defineConfig([
     },
   },
   {
-    files: ['next.config.js', '.storybook/**/*.js'],
+    files: ['.storybook/**/*.js'],
     rules: {
       '@typescript-eslint/no-var-requires': 'off',
     },
