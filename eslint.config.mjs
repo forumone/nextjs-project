@@ -7,7 +7,7 @@ import nextTs from 'eslint-config-next/typescript';
 import prettier from 'eslint-config-prettier/flat';
 import { defineConfig, globalIgnores } from 'eslint/config';
 
-const config = defineConfig([
+const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
   prettier,
@@ -49,6 +49,7 @@ const config = defineConfig([
       '@typescript-eslint/ban-ts-comment': 'off',
     },
   },
+  // Override default ignores of eslint-config-next.
   globalIgnores([
     // Default ignores of eslint-config-next:
     '.next/**',
@@ -61,4 +62,4 @@ const config = defineConfig([
   ...storybook.configs['flat/recommended'],
 ]);
 
-export default config;
+export default eslintConfig;
