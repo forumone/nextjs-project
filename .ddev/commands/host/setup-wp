@@ -27,7 +27,7 @@ rm -rf ./types
 cp -r ./starterkits/wp/types ./
 cp -r ./starterkits/wp/block-fragments.ts ./
 cp -r ./starterkits/wp/faust.config.js ./
-rm ./next.config.js
+rm ./next.config.ts
 cp -r ./starterkits/wp/next.config.mjs ./
 cp -r ./starterkits/wp/possibleTypes.json ./
 

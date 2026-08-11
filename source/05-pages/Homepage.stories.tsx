@@ -8,7 +8,7 @@ import { Default as HeroStory } from '~components/HeroBgImage/HeroBgImage.storie
 import Grid from '~layouts/Grid/Grid';
 import Section from '~layouts/Section/Section';
 import LandingPage from '~templates/LandingPage/LandingPage';
-import PageWrapper from './page-wrappers/default';
+import StorybookLayout from './page-wrappers/default';
 
 interface HomepageStoryArgs {
   card: Partial<CardProps>;
@@ -21,7 +21,7 @@ const settings: Meta<HomepageStoryArgs> = {
 
 const Homepage: StoryObj<HomepageStoryArgs> = {
   render: args => (
-    <PageWrapper>
+    <StorybookLayout>
       <LandingPage title="Homepage" hidePageTitle={true}>
         <Section>
           <HeroBgImage {...args.hero} />
@@ -76,7 +76,7 @@ const Homepage: StoryObj<HomepageStoryArgs> = {
           </Grid>
         </Section>
       </LandingPage>
-    </PageWrapper>
+    </StorybookLayout>
   ),
 };
 Homepage.args = {

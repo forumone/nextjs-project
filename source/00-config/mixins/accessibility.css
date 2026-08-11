@@ -24,7 +24,7 @@
   @param {boolean} $important
  */
 @mixin visually-hidden-off($important: false) {
-  clip-path: auto iff($important, !important);
+  clip-path: none iff($important, !important);
   height: auto iff($important, !important);
   overflow: visible iff($important, !important);
   position: static iff($important, !important);
