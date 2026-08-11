@@ -1,5 +1,8 @@
-import { JSX, PropsWithChildren } from 'react';
+// This must be imported first, so it has to stay in a group by itself,
+// so prettier won't try to resort it.
 import '~/source/00-config/index.css';
+
+import { JSX, PropsWithChildren } from 'react';
 import footerStyles from '~components/Menu/menu-footer.module.css';
 import sourceSansPro from '~global/fonts/source-sans';
 import '~global/index.css';
