@@ -102,10 +102,15 @@ Other aliases can be added in tsconfig.json.
 [Vitest](https://vitest.dev/guide/) is installed for unit tests. Name your test
 file [name].test.ts(x) and place it in the same directory as the file it is testing.
 
-Run all project unit tests:
+#### Run all tests
 ```bash
 ddev frontend test:unit
 ```
+
+#### Change test environment
+The global environment for Vitest is `node`, which is faster for tests that do 
+not require a browser. To use the `jsdom` environment for a test instead,
+add a comment at the top of the file: `// @vitest-environment jsdom`
 
 ## Helpful commands
 
