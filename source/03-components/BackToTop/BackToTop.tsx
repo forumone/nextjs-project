@@ -47,7 +47,7 @@ function BackToTop({
   }, [isHidden, threshold]);
 
   const handleClick = (event: MouseEvent) => {
-    const target = document.querySelector(topElement);
+    const target = document.getElementById(topElement);
 
     if (target instanceof HTMLElement) {
       event.preventDefault();
