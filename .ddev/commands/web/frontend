@@ -46,6 +46,9 @@ case $1 in
   wp-editor-styles)
     npm run editor-styles
   ;;
+  test:unit)
+    npm run test:unit
+  ;;
   "")
     echo "Usage: frontend install|build|deploy|watch|(some other command in the theme service)"
   ;;

@@ -96,6 +96,17 @@ TypeScript is configured with several path aliases for use in imports.
 
 Other aliases can be added in tsconfig.json.
 
+## Testing
+
+### Unit Tests
+[Vitest](https://vitest.dev/guide/) is installed for unit tests. Name your test
+file [name].test.ts(x) and place it in the same directory as the file it is testing.
+
+Run all project unit tests:
+```bash
+ddev frontend test:unit
+```
+
 ## Helpful commands
 
 ### Monitoring the applications
