@@ -17,7 +17,8 @@
     "component": "node lib/create-component.mjs",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build -o storybook-static",
-    "build-icons": "svgr --out-dir source/01-global/icon/icons -- source/01-global/icon/svgs"
+    "build-icons": "svgr --out-dir source/01-global/icon/icons -- source/01-global/icon/svgs",
+    "test:unit": "vitest run"
   },
   "browserslist": [
     "last 2 versions and not dead",
@@ -72,6 +73,7 @@
     "stylelint-order": "^8.1.1",
     "stylelint-webpack-plugin": "^5.1.0",
     "typescript": "~5.9.2",
+    "vitest": "^4.1.10",
     "yaml": "^2.9.0"
   },
   "overrides": {
