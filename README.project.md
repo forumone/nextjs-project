@@ -112,6 +112,29 @@ The global environment for Vitest is `node`, which is faster for tests that do
 not require a browser. To use the `jsdom` environment for a test instead,
 add a comment at the top of the file: `// @vitest-environment jsdom`
 
+### End-to-End Tests
+[Playwright](https://playwright.dev/) is installed for end-to-end tests, which
+exercise real pages in a browser against the running site. Specs live in the
+top-level `e2e` directory and are named `[name].spec.ts`. See `e2e/home.spec.ts`,
+`e2e/about.spec.ts`, and `e2e/navigation.spec.ts` for examples to follow.
+
+By default, tests run against `https://YOUR-PROJECT.ddev.site` (see
+`playwright.config.ts`). Override the target with the `PLAYWRIGHT_BASE_URL`
+environment variable if you need to point at a different environment.
+
+#### Run all tests
+```bash
+npm run test:e2e
+```
+
+Playwright's browser binaries are installed on the host machine rather than
+inside the `ddev` web container, so run this command directly with `npm`
+(after `nvm use`), not with the `ddev frontend` prefix. The first time, install
+the browsers with:
+```bash
+npx playwright install
+```
+
 ## Helpful commands
 
 ### Monitoring the applications
