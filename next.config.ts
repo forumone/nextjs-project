@@ -1,6 +1,5 @@
 import type { NextConfig } from 'next';
 import StylelintWebpackPlugin from 'stylelint-webpack-plugin';
-import SvgSpritemapPlugin from 'svg-spritemap-webpack-plugin';
 import type Webpack from 'webpack';
 
 const basePath: NextConfig['basePath'] = '';
@@ -33,23 +32,6 @@ const nextConfig: NextConfig = {
     config.plugins.push(
       new StylelintWebpackPlugin({
         exclude: ['node_modules', 'storybook-static'],
-      }),
-    );
-
-    config.plugins.push(
-      new SvgSpritemapPlugin('source/01-global/icon/svgs/*.svg', {
-        output: {
-          filename: 'static/sprite.artifact.svg',
-          svg4everybody: false,
-          svgo: true,
-        },
-        sprite: {
-          prefix: '',
-          generate: {
-            title: false,
-            use: true,
-          },
-        },
       }),
     );
 

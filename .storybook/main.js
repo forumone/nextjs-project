@@ -1,6 +1,4 @@
-const path = require('path');
 const StylelintWebpackPlugin = require('stylelint-webpack-plugin');
-const SvgSpritemapPlugin = require('svg-spritemap-webpack-plugin').default;
 const YAML = require('yaml');
 
 module.exports = {
@@ -22,22 +20,6 @@ module.exports = {
     config.plugins.push(
       new StylelintWebpackPlugin({
         exclude: ['node_modules', 'storybook-static', '.next'],
-      }),
-    );
-    config.plugins.push(
-      new SvgSpritemapPlugin('source/01-global/icon/svgs/*.svg', {
-        output: {
-          filename: '_next/static/sprite.artifact.svg',
-          svg4everybody: false,
-          svgo: true,
-        },
-        sprite: {
-          prefix: '',
-          generate: {
-            title: false,
-            use: true,
-          },
-        },
       }),
     );
     config.module.rules.push({

@@ -3,7 +3,9 @@
   "version": "2.3.6",
   "private": true,
   "scripts": {
+    "predev": "npm run build-icons",
     "dev": "next dev --webpack",
+    "prebuild": "npm run build-icons",
     "build": "next build --webpack",
     "start": "next start",
     "export": "npm run build && next export",
@@ -15,9 +17,11 @@
     "tsc": "tsc --noEmit",
     "test": "npm run typegen && npm run lint && npm run tsc",
     "component": "node lib/create-component.mjs",
+    "prestorybook": "npm run build-icons",
     "storybook": "storybook dev -p 6006",
+    "prebuild-storybook": "npm run build-icons",
     "build-storybook": "storybook build -o storybook-static",
-    "build-icons": "node lib/generate-icon-manifest.mjs"
+    "build-icons": "node lib/generate-icon-manifest.mjs && node lib/generate-icon-sprite.mjs"
   },
   "browserslist": [
     "last 2 versions and not dead",
@@ -68,7 +72,6 @@
     "stylelint-config-standard": "^40.0.0",
     "stylelint-order": "^8.1.1",
     "stylelint-webpack-plugin": "^5.1.0",
-    "svg-spritemap-webpack-plugin": "^5.1.4",
     "typescript": "~5.9.2",
     "yaml": "^2.9.0"
   },
