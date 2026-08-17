@@ -15,9 +15,9 @@ The `Icon` component references a symbol in that sprite by name.
 ## Adding an icon
 To add a new icon:
 1. Add the SVG to the `svgs` directory
-2. Run either `npm run build-icons` or `ddev nextjs icons` to regenerate
-   `manifest.ts`, which records each icon's `viewBox` so `Icon` doesn't need
-   it passed in manually
+2. Run either `npm run build-icons` or `ddev nextjs icons` (or restart the dev
+   server or project build) to regenerate `manifest.ts`, which records each icon's
+   `viewBox` so `Icon` doesn't need it passed in manually
 
 Do not modify `manifest.ts` directly. It is overwritten whenever icons are
 generated.

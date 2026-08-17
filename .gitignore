@@ -20,6 +20,9 @@
 # production
 /build
 
+# SVG sprite
+/public/sprite.artifact.svg
+
 # misc
 .DS_Store
 *.pem
