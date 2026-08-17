@@ -11,13 +11,16 @@ test.describe('About page', () => {
 
   test('renders the page heading', async ({ page }) => {
     await expect(
-      page.getByRole('heading', { name: 'About Forum One Next.js Starter App' }),
+      page.getByRole('heading', {
+        name: 'About Forum One Next.js Starter App',
+      }),
     ).toBeVisible();
   });
 
   test('links out to the Next.js docs', async ({ page }) => {
-    await expect(
-      page.getByRole('link', { name: 'Next.js' }),
-    ).toHaveAttribute('href', 'https://nextjs.org/docs');
+    await expect(page.getByRole('link', { name: 'Next.js' })).toHaveAttribute(
+      'href',
+      'https://nextjs.org/docs',
+    );
   });
 });

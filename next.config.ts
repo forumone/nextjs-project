@@ -3,10 +3,12 @@ import StylelintWebpackPlugin from 'stylelint-webpack-plugin';
 import type Webpack from 'webpack';
 
 const basePath: NextConfig['basePath'] = '';
+const ddevHostname = process.env.DDEV_HOSTNAME || process.env.VIRTUAL_HOST;
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   basePath,
+  allowedDevOrigins: ddevHostname ? [ddevHostname] : ['.ddev.site'],
   /**
    * Custom Webpack Config
    * https://nextjs.org/docs/api-reference/next.config.js/custom-webpack-config

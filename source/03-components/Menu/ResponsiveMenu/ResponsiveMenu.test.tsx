@@ -1,6 +1,7 @@
 // @vitest-environment jsdom
 import { act, render, screen } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
+import { MOBILE_MENU_BREAKPOINT } from '~components/Menu/ResponsiveMenu/constants';
 import ResponsiveMenu from './ResponsiveMenu';
 
 const items = [
@@ -13,7 +14,7 @@ function mockMatchMedia(matches: boolean) {
   const listeners: Array<(e: MediaQueryListEvent) => void> = [];
   const mediaQueryList = {
     matches,
-    media: '(min-width: 700px)',
+    media: `(min-width: ${MOBILE_MENU_BREAKPOINT})`,
     addEventListener: vi.fn((_event: string, listener: EventListener) => {
       listeners.push(listener);
     }),

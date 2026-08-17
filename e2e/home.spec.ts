@@ -10,8 +10,6 @@ test.describe('Home page', () => {
   });
 
   test('renders the hero heading', async ({ page }) => {
-    // The page renders two h1s with this text (a visually-hidden PageTitle
-    // and the visible hero heading), so scope to the first match.
     await expect(
       page
         .getByRole('heading', { name: 'Forum One Next.js Starter App' })
@@ -19,9 +17,7 @@ test.describe('Home page', () => {
     ).toBeVisible();
   });
 
-  test('has no accessibility-blocking landmarks missing', async ({
-    page,
-  }) => {
+  test('has no accessibility-blocking landmarks missing', async ({ page }) => {
     await expect(page.getByRole('banner')).toBeVisible();
     await expect(page.getByRole('contentinfo')).toBeVisible();
   });

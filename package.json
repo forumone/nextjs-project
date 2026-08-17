@@ -19,7 +19,8 @@
     "build-storybook": "storybook build -o storybook-static",
     "build-icons": "svgr --out-dir source/01-global/icon/icons -- source/01-global/icon/svgs",
     "test:unit": "vitest run",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "pretest:e2e": "playwright install --with-deps"
   },
   "browserslist": [
     "last 2 versions and not dead",
