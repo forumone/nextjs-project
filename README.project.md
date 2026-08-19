@@ -60,10 +60,15 @@ ddev stop
 ```
 
 ## Icons
-After adding a new SVG to `source/01-global-icon/svgs`, you will need to
-generate the React components:
+After adding a new SVG to `source/01-global-icon/svgs`, the icon manifest and SVG sprite should update automatically.  The assets will also be generated as part of the prebuild/predev hooks.  
+However, if an SVG file is edited in place *without changing the name*, you will likely need to manually trigger a icon build with the `force` flag:
 ```bash
-ddev nextjs icons
+ddev frontend icons force
+```
+
+To manually prompt the icons to update as usual (skipping the process if all the SVGs are already in the manifest and sprite file), then you can run:
+```bash
+ddev frontend icons
 ```
 
 ## Project organization

@@ -56,18 +56,10 @@ However, if an SVG file is edited in place *without changing the name*, you will
 ```bash
 npm run build-icons:force
 ```
-Or if using ddev:
-```
-ddev frontend icons force
-```
 
-To manually prompt the icons to update as usual (skipping the process if all the SVGs are already in the manifest and sprite file), then you can run the command corresponding to your development environment without the `force` flag:
-```
+To manually prompt the icons to update as usual (skipping the process if all the SVGs are already in the manifest and sprite file), run:
+```bash
 npm run build-icons
-```
-or
-```
-ddev frontend icons
 ```
 
 ## Other Commands
