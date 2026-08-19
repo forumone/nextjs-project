@@ -123,7 +123,7 @@ Runs `tsc --noEmit`, which will compile the TypeScript code without emitting fil
 
 ## Husky
 
-This project uses [Husky](https://typicode.github.io/husky/#/) to check code on git commits. By default, it is setup to use the `npm test` script which runs `lint` and `tsc` (TypeScript) checks against the codebase. This check occurs on `git commit` attempts. This helps developers catch errors _before_ pushing branches and creating PRs, quickening the overall dev worklow.
+This project uses [Husky](https://typicode.github.io/husky/#/) to check code on git commits. By default, it is setup to use the `npm test` script which runs `lint` and `tsc` (TypeScript) checks against the codebase. This check occurs on `git commit` attempts. This helps developers catch errors _before_ pushing branches and creating PRs, quickening the overall dev workflow.
 
 To bypass this check, you can use the `--no-verify` flag with your commit:
 
