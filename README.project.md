@@ -61,7 +61,7 @@ ddev stop
 
 ## Icons
 After adding a new SVG to `source/01-global-icon/svgs`, the icon manifest and SVG sprite should update automatically.  The assets will also be generated as part of the prebuild/predev hooks.  
-However, if an SVG file is edited in place *without changing the name*, you will likely need to manually trigger a icon build with the `force` flag:
+However, if an SVG file is edited in place *without changing the name*, you will likely need to manually trigger an icon build with the `force` flag:
 ```bash
 ddev frontend icons force
 ```
