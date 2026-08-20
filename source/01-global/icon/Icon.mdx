@@ -15,16 +15,15 @@ The `Icon` component references a symbol in that sprite by name.
 ## Adding an icon
 To add a new icon:
 1. Add the SVG to the `svgs` directory
-2. Run either `npm run build-icons` or `ddev frontend icons` to regenerate
-   `manifest.ts`, which records each icon's `viewBox` so `Icon` doesn't need
-   it passed in manually.
+2. The icon manifest and SVG spritemap should update automatically if the dev server is running, or if not running, the next time it is started or built.
+    * To regenerate icons outside of the normal development workflow, run either `npm run build-icons` or `ddev frontend icons`.
     * If an SVG file has been modified in place without changing the filename,
     then the `force` argument will need to be passed using either:
-```
+```bash
 npm run build-icons:force
 ```
 or:
-```
+```bash
 ddev frontend icons force
 ```
 
