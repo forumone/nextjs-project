@@ -1,8 +1,9 @@
 import { Meta, StoryObj } from '@storybook/nextjs';
-import Icons from './icons';
+import Icon from './Icon';
+import iconManifest from './manifest';
 
 const meta: Meta = {
-  title: 'Global/Icon',
+  title: 'Global/Icons',
   parameters: {
     controls: { hideNoControlsWarning: true },
   },
@@ -19,23 +20,20 @@ const meta: Meta = {
   },
 };
 
-const Icon: StoryObj = {
+const Icons: StoryObj = {
   render: () => {
-    const icons = Object.keys(Icons);
+    const names = Object.keys(iconManifest) as (keyof typeof iconManifest)[];
     return (
       <>
-        {icons.map(icon => {
-          const IconComponent = Icons[icon as keyof typeof Icons];
-          return (
-            <p key={icon}>
-              <IconComponent isHidden={false} title={icon} /> {icon}
-            </p>
-          );
-        })}
+        {names.map(name => (
+          <p key={name}>
+            <Icon name={name} isHidden={false} title={name} /> {name}
+          </p>
+        ))}
       </>
     );
   },
 };
 
 export default meta;
-export { Icon };
+export { Icons };

@@ -74,7 +74,7 @@ Please delete: `./github` folder.
 
 * Please put a `halp` request in to get a `secrets manager` setup for the project. (This may change in the future)
 * Will need to provide what `.env` are needed to put into secrets manager.
-* In the `.buildkite/pipeline-base.yml` > will need to update: `[NEED THIS CONFIGURED]` tobe updated.
+* In the `.buildkite/pipeline-base.yml`, replace `[NEED THIS CONFIGURED]` with the project-specific value.
   * Please reference: https://github.com/forumone/NYU-CDHDB/blob/main/.buildkite/pipeline-base.yml#L49
   * That reference is referring to: https://github.com/forumone/NYU-CDHDB/blob/main/.buildkite/pipeline.yml#L7
 
