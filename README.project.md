@@ -71,6 +71,7 @@ ddev nextjs icons
   CMS or content structure go here. Uses the Next.js App Router, so refer to the
   [Next.js docs](https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts)
   for details on how the folder structure corresponds to routes.
+- `e2e`: E2E tests with Playwright. (Unit tests can be co-located with the components they test.)
 - `lib`: Helper files for `nextjs-project` itself, such as custom PostCSS plugins,
   and scripts to facilitate setting up for a headless CMS.
 - `public`: [Static assets](https://nextjs.org/docs/app/building-your-application/optimizing/static-assets)
@@ -95,6 +96,42 @@ TypeScript is configured with several path aliases for use in imports.
 - `~/`: project root
 
 Other aliases can be added in tsconfig.json.
+
+## Testing
+
+### Unit Tests
+[Vitest](https://vitest.dev/guide/) is installed for unit tests. Name your test
+file [name].test.ts(x) and place it in the same directory as the file it is testing.
+
+#### Run all tests
+```bash
+ddev frontend test:unit
+```
+
+#### Change test environment
+The global environment for Vitest is `node`, which is faster for tests that do 
+not require a browser. To use the `jsdom` environment for a test instead,
+add a comment at the top of the file: `// @vitest-environment jsdom`
+
+### End-to-End Tests
+[Playwright](https://playwright.dev/) is installed for end-to-end tests. You will need to have your 
+local site up and running before you can run Playwright tests. Name your test `[name].spec.ts`
+and place it in the `e2e` directory. You can remove the existing e2e tests once 
+you've written some of your own-- they are provided primarily as examples of 
+test specs.
+
+By default, tests run against `https://YOUR-PROJECT.ddev.site` if you run 
+`ddev frontend test:e2e` and against `https://localhost:3000` if you run 
+with `npm run test:e2e`. Either way, if you want to run against a different URL, 
+set the `PLAYWRIGHT_BASE_URL` environment variable.
+
+When you run the `test:e2e` script (with or without ddev), it will first run
+`playwright install` to install all needed dependencies on your environment.
+
+#### Run all tests
+```bash
+ddev frontend test:e2e
+```
 
 ## Helpful commands
 
