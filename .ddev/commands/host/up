@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+## Description: Start ddev and selectively start PM2 services
+## Usage: up [nextjs|storybook|all]
+
+SERVICE=${1:-all}
+
+START_UP_SERVICE=${SERVICE} ddev start
+
+echo "--- Selective PM2 Startup: $SERVICE ---"
+
+case $SERVICE in
+  nextjs)
+    ddev exec pm2 start --name next node_modules/.bin/next -- dev --webpack
+    ;;
+  storybook)
+    ddev exec pm2 start --name storybook node_modules/.bin/storybook -- dev --no-open -p 6006
+    ;;
+  all)
+    ddev exec pm2 start --name next node_modules/.bin/next -- dev --webpack
+    ddev exec pm2 start --name storybook node_modules/.bin/storybook -- dev --no-open -p 6006
+    ;;
+  *)
+    echo "Usage: ddev up [nextjs|storybook|all]"
+    exit 1
+    ;;
+esac
+
+ddev exec pm2 status
