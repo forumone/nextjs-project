@@ -167,4 +167,4 @@ Remove this `README.md` file and rename the `README.project.md` file to `README.
 When updating the packages for a project based on this template, note whether the version string in the project's package.json is intended to match that of this template, and update it to maintain parity.
 For example, if the version in your project is `2.3.5` and you're updating its packages to match those that are currently in `2.3.7` of this template, also update the version string in your project to `2.3.7`.
 
-Additionally, remember to check for other changes throughout this template since the last update, include config files, utility functions, and other adjustments/fixes in components.
+Additionally, remember to check for other changes throughout this template since the last update, including config files, utility functions, and other adjustments/fixes in components.
