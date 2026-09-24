@@ -161,3 +161,10 @@ role :db,  %w{wordpress@wordpress.byf1.dev}
 ## Project README
 
 Remove this `README.md` file and rename the `README.project.md` file to `README.md`. Update the `README.md` with the correct details for your projects. Take note of the Project Name at the top as well as the Buildkite badge setup. _(**Note**: The Buildkite build status badge can be found in the Buildkite pipeline settings online.)_
+
+## Versioning and Updating Projects
+
+When updating the packages for a project based on this template, note whether the version string in the project's package.json is intended to match that of this template, and update it to maintain parity.
+For example, if the version in your project is `2.3.5` and you're updating its packages to match those that are currently in `2.3.7` of this template, also update the version string in your project to `2.3.7`.
+
+Additionally, remember to check for other changes throughout this template since the last update, include config files, utility functions, and other adjustments/fixes in components.
