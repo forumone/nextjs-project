@@ -23,7 +23,10 @@
     "build-storybook": "storybook build -o storybook-static",
     "build-icons": "node lib/generate-icon-manifest.mjs && node lib/generate-icon-sprite.mjs",
     "build-icons:force": "node lib/generate-icon-manifest.mjs --force && node lib/generate-icon-sprite.mjs --force",
-    "watch": "npm-watch"
+    "watch": "npm-watch",
+    "test:unit": "vitest run",
+    "test:e2e": "playwright test",
+    "pretest:e2e": "node lib/ensurePlaywrightBrowsers.mjs"
   },
   "watch": {
     "build-icons": {
@@ -50,10 +53,13 @@
     "@forumone/eslint-config-es5": "^4.0.0",
     "@forumone/tiny-mustache": "^3.0.5",
     "@inquirer/prompts": "^8.5.2",
+    "@playwright/test": "^1.62.1",
     "@storybook/addon-a11y": "^10.5.7",
     "@storybook/addon-docs": "^10.5.7",
     "@storybook/addon-links": "^10.5.7",
     "@storybook/nextjs": "^10.5.7",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.2",
     "@types/node": "^24.13.3",
     "@types/react": "~19.2.18",
     "@types/react-dom": "~19.2.4",
@@ -68,6 +74,7 @@
     "eslint-plugin-storybook": "^10.5.7",
     "html-react-parser": "^6.1.5",
     "husky": "^9.1.7",
+    "jsdom": "^30.0.1",
     "npm-watch": "^0.13.0",
     "postcss": "^8.5.26",
     "postcss-advanced-variables": "github:kmonahan/postcss-advanced-variables",
@@ -85,6 +92,7 @@
     "stylelint-order": "^8.1.1",
     "stylelint-webpack-plugin": "^5.1.0",
     "typescript": "~5.9.2",
+    "vitest": "^4.1.10",
     "yaml": "^2.9.0"
   },
   "overrides": {

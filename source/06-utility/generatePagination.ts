@@ -40,8 +40,8 @@ function generatePagination(
       pages: [
         '...',
         ...Array.from(Array(pagesToShow).fill('').keys())
-          .reverse()
-          .map((_, i) => totalPages - i),
+          .map((_, i) => totalPages - i)
+          .toSorted((a, b) => a - b),
       ],
     };
   }

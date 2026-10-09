@@ -1,5 +1,6 @@
 const StylelintWebpackPlugin = require('stylelint-webpack-plugin');
 const YAML = require('yaml');
+const ddevHostname = process.env.DDEV_HOSTNAME || process.env.VIRTUAL_HOST;
 
 module.exports = {
   staticDirs: ['../public'],
@@ -12,9 +13,9 @@ module.exports = {
   framework: {
     name: '@storybook/nextjs',
   },
-  // Replace with the DDEV URL for your site
   core: {
-    allowedHosts: ['nextjs-project.ddev.site', 'localhost'],
+    // Replace allowedHosts value with your DDEV URL if neither ddevHostname nor the .ddev.site pattern apply.
+    allowedHosts: ddevHostname ? [ddevHostname] : ['.ddev.site'],
   },
   webpackFinal: async config => {
     config.plugins.push(

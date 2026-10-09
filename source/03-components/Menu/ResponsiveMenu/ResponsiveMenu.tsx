@@ -4,6 +4,7 @@ import { GessoComponent } from 'gesso';
 import { useEffect, useState, type JSX } from 'react';
 import Menu, { MenuItem } from '~components/Menu/Menu';
 import OverlayMenu from '~components/Menu/OverlayMenu/OverlayMenu';
+import { MOBILE_MENU_BREAKPOINT } from '~components/Menu/ResponsiveMenu/constants';
 import styles from './responsive-menu.module.css';
 
 interface ResponsiveMenuProps extends GessoComponent {
@@ -22,7 +23,9 @@ function ResponsiveMenu({
     : [];
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(min-width: 700px)');
+    const mediaQuery = window.matchMedia(
+      `(min-width: ${MOBILE_MENU_BREAKPOINT})`,
+    );
     const handleChange = (e: MediaQueryListEvent | MediaQueryList) => {
       if (e.matches) {
         setMobile(false);
