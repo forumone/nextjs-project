@@ -20,6 +20,9 @@
 # production
 /build
 
+# SVG sprite
+/public/sprite.artifact.svg
+
 # misc
 .DS_Store
 *.pem
@@ -47,3 +50,9 @@ next-env.d.ts
 # Storybook build files
 storybook-static/
 debug-storybook.log
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

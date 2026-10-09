@@ -1,0 +1,4 @@
+inheritance: true
+reviews:
+  auto_review:
+    base_branches: ['^2\.x-RC$', '^2\.x$', 'main']

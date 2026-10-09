@@ -38,13 +38,23 @@ case $1 in
     npm run prettier:write
   ;;
   icons)
-    npm run build-icons
+    if [ "$2" = "force" ]; then
+      npm run build-icons:force
+    else
+      npm run build-icons
+    fi
   ;;
   generate)
     npm run generate:all
   ;;
   wp-editor-styles)
     npm run editor-styles
+  ;;
+  test:unit)
+    npm run test:unit
+  ;;
+  test:e2e)
+    npm run test:e2e
   ;;
   "")
     echo "Usage: frontend install|build|deploy|watch|(some other command in the theme service)"

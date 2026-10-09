@@ -60,10 +60,15 @@ ddev stop
 ```
 
 ## Icons
-After adding a new SVG to `source/01-global-icon/svgs`, you will need to
-generate the React components:
+After adding a new SVG to `source/01-global/icon/svgs`, the icon manifest and SVG sprite should update automatically.  The assets will also be generated as part of the prebuild/predev hooks.  
+However, if an SVG file is edited in place *without changing the name*, you will likely need to manually trigger an icon build with the `force` flag:
 ```bash
-ddev nextjs icons
+ddev frontend icons force
+```
+
+To manually prompt the icons to update as usual (skipping the process if all the SVGs are already in the manifest and sprite file), then you can run:
+```bash
+ddev frontend icons
 ```
 
 ## Project organization
@@ -71,6 +76,7 @@ ddev nextjs icons
   CMS or content structure go here. Uses the Next.js App Router, so refer to the
   [Next.js docs](https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts)
   for details on how the folder structure corresponds to routes.
+- `e2e`: E2E tests with Playwright. (Unit tests can be co-located with the components they test.)
 - `lib`: Helper files for `nextjs-project` itself, such as custom PostCSS plugins,
   and scripts to facilitate setting up for a headless CMS.
 - `public`: [Static assets](https://nextjs.org/docs/app/building-your-application/optimizing/static-assets)
@@ -95,6 +101,42 @@ TypeScript is configured with several path aliases for use in imports.
 - `~/`: project root
 
 Other aliases can be added in tsconfig.json.
+
+## Testing
+
+### Unit Tests
+[Vitest](https://vitest.dev/guide/) is installed for unit tests. Name your test
+file [name].test.ts(x) and place it in the same directory as the file it is testing.
+
+#### Run all tests
+```bash
+ddev frontend test:unit
+```
+
+#### Change test environment
+The global environment for Vitest is `node`, which is faster for tests that do 
+not require a browser. To use the `jsdom` environment for a test instead,
+add a comment at the top of the file: `// @vitest-environment jsdom`
+
+### End-to-End Tests
+[Playwright](https://playwright.dev/) is installed for end-to-end tests. You will need to have your 
+local site up and running before you can run Playwright tests. Name your test `[name].spec.ts`
+and place it in the `e2e` directory. You can remove the existing e2e tests once 
+you've written some of your own-- they are provided primarily as examples of 
+test specs.
+
+By default, tests run against `https://YOUR-PROJECT.ddev.site` if you run 
+`ddev frontend test:e2e` and against `https://localhost:3000` if you run 
+with `npm run test:e2e`. Either way, if you want to run against a different URL, 
+set the `PLAYWRIGHT_BASE_URL` environment variable.
+
+When you run the `test:e2e` script (with or without ddev), it will first run
+`playwright install` to install all needed dependencies on your environment.
+
+#### Run all tests
+```bash
+ddev frontend test:e2e
+```
 
 ## Helpful commands
 
@@ -184,7 +226,7 @@ Runs `tsc --noEmit`, which will compile the TypeScript code without emitting fil
 * The current favicon implementation will probably not display correctly locally in Chrome (v94), but does display correctly in Firefox and Safari. Note that the favicon _does_ display correctly once deployed. Not sure why.
 
 ### Vendor Cascade Layer
-A cascade layer ([https://developer.mozilla.org/en-US/docs/Web/CSS/@layer](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer)) for thrid-party css is available called vendor.
+A cascade layer ([https://developer.mozilla.org/en-US/docs/Web/CSS/@layer](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer)) for third-party css is available called vendor.
 
 CSS can be added to this layer using @import. Ex: `@import "@thirdparty/dist/css/thirdparty-core.min.css" layer(vendor);`
 This can be added within the files for component and layout styles using the third-party package.

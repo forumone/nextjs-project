@@ -1,6 +1,6 @@
-const path = require('path');
 const StylelintWebpackPlugin = require('stylelint-webpack-plugin');
 const YAML = require('yaml');
+const ddevHostname = process.env.DDEV_HOSTNAME || process.env.VIRTUAL_HOST;
 
 module.exports = {
   staticDirs: ['../public'],
@@ -13,9 +13,9 @@ module.exports = {
   framework: {
     name: '@storybook/nextjs',
   },
-  // Replace with the DDEV URL for your site
   core: {
-    allowedHosts: ['nextjs-project.ddev.site', 'localhost'],
+    // Replace allowedHosts value with your DDEV URL if neither ddevHostname nor the .ddev.site pattern apply.
+    allowedHosts: ddevHostname ? [ddevHostname] : ['.ddev.site'],
   },
   webpackFinal: async config => {
     config.plugins.push(
@@ -23,27 +23,6 @@ module.exports = {
         exclude: ['node_modules', 'storybook-static', '.next'],
       }),
     );
-    config.module.rules.find(
-      rule => rule.test && rule.test.toString().includes('svg'),
-    ).exclude = /Icon\/icons\/.*\.svg$/i;
-    config.module.rules.push({
-      test: /Icon\/icons\/.*\.svg$/i,
-      use: [
-        {
-          loader: '@svgr/webpack',
-          options: {
-            svgo: true,
-            svgoConfig: {
-              plugins: ['removeDimensions'],
-            },
-            replaceAttrValues: {
-              '#000': 'currentColor',
-            },
-            titleProp: true,
-          },
-        },
-      ],
-    });
     config.module.rules.push({
       test: /\.ya?ml$/i,
       type: 'json',
