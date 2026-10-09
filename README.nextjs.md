@@ -51,8 +51,13 @@ npm run storybook
 ```
 
 ## Icons
-After adding a new SVG to `source/01-global-icon/svgs`, you will need to
-generate the React components:
+After adding a new SVG to `source/01-global/icon/svgs`, the icon manifest and SVG sprite should update automatically.  The assets will also be generated as part of the prebuild/predev hooks.  
+However, if an SVG file is edited in place *without changing the name*, you will likely need to manually trigger an icon build with the `force` flag:
+```bash
+npm run build-icons:force
+```
+
+To manually prompt the icons to update as usual (skipping the process if all the SVGs are already in the manifest and sprite file), run:
 ```bash
 npm run build-icons
 ```
@@ -118,7 +123,7 @@ Runs `tsc --noEmit`, which will compile the TypeScript code without emitting fil
 
 ## Husky
 
-This project uses [Husky](https://typicode.github.io/husky/#/) to check code on git commits. By default, it is setup to use the `npm test` script which runs `lint` and `tsc` (TypeScript) checks against the codebase. This check occurs on `git commit` attempts. This helps developers catch errors _before_ pushing branches and creating PRs, quickening the overall dev worklow.
+This project uses [Husky](https://typicode.github.io/husky/#/) to check code on git commits. By default, it is setup to use the `npm test` script which runs `lint` and `tsc` (TypeScript) checks against the codebase. This check occurs on `git commit` attempts. This helps developers catch errors _before_ pushing branches and creating PRs, quickening the overall dev workflow.
 
 To bypass this check, you can use the `--no-verify` flag with your commit:
 

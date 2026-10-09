@@ -38,7 +38,11 @@ case $1 in
     npm run prettier:write
   ;;
   icons)
-    npm run build-icons
+    if [ "$2" = "force" ]; then
+      npm run build-icons:force
+    else
+      npm run build-icons
+    fi
   ;;
   generate)
     npm run generate:all

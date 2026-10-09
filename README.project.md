@@ -60,10 +60,15 @@ ddev stop
 ```
 
 ## Icons
-After adding a new SVG to `source/01-global-icon/svgs`, you will need to
-generate the React components:
+After adding a new SVG to `source/01-global/icon/svgs`, the icon manifest and SVG sprite should update automatically.  The assets will also be generated as part of the prebuild/predev hooks.  
+However, if an SVG file is edited in place *without changing the name*, you will likely need to manually trigger an icon build with the `force` flag:
 ```bash
-ddev nextjs icons
+ddev frontend icons force
+```
+
+To manually prompt the icons to update as usual (skipping the process if all the SVGs are already in the manifest and sprite file), then you can run:
+```bash
+ddev frontend icons
 ```
 
 ## Project organization
@@ -184,7 +189,7 @@ Runs `tsc --noEmit`, which will compile the TypeScript code without emitting fil
 * The current favicon implementation will probably not display correctly locally in Chrome (v94), but does display correctly in Firefox and Safari. Note that the favicon _does_ display correctly once deployed. Not sure why.
 
 ### Vendor Cascade Layer
-A cascade layer ([https://developer.mozilla.org/en-US/docs/Web/CSS/@layer](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer)) for thrid-party css is available called vendor.
+A cascade layer ([https://developer.mozilla.org/en-US/docs/Web/CSS/@layer](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer)) for third-party css is available called vendor.
 
 CSS can be added to this layer using @import. Ex: `@import "@thirdparty/dist/css/thirdparty-core.min.css" layer(vendor);`
 This can be added within the files for component and layout styles using the third-party package.

@@ -22,5 +22,5 @@ RUN npm run build-storybook
 
 RUN mv /app/storybook-static /app/public/storybook
 
-# Adding artifact tobe the default step to run
+# Adding artifact to be the default step to run
 FROM artifact
