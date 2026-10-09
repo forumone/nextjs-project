@@ -3,7 +3,7 @@
 import clsx from 'clsx';
 import { GessoComponent } from 'gesso';
 import { JSX, MouseEvent, useEffect, useState } from 'react';
-import AngleUp from '~global/icon/icons/AngleUp';
+import Icon from '~global/icon/Icon';
 import styles from './back-to-top.module.css';
 
 interface BackToTopProps extends GessoComponent {
@@ -70,7 +70,7 @@ function BackToTop({
       tabIndex={isHidden ? -1 : undefined}
       onClick={smoothScroll ? handleClick : undefined}
     >
-      <AngleUp title={text} isHidden={false} />
+      <Icon name="angle-up" title={text} isHidden={false} />
     </a>
   );
 }

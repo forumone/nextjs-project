@@ -3,7 +3,9 @@
   "version": "2.3.6",
   "private": true,
   "scripts": {
-    "dev": "next dev --webpack",
+    "predev": "npm run build-icons",
+    "dev": "concurrently \"npm run watch\" \"next dev --webpack\"",
+    "prebuild": "npm run build-icons",
     "build": "next build --webpack",
     "start": "next start",
     "export": "npm run build && next export",
@@ -15,12 +17,24 @@
     "tsc": "tsc --noEmit",
     "test": "npm run typegen && npm run lint && npm run tsc",
     "component": "node lib/create-component.mjs",
+    "prestorybook": "npm run build-icons",
     "storybook": "storybook dev -p 6006",
+    "prebuild-storybook": "npm run build-icons",
     "build-storybook": "storybook build -o storybook-static",
-    "build-icons": "svgr --out-dir source/01-global/icon/icons -- source/01-global/icon/svgs",
+    "build-icons": "node lib/generate-icon-manifest.mjs && node lib/generate-icon-sprite.mjs",
+    "build-icons:force": "node lib/generate-icon-manifest.mjs --force && node lib/generate-icon-sprite.mjs --force",
+    "watch": "npm-watch",
     "test:unit": "vitest run",
     "test:e2e": "playwright test",
     "pretest:e2e": "playwright install --with-deps"
+  },
+  "watch": {
+    "build-icons": {
+      "patterns": [
+        "source/01-global/icon/svgs"
+      ],
+      "extensions": "svg"
+    }
   },
   "browserslist": [
     "last 2 versions and not dead",
@@ -44,9 +58,6 @@
     "@storybook/addon-docs": "^10.5.7",
     "@storybook/addon-links": "^10.5.7",
     "@storybook/nextjs": "^10.5.7",
-    "@svgr/babel-plugin-add-jsx-attribute": "^8.0.0",
-    "@svgr/babel-plugin-remove-jsx-attribute": "^8.0.0",
-    "@svgr/cli": "^8.1.0",
     "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.2",
     "@types/node": "^24.13.3",
@@ -54,6 +65,7 @@
     "@types/react-dom": "~19.2.4",
     "change-case": "^5.4.4",
     "clsx": "^2.1.1",
+    "concurrently": "^10.0.5",
     "css-loader": "^7.1.4",
     "csstype": "3.2.3",
     "eslint": "^9.39.5",
@@ -63,6 +75,7 @@
     "html-react-parser": "^6.1.5",
     "husky": "^9.1.7",
     "jsdom": "^30.0.1",
+    "npm-watch": "^0.13.0",
     "postcss": "^8.5.26",
     "postcss-advanced-variables": "github:kmonahan/postcss-advanced-variables",
     "postcss-import": "^16.1.1",

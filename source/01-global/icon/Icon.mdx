@@ -1,6 +1,6 @@
 import {Canvas, Meta, ArgTypes, Source} from '@storybook/addon-docs/blocks';
 
-import * as IconStories from './Icon.stories';
+import * as IconStories from './Icons.stories';
 import * as BackToTopStories
   from '../../03-components/BackToTop/BackToTop.stories';
 
@@ -8,21 +8,34 @@ import * as BackToTopStories
 
 # Icons
 
-Icons use `svgr` to convert SVGs to React components.
+Icons are rendered from a single SVG spritemap (`sprite.artifact.svg`), built
+by `lib/generate-icon-sprite.mjs` from the SVGs in the `svgs` directory.
+The `Icon` component references a symbol in that sprite by name.
 
 ## Adding an icon
 To add a new icon:
 1. Add the SVG to the `svgs` directory
-2. Run either `npm run build-icons` or `ddev nextjs icons`
+2. The icon manifest and SVG spritemap should update automatically if the dev server is running, or if not running, the next time it is started or built.
+    * To regenerate icons outside of the normal development workflow, run either `npm run build-icons` or `ddev frontend icons`.
+    * If an SVG file has been modified in place without changing the filename,
+    then the `force` argument will need to be passed using either:
+```bash
+npm run build-icons:force
+```
+or:
+```bash
+ddev frontend icons force
+```
 
-Do not modify the components in `icons`. These will be overwritten whenever
-icons are generated.
+Do not modify `manifest.ts` directly. It is overwritten whenever icons are
+generated.
 
 ## Using icons
-Most of the time, you will import the icon from the `icons` directory.
+Import `Icon` and pass the icon's filename (without the `.svg` extension) as
+`name`. TypeScript will only accept names that exist in `manifest.ts`.
 <Source language="tsx" type="code" code={
   `
-import AngleUp from '../../01-global/icon/icons/AngleUp';
+import Icon from '../../01-global/icon/Icon';
 
 function BackToTop({
   text,
@@ -39,28 +52,28 @@ function BackToTop({
       tabIndex={isHidden ? -1 : undefined}
       onClick={smoothScroll ? handleClick : undefined}
     >
-      <AngleUp title={text} isHidden={false} />
+      <Icon name="angle-up" title={text} isHidden={false} />
     </a>
   );
 `}/>
 
-To reference an icon dynamically based on a prop or variable, import `icons/index.tsx`,
-which exports an object containing all icons.
+To reference an icon dynamically based on a prop or variable, pass that
+variable (typed as `IconName`) as `name`.
 <Source language='tsx' type='code' code={`
-import Icons from './icons';
+import Icon from './Icon';
+import type { IconName } from './manifest';
 
-function LinkedIcon({ iconName, text }: IconProps): JSX.Element {
-  const IconComponent = Icons[iconName];
+function LinkedIcon({ iconName, text }: { iconName: IconName; text: string }): JSX.Element {
   return (
     <a href="#">
-      <IconComponent title={text} isHidden={false} />
+      <Icon name={iconName} title={text} isHidden={false} />
     </a>
   );
 }
 `} />
 
 ## All icons
-<Canvas of={IconStories.Icon} />
+<Canvas of={IconStories.Icons} />
 
 ## Available props
 <ArgTypes />
